@@ -142,6 +142,14 @@ button:focus {
   color: #FFF;
 }
 
+.selected {
+  font-size: 18px;
+}
+.selected-text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .display-log-box{
   padding: 40px 20px;
   box-sizing: border-box;
@@ -159,7 +167,6 @@ button:focus {
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  float: left; 
   white-space: pre;
   overflow: auto;
   color: #EEE;

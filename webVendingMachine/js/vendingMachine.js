@@ -1,3 +1,5 @@
+
+
 // class Wallet, vendingMachine, View
 const snackList = [
   { "id": 1, "name": "콜라", "price": 500, "working": true },
@@ -67,22 +69,21 @@ class WalletModel {
   }
 }
 
-// STEP6
-// [O] 돈 이 입력되면 로그 창에 돈이 입력되었다고 나온다.
-// [O]    돈이 입력되었을 때 로그를 저장한다.  
-//        어떻게 저장할지 list 형태로 concat or push
-// [O]-- 로그의 3개 까지는 관련 메시지들을 만들어서 컨트롤러에게 보내준다.
-// [O] 컨트롤러는 메시지들을 가지고 rendering을 해준다. 
+// STEP7
 
-// [O] 자판기에 돈이 입력되면.입력된 돈으로 살 수 있는 목록을 보여준다
-//    [O] 살 수 있는 목록을 가지고 온다. 
-//    [O] html파일에 상품이름과 컨트롤러에 보내준 상품이름이 같으면 스타일을 변경한다.
+// 동전을 눌러서 상품 선택이 가능.
+// 누른상태로 3초동안 아무런 
+// 입력이 없으면 최종 번호가 자동인식.
 
-// 피드백 반영
+// 없는 번호가 눌러지면 에러메시지가 노출되고 
+// 다시입력을 받을 수 있는 상태
 
-// [O] 간단한 함수는 메소드로 만들지 말기 !
-// [O] Model에서는 Data만 전달하게 끔 수정
-// [O] 네이밍 catch -> on으로 수정 innerHtml 같은 메소드들 도 수정 and 작은 규모는 없애기
+// 뭐가 문제임? 
+
+// 번호 입력하고 무슨 데이터를 보내줘?
+// 번호 클릭하면 번호 텍스트를 보내야지 컨트롤러에 
+// 컨트롤러는 번호텍스트를 받아서 1번이 입력되엇습니다. 
+// 
 
 class VendingMachineModel {
   constructor(snackList){
@@ -119,7 +120,11 @@ class VendingMachineView {
     this.displayLogEl = this.getSearched('.display-log-box')
     this.controller = null;
     this.actions = {
-      'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`
+      'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
+      'selected': (data)=> `<p class="selected"><span class="selected-text">${data} 번</span>을 입력하려면 선택버튼을<br>
+                            취소하려면 취소버튼을 누르세요</p>
+                            <p class="notice">입력버튼을 누르지 않으면 3초 뒤에 자동 선택됩니다</p>
+      `,
     }
   }
   getSearched(selector, target=document){
@@ -191,7 +196,9 @@ class VendingMachineView {
     this.displayLogEl.lastElementChild.classList.add('now')
   }
   handleSelectButtonClicked(e){
-    
+    // 버튼 텍스트 보내기  
+    const buttonText = e.target.innerText    
+    this.emit('handleSelectButtonClicked',buttonText)
   }
   reRenderVendingMachineMoney(data){
    this.updateText(this.insertedMoneyEl, `${data.insertedMoney}`)
@@ -230,6 +237,9 @@ class VmController {
   }
   reRenderLog(latestHistorys){
     this.vendingMachineView.reRenderLog(latestHistorys);
+  }
+  handleSelectButtonClicked(buttonText){
+    this.vendingMachine.writeLog('selected',buttonText)
   }
 }
 
