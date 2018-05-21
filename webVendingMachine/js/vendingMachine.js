@@ -87,23 +87,47 @@ class WalletModel {
 
 class VendingMachineModel {
   constructor(snackList){
-    this.money=0;
+    this.selectedText = '';
+    this.slectionId = 0; 
+    this.money = 0;
     this.snackList= snackList
     this.controller = null;
     this.logHistoryList = [];
   }
+  startAutoChecking(){
+    setTimeout(()=>{
+
+    }, 3000)
+  }
   insertMoney(data){
     this.money += Number(data.money);
     data.insertedMoney = this.money;
-    this.writeLog('insertMoney', data.money);
+    this.logInsert('insertMoney', data.money);
     this.emit('displayCanBuyList', this.money);
     this.emit('reRenderVendingMachineMoney', data)
   }
-  writeLog(type, data){
+  logInsert(type, data){
     const logData = {type, data};
-    this.logHistoryList = this.logHistoryList.concat(logData);
+    this.savelogHistory(logData);
     const latestHistorys = this.logHistoryList.slice(-3);
     this.emit('reRenderLog',latestHistorys)
+  }
+  logSelection(type, selectedText){
+    this.slectionId+=1
+    const data = this.updatedSelectedText(selectedText);
+
+    const logData = {type, data};
+    this.savelogHistory(logData);
+
+    const latestHistorys = this.logHistoryList.slice(-3);
+  
+    this.emit('reRenderLog',latestHistorys)
+  }
+  updatedSelectedText(selectedText){
+    return this.selectedText += selectedText
+  }
+  savelogHistory(logData){
+    this.logHistoryList = this.logHistoryList.concat(logData);
   }
   emit(eventName, data){
     this.controller.on(eventName, data);
@@ -121,9 +145,10 @@ class VendingMachineView {
     this.controller = null;
     this.actions = {
       'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
-      'selected': (data)=> `<p class="selected"><span class="selected-text">${data} 번</span>을 입력하려면 선택버튼을<br>
-                            취소하려면 취소버튼을 누르세요</p>
-                            <p class="notice">입력버튼을 누르지 않으면 3초 뒤에 자동 선택됩니다</p>
+      'selected': (data)=> `<p class="selected"><span class="selected-text button-color">${data} 번</span>
+                            을 입력하려면<span class="button-color">선택</span>버튼을<br>
+                            취소하려면 <span class="button-color">취소</span>버튼을 누르세요</p>
+                            <p class="notice">입력버튼을 누르지 않으면 <span class="button-color">3초</span>뒤에 자동 선택됩니다</p>
       `,
     }
   }
@@ -239,7 +264,7 @@ class VmController {
     this.vendingMachineView.reRenderLog(latestHistorys);
   }
   handleSelectButtonClicked(buttonText){
-    this.vendingMachine.writeLog('selected',buttonText)
+    this.vendingMachine.logSelection('selected',buttonText)
   }
 }
 

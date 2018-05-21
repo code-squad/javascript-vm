@@ -149,6 +149,11 @@ button:focus {
   font-size: 20px;
   font-weight: bold;
 }
+.button-color {
+  color: #495057;
+  font-size: 20px;
+  font-weight: bold;
+}
 
 .display-log-box{
   padding: 40px 20px;
