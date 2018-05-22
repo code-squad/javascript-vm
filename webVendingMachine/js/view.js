@@ -12,6 +12,7 @@ class VendingMachineView {
       'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
       'selected': (data)=> `<p class="selected-text">${data} 번</p>`,
     }
+    this.numberButtonListEL = null;
   }
   getSearched(selector, target=document){
     return target.querySelector(selector);
@@ -34,6 +35,7 @@ class VendingMachineView {
     this.myTotalMoneyEl.innerText = Object.keys(myMoney).reduce((ac,money)=> {
       return ac+=Number(money)*myMoney[money]
     },0)
+    this.numberButtonListEL = this.getNumberButtonList();
   }
   handleMoneyButtonClicked({target}){
     if(!target.localName==="button") return;
@@ -126,13 +128,41 @@ class VendingMachineView {
     this.displayLogEl.innerHTML = `<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>`;
     this.clearTimer();
   }
-  notifyCanBuy(money){
+  notifyCanNotBuy(money){
     this.displayLogEl.innerHTML = `<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`;
     this.clearTimer();
+  }
+  notifyChoseWrongNumber(wrongNumber){
+    this.displayLogEl.innerHTML = `<p class="notify">${wrongNumber}는 선택할 수 없는 번호입니다.</p>`;
+    this.clearTimer();
+  }
+  notifyNumberButtonBlocked(){
+    this.displayLogEl.insertAdjacentHTML(
+      'beforeend', 
+      '<p class="notify blocked">세 자리수 이상 선택 못 합니다. 재입력을 하시려면 취소버튼을 누르고 입력하십시오</p>'
+    ); 
   }
   handleCancelButtonClicked(){
     this.displayLogEl.innerHTML = ``;
     this.clearTimer();
+    this.activateNumberButton();
+  }
+  getNumberButtonList(){
+    const slectButtonList = this.getSearchedAll('button',this.selectButtonsEl)    
+    return Array.prototype.forEach.call(slectButtonList,(buttonEl)=>{
+      const buttonText = buttonEl.innerText
+      if(!isNaN(buttonText)) return buttonEl;
+    })
+  }
+  blockNumberSelectionButton(){
+    Array.prototype.forEach.call(this.numberButtonListEL,(buttonEl)=>{
+      buttonEl.disable=true;
+    })
+  }
+  activateNumberButton(){
+    Array.prototype.forEach.call(this.numberButtonListEL,(buttonEl)=>{
+      buttonEl.disable=false;
+    })
   }
   clearTimer(){
     this.timer.innerHTML = '';

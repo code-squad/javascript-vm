@@ -46,7 +46,8 @@ class VendingMachineModel {
     this.selectedText += selectedText
     const selectedInfo = this.selectedText+" 번"
     this.emit('displaySelectedButtonNumber',this.selectedText)
-    this.emit('startTimer',3)
+    this.emit('startTimer',200)
+    if(this.selectedText.length===2)this.emit('blockOverRange')
   }
   updatedSelectedText(selectedText){
     return this.selectedText += selectedText
@@ -66,7 +67,12 @@ class VendingMachineModel {
   selectSnack(){
     const snackId = Number(this.selectedText)
     const selectedOne = this.snackList.find(snack=>snack.id===snackId)
+    if(selectedOne===undefined) return this.handleChoseWrongNumber(snackId)
     this.checkCanBuy(selectedOne)
+  }
+  handleChoseWrongNumber(snackId){
+    this.clearSelectedInfo();
+    return this.emit('notifyChoseWrongNumber',snackId)
   }
   checkCanBuy(selectedOne){
     this.clearSelectedInfo();    

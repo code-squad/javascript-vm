@@ -45,7 +45,7 @@ class VmController {
     this.vendingMachineView.displaySelectedOne(selectedOne)
   }
   notifyCanNotBuy(money){
-    this.vendingMachineView.notifyCanBuy(money)
+    this.vendingMachineView.notifyCanNotBuy(money)
   }
   handleCancelButtonClicked(){
     this.vendingMachine.clearSelectedInfo();
@@ -53,5 +53,12 @@ class VmController {
   }
   updateCanBuyList(money){
     this.vendingMachineView.updateCanBuyList(money)
+  }
+  notifyChoseWrongNumber(wrongNumber){
+    this.vendingMachineView.notifyChoseWrongNumber(wrongNumber)
+  }
+  blockOverRange(){
+    this.vendingMachineView.blockNumberSelectionButton()
+    this.vendingMachineView.notifyNumberButtonBlocked()
   }
 }

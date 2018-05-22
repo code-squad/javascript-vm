@@ -151,6 +151,11 @@ button:focus {
   text-align: center;
   vertical-align: middle
 }
+.blocked {
+  margin: 16px;
+  font-size: 14px;
+  display: table-footer-group;
+}
 
 .display-log-box{
   padding: 40px 20px;
