@@ -40,6 +40,7 @@ class VmController {
   }
   selectSnack(){
     this.vendingMachine.selectSnack()
+    this.vendingMachineView.activateNumberButton();
   }
   sendSelectedSnack(selectedOne){
     this.vendingMachineView.displaySelectedOne(selectedOne)
