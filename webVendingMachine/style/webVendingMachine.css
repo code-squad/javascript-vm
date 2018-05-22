@@ -142,17 +142,11 @@ button:focus {
   color: #FFF;
 }
 
-.selected {
-  font-size: 18px;
-}
-.selected-text {
-  font-size: 20px;
-  font-weight: bold;
-}
-.button-color {
+.selected-button-info {
   color: #495057;
-  font-size: 20px;
   font-weight: bold;
+  font-size: 20px;
+  line-height: 120px;
 }
 
 .display-log-box{
@@ -183,6 +177,16 @@ button:focus {
 
 .red {
   color: red;
+}
+
+.timer {
+  width: 100%;
+  margin-top: 20px;
+  min-height: 80px;
+  background-color: #fff;
+  border-radius: 10px;
+  line-height: 80px;
+  text-align: center;
 }
 
 /* wallet */

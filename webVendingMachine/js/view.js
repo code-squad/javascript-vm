@@ -81,11 +81,10 @@ class VendingMachineView {
     this.displayLogEl.innerHTML = latestMsgTemplate;
     this.displayLogEl.lastElementChild.classList.add('now')
   }
-  displaySelectedButtonNumber(){
-
+  displaySelectedButtonNumber(selectedText){
+    this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText}</p>`;
   }
   handleSelectButtonClicked(e){
-    // 버튼 텍스트 보내기  
     const buttonText = e.target.innerText    
     this.emit('handleSelectButtonClicked',buttonText)
   }

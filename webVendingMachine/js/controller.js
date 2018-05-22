@@ -27,7 +27,10 @@ class VmController {
     this.vendingMachineView.reRenderLog(latestHistorys);
   }
   handleSelectButtonClicked(buttonText){
-    this.vendingMachine.logSelection('selected',buttonText)
+    this.vendingMachine.logSelection(buttonText)
+  }
+  displaySelectedButtonNumber(selectedText){
+    this.vendingMachineView.displaySelectedButtonNumber(selectedText)
   }
   startTimer(time){
     this.vendingMachineView.startTimer(time);

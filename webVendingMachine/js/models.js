@@ -21,12 +21,9 @@ class WalletModel {
     this.controller.on(eventName, data);
   }
 }
-
-
 class VendingMachineModel {
   constructor(snackList){
     this.selectedText = '';
-    this.slectionId = 0; 
     this.money = 0;
     this.snackList= snackList
     this.controller = null;
@@ -50,14 +47,17 @@ class VendingMachineModel {
     const latestHistorys = this.logHistoryList.slice(-3);
     this.emit('reRenderLog',latestHistorys)
   }
-  logSelection(type, selectedText){
-    this.slectionId+=1
-    const data = this.updatedSelectedText(selectedText);
-    this.emit('reRenderLog',latestHistorys)
+  logSelection(selectedText){
+    this.selectedText += selectedText
+    const selectedInfo = this.selectedText+" 번"
+    this.emit('displaySelectedButtonNumber',this.selectedText)
     this.emit('startTimer',3)
   }
   updatedSelectedText(selectedText){
     return this.selectedText += selectedText
+  }
+  clearSelectedInfo(){
+    this.selectedText = "";
   }
   savelogHistory(logData){
     this.logHistoryList = this.logHistoryList.concat(logData);
