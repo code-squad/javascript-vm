@@ -51,4 +51,7 @@ class VmController {
     this.vendingMachine.clearSelectedInfo();
     this.vendingMachineView.handleCancelButtonClicked();
   }
+  updateCanBuyList(money){
+    this.vendingMachineView.updateCanBuyList(money)
+  }
 }

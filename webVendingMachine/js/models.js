@@ -79,6 +79,7 @@ class VendingMachineModel {
   useMoney(snackPrice){
     this.money-=snackPrice
     this.emit('reRenderVendingMachineMoney', this.money)
+    this.emit('updateCanBuyList', this.money)
   }
   emit(eventName, data){
     this.controller.on(eventName, data);

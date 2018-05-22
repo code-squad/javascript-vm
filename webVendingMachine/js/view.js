@@ -66,9 +66,20 @@ class VendingMachineView {
   addClassElList(list, className){
     list.forEach(el=> el.classList.add(className))
   }
+  removeClassElList(list, className){
+    list.forEach(el=> el.classList.remove(className))
+  }
+  updateCanBuyList(money){
+    const lastDisplayList = this.getSearchedAll('.red')
+    const canNotBuyList = Array.prototype.filter.call(lastDisplayList,(snackEl)=>{
+      const price = snackEl.dataset.price
+      if(price>money) return snackEl;
+    })
+    this.removeClassElList(canNotBuyList,'red')
+  }
   displayCanBuyList(money){
     const canBuyList = this.getCanBuyList(money);
-    this.addClassElList(canBuyList, 'red')
+    this.addClassElList(canBuyList,'red')
   }
   makeLogTemplate(latestHistorys){
      return latestHistorys.reduce(
