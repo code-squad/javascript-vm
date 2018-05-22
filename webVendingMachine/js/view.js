@@ -101,11 +101,18 @@ class VendingMachineView {
     this.timer.innerText = initTime;
     const intervalId = setInterval(()=>{
       if(initTime===0){
+        this.emit('selectSnack')
         return clearTimeout(intervalId);
       } 
         initTime-=1
         this.timer.innerText = initTime; 
       },1000)
     this.emit('updateTimerInfo', intervalId)
+  }
+  displaySelectedOne(selectedOne){
+    this.displayLogEl.innerHTML = `<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>`;
+  }
+  notifyCanBuy(money){
+    this.displayLogEl.innerHTML = `<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`;
   }
 }

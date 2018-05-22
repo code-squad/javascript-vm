@@ -38,4 +38,13 @@ class VmController {
   updateTimerInfo(intervalId){
     this.vendingMachine.updateTimerInfo(intervalId)
   }
+  selectSnack(){
+    this.vendingMachine.selectSnack()
+  }
+  sendSelectedSnack(selectedOne){
+    this.vendingMachineView.displaySelectedOne(selectedOne)
+  }
+  notifyCanNotBuy(money){
+    this.vendingMachineView.notifyCanBuy(money)
+  }
 }

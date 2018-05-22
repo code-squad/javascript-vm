@@ -54,6 +54,7 @@ class VendingMachineModel {
   }
   clearSelectedInfo(){
     this.selectedText = "";
+    this.timerId = null
   }
   savelogHistory(logData){
     this.logHistoryList = this.logHistoryList.concat(logData);
@@ -61,6 +62,16 @@ class VendingMachineModel {
   updateTimerInfo(intervalId){
     clearTimeout(this.timerId);
     this.timerId = intervalId;
+  }
+  selectSnack(){
+    const snackId = Number(this.selectedText)
+    const selectedOne = this.snackList.find(snack=>snack.id===snackId)
+    this.checkCanBuy(selectedOne)
+  }
+  checkCanBuy(selectedOne){
+    this.clearSelectedInfo();    
+    if(this.money>=selectedOne.price) return this.emit('sendSelectedSnack',selectedOne) 
+    else return this.emit('notifyCanNotBuy', this.money)
   }
   emit(eventName, data){
     this.controller.on(eventName, data);

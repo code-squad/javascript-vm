@@ -142,12 +142,14 @@ button:focus {
   color: #FFF;
 }
 
-.selected-button-info {
+.selected-button-info, .selected-one, .notify{
   color: #495057;
   font-weight: bold;
   font-size: 20px;
-  line-height: 120px;
   margin: 0;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle
 }
 
 .display-log-box{
@@ -161,6 +163,7 @@ button:focus {
   color: #FFF;
   overflow: auto;
   text-align: center;
+  display: table;
 }
 
 .log {
