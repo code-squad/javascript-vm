@@ -17,8 +17,8 @@ class VmController {
   insertMoney(data){
     this.vendingMachine.insertMoney(data);
   }
-  reRenderVendingMachineMoney(data){
-    this.vendingMachineView.reRenderVendingMachineMoney(data);
+  reRenderVendingMachineMoney(money){
+    this.vendingMachineView.reRenderVendingMachineMoney(money);
   }
   displayCanBuyList(money){
     this.vendingMachineView.displayCanBuyList(money);
@@ -46,5 +46,9 @@ class VmController {
   }
   notifyCanNotBuy(money){
     this.vendingMachineView.notifyCanBuy(money)
+  }
+  handleCancelButtonClicked(){
+    this.vendingMachine.clearSelectedInfo();
+    this.vendingMachineView.handleCancelButtonClicked();
   }
 }

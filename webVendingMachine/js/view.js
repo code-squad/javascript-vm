@@ -85,11 +85,13 @@ class VendingMachineView {
     this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText}</p>`;
   }
   handleSelectButtonClicked(e){
-    const buttonText = e.target.innerText    
+    const buttonText = e.target.innerText 
+    if(buttonText==='선택') return this.emit('selectSnack')
+    if(buttonText==='취소') return this.emit('handleCancelButtonClicked')
     this.emit('handleSelectButtonClicked',buttonText)
   }
-  reRenderVendingMachineMoney(data){
-   this.updateText(this.insertedMoneyEl, `${data.insertedMoney}`)
+  reRenderVendingMachineMoney(money){
+   this.updateText(this.insertedMoneyEl, `${money}`)
   }
   reRenderWallet(data){
     this.updateText(data.moneyCountEl, `${data.moneyCount}개`);
@@ -111,8 +113,17 @@ class VendingMachineView {
   }
   displaySelectedOne(selectedOne){
     this.displayLogEl.innerHTML = `<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>`;
+    this.clearTimer();
   }
   notifyCanBuy(money){
     this.displayLogEl.innerHTML = `<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`;
+    this.clearTimer();
+  }
+  handleCancelButtonClicked(){
+    this.displayLogEl.innerHTML = ``;
+    this.clearTimer();
+  }
+  clearTimer(){
+    this.timer.innerHTML = '';
   }
 }

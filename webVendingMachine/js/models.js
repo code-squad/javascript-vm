@@ -32,10 +32,9 @@ class VendingMachineModel {
   }
   insertMoney(data){
     this.money += Number(data.money);
-    data.insertedMoney = this.money;
     this.logInsert('insertMoney', data.money);
     this.emit('displayCanBuyList', this.money);
-    this.emit('reRenderVendingMachineMoney', data)
+    this.emit('reRenderVendingMachineMoney', this.money)
   }
   logInsert(type, data){
     const logData = {type, data};
@@ -54,7 +53,8 @@ class VendingMachineModel {
   }
   clearSelectedInfo(){
     this.selectedText = "";
-    this.timerId = null
+    clearTimeout(this.timerId);
+    this.timerId = null;
   }
   savelogHistory(logData){
     this.logHistoryList = this.logHistoryList.concat(logData);
@@ -70,8 +70,15 @@ class VendingMachineModel {
   }
   checkCanBuy(selectedOne){
     this.clearSelectedInfo();    
-    if(this.money>=selectedOne.price) return this.emit('sendSelectedSnack',selectedOne) 
+    if(this.money>=selectedOne.price){
+      this.useMoney(selectedOne.price)
+      return this.emit('sendSelectedSnack',selectedOne) 
+    } 
     else return this.emit('notifyCanNotBuy', this.money)
+  }
+  useMoney(snackPrice){
+    this.money-=snackPrice
+    this.emit('reRenderVendingMachineMoney', this.money)
   }
   emit(eventName, data){
     this.controller.on(eventName, data);
