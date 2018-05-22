@@ -100,9 +100,12 @@ class VendingMachineView {
     let initTime = time;
     this.timer.innerText = initTime;
     const intervalId = setInterval(()=>{
-      if(initTime===0) return clearTimeout(intervalId);
+      if(initTime===0){
+        return clearTimeout(intervalId);
+      } 
         initTime-=1
         this.timer.innerText = initTime; 
       },1000)
+    this.emit('updateTimerInfo', intervalId)
   }
 }

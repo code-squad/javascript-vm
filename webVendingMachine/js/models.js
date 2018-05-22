@@ -28,11 +28,7 @@ class VendingMachineModel {
     this.snackList= snackList
     this.controller = null;
     this.logHistoryList = [];
-  }
-  startAutoChecking(){
-    setTimeout(()=>{
-
-    }, 3000)
+    this.timerId = null;
   }
   insertMoney(data){
     this.money += Number(data.money);
@@ -61,6 +57,10 @@ class VendingMachineModel {
   }
   savelogHistory(logData){
     this.logHistoryList = this.logHistoryList.concat(logData);
+  }
+  updateTimerInfo(intervalId){
+    clearTimeout(this.timerId);
+    this.timerId = intervalId;
   }
   emit(eventName, data){
     this.controller.on(eventName, data);

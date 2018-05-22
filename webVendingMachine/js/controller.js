@@ -35,4 +35,7 @@ class VmController {
   startTimer(time){
     this.vendingMachineView.startTimer(time);
   }
+  updateTimerInfo(intervalId){
+    this.vendingMachine.updateTimerInfo(intervalId)
+  }
 }

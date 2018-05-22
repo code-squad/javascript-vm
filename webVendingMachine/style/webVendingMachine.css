@@ -147,6 +147,7 @@ button:focus {
   font-weight: bold;
   font-size: 20px;
   line-height: 120px;
+  margin: 0;
 }
 
 .display-log-box{
