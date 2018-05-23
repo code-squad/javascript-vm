@@ -40,13 +40,13 @@ class VmController {
   }
   selectSnack(){
     this.vendingMachine.selectSnack()
-    this.vendingMachineView.activateNumberButton();
+    this.vendingMachineView.setNumberButtonState(false);
   }
   sendSelectedSnack(selectedOne){
-    this.vendingMachineView.displaySelectedOne(selectedOne)
+    this.vendingMachineView.updateLogView(selectedOne,'displaySelectedOne')
   }
   notifyCanNotBuy(money){
-    this.vendingMachineView.notifyCanNotBuy(money)
+    this.vendingMachineView.updateLogView(money,'notifyCanNotBuy')
   }
   handleCancelButtonClicked(){
     this.vendingMachine.clearSelectedInfo();
@@ -56,10 +56,10 @@ class VmController {
     this.vendingMachineView.updateCanBuyList(money)
   }
   notifyChoseWrongNumber(wrongNumber){
-    this.vendingMachineView.notifyChoseWrongNumber(wrongNumber)
+    this.vendingMachineView.updateLogView(wrongNumber,'notifyChoseWrongNumber')
   }
   blockOverRange(){
-    this.vendingMachineView.blockNumberSelectionButton()
+    this.vendingMachineView.setNumberButtonState(true)
     this.vendingMachineView.notifyNumberButtonBlocked()
   }
 }

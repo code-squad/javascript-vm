@@ -44,7 +44,6 @@ class VendingMachineModel {
   }
   logSelection(selectedText){
     this.selectedText += selectedText
-    const selectedInfo = this.selectedText+" 번"
     this.emit('displaySelectedButtonNumber',this.selectedText)
     this.emit('startTimer',5)
     if(this.selectedText.length===2)this.emit('blockOverRange')

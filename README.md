@@ -67,49 +67,50 @@ view -event-> controller->model->controller -> view
 
 자판기에 돈을 투입하면, 앞서 개발한 부분(지갑의 잔금과 투입금액)이외에 추가로 처리해야할 부분이 있다. 투입이후에는 그 처리결과를 화면에 표시해야하고(log를 쌓는다고 표현한다) 구입가능한 음료를 하이라이트 해야 한다.
 
-스템7
+스텝7
 
-체크리스트 작성
+추가 체크리스트 작성
 
-[ ] 자판기의 숫자패드를 눌러서 상품을 선택할 수 있다. 
--- [] 눌린 버튼 알림을 알려준다. 
-  - [O] 번호가 클릭되면 해당 번호를 디스플레이 창에 보여준다.
-  - [O] 해당 번호를 가운데 정렬해서 보여준다.
-  -- 자동 선택 되기 전(3초전) 추가 클릭시에  눌린 버튼 알림을 알려준다.
-  - [O] 번호가 추가 클릭되면 해당 번호를 텍스트와 합쳐서 번호를 보여준다.
-  - [O] 타이머 표시를 추가해준다.
-  --- [O] 번호 추가 입력시 타이머 정보를 갱신해준다
-  --- [O] 타이머가 0초가 되었을 떄 ! 선택 Method를 실행시킨다
-  - 선택 버튼이 클릭되거나 자동선택으로 선택이 되면
-  -- [O] 선택되었다는 알림과 함께 음료수를 선택하고 모델을 업데이트하고 음료가 나왔다는 알림을 알려준다.
-  --- [O] 모델에서는 해당 버튼 텍스트에 맞는 스낵을 가지고 온다.
-  --- [O] 지금 있는 가격으로 살 수 있는지 알려준다.
-  ---- [O] 살 수 있으면 가격을 업데이트 시키고 뷰에 산 스낵 정보를 보내줘서 음료가 나왔다는 알림을 준다.
-  --- [O] 살 수 없으면 살 수 없다는 알림을 준다.
 
-[] 없는 번호를 클릭하면 알림을 주고 선택했던 정보를 클리어한다.
-[] 두자리수 이상 버튼은 클릭 못하도록 설정 하기
+[]mvc나 구조적인 부분에서 질문 하기 
+[] 리팩토링 진행
+->
+[] 네이밍 네이밍 모델 변수 네임은  Model이 안 붙어 있어서 헷갈릴 수도 있다 Model 붙여놓기
+[] 나왔습니다 다음 알림 자동 없애기 
+[] 고장이 나왔습니다 => 고장이면 안되도록 설정
+[] 메소드들 중복 된 것들 수정 
+
+```js
+displaySelectedOne(selectedOne){
+    this.displayLogEl.innerHTML = `<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>`;
+    this.clearTimer();
+  }
+  notifyCanNotBuy(money){
+    this.displayLogEl.innerHTML = `<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`;
+    this.clearTimer();
+  }
+  notifyChoseWrongNumber(wrongNumber){
+    this.displayLogEl.innerHTML = `<p class="notify">${wrongNumber}는 선택할 수 없는 번호입니다.</p>`;
+    this.clearTimer();
+  }
+여기도 setButtonState로 바꿔서 true, false만 받아서 하면 훨씬 나을 듯 !
+  
+  Array.prototype.forEach.call(this.numberButtonListEL,(buttonEl)=>{
+  buttonEl.disable=true;
+  })
+  
+  이 부분도 Controller가 처리하도록 하는 편이 좋을 듯!
+   vendingMachineView.initRender(template, renderingData)
+  vendingMachineView.bindEvents()
+```
+
+[] 디자인 적 수정 
+--[] 하이라이트 단순 빨간색 ... => 좀 예쁜 ui좀 찾아봐서 바꿔봐 !!! 
+--[] 폰트 수정  
 
 ### -- 코드 짜면서 이슈
   
 
-1. 너무 길다... 장황하다 앞뒤로 좀 나눠야겠다.
-
-* 해결방안 
-* * 정적 data는 따른 파일에 나눠서 가지고 있자. 
-* * 모델 뷰 컨트롤러도 파일 분리시켜 놓자 
-
-2. 처음에 로그 창에 돈 입력된 것처럼 3개를 띄우고 설명까지 뛰어놨었는데 너무 장황한 느낌이 들었다. 
-고로 -> 입력번호만 띄우고 ,따로 타이머를 보여주는 창을 보여주기로 결정 
-
-
-3. 고민 선택 버튼이 세자리수를 선택 하지 못하도록 강제 하는 편이 나으련지 
-사용자가 잘 못 눌렀으면 알아서 취소를 하고 다시 작성하게 하는 것이 나을런지 ...
-
-block을 했을시에는 대신에 또 취소로 클리어하라는 알림을 설정해야 함 
-* 버튼 number button들만 찾아서 disabled 
-* 취소 및 선택 버튼을 누르면 클리어하고 다시 disabled를 다시 풀음 
-* 오버킬일까?
 
 
 

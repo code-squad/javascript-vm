@@ -35,7 +35,7 @@ class VendingMachineView {
     this.myTotalMoneyEl.innerText = Object.keys(myMoney).reduce((ac,money)=> {
       return ac+=Number(money)*myMoney[money]
     },0)
-    this.numberButtonListEL = this.getNumberButtonList();
+   this.saveNumberButtonList();
   }
   handleMoneyButtonClicked({target}){
     if(!target.localName==="button") return;
@@ -95,7 +95,7 @@ class VendingMachineView {
     this.displayLogEl.lastElementChild.classList.add('now')
   }
   displaySelectedButtonNumber(selectedText){
-    this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText}</p>`;
+    this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText} 번</p>`;
   }
   handleSelectButtonClicked(e){
     const buttonText = e.target.innerText 
@@ -124,16 +124,15 @@ class VendingMachineView {
       },1000)
     this.emit('updateTimerInfo', intervalId)
   }
-  displaySelectedOne(selectedOne){
-    this.displayLogEl.innerHTML = `<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>`;
-    this.clearTimer();
-  }
-  notifyCanNotBuy(money){
-    this.displayLogEl.innerHTML = `<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`;
-    this.clearTimer();
-  }
-  notifyChoseWrongNumber(wrongNumber){
-    this.displayLogEl.innerHTML = `<p class="notify">${wrongNumber}는 선택할 수 없는 번호입니다.</p>`;
+  updateLogView(updatedLogData, templateType){
+    
+    const logtemplate = {
+      displaySelectedOne: (selectedOne)=>`<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>` ,
+      notifyCanNotBuy: (money)=>`<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`,
+      notifyChoseWrongNumber: (wrongNumber)=>`<p class="notify">${wrongNumber}는 선택할 수 없는 번호입니다.</p>`
+    }
+
+    this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
     this.clearTimer();
   }
   notifyNumberButtonBlocked(){
@@ -145,23 +144,18 @@ class VendingMachineView {
   handleCancelButtonClicked(){
     this.displayLogEl.innerHTML = ``;
     this.clearTimer();
-    this.activateNumberButton();
+    this.setNumberButtonState(false);
   }
-  getNumberButtonList(){
-    const slectButtonList = this.getSearchedAll('button',this.selectButtonsEl)    
-    return Array.prototype.forEach.call(slectButtonList,(buttonEl)=>{
+  saveNumberButtonList(){
+    const slectButtonList = this.getSearchedAll('button',this.selectButtonsEl)
+    return this.numberButtonListEL = Array.prototype.filter.call(slectButtonList,(buttonEl)=>{
       const buttonText = buttonEl.innerText
       if(!isNaN(buttonText)) return buttonEl;
     })
   }
-  blockNumberSelectionButton(){
+  setNumberButtonState(disbaled){
     Array.prototype.forEach.call(this.numberButtonListEL,(buttonEl)=>{
-      buttonEl.disable=true;
-    })
-  }
-  activateNumberButton(){
-    Array.prototype.forEach.call(this.numberButtonListEL,(buttonEl)=>{
-      buttonEl.disable=false;
+      buttonEl.disabled=disbaled;
     })
   }
   clearTimer(){
