@@ -1,26 +1,17 @@
 class VendingMachineView {
   constructor(){
-    this.snackListEl = this.getSearched('.snack-list')
-    this.selectButtonsEl = this.getSearched('.number-buttons')
-    this.moneyButtonListEl = this.getSearched('.money-button-list')
-    this.myTotalMoneyEl = this.getSearched('.total-my-assets .money')
-    this.insertedMoneyEl = this.getSearched('.diplay-inserted-money .money')
-    this.displayLogEl = this.getSearched('.display-log-box')
-    this.timer = this.getSearched('.time')
+    this.snackListEl = getSearched('.snack-list')
+    this.selectButtonsEl = getSearched('.number-buttons')
+    this.moneyButtonListEl = getSearched('.money-button-list')
+    this.myTotalMoneyEl = getSearched('.total-my-assets .money')
+    this.insertedMoneyEl = getSearched('.diplay-inserted-money .money')
+    this.displayLogEl = getSearched('.display-log-box')
+    this.timer = getSearched('.time')
     this.controller = null;
     this.actions = {
       'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
     }
     this.numberButtonListEL = null;
-  }
-  getSearched(selector, target=document){
-    return target.querySelector(selector);
-  }
-  getSearchedAll(selector, target=document){
-    return target.querySelectorAll(selector);
-  }
-  updateText(el,updateText){
-    return el.innerText = updateText;
   }
   getMessageByType(type, data){
     return this.actions[type](data)
@@ -59,29 +50,23 @@ class VendingMachineView {
     return this;
   }
   getCanBuyList(money){
-    const eachSnacks = this.getSearchedAll(`[data-id]`, this.snackListEl);
+    const eachSnacks = getSearchedAll(`[data-id]`, this.snackListEl);
     return Array.prototype.filter.call(eachSnacks,(snackEl)=>{
       const price = snackEl.dataset.price
       if(price<=money) return snackEl;
     })
   }
-  addClassElList(list, className){
-    list.forEach(el=> el.classList.add(className))
-  }
-  removeClassElList(list, className){
-    list.forEach(el=> el.classList.remove(className))
-  }
   updateCanBuyList(money){
-    const lastDisplayList = this.getSearchedAll('.red')
+    const lastDisplayList = getSearchedAll('.red')
     const canNotBuyList = Array.prototype.filter.call(lastDisplayList,(snackEl)=>{
       const price = snackEl.dataset.price
       if(price>money) return snackEl;
     })
-    this.removeClassElList(canNotBuyList,'red')
+    removeClassElList(canNotBuyList,'red')
   }
   displayCanBuyList(money){
     const canBuyList = this.getCanBuyList(money);
-    this.addClassElList(canBuyList,'red')
+    addClassElList(canBuyList,'red')
   }
   makeLogTemplate(latestHistorys){
      return latestHistorys.reduce(
@@ -105,12 +90,12 @@ class VendingMachineView {
     this.emit('handleSelectNumberButtonClicked',buttonText)
   }
   reRenderVendingMachineMoney(money){
-   this.updateText(this.insertedMoneyEl, `${money}`)
+   updateText(this.insertedMoneyEl, `${money}`)
   }
   reRenderWallet(data){
-    this.updateText(data.moneyCountEl, `${data.moneyCount}개`);
+    updateText(data.moneyCountEl, `${data.moneyCount}개`);
     data.moneyCountEl.setAttribute('data-count',data.moneyCount);
-    this.updateText(data.totalMoneyEl, data.totalMoney);
+    updateText(data.totalMoneyEl, data.totalMoney);
   }
   startTimer(time){
     let initTime = time;
@@ -144,7 +129,7 @@ class VendingMachineView {
     ); 
   }
   changeStyleselectedLog(){
-    const selectedLog =this.getSearched('.selected-button-info', this.displayLogEl)
+    const selectedLog =getSearched('.selected-button-info', this.displayLogEl)
     selectedLog.classList.add('with-notify')
   }
   handleCancelButtonClicked(){
@@ -157,10 +142,10 @@ class VendingMachineView {
     this.emit('sendAutoClearId', autoClearId)
   }
   clearLog(){
-   this.displayLogEl.innerHTML = ``;
+    return clearText(this.displayLogEl);
   }
   saveNumberButtonList(){
-    const slectButtonList = this.getSearchedAll('button',this.selectButtonsEl)
+    const slectButtonList = getSearchedAll('button',this.selectButtonsEl)
     return this.numberButtonListEL = Array.prototype.filter.call(slectButtonList,(buttonEl)=>{
       if(!isNaN(buttonEl.innerText)) return buttonEl;
     })
@@ -171,6 +156,6 @@ class VendingMachineView {
     })
   }
   clearTimer(){
-    this.timer.innerHTML = '';
+    return clearText(this.timer)
   }
 }
