@@ -37,7 +37,7 @@ class VendingMachineView {
    this.saveNumberButtonList();
   }
   handleMoneyButtonClicked({target}){
-    if(!target.localName==="button") return;
+    if(target.localName!=="button") return;
     const moneyCountEl = target.nextElementSibling
     const moneyCount =  Number(moneyCountEl.dataset.count)
     if(!moneyCount) return;

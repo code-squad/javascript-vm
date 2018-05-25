@@ -58,10 +58,12 @@ vendingMachineView
 각각의 처리가 그래도 분리가 되어 있는 것 같다.
 
 
+### 발견된 이슈 
 
-
-### -- 코드 짜면서 이슈
-
+[] 돈 버튼 갯수 span 클릭 했을 때 콘솔에 뜨는 에러 `view.js:42 Uncaught TypeError: Cannot read property 'dataset' of null`
+[]
+[]
+[]
 
 ### 순수함수
 
