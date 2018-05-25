@@ -41,6 +41,7 @@ class VendingMachineView {
     const moneyCountEl = target.nextElementSibling
     const moneyCount =  Number(moneyCountEl.dataset.count)
     if(!moneyCount) return;
+    this.emit('clearSelectedInfo')
     const eventData = {
       money: target.dataset.money,
       moneyCountEl,
@@ -97,6 +98,7 @@ class VendingMachineView {
     this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText} 번</p>`;
   }
   handleSelectButtonClicked(e){
+    this.emit('clearAutoClear')
     const buttonText = e.target.innerText 
     if(buttonText==='선택') return this.emit('selectSnack')
     if(buttonText==='취소') return this.emit('handleCancelButtonClicked')
@@ -132,6 +134,7 @@ class VendingMachineView {
     }
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
     this.clearTimer();
+    this.startAutoClearLog();
   }
   notifyNumberButtonBlocked(){
     this.displayLogEl.insertAdjacentHTML(
@@ -140,9 +143,16 @@ class VendingMachineView {
     ); 
   }
   handleCancelButtonClicked(){
-    this.displayLogEl.innerHTML = ``;
+    this.clearLog();
     this.clearTimer();
     this.setNumberButtonState(false);
+  }
+  startAutoClearLog(){
+    const autoClearId = setTimeout(this.clearLog.bind(this), 2000);
+    this.emit('sendAutoClearId', autoClearId)
+  }
+  clearLog(){
+   this.displayLogEl.innerHTML = ``;
   }
   saveNumberButtonList(){
     const slectButtonList = this.getSearchedAll('button',this.selectButtonsEl)

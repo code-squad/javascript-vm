@@ -29,6 +29,7 @@ class VendingMachineModel {
     this.controller = null;
     this.logHistoryList = [];
     this.timerId = null;
+    this.autoClearId = null;
   }
   insertMoney(data){
     this.money += Number(data.money);
@@ -91,6 +92,13 @@ class VendingMachineModel {
     this.money-=snackPrice
     this.emit('reRenderVendingMachineMoney', this.money)
     this.emit('updateCanBuyList', this.money)
+  }
+  getAutoClearId(autoClearId){
+    this.autoClearId = autoClearId;
+  }
+  clearAutoClear(){
+    clearTimeout(this.autoClearId);
+    this.autoClearId = null;
   }
   emit(eventName, data){
     this.controller.on(eventName, data);

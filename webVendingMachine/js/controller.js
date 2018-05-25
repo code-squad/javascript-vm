@@ -27,6 +27,7 @@ class VmController {
     this.vendingMachineView.reRenderLog(latestHistorys);
   }
   handleSelectNumberButtonClicked(buttonText){
+    this.clearAutoClear();
     this.vendingMachine.handleSelectNumberButtonClicked(buttonText)
   }
   displaySelectedButtonNumber(selectedText){
@@ -49,7 +50,8 @@ class VmController {
     this.vendingMachineView.updateLogView(money,'notifyCanNotBuy')
   }
   handleCancelButtonClicked(){
-    this.vendingMachine.clearSelectedInfo();
+    this.clearAutoClear();
+    this.clearSelectedInfo();
     this.vendingMachineView.handleCancelButtonClicked();
   }
   updateCanBuyList(money){
@@ -64,5 +66,14 @@ class VmController {
   blockOverRange(){
     this.vendingMachineView.setNumberButtonState(true)
     this.vendingMachineView.notifyNumberButtonBlocked()
+  }
+  sendAutoClearId(autoClearId){
+    this.vendingMachine.getAutoClearId(autoClearId)
+  }
+  clearSelectedInfo(){
+    this.vendingMachine.clearSelectedInfo();
+  }
+  clearAutoClear(){
+    this.vendingMachine.clearAutoClear();
   }
 }
