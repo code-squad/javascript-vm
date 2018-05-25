@@ -51,17 +51,11 @@ class VendingMachineView {
   }
   getCanBuyList(money){
     const eachSnacks = getSearchedAll(`[data-id]`, this.snackListEl);
-    return Array.prototype.filter.call(eachSnacks,(snackEl)=>{
-      const price = snackEl.dataset.price
-      if(price<=money) return snackEl;
-    })
+    return [...eachSnacks].filter(snackEl=>snackEl.dataset.price<=money)
   }
   updateCanBuyList(money){
     const lastDisplayList = getSearchedAll('.red')
-    const canNotBuyList = Array.prototype.filter.call(lastDisplayList,(snackEl)=>{
-      const price = snackEl.dataset.price
-      if(price>money) return snackEl;
-    })
+    const canNotBuyList = [...lastDisplayList].filter(snackEl=>snackEl.dataset.price>money)
     removeClassElList(canNotBuyList,'red')
   }
   displayCanBuyList(money){
@@ -146,14 +140,10 @@ class VendingMachineView {
   }
   saveNumberButtonList(){
     const slectButtonList = getSearchedAll('button',this.selectButtonsEl)
-    return this.numberButtonListEL = Array.prototype.filter.call(slectButtonList,(buttonEl)=>{
-      if(!isNaN(buttonEl.innerText)) return buttonEl;
-    })
+    return [...slectButtonList].filter(buttonEl=> !isNaN(buttonEl.innerText))
   }
   setNumberButtonDisable(disbaled){
-    Array.prototype.forEach.call(this.numberButtonListEL,(buttonEl)=>{
-      buttonEl.disabled=disbaled;
-    })
+    return [...this.numberButtonListEL].forEach(buttonEl=>buttonEl.disabled=disbaled)
   }
   clearTimer(){
     return clearText(this.timer)
