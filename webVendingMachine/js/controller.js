@@ -26,8 +26,8 @@ class VmController {
   reRenderLog(latestHistorys){
     this.vendingMachineView.reRenderLog(latestHistorys);
   }
-  handleSelectButtonClicked(buttonText){
-    this.vendingMachine.logSelection(buttonText)
+  handleSelectNumberButtonClicked(buttonText){
+    this.vendingMachine.handleSelectNumberButtonClicked(buttonText)
   }
   displaySelectedButtonNumber(selectedText){
     this.vendingMachineView.displaySelectedButtonNumber(selectedText)
@@ -57,6 +57,9 @@ class VmController {
   }
   notifyChoseWrongNumber(wrongNumber){
     this.vendingMachineView.updateLogView(wrongNumber,'notifyChoseWrongNumber')
+  }
+  notifyBreakdown(breakId){
+    this.vendingMachineView.updateLogView(breakId,'notifyBreakdown')
   }
   blockOverRange(){
     this.vendingMachineView.setNumberButtonState(true)

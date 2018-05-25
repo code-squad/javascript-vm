@@ -42,7 +42,7 @@ class VendingMachineModel {
     const latestHistorys = this.logHistoryList.slice(-3);
     this.emit('reRenderLog',latestHistorys)
   }
-  logSelection(selectedText){
+  handleSelectNumberButtonClicked(selectedText){
     this.selectedText += selectedText
     this.emit('displaySelectedButtonNumber',this.selectedText)
     this.emit('startTimer',5)
@@ -66,15 +66,21 @@ class VendingMachineModel {
   selectSnack(){
     const snackId = Number(this.selectedText)
     const selectedOne = this.snackList.find(snack=>snack.id===snackId)
+    this.clearSelectedInfo();    
+    return this.checkValidSelection(selectedOne, snackId)
+  }
+  checkValidSelection(selectedOne, snackId){
     if(selectedOne===undefined) return this.handleChoseWrongNumber(snackId)
-    this.checkCanBuy(selectedOne)
+    if(selectedOne.name==="{고장}") return this.handleBreakdown(snackId)
+    return this.checkCanBuy(selectedOne)
   }
   handleChoseWrongNumber(snackId){
-    this.clearSelectedInfo();
     return this.emit('notifyChoseWrongNumber',snackId)
   }
+  handleBreakdown(breakId){
+    return this.emit('notifyBreakdown',breakId)
+  }
   checkCanBuy(selectedOne){
-    this.clearSelectedInfo();    
     if(this.money>=selectedOne.price){
       this.useMoney(selectedOne.price)
       return this.emit('sendSelectedSnack',selectedOne) 

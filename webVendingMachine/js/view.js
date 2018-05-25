@@ -10,7 +10,6 @@ class VendingMachineView {
     this.controller = null;
     this.actions = {
       'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
-      'selected': (data)=> `<p class="selected-text">${data} 번</p>`,
     }
     this.numberButtonListEL = null;
   }
@@ -101,7 +100,7 @@ class VendingMachineView {
     const buttonText = e.target.innerText 
     if(buttonText==='선택') return this.emit('selectSnack')
     if(buttonText==='취소') return this.emit('handleCancelButtonClicked')
-    this.emit('handleSelectButtonClicked',buttonText)
+    this.emit('handleSelectNumberButtonClicked',buttonText)
   }
   reRenderVendingMachineMoney(money){
    this.updateText(this.insertedMoneyEl, `${money}`)
@@ -125,13 +124,12 @@ class VendingMachineView {
     this.emit('updateTimerInfo', intervalId)
   }
   updateLogView(updatedLogData, templateType){
-    
     const logtemplate = {
       displaySelectedOne: (selectedOne)=>`<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>` ,
       notifyCanNotBuy: (money)=>`<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`,
-      notifyChoseWrongNumber: (wrongNumber)=>`<p class="notify">${wrongNumber}는 선택할 수 없는 번호입니다.</p>`
+      notifyChoseWrongNumber: (wrongNumber)=>`<p class="notify">${wrongNumber}는 선택할 수 없는 번호입니다.</p>`,
+      notifyBreakdown: (breakId)=>`<p class="notify">죄송합니다 ${breakId}는 고장으로 선택할 수 없습니다</p>`
     }
-
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
     this.clearTimer();
   }
@@ -149,8 +147,7 @@ class VendingMachineView {
   saveNumberButtonList(){
     const slectButtonList = this.getSearchedAll('button',this.selectButtonsEl)
     return this.numberButtonListEL = Array.prototype.filter.call(slectButtonList,(buttonEl)=>{
-      const buttonText = buttonEl.innerText
-      if(!isNaN(buttonText)) return buttonEl;
+      if(!isNaN(buttonEl.innerText)) return buttonEl;
     })
   }
   setNumberButtonState(disbaled){
