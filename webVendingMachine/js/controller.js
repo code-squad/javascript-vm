@@ -41,7 +41,7 @@ class VmController {
   }
   selectSnack(){
     this.vendingMachine.selectSnack()
-    this.vendingMachineView.setNumberButtonState(false);
+    this.vendingMachineView.setNumberButtonDisable(false);
   }
   sendSelectedSnack(selectedOne){
     this.vendingMachineView.updateLogView(selectedOne,'displaySelectedOne')
@@ -64,7 +64,7 @@ class VmController {
     this.vendingMachineView.updateLogView(breakId,'notifyBreakdown')
   }
   blockOverRange(){
-    this.vendingMachineView.setNumberButtonState(true)
+    this.vendingMachineView.setNumberButtonDisable(true)
     this.vendingMachineView.notifyNumberButtonBlocked()
   }
   sendAutoClearId(autoClearId){

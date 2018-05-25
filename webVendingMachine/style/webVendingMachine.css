@@ -149,12 +149,18 @@ button:focus {
   margin: 0;
   display: table-cell;
   text-align: center;
-  vertical-align: middle
+  vertical-align: middle;
 }
 .blocked {
   margin: 16px;
   font-size: 14px;
   display: table-footer-group;
+  position: absolute;
+  bottom: 20px;
+}
+
+.with-notify {
+  display: block;
 }
 
 .display-log-box{
@@ -169,6 +175,7 @@ button:focus {
   overflow: auto;
   text-align: center;
   display: table;
+  position: relative;
 }
 
 .log {

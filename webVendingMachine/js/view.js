@@ -137,15 +137,20 @@ class VendingMachineView {
     this.startAutoClearLog();
   }
   notifyNumberButtonBlocked(){
+    this.changeStyleselectedLog();
     this.displayLogEl.insertAdjacentHTML(
       'beforeend', 
-      '<p class="notify blocked">세 자리수 이상 선택 못 합니다. 재입력을 하시려면 취소버튼을 누르고 입력하십시오</p>'
+      '<p class="notify blocked">세 자리수 이상 선택 못 합니다.<br> 재입력을 하시려면 취소버튼을 누르고 입력하십시오</p>'
     ); 
+  }
+  changeStyleselectedLog(){
+    const selectedLog =this.getSearched('.selected-button-info', this.displayLogEl)
+    selectedLog.classList.add('with-notify')
   }
   handleCancelButtonClicked(){
     this.clearLog();
     this.clearTimer();
-    this.setNumberButtonState(false);
+    this.setNumberButtonDisable(false);
   }
   startAutoClearLog(){
     const autoClearId = setTimeout(this.clearLog.bind(this), 2000);
@@ -160,7 +165,7 @@ class VendingMachineView {
       if(!isNaN(buttonEl.innerText)) return buttonEl;
     })
   }
-  setNumberButtonState(disbaled){
+  setNumberButtonDisable(disbaled){
     Array.prototype.forEach.call(this.numberButtonListEL,(buttonEl)=>{
       buttonEl.disabled=disbaled;
     })

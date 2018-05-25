@@ -22,6 +22,13 @@ vendingMachineView
 추가 나왔습니다 알림 
 [O] 나왔습니다 다음 알림  시간 지난 후 자동 없애기 
 
+체크리스트 추가 
+[] 버튼 블락 알림은 세자릿수를 클릭했을 떄 블락되고 알림을 나오도록 수정 
+[] 버튼 혹은 키보드 입력을 받도록 수정 
+[] 선택 버튼 클릭시 0이 선택 되었을 때는 아무것도 선택하지 않았다는 알림 
+[] 돈 입력된 로그도 몇 초 후에 사라지도록 
+
+
 매인은 아니지만 바꾸고 싶은 추가사항
 [] 디자인 적 수정 
 --[] 하이라이트 단순 빨간색 ... => 좀 예쁜 ui좀 찾아봐서 바꿔봐 !!! 
@@ -60,10 +67,9 @@ vendingMachineView
 
 ### 발견된 이슈 
 
-[] 돈 버튼 갯수 span 클릭 했을 때 콘솔에 뜨는 에러 `view.js:42 Uncaught TypeError: Cannot read property 'dataset' of null`
-[]
-[]
-[]
+[O] 돈 버튼 갯수 span 클릭 했을 때 콘솔에 뜨는 에러 `view.js:42 Uncaught TypeError: Cannot read property 'dataset' of null` => if(!==) if(!el==) 조건을 잘 못 사용함 !
+
+
 
 ### 순수함수
 

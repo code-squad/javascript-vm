@@ -44,10 +44,10 @@ class VendingMachineModel {
     this.emit('reRenderLog',latestHistorys)
   }
   handleSelectNumberButtonClicked(selectedText){
+    if((this.selectedText+selectedText).length===3) return this.emit('blockOverRange')
     this.selectedText += selectedText
     this.emit('displaySelectedButtonNumber',this.selectedText)
-    this.emit('startTimer',5)
-    if(this.selectedText.length===2)this.emit('blockOverRange')
+    this.emit('startTimer',200)
   }
   updatedSelectedText(selectedText){
     return this.selectedText += selectedText
