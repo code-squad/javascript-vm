@@ -65,28 +65,34 @@ class VendingMachineModel {
     this.timerId = intervalId;
   }
   selectSnack(){
+    if(this.selectedText==="") return this.emit('updateLogView',{logType: 'notifyNoneSelect'})
     const snackId = Number(this.selectedText)
-    const selectedOne = this.snackList.find(snack=>snack.id===snackId)
+    const selectedOne = this.snackList.find(snack=>snack.id===snackId);
     this.clearSelectedInfo();    
     return this.checkValidSelection(selectedOne, snackId)
   }
-  checkValidSelection(selectedOne, snackId){
-    if(selectedOne===undefined) return this.handleChoseWrongNumber(snackId)
-    if(selectedOne.name==="{고장}") return this.handleBreakdown(snackId)
+  checkValidSelection(selectedOne={name: 'outOfRange'}, snackId){
+    if(this.isErrorCase(selectedOne)) return this.handleErrorCase(selectedOne, snackId)
     return this.checkCanBuy(selectedOne)
   }
-  handleChoseWrongNumber(snackId){
-    return this.emit('notifyChoseWrongNumber',snackId)
+  isErrorCase({name}){
+    return (name==='outOfRange'||name==='{고장}') 
   }
-  handleBreakdown(breakId){
-    return this.emit('notifyBreakdown',breakId)
+  handleErrorCase(selectedOne, snackId){
+    const updatedlogData = {id: snackId}
+    updatedlogData.logType = selectedOne.name==='outOfRange'  ? 'notifyChoseWrongNumber' :'notifyBreakdown'
+    return this.emit('updateLogView', updatedlogData)
   }
   checkCanBuy(selectedOne){
     if(this.money>=selectedOne.price){
       this.useMoney(selectedOne.price)
-      return this.emit('sendSelectedSnack',selectedOne) 
+      const updatelogData = {...selectedOne, logType: 'displaySelectedOne'} 
+      return this.emit('updateLogView', updatelogData) 
     } 
-    else return this.emit('notifyCanNotBuy', this.money)
+    else {
+      const updatelogData = {money: this.money, logType: 'notifyCanNotBuy'}
+      return this.emit('updateLogView',updatelogData)
+    } 
   }
   useMoney(snackPrice){
     this.money-=snackPrice
