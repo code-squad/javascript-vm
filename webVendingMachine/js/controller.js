@@ -55,10 +55,6 @@ class VmController {
   updateCanBuyList(money){
     this.vendingMachineView.updateCanBuyList(money)
   }
-  blockOverRange(){
-    this.vendingMachineView.setNumberButtonDisable(true)
-    this.vendingMachineView.notifyNumberButtonBlocked()
-  }
   sendAutoClearId(autoClearId){
     this.vendingMachine.getAutoClearId(autoClearId)
   }

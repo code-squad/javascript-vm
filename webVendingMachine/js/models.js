@@ -44,9 +44,15 @@ class VendingMachineModel {
     this.emit('reRenderLog',latestHistorys)
   }
   handleSelectNumberButtonClicked(selectedText){
+<<<<<<< Updated upstream
     if((this.selectedText+selectedText).length===3) return this.emit('blockOverRange')    
     this.selectedText += selectedText
     // this.selectedText = this.selectedText.slice(-2)
+=======
+    // if((this.selectedText+selectedText).length===3) return this.emit('blockOverRange')
+    this.selectedText += selectedText
+    this.selectedText = this.selectedText.slice(-2)
+>>>>>>> Stashed changes
     this.emit('displaySelectedButtonNumber', this.selectedText)
     this.emit('startTimer',5)
   }
