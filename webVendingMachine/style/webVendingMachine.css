@@ -151,6 +151,7 @@ button:focus {
   border-radius: 5px;
   background-color: #495057;
   color: #FFF;
+  cursor: pointer
 }
 
 .selected-button-info, .selected-one, .notify{
@@ -247,6 +248,9 @@ button:focus {
 .wallet-money-button {
   float: left;
   width: 100%;
+}
+.money-button {
+  cursor: pointer;  
 }
 
 .wallet-money-button button,.wallet-money-button .money-count{
