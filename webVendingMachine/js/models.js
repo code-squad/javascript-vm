@@ -58,7 +58,7 @@ class VendingMachineModel {
     this.timerId = null;
   }
   savelogHistory(logData){
-    this.logHistoryList = this.logHistoryList.concat(logData);
+    this.logHistoryList = [...this.logHistoryList, logData];
   }
   updateTimerInfo(intervalId){
     clearTimeout(this.timerId);
