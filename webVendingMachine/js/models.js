@@ -94,7 +94,7 @@ class VendingMachineModel {
     this.emit('updateCanBuyList', this.money)
   }
   getAutoClearId(autoClearId){
-    this.autoClearId = autoClearId;
+    return this.autoClearId = autoClearId;
   }
   clearAutoClear(){
     clearTimeout(this.autoClearId);

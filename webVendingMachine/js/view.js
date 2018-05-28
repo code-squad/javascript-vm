@@ -12,6 +12,7 @@ class VendingMachineView {
       'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
     }
     this.numberButtonListEL = null;
+    this.clearTime = 2000;
   }
   getMessageByType(type, data){
     return this.actions[type](data)
@@ -94,6 +95,7 @@ class VendingMachineView {
   startTimer(time){
     let initTime = time;
     this.timer.innerText = initTime;
+    // setTimeOut 재귀 가능 !
     const intervalId = setInterval(()=>{
       if(initTime===0){
         this.emit('selectSnack')
@@ -113,7 +115,7 @@ class VendingMachineView {
     }
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
     this.clearTimer();
-    this.startAutoClearLog();
+    this.startAutoClearLog(this.clearTime);
   }
   notifyNumberButtonBlocked(){
     this.changeStyleselectedLog();
@@ -131,8 +133,8 @@ class VendingMachineView {
     this.clearTimer();
     this.setNumberButtonDisable(false);
   }
-  startAutoClearLog(){
-    const autoClearId = setTimeout(this.clearLog.bind(this), 2000);
+  startAutoClearLog(clearTime = 1000){
+    const autoClearId = setTimeout(this.clearLog.bind(this), clearTime);
     this.emit('sendAutoClearId', autoClearId)
   }
   clearLog(){
