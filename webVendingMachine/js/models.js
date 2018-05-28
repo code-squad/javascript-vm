@@ -44,9 +44,10 @@ class VendingMachineModel {
     this.emit('reRenderLog',latestHistorys)
   }
   handleSelectNumberButtonClicked(selectedText){
-    if((this.selectedText+selectedText).length===3) return this.emit('blockOverRange')
+    if((this.selectedText+selectedText).length===3) return this.emit('blockOverRange')    
     this.selectedText += selectedText
-    this.emit('displaySelectedButtonNumber',this.selectedText)
+    // this.selectedText = this.selectedText.slice(-2)
+    this.emit('displaySelectedButtonNumber', this.selectedText)
     this.emit('startTimer',5)
   }
   updatedSelectedText(selectedText){
@@ -72,10 +73,10 @@ class VendingMachineModel {
     return this.checkValidSelection(selectedOne, snackId)
   }
   checkValidSelection(selectedOne={name: 'outOfRange'}, snackId){
-    if(this.isErrorCase(selectedOne)) return this.handleErrorCase(selectedOne, snackId)
+    if(this.isInValidCase(selectedOne)) return this.handleErrorCase(selectedOne, snackId)
     return this.checkCanBuy(selectedOne)
   }
-  isErrorCase({name}){
+  isInValidCase({name}){
     return (name==='outOfRange'||name==='{고장}') 
   }
   handleErrorCase(selectedOne, snackId){
