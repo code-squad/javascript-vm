@@ -28,7 +28,7 @@ class VendingMachineView {
    this.saveNumberButtonList();
   }
   handleMoneyButtonClicked({target}){
-    if(target.localName!=="button") return;
+    if(target.className!=="money-button") return;
     const moneyCountEl = target.nextElementSibling
     const moneyCount =  Number(moneyCountEl.dataset.count)
     if(!moneyCount) return;
@@ -51,7 +51,7 @@ class VendingMachineView {
   }
   getCanBuyList(money){
     const eachSnacks = getSearchedAll(`[data-id]`, this.snackListEl);
-    return [...eachSnacks].filter(snackEl=>snackEl.dataset.price<=money)
+    return [...eachSnacks].filter(({dataset})=>dataset.price<=money)
   }
   updateCanBuyList(money){
     const lastDisplayList = getSearchedAll('.red')
@@ -78,10 +78,10 @@ class VendingMachineView {
   }
   handleSelectButtonClicked(e){
     this.emit('clearAutoClear')
-    const buttonText = e.target.innerText 
-    if(buttonText==='선택') return this.emit('selectSnack')
-    if(buttonText==='취소') return this.emit('handleCancelButtonClicked')
-    this.emit('handleSelectNumberButtonClicked',buttonText)
+    const selectButton= e.target
+    if(selectButton.id==='chose') return this.emit('selectSnack')
+    if(selectButton.id==='cancel') return this.emit('handleCancelButtonClicked')
+    this.emit('handleSelectNumberButtonClicked',selectButton.innerText)
   }
   reRenderVendingMachineMoney(money){
    updateText(this.insertedMoneyEl, `${money}`)
@@ -140,7 +140,7 @@ class VendingMachineView {
   }
   saveNumberButtonList(){
     const slectButtonList = getSearchedAll('button',this.selectButtonsEl)
-    return [...slectButtonList].filter(buttonEl=> !isNaN(buttonEl.innerText))
+    return this.numberButtonListEL = [...slectButtonList].filter(buttonEl=> !isNaN(buttonEl.innerText))
   }
   setNumberButtonDisable(disbaled){
     return [...this.numberButtonListEL].forEach(buttonEl=>buttonEl.disabled=disbaled)

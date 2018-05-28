@@ -43,6 +43,9 @@ class VmController {
     this.vendingMachine.selectSnack()
     this.vendingMachineView.setNumberButtonDisable(false);
   }
+  updateLogView(updateLogData, logtype){
+    this.vendingMachineView.updateLogView(updateLogData,logtype)
+  }
   sendSelectedSnack(selectedOne){
     this.vendingMachineView.updateLogView(selectedOne,'displaySelectedOne')
   }

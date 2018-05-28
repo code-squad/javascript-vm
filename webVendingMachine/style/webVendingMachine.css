@@ -130,8 +130,7 @@ button:focus {
   float: right;
   text-align: right
 }
-
-.select-button {
+[class*="select-button"] {
   border: none;
   width: 100%;
   height: 50px;

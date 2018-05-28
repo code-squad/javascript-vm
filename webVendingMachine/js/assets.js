@@ -34,8 +34,58 @@ const snackList = [
   { "id": 32, "name": "포도맛 환타", "price": 1000, "working": true }
 ]
 
-const buttonTextList = [1,2,3,4,5,6,7,8,9,0,"선택","취소"]
-
+const buttonTextList = [
+  {
+    buttonText:1,
+    type: 'normal',
+  },
+  {
+    buttonText:2,
+    type: 'normal',
+  },
+  {
+    buttonText:3,
+    type: 'normal',
+  },
+  {
+    buttonText:4,
+    type: 'normal',
+  },
+  {
+    buttonText:5,
+    type: 'normal',
+  },
+  {
+    buttonText:6,
+    type: 'normal',
+  },
+  {
+    buttonText:7,
+    type: 'normal',
+  },
+  {
+    buttonText:8,
+    type: 'normal',
+  },
+  {
+    buttonText:9,
+    type: 'normal',
+  },
+  {
+    buttonText:0,
+    type: 'normal',
+  },
+  {
+    buttonText:"선택",
+    type: 'chose',
+  },
+  {
+    buttonText:"취소",
+    type: 'cancel',
+  },
+]
+  
+ 
 const myMoney = {
   100: 5,
   500: 5,
