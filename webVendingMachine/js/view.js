@@ -73,6 +73,11 @@ class VendingMachineView {
     const latestMsgTemplate = this.makeLogTemplate(latestHistorys);
     this.displayLogEl.innerHTML = latestMsgTemplate;
     this.displayLogEl.lastElementChild.classList.add('now')
+    this.reStartAutoClear();
+  }
+  reStartAutoClear(){
+    this.emit('clearAutoClear')
+    this.startAutoClearLog(this.clearTime);
   }
   displaySelectedButtonNumber(selectedText){
     this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText} 번</p>`;

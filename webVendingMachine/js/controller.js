@@ -9,13 +9,10 @@ class VmController {
   }
   useMoney(data){
     this.wallet.useMoney(data)
-    this.insertMoney(data)
+    this.vendingMachine.insertMoney(data);
   }
   reRenderWallet(data){
     this.vendingMachineView.reRenderWallet(data);
-  }
-  insertMoney(data){
-    this.vendingMachine.insertMoney(data);
   }
   reRenderVendingMachineMoney(money){
     this.vendingMachineView.reRenderVendingMachineMoney(money);
@@ -44,7 +41,6 @@ class VmController {
     this.vendingMachineView.setNumberButtonDisable(false);
   }
   updateLogView({logType, ...updatedlogData}){
-
     this.vendingMachineView.updateLogView(updatedlogData, logType)
   }
   handleCancelButtonClicked(){
