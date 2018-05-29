@@ -85,7 +85,6 @@ const buttonTextList = [
   },
 ]
   
- 
 const myMoney = {
   100: 5,
   500: 5,

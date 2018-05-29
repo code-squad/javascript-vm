@@ -1,3 +1,23 @@
+// class SnackList {
+//   constructor(snackList){
+//     this.snackList = snackList;
+//   }
+//   add(snack){
+//     this.snackList = [...this.snackList, snack]
+//   }
+// }
+
+// class Account {
+//   constructor(money){
+//     this.money = money
+//   }
+//   addMoney(kind){
+//     if(this.money[kind]===undefined) this.money[kind] = 1
+//     this.money[kind]+=1
+//   }
+// }
+
+
 class WalletModel {
   constructor(myMoney){
     this.myMoney=myMoney;
