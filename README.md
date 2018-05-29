@@ -34,6 +34,7 @@ vendingMachineView
 ...
 
 [] html 메타 태그 크롱 링크 보고 반영해서 수정 
+[참고](https://sympli.io/blog/2017/07/13/which-meta-tags-should-you-be-using-in-2017/)
 [] 돈 입력된 로그도 몇 초 후에 사라지도록 
 [] 돈 반환 기능 추가 
 [] notify 추가 메시지 가운데 정렬이 안되고 있음 ! 
