@@ -60,4 +60,13 @@ class VmController {
   clearAutoClear(){
     this.vendingMachine.clearAutoClear();
   }
+  notifyReturnMoney({logType, ...updatedlogData}){
+    this.vendingMachineView.updateLogView(updatedlogData, logType)
+  }
+  notifySecondOrder({logType, ...updatedlogData}){
+    this.vendingMachineView.updateLogView(updatedlogData, logType)
+  }
+  returnMoney(){
+    this.vendingMachine.returnMoney()
+  }
 }

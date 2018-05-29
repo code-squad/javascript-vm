@@ -13,6 +13,7 @@ class VendingMachineView {
     }
     this.numberButtonListEL = null;
     this.clearTime = 2000;
+    this.addOrderTime = 3;
   }
   getMessageByType(type, data){
     return this.actions[type](data)
@@ -97,13 +98,14 @@ class VendingMachineView {
     data.moneyCountEl.setAttribute('data-count',data.moneyCount);
     updateText(data.totalMoneyEl, data.totalMoney);
   }
-  startTimer(time){
+  startTimer(time, type){
     let initTime = time;
     this.timer.innerText = initTime;
     // setTimeOut 재귀 가능 !
     const intervalId = setInterval(()=>{
       if(initTime===0){
-        this.emit('selectSnack')
+        if(type==="returnMoney") this.emit('returnMoney')
+        else this.emit('selectSnack')
         return clearTimeout(intervalId);
       } 
         initTime-=1
@@ -117,11 +119,15 @@ class VendingMachineView {
       notifyCanNotBuy: ({money})=>`<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`,
       notifyChoseWrongNumber: ({id})=>`<p class="notify">${id}는 선택할 수 없는 번호입니다.</p>`,
       notifyBreakdown: ({id})=>`<p class="notify">죄송합니다 ${id}는 고장으로 선택할 수 없습니다</p>`,
-      notifyNoneSelect: ()=>`<p class="notify">선택하기 전에 <br>선택할 번호를 입력해주세요</p>`
+      notifyNoneSelect: ()=>`<p class="notify">선택하기 전에 <br>선택할 번호를 입력해주세요</p>`,
+      notifySecondOrder: ()=>`<p class="notify">추가 선택이 3초 동안 안 이뤄질 시<br>입력한 돈을 반환 합니다</p>`,
+      notifyReturnMoney: ({money})=>`<p class="notify">${money} 이 반환 되었습니다</p>`
     }
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
     this.clearTimer();
-    this.startAutoClearLog(this.clearTime);
+    const type = templateType==='displaySelectedOne' ? 'selected' :null
+    const clearTime = templateType==='notifySecondOrder' ? this.addOrderTime*1000 : this.clearTime
+    this.startAutoClearLog(clearTime, type);
   }
   notifyNumberButtonBlocked(){
     this.changeStyleselectedLog();
@@ -131,7 +137,7 @@ class VendingMachineView {
     ); 
   }
   changeStyleselectedLog(){
-    const selectedLog =getSearched('.selected-button-info', this.displayLogEl)
+    const selectedLog = getSearched('.selected-button-info', this.displayLogEl)
     selectedLog.classList.add('with-notify')
   }
   handleCancelButtonClicked(){
@@ -139,12 +145,16 @@ class VendingMachineView {
     this.clearTimer();
     this.setNumberButtonDisable(false);
   }
-  startAutoClearLog(clearTime = 1000){
-    const autoClearId = setTimeout(this.clearLog.bind(this), clearTime);
+  startAutoClearLog(clearTime = 1000, type){
+    const autoClearId = setTimeout(this.clearLog.bind(this,type), clearTime);
     this.emit('sendAutoClearId', autoClearId)
   }
-  clearLog(){
-    return clearText(this.displayLogEl);
+  clearLog(type){
+    clearText(this.displayLogEl);
+    if(type==="selected"){
+      this.emit('notifySecondOrder', {logType: 'notifySecondOrder'})
+      this.startTimer(this.addOrderTime, 'returnMoney')
+    } 
   }
   saveNumberButtonList(){
     const slectButtonList = getSearchedAll('button',this.selectButtonsEl)
@@ -157,3 +167,6 @@ class VendingMachineView {
     return clearText(this.timer)
   }
 }
+
+// 돈이 입력 된 후 에 추가 입력 없을시 알림 
+// 타이머를 시작한다.

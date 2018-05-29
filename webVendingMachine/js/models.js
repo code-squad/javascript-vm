@@ -99,6 +99,14 @@ class VendingMachineModel {
     this.emit('reRenderVendingMachineMoney', this.money)
     this.emit('updateCanBuyList', this.money)
   }
+  returnMoney(){
+    const returnMoney = this.money
+    this.money = 0;
+    const updateLogData = {money: returnMoney, logType: 'notifyReturnMoney'}
+    this.logHistoryList = [];
+    this.emit('reRenderVendingMachineMoney', this.money)
+    this.emit('updateLogView', updateLogData)
+  }
   getAutoClearId(autoClearId){
     return this.autoClearId = autoClearId;
   }
