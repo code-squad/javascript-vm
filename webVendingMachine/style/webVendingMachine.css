@@ -103,6 +103,19 @@ button:focus {
   padding-left: 10px;
 }
 
+.select-input-box {
+  height: 50px;
+  margin-top: 30px;
+}
+.select-input {
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  height: 50px;
+  border-radius: 10px;
+  text-align: right;
+}
+
 .diplay-inserted-money p {
   margin: 10px;
 }
@@ -113,7 +126,7 @@ button:focus {
 
 .number-buttons {
   float: left;
-  margin-top: 40px;
+  margin-top: 30px;
   overflow: auto;
   width: 100%;
 }
@@ -130,8 +143,7 @@ button:focus {
   float: right;
   text-align: right
 }
-
-.select-button {
+[class*="select-button"] {
   border: none;
   width: 100%;
   height: 50px;
@@ -140,6 +152,28 @@ button:focus {
   border-radius: 5px;
   background-color: #495057;
   color: #FFF;
+  cursor: pointer
+}
+
+.selected-button-info, .selected-one, .notify{
+  color: #495057;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.blocked {
+  margin: 16px;
+  font-size: 14px;
+  display: table-footer-group;
+  position: absolute;
+  bottom: 20px;
+}
+
+.with-notify {
+  display: block;
 }
 
 .display-log-box{
@@ -153,13 +187,14 @@ button:focus {
   color: #FFF;
   overflow: auto;
   text-align: center;
+  display: table;
+  position: relative;
 }
 
 .log {
   margin-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  float: left; 
   white-space: pre;
   overflow: auto;
   color: #EEE;
@@ -171,6 +206,16 @@ button:focus {
 
 .red {
   color: red;
+}
+
+.timer {
+  width: 100%;
+  margin-top: 20px;
+  min-height: 80px;
+  background-color: #fff;
+  border-radius: 10px;
+  line-height: 80px;
+  text-align: center;
 }
 
 /* wallet */
@@ -204,6 +249,9 @@ button:focus {
 .wallet-money-button {
   float: left;
   width: 100%;
+}
+.money-button {
+  cursor: pointer;  
 }
 
 .wallet-money-button button,.wallet-money-button .money-count{

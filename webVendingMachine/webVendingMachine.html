@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>webVendingMachine_byDali :D</title>
+    <meta name="Description" content="Discover the innovative world of webVending Machine">
+    <meta name="keywords" content="webVendingMachine, snack">
+    <meta name="webVendingMachine" content="webVendingMachine">
+    <meta name="referrer" content="unsafe-url">
     <link rel="stylesheet" href="./style/webVendingMachine.css">
 </head>
 <body>
@@ -28,6 +32,9 @@
         <div class="diplay-inserted-money">
             <p><span class="money">0</span><span class="unit">원</span></p>
         </div>
+        <div class="select-input-box">
+            <input class="select-input" type="text" placeholder="choose your snack">
+        </div>
         <ul class="number-buttons">
             <!-- <li> b
                 <button class="select-button">1</button>
@@ -42,6 +49,9 @@
             -->      
         </ul>
         <div class="display-log-box">
+        </div>
+        <div class="timer">
+            <p class="time"></p>
         </div>
     </section> 
   </section>
@@ -64,6 +74,11 @@
     </div>
   </section>
   <footer class="footer"></footer>
+  <script src="./js/assets.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/models.js"></script>
+  <script src="./js/controller.js"></script>
+  <script src="./js/view.js"></script>
   <script src="./js/vendingMachine.js"></script>
 </body>
 </html>
