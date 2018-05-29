@@ -80,7 +80,7 @@ class VendingMachineView {
   handleSelectButtonClicked(e){
     this.emit('clearAutoClear')
     const selectButton= e.target
-    if(selectButton.id==='chose') return this.emit('selectSnack')
+    if(selectButton.id==='choose') return this.emit('selectSnack')
     if(selectButton.id==='cancel') return this.emit('handleCancelButtonClicked')
     this.emit('handleSelectNumberButtonClicked',selectButton.innerText)
   }

@@ -77,7 +77,7 @@ const buttonTextList = [
   },
   {
     buttonText:"선택",
-    type: 'chose',
+    type: 'choose',
   },
   {
     buttonText:"취소",
