@@ -89,6 +89,10 @@ VendingMachineModel.prototype = {
     clearTimeout(this.timerId);
     this.timerId = intervalId;
   },
+  getSnackId(selectedSnackId){
+    this.selectedText = selectedSnackId;
+    this.selectSnack()
+  },
   selectSnack(){
     if(this.selectedText==="") return this.emit('updateLogView',{logType: 'notifyNoneSelect'})
     const snackId = Number(this.selectedText)

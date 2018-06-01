@@ -1,5 +1,6 @@
 class VendingMachineView {
   constructor(){
+    this.inputEl = getSearched('.select-input')
     this.snackListEl = getSearched('.snack-list')
     this.selectButtonsEl = getSearched('.number-buttons')
     this.moneyButtonListEl = getSearched('.money-button-list')
@@ -47,9 +48,17 @@ class VendingMachineView {
     this.controller.on(eventName, data);
   }
   bindEvents(){
+    this.inputEl.addEventListener('keydown', e=>this.handleInputSelected(e))
     this.selectButtonsEl.addEventListener('click', e =>this.handleSelectButtonClicked(e));
     this.moneyButtonListEl.addEventListener('click', e =>this.handleMoneyButtonClicked(e));
     return this;
+  }
+  handleInputSelected(e){
+    if(e.keyCode===13){
+      const selectedSnackId = e.target.value.trim()
+      selectedSnackId && this.emit('sendSnackNumber', selectedSnackId)
+      e.target.value = ''
+    }
   }
   getCanBuyList(money){
     const eachSnacks = getSearchedAll(`[data-id]`, this.snackListEl);
