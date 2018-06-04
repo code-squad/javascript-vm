@@ -69,4 +69,7 @@ class VmController {
   returnMoney(){
     this.vendingMachine.returnMoney()
   }
+  sendSnackNumber(selectedSnackId){
+    this.vendingMachine.getSnackId(selectedSnackId)
+  }
 }
