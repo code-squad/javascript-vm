@@ -1,18 +1,18 @@
-const getSearched = (selector, target=document)=>{
+const gs = (selector, target=document)=>{
   return target.querySelector(selector);
 }
-const getSearchedAll = (selector, target=document)=>{
+const gsA = (selector, target=document)=>{
   return target.querySelectorAll(selector);
 }
-const updateText = (el,updateText)=>{
+const ut = (el,updateText)=>{
   return el.innerText = updateText;
 } 
-const addClassElList = (list, className) =>{
+const acL = (list, className) =>{
   return list.forEach(el=> el.classList.add(className))
 }
-const removeClassElList = (list, className) => {
+const rcL = (list, className) => {
   return list.forEach(el=> el.classList.remove(className))
 }
-const clearText = (el)=> {
+const ct = (el)=> {
   return el.innerHTML = "";
 }

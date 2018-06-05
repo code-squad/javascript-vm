@@ -1,13 +1,13 @@
 class VendingMachineView {
   constructor(){
-    this.inputEl = getSearched('.select-input')
-    this.snackListEl = getSearched('.snack-list')
-    this.selectButtonsEl = getSearched('.number-buttons')
-    this.moneyButtonListEl = getSearched('.money-button-list')
-    this.myTotalMoneyEl = getSearched('.total-my-assets .money')
-    this.insertedMoneyEl = getSearched('.diplay-inserted-money .money')
-    this.displayLogEl = getSearched('.display-log-box')
-    this.timer = getSearched('.time')
+    this.inputEl = gs('.select-input')
+    this.snackListEl = gs('.snack-list')
+    this.selectButtonsEl = gs('.number-buttons')
+    this.moneyButtonListEl = gs('.money-button-list')
+    this.myTotalMoneyEl = gs('.total-my-assets .money')
+    this.insertedMoneyEl = gs('.diplay-inserted-money .money')
+    this.displayLogEl = gs('.display-log-box')
+    this.timer = gs('.time')
     this.controller = null;
     this.actions = {
       'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
@@ -61,17 +61,17 @@ class VendingMachineView {
     }
   }
   getCanBuyList(money){
-    const eachSnacks = getSearchedAll(`[data-id]`, this.snackListEl);
+    const eachSnacks = gsA(`[data-id]`, this.snackListEl);
     return [...eachSnacks].filter(({dataset})=>dataset.price<=money)
   }
   updateCanBuyList(money){
-    const lastDisplayList = getSearchedAll('.red')
+    const lastDisplayList = gsA('.red')
     const canNotBuyList = [...lastDisplayList].filter(snackEl=>snackEl.dataset.price>money)
-    removeClassElList(canNotBuyList,'red')
+    rcL(canNotBuyList,'red')
   }
   displayCanBuyList(money){
     const canBuyList = this.getCanBuyList(money);
-    addClassElList(canBuyList,'red')
+    acL(canBuyList,'red')
   }
   makeLogTemplate(latestHistorys){
      return latestHistorys.reduce(
@@ -100,12 +100,12 @@ class VendingMachineView {
     this.emit('handleSelectNumberButtonClicked',selectButton.innerText)
   }
   reRenderVendingMachineMoney(money){
-   updateText(this.insertedMoneyEl, `${money}`)
+   ut(this.insertedMoneyEl, `${money}`)
   }
   reRenderWallet(data){
-    updateText(data.moneyCountEl, `${data.moneyCount}개`);
+    ut(data.moneyCountEl, `${data.moneyCount}개`);
     data.moneyCountEl.setAttribute('data-count',data.moneyCount);
-    updateText(data.totalMoneyEl, data.totalMoney);
+    ut(data.totalMoneyEl, data.totalMoney);
   }
   startTimer(time, type){
     let initTime = time;
@@ -146,7 +146,7 @@ class VendingMachineView {
     ); 
   }
   changeStyleselectedLog(){
-    const selectedLog = getSearched('.selected-button-info', this.displayLogEl)
+    const selectedLog = gs('.selected-button-info', this.displayLogEl)
     selectedLog.classList.add('with-notify')
   }
   handleCancelButtonClicked(){
@@ -159,21 +159,21 @@ class VendingMachineView {
     this.emit('sendAutoClearId', autoClearId)
   }
   clearLog(type){
-    clearText(this.displayLogEl);
+    ct(this.displayLogEl);
     if(type==="selected"){
       this.emit('notifySecondOrder', {logType: 'notifySecondOrder'})
       this.startTimer(this.addOrderTime, 'returnMoney')
     } 
   }
   saveNumberButtonList(){
-    const slectButtonList = getSearchedAll('button',this.selectButtonsEl)
+    const slectButtonList = gsA('button',this.selectButtonsEl)
     return this.numberButtonListEL = [...slectButtonList].filter(buttonEl=> !isNaN(buttonEl.innerText))
   }
   setNumberButtonDisable(disbaled){
     return [...this.numberButtonListEL].forEach(buttonEl=>buttonEl.disabled=disbaled)
   }
   clearTimer(){
-    return clearText(this.timer)
+    return ct(this.timer)
   }
 }
 
