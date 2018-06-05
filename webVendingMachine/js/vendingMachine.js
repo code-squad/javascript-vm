@@ -41,8 +41,11 @@ vendingMachine.controller = vendingMachineController;
 wallet.controller = vendingMachineController;
 vendingMachineView.controller = vendingMachineController;
 
-
 /// domLoad
+
+// module.exports = {
+//   vendingMachineView,
+// }
 
 document.addEventListener("DOMContentLoaded", (e)=> {
   console.log("DOM fully loaded and parsed");
@@ -57,7 +60,9 @@ document.addEventListener("DOMContentLoaded", (e)=> {
 });
 
  
-
+module.exports = {
+  vendingMachineView,
+}
 
 
 

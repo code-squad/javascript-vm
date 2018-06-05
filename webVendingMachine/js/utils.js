@@ -16,3 +16,12 @@ const rcL = (list, className) => {
 const ct = (el)=> {
   return el.innerHTML = "";
 }
+
+module.exports = {
+  gs,
+  gsA,
+  ut,
+  acL,
+  rcL,
+  ct,
+}
