@@ -56,8 +56,6 @@ describe('VendingMachineModel Test', () => {
     expect(vendingMachineModel.emit).toHaveBeenCalled()
     const updateLogdata = {...selectedOne, logType:'displaySelectedOne'}
     expect(vendingMachineModel.emit).toHaveBeenCalledWith('updateLogView',updateLogdata)
-  
-
     });
 });
 
