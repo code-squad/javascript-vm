@@ -62,9 +62,9 @@ function VendingMachineModel(snackList){
 }
 
 VendingMachineModel.prototype = {
-  insertMoney(data){
-    this.money += Number(data.money);
-    this.logInsert('insertMoney', data.money);
+  insertMoney(money){
+    this.money += money;
+    this.logInsert('insertMoney', money);
     this.emit('displayCanBuyList', this.money);
     this.emit('reRenderVendingMachineMoney', this.money)
   },

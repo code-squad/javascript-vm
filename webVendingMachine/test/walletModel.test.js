@@ -20,7 +20,6 @@ describe('walletModel Test', () => {
     const usedMoney = 1000;
     wallet.useMoney(usedMoney)
     wallet.getTotalMoney()
-    console.log(wallet.totalMoney)
     expect(wallet.totalMoney).toBe(initialMoney-usedMoney)
     });
   test('wallet useMoney 사용하면 emit을 발생시키는지 테스트 ', () => {
@@ -31,7 +30,6 @@ describe('walletModel Test', () => {
       totalMoney: wallet.getTotalMoney(),
       moneyCount: wallet.myMoney[usedMoney],
     }
-    console.log(useMoneyInfo)
     expect(wallet.emit).toHaveBeenCalledWith('reRenderWallet',useMoneyInfo)
     });
 });

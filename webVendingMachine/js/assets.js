@@ -96,4 +96,5 @@ const myMoney = {
 
 module.exports = {
   myMoney,
+  snackList,
 }
