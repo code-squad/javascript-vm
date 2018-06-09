@@ -21,8 +21,9 @@
 function WalletModel(myMoney) {
     this.myMoney=myMoney;
     this.controller = null;
-    this.totalMoney = null;
-  
+    this.totalMoney = Object.keys(this.myMoney).reduce((ac,money)=> {
+      return ac+=Number(money)*this.myMoney[money]
+    },0)
 }
 WalletModel.prototype = {
   getTotalMoney(){
@@ -30,14 +31,19 @@ WalletModel.prototype = {
       return ac+=Number(money)*this.myMoney[money]
     },0)
   },
-  useMoney(data){
-    if(this.myMoney[data.money]){
-      this.myMoney[data.money]-=1;
-      data.totalMoney = this.getTotalMoney();
-      data.moneyCount = this.myMoney[data.money]
-      this.emit('reRenderWallet',data)
-      return Number(data.money)
+  useMoney(money){
+    if(this.myMoney[money]){
+      this.myMoney[money]-=1;
+      this.sendUseMoneyInfo(money)  
+      return Number(money)
     }
+  },
+  sendUseMoneyInfo(money){
+    const useMoneyInfo = {
+      totalMoney: this.getTotalMoney(),
+      moneyCount: this.myMoney[money],
+    }
+    this.emit('reRenderWallet', useMoneyInfo)
   },
   emit(eventName, data){
     this.controller.on(eventName, data);
@@ -149,3 +155,8 @@ VendingMachineModel.prototype = {
   },
 }
 
+
+module.exports = {
+  WalletModel,
+  VendingMachineModel,
+}

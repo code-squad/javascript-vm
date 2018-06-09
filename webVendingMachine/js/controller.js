@@ -73,3 +73,8 @@ class VmController {
     this.vendingMachine.getSnackId(selectedSnackId)
   }
 }
+
+
+module.exports = {
+  VmController,
+}

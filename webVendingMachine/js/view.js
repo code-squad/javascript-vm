@@ -179,3 +179,7 @@ class VendingMachineView {
 
 // 돈이 입력 된 후 에 추가 입력 없을시 알림 
 // 타이머를 시작한다.
+
+module.exports = {
+  VendingMachineView,
+}

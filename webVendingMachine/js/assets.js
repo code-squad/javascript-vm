@@ -92,3 +92,8 @@ const myMoney = {
   5000: 2,
   10000: 2,
 }
+
+
+module.exports = {
+  myMoney,
+}

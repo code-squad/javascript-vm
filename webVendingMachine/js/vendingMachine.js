@@ -1,3 +1,10 @@
+// testCode
+const {gs,gsA,ut,acL,rcL,ct} = require('../js/utils.js')
+const {VendingMachineModel, WalletModel} = require('./models.js');
+const {VmController} = require('./controller.js')
+const {VendingMachineView} = require('./view.js')
+const {snackList, buttonTextList, myMoney} = require('./assets.js')
+
 // template
 const template = {
   snackTemplate: (snackList)=>{
@@ -61,7 +68,10 @@ document.addEventListener("DOMContentLoaded", (e)=> {
 
  
 module.exports = {
+  vendingMachine,
+  wallet,
   vendingMachineView,
+  vendingMachineController,
 }
 
 
