@@ -14,16 +14,8 @@ WalletModel.prototype = {
   useMoney(money){
     if(this.myMoney[money]){
       this.myMoney[money]-=1;
-      this.sendUseMoneyInfo(money)  
       return Number(money)
     }
-  },
-  sendUseMoneyInfo(money){
-    const useMoneyInfo = {
-      totalMoney: this.getTotalMoney(),
-      moneyCount: this.myMoney[money],
-    }
-    this.emit('reRenderWallet', useMoneyInfo)
   },
   emit(eventName, data){
     this.controller.on(eventName, data);

@@ -1,5 +1,4 @@
-import {gs, gsA, ut} from './utils.js';
-
+import {gs, gsA, ut, acL, rcL} from './utils.js';
 export class VendingMachineView {
   constructor(){
     this.inputEl = gs('.select-input')
@@ -33,7 +32,6 @@ export class VendingMachineView {
    this.saveNumberButtonList();
   }
   handleMoneyButtonClicked({target}){
-    console.log('target', target)
     if(target.className!=="money-button") return;
     const moneyCountEl = target.nextElementSibling
     const moneyCount =  Number(moneyCountEl.dataset.count)
@@ -41,6 +39,20 @@ export class VendingMachineView {
     if(!moneyCount) return;
     this.emit('clearSelectedInfo')
     const money = Number(target.dataset.money)
+    this.handleMoneyBtnUpdate(moneyCountEl, money)
+  }
+  updateMoneyCount(el){
+    el.dataset.count-=1
+    ut(el, `${el.dataset.count}개`);
+  }
+  updateTotalMoney(money){
+    const totalMoney = Number(this.myTotalMoneyEl.innerText)
+    ut(this.myTotalMoneyEl, totalMoney-money)
+  }
+  handleMoneyBtnUpdate(moneyCountEl, money){
+    this.updateMoneyCount(moneyCountEl)
+    this.updateTotalMoney(money)
+    debugger;
     this.emit('useMoney', money)
   }
   emit(eventName, data){
@@ -92,6 +104,7 @@ export class VendingMachineView {
     this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText} 번</p>`;
   }
   handleSelectButtonClicked(e){
+    debugger;
     this.emit('clearAutoClear')
     const selectButton= e.target
     if(selectButton.id==='choose') return this.emit('selectSnack')
@@ -100,11 +113,6 @@ export class VendingMachineView {
   }
   reRenderVendingMachineMoney(money){
    ut(this.insertedMoneyEl, `${money}`)
-  }
-  reRenderWallet(data){
-    ut(data.moneyCountEl, `${data.moneyCount}개`);
-    data.moneyCountEl.setAttribute('data-count',data.moneyCount);
-    ut(data.totalMoneyEl, data.totalMoney);
   }
   startTimer(time, type){
     let initTime = time;

@@ -75,6 +75,3 @@ export class VmController {
 }
 
 
-// module.exports = {
-//   VmController,
-// }
