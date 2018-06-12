@@ -7,9 +7,11 @@ export class VmController {
   on(eventName, data){
     this[eventName](data)
   }
-  useMoney(data){
-    this.wallet.useMoney(data)
-    this.vendingMachine.insertMoney(data);
+  useMoney(money){
+    this.wallet.useMoney(money)
+  }
+  insertMoney(money){
+    this.vendingMachine.insertMoney(money);
   }
   reRenderWallet(data){
     this.vendingMachineView.reRenderWallet(data);

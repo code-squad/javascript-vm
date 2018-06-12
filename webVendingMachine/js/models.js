@@ -14,7 +14,7 @@ WalletModel.prototype = {
   useMoney(money){
     if(this.myMoney[money]){
       this.myMoney[money]-=1;
-      return Number(money)
+      this.emit('insertMoney',money)
     }
   },
   emit(eventName, data){

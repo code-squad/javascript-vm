@@ -2,8 +2,8 @@
 
 
 1. 돈을 쓴다 
-- 돈 종류 갯수가 줄어든다.
-- 최종 돈을 쓴만큼 줄인다. 
+- 돈 종류 갯수가 줄어든다. [O]
+- 최종 돈을 쓴만큼 줄인다. [O]
 
 2. 돈이 벤딩머신에 들어간다. 
 - 벤딩머신에 투입된 돈이 나오고 
@@ -18,8 +18,8 @@ data-money만큼 totalMoney를 줄여준다.
 
 Model 
 
-walletMode이 돈 사용한 돈을 받아서 update하고 
-vendingMachine insertMoney를 호출한다. 
+walletMode이 돈 사용한 돈을 받아서 update하고 [O]
+vendingMachine insertMoney를 호출한다.  [O]
 
 insertMoney 
 1. vendingMachine insertMoney만큼 돈이 저장된다.
