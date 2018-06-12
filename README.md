@@ -22,8 +22,9 @@ walletMode이 돈 사용한 돈을 받아서 update하고 [O]
 vendingMachine insertMoney를 호출한다.  [O]
 
 insertMoney 
-1. vendingMachine insertMoney만큼 돈이 저장된다.
-2. vendingMachineView의  입력된 돈 만큼 뷰를 업데이트 한다.
-3. vendingMachine 의 살 수 있는 목록들을 가지고 와서 vendingMachineView에 넘겨준다. 
+1. vendingMachine insertMoney만큼 돈이 저장된다. [O]
+2. vendingMachineView의  입력된 돈 만큼 뷰를 업데이트 한다. -> 뷰 업데이트 메소드를 호출한다. [O]
+3. vendingMachine 의 살 수 있는 목록을 확인하는 뷰의 displayCanBuyList의 메소드를  호출한다. [O]
+4. insertMoney 횟수만큼 기록을 한다 [O]
 
 순서데로 테스트 코드 진행 
