@@ -1,6 +1,7 @@
 // testCode
 import {gs,gsA,ut,acL,rcL,ct} from'../js/utils.js'
-import {VendingMachineModel, WalletModel} from'./models.js'
+import {VendingMachineModel } from'./VendingMachineModel.js'
+import { WalletModel } from'./WalletModel.js'
 import {VmController} from'./controller.js'
 import {VendingMachineView} from'./view.js'
 import {snackList, buttonTextList, myMoney} from'./assets.js'
