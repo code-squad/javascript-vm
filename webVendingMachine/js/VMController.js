@@ -1,8 +1,30 @@
 export class VmController {
-  constructor(vendingMachine,wallet,vendingMachineView){
+  constructor({wallet, vendingMachine}, {vendingMachineView,walletView}){
     this.vendingMachine = vendingMachine;
     this.wallet = wallet;
     this.vendingMachineView = vendingMachineView;
+    this.walletView = walletView;
+  }
+  init(){
+    // controller bind
+    this.vendingMachine.controller = this;
+    this.wallet.controller = this 
+    this.vendingMachineView.controller = this;
+    this.walletView.controller = this;
+    this.initRender()
+  }
+  initRender(){
+    this.vendingMachineViewInitRender()
+    this.walletViewInitRender()
+  }
+  vendingMachineViewInitRender(){
+    const snackList = this.vendingMachine.getSnackList()
+    this.vendingMachineView.initRender(snackList)    
+  }
+  walletViewInitRender(){
+    const myMoney  = this.wallet.getMyMoney();
+    const toatlMoney = this.wallet.getTotalMoney()
+    this.walletView.initRender(myMoney, toatlMoney);
   }
   on(eventName, data){
     this[eventName](data)

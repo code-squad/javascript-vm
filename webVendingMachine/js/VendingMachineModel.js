@@ -15,6 +15,9 @@ VendingMachineModel.prototype = {
     this.emit('displayCanBuyList', this.money);
     this.emit('reRenderVendingMachineMoney', this.money)
   },
+  getSnackList(){
+    return this.snackList;
+  },
   logInsert(type, data){
     const logData = {type, data};
     this.savelogHistory(logData);

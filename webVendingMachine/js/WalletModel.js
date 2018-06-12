@@ -11,6 +11,9 @@ getTotalMoney(){
     return ac+=Number(money)*this.myMoney[money]
   },0)
 },
+getMyMoney(){
+  return this.myMoney
+},
 useMoney(money){
   if(this.myMoney[money]){
     this.myMoney[money]-=1;

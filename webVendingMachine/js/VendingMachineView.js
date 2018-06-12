@@ -1,4 +1,7 @@
 import {gs, gsA, ut, acL, rcL} from './utils.js';
+import {snackTemplate, selectButtonTemplate, walletMoneyButtonTemplate} from './template.js'
+import {buttonTextList} from './assets.js';
+
 export class VendingMachineView {
   constructor(){
     this.inputEl = gs('.select-input')
@@ -16,44 +19,15 @@ export class VendingMachineView {
     this.numberButtonListEL = null;
     this.clearTime = 2000;
     this.addOrderTime = 3;
+    this.bindEvents();
   }
   getMessageByType(type, data){
     return this.actions[type](data)
   }
-  initRender(template, data){
-    const {snackTemplate, selectButtonTemplate, walletMoneyButtonTemplate} = template
-    const {snackList, buttonTextList, myMoney} = data
+  initRender(snackList){
     this.snackListEl.insertAdjacentHTML('beforeend', snackTemplate(snackList))
     this.selectButtonsEl.insertAdjacentHTML('beforeend', selectButtonTemplate(buttonTextList))
-    this.moneyButtonListEl.insertAdjacentHTML('beforeend', walletMoneyButtonTemplate(myMoney))
-    this.myTotalMoneyEl.innerText = Object.keys(myMoney).reduce((ac,money)=> {
-      return ac+=Number(money)*myMoney[money]
-    },0)
-   this.saveNumberButtonList();
-  }
-  handleMoneyButtonClicked({target}){
-    if(target.className!=="money-button") return;
-    const moneyCountEl = target.nextElementSibling
-    const moneyCount =  Number(moneyCountEl.dataset.count)
-    console.log('moneyCountEl',moneyCountEl)
-    if(!moneyCount) return;
-    this.emit('clearSelectedInfo')
-    const money = Number(target.dataset.money)
-    this.handleMoneyBtnUpdate(moneyCountEl, money)
-  }
-  updateMoneyCount(el){
-    el.dataset.count-=1
-    ut(el, `${el.dataset.count}개`);
-  }
-  updateTotalMoney(money){
-    const totalMoney = Number(this.myTotalMoneyEl.innerText)
-    ut(this.myTotalMoneyEl, totalMoney-money)
-  }
-  handleMoneyBtnUpdate(moneyCountEl, money){
-    this.updateMoneyCount(moneyCountEl)
-    this.updateTotalMoney(money)
-    debugger;
-    this.emit('useMoney', money)
+    this.saveNumberButtonList();
   }
   emit(eventName, data){
     this.controller.on(eventName, data);
@@ -61,7 +35,6 @@ export class VendingMachineView {
   bindEvents(){
     this.inputEl.addEventListener('keydown', e=>this.handleInputSelected(e))
     this.selectButtonsEl.addEventListener('click', e =>this.handleSelectButtonClicked(e));
-    this.moneyButtonListEl.addEventListener('click', e =>this.handleMoneyButtonClicked(e));
     return this;
   }
   handleInputSelected(e){
@@ -183,4 +156,6 @@ export class VendingMachineView {
     return ct(this.timer)
   }
 }
+
+
 

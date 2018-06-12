@@ -32,3 +32,9 @@ insertMoney
 ### 뷰를 나눌 필요성 
 나눠져서 각각해당되는 부분만 관리 하는 것이 더 깔끔해보인다. Why not 모델도 나눠져 있어서 더 흐름 보기 용이 
 -> vendingMachineView / WalletView
+
+
+
+
+
+1. 리팩토링하면서 질문 Dom이 로드되기 전에 어떻게 gs로 찾을 수 있었던 건지
