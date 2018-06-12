@@ -1,4 +1,6 @@
-class VendingMachineView {
+import {gs, gsA, ut} from './utils.js';
+
+export class VendingMachineView {
   constructor(){
     this.inputEl = gs('.select-input')
     this.snackListEl = gs('.snack-list')
@@ -31,18 +33,15 @@ class VendingMachineView {
    this.saveNumberButtonList();
   }
   handleMoneyButtonClicked({target}){
+    console.log('target', target)
     if(target.className!=="money-button") return;
     const moneyCountEl = target.nextElementSibling
     const moneyCount =  Number(moneyCountEl.dataset.count)
+    console.log('moneyCountEl',moneyCountEl)
     if(!moneyCount) return;
     this.emit('clearSelectedInfo')
-    const eventData = {
-      money: target.dataset.money,
-      moneyCountEl,
-      totalMoneyEl: this.myTotalMoneyEl,
-      insertedMoneyEl: this.insertedMoneyEl,
-    };
-    this.emit('useMoney', eventData)
+    const money = Number(target.dataset.money)
+    this.emit('useMoney', money)
   }
   emit(eventName, data){
     this.controller.on(eventName, data);
@@ -177,9 +176,3 @@ class VendingMachineView {
   }
 }
 
-// 돈이 입력 된 후 에 추가 입력 없을시 알림 
-// 타이머를 시작한다.
-
-module.exports = {
-  VendingMachineView,
-}

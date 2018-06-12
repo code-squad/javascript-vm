@@ -1,27 +1,19 @@
-const gs = (selector, target=document)=>{
+export const gs = (selector, target=document)=>{
   return target.querySelector(selector);
 }
-const gsA = (selector, target=document)=>{
+export const gsA = (selector, target=document)=>{
   return target.querySelectorAll(selector);
 }
-const ut = (el,updateText)=>{
+export const ut = (el,updateText)=>{
   return el.innerText = updateText;
 } 
-const acL = (list, className) =>{
+export const acL = (list, className) =>{
   return list.forEach(el=> el.classList.add(className))
 }
-const rcL = (list, className) => {
+export const rcL = (list, className) => {
   return list.forEach(el=> el.classList.remove(className))
 }
-const ct = (el)=> {
+export const ct = (el)=> {
   return el.innerHTML = "";
 }
 
-module.exports = {
-  gs,
-  gsA,
-  ut,
-  acL,
-  rcL,
-  ct,
-}

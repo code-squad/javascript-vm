@@ -1,4 +1,4 @@
-const { gs,gsA,ut,acL,rcL,ct,} = require("../js/utils")
+import {gs,gsA,ut,acL,rcL,ct} from '../js/utils';
 
 'use strict';
 document.body.innerHTML =

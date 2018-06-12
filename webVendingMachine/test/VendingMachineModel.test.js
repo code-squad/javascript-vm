@@ -1,5 +1,5 @@
-const { VendingMachineModel }= require('../js/models.js')
-const {snackList} = require('../js/assets');
+import { VendingMachineModel } from'../js/models.js';
+import {snackList} from'../js/assets';
 
 
 // 전체를 다 하면 좋지만 주요메소드 위주로만 우선 테스트-> 시간 대비 학습효과!

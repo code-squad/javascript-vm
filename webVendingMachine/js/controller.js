@@ -1,4 +1,4 @@
-class VmController {
+export class VmController {
   constructor(vendingMachine,wallet,vendingMachineView){
     this.vendingMachine = vendingMachine;
     this.wallet = wallet;
@@ -75,6 +75,6 @@ class VmController {
 }
 
 
-module.exports = {
-  VmController,
-}
+// module.exports = {
+//   VmController,
+// }

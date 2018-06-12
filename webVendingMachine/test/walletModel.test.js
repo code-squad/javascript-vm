@@ -1,5 +1,5 @@
-const { WalletModel }= require('../js/models.js')
-const {myMoney} = require('../js/assets');
+import { WalletModel } from'../js/models.js';
+import { myMoney } from '../js/assets';
 
 
 describe('walletModel Test', () => {

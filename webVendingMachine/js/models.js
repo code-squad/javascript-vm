@@ -1,24 +1,4 @@
-// class SnackList {
-//   constructor(snackList){
-//     this.snackList = snackList;
-//   }
-//   add(snack){
-//     this.snackList = [...this.snackList, snack]
-//   }
-// }
-
-// class Account {
-//   constructor(money){
-//     this.money = money
-//   }
-//   addMoney(kind){
-//     if(this.money[kind]===undefined) this.money[kind] = 1
-//     this.money[kind]+=1
-//   }
-// }
-
-
-function WalletModel(myMoney) {
+export function WalletModel(myMoney) {
     this.myMoney=myMoney;
     this.controller = null;
     this.totalMoney = Object.keys(this.myMoney).reduce((ac,money)=> {
@@ -51,7 +31,7 @@ WalletModel.prototype = {
 }
 
 
-function VendingMachineModel(snackList){
+export function VendingMachineModel(snackList){
     this.selectedText = '';
     this.money = 0;
     this.snackList= snackList
@@ -156,7 +136,4 @@ VendingMachineModel.prototype = {
 }
 
 
-module.exports = {
-  WalletModel,
-  VendingMachineModel,
-}
+
