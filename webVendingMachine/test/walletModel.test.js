@@ -1,4 +1,4 @@
-import { WalletModel } from'../js/models.js';
+import { WalletModel } from'../js/WalletModel.js';
 import { myMoney } from '../js/assets';
 
 

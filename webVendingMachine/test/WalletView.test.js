@@ -1,4 +1,4 @@
-import {VendingMachineView} from '../js/view';
+import {WalletView} from '../js/WalletView.js';
 import {gs} from '../js/utils';
 
 // 전체를 다 하면 좋지만 주요메소드 위주로만 우선 테스트-> 시간 대비 학습효과!
@@ -7,8 +7,8 @@ import {gs} from '../js/utils';
 // 3. useMoney 
 
 
-describe('VendingMachineView Test', () => {
-  let vendingMachineView;
+describe('walletView Test', () => {
+  let walletView;
   beforeEach(()=>{
     const testTemplate = 
     `
@@ -30,54 +30,58 @@ describe('VendingMachineView Test', () => {
             <span class="money-count" data-count="5">5개</span>
           </li>
       </ul>
+      <div class="total-my-assets">
+      <p>
+          <span class="money">0</span><span class="unit">원</span>
+      </p>
+      </div>
     `
     document.body.innerHTML = testTemplate.trim()
-    vendingMachineView = new VendingMachineView()
+    walletView = new WalletView()
     // console.log('test',gs('.money-button-list') === vendingMachineView.moneyButtonListEl)
-    vendingMachineView.bindEvents();
-    vendingMachineView.controller = {}
-    vendingMachineView.controller.on = (evtName, data)=> {evtName, data} 
+    walletView.bindEvent();
+    walletView.controller = {}
+    walletView.controller.on = (evtName, data)=> {evtName, data} 
   })
   test('moneyButton이 클릭되었을 떄 money를 handleMoneyBtn ClickedMethod가 불리는지', () => {
     // 이벤트 캡쳐링 ?.? 어떻게 해야 될지 
     
     //given
-    vendingMachineView.handleMoneyButtonClicked = jest.fn();
+    walletView.handleMoneyButtonClicked = jest.fn();
     const evt = new Event('click');
     //when
-    console.log('aaaa',vendingMachineView.moneyButtonListEl)
-    vendingMachineView.moneyButtonListEl.dispatchEvent(evt)
+    walletView.moneyButtonListEl.dispatchEvent(evt)
 
     // 버튼에 바로 dispatch하는 것으로는 바인딩 이벤트를 인식 못해서 나서 2번쨰 방법으로 접근했습니다.
     // gs('.money-button').dispatchEvent(evt)
 
     //then
-    expect(vendingMachineView.handleMoneyButtonClicked).toHaveBeenCalled()
+    expect(walletView.handleMoneyButtonClicked).toHaveBeenCalled()
     });
 
-    test('handleMoneyButtonClicked되고 target이 ', () => {
+    test('handleMoneyButtonClicked되고 해당 MoneyBtn data-money와 함께 메소드 useMoney를 emit한다', () => {
       
       //given
-      vendingMachineView.emit = jest.fn();
+      walletView.emit = jest.fn();
       const evtMock = {}
       evtMock.target = gs('.money-button')
       const mockMoney = 1000
       console.dir(evtMock)
       //when
-      vendingMachineView.handleMoneyButtonClicked(evtMock)       
+      walletView.handleMoneyButtonClicked(evtMock)       
       //then
-      expect(vendingMachineView.emit).toHaveBeenCalledWith('useMoney', mockMoney)
+      expect(walletView.emit).toHaveBeenCalledWith('useMoney', mockMoney)
       });
       test('moneyButton이 클릭되었을 떄 money를 handleMoneyBtn ClickedMethod가 불리는지', () => {
         // 이벤트 캡쳐링 ?.? 어떻게 해야 될지 
         
         //given
-        vendingMachineView.handleMoneyButtonClicked = jest.fn();
+        walletView.handleMoneyButtonClicked = jest.fn();
         const evt = new Event('click');
         //when
         
-        vendingMachineView.moneyButtonListEl.dispatchEvent(evt)
+        walletView.moneyButtonListEl.dispatchEvent(evt)
         //then
-        expect(vendingMachineView.handleMoneyButtonClicked).toHaveBeenCalled()
+        expect(walletView.handleMoneyButtonClicked).toHaveBeenCalled()
         });
 });

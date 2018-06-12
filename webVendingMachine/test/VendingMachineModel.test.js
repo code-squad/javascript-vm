@@ -1,4 +1,4 @@
-import { VendingMachineModel } from'../js/models.js';
+import { VendingMachineModel } from'../js/VendingMachineModel.js';
 import {snackList} from'../js/assets';
 
 
