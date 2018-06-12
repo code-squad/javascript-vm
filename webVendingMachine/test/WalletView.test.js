@@ -32,7 +32,7 @@ describe('walletView Test', () => {
       </ul>
       <div class="total-my-assets">
       <p>
-          <span class="money">0</span><span class="unit">원</span>
+          <span class="money">3000</span><span class="unit">원</span>
       </p>
       </div>
     `
@@ -57,31 +57,37 @@ describe('walletView Test', () => {
 
     //then
     expect(walletView.handleMoneyButtonClicked).toHaveBeenCalled()
-    });
+   });
 
-    test('handleMoneyButtonClicked되고 해당 MoneyBtn data-money와 함께 메소드 useMoney를 emit한다', () => {
-      
-      //given
-      walletView.emit = jest.fn();
-      const evtMock = {}
-      evtMock.target = gs('.money-button')
-      const mockMoney = 1000
-      console.dir(evtMock)
-      //when
-      walletView.handleMoneyButtonClicked(evtMock)       
-      //then
-      expect(walletView.emit).toHaveBeenCalledWith('useMoney', mockMoney)
-      });
-      test('moneyButton이 클릭되었을 떄 money를 handleMoneyBtn ClickedMethod가 불리는지', () => {
-        // 이벤트 캡쳐링 ?.? 어떻게 해야 될지 
-        
-        //given
-        walletView.handleMoneyButtonClicked = jest.fn();
-        const evt = new Event('click');
-        //when
-        
-        walletView.moneyButtonListEl.dispatchEvent(evt)
-        //then
-        expect(walletView.handleMoneyButtonClicked).toHaveBeenCalled()
-        });
+  test('머니메소드에서는 evt.target에 data-count 와 data-money를 가지고 와서 업데이트 하는지 test', () => {
+  
+    //given
+    walletView.emit = jest.fn();
+    const evtMock = {}
+    evtMock.target = gs('.money-button')
+    const moneyCountEl = gs('.money-count')
+    console.log('moneyCountEl', moneyCountEl)
+    const initCount = Number(moneyCountEl.dataset.count)
+    const money = Number(evtMock.target.dataset.money)
+    //when
+    const initTotalMoney = Number(walletView.myTotalMoneyEl.innerText)
+    walletView.handleMoneyButtonClicked(evtMock)       
+    //then
+    expect(Number(walletView.myTotalMoneyEl.innerText)).toBe(initTotalMoney-money)
+    expect(Number(moneyCountEl.dataset.count)).toBe(initCount-1)
+   });  
+
+  test('handleMoneyButtonClicked되고 해당 MoneyBtn data-money와 함께 메소드 useMoney를 emit한다', () => {
+    
+    //given
+    walletView.emit = jest.fn();
+    const evtMock = {}
+    evtMock.target = gs('.money-button')
+    const mockMoney = 1000
+    console.dir(evtMock)
+    //when
+    walletView.handleMoneyButtonClicked(evtMock)       
+    //then
+    expect(walletView.emit).toHaveBeenCalledWith('useMoney', mockMoney)
+    });
 });

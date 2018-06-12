@@ -33,8 +33,12 @@ insertMoney
 나눠져서 각각해당되는 부분만 관리 하는 것이 더 깔끔해보인다. Why not 모델도 나눠져 있어서 더 흐름 보기 용이 
 -> vendingMachineView / WalletView
 
+### 뷰 테스트
 
-
+WalletView Test
+1. 머니버튼이 클릭되면 머니버튼 메소드가 불린다. 
+2. 머니메소드에서는 evt.target에 data-count 와 data-money를 가지고 와서 뷰를 업데이트한다.
+3.  머니메소드에서는 컨트롤러에 useMoney 메소드와 useMoney에 필요한 data-money -> money를 param으로 넘긴다.
 
 
 1. 리팩토링하면서 질문 Dom이 로드되기 전에 어떻게 gs로 찾을 수 있었던 건지
