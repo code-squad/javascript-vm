@@ -1,11 +1,6 @@
 import {WalletView} from '../js/WalletView.js';
 import {gs} from '../js/utils';
 
-// 전체를 다 하면 좋지만 주요메소드 위주로만 우선 테스트-> 시간 대비 학습효과!
-// 1. insertMoney 
-// 2. selectSnak 
-// 3. useMoney 
-
 
 describe('walletView Test', () => {
   let walletView;
@@ -90,4 +85,6 @@ describe('walletView Test', () => {
     //then
     expect(walletView.emit).toHaveBeenCalledWith('useMoney', mockMoney)
     });
+
+ 
 });

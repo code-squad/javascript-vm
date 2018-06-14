@@ -1,9 +1,12 @@
-import {gs, gsA, ut, acL, rcL} from './utils.js';
+import {gs, gsA, ut, acL, rcL, ct} from './utils.js';
 import {snackTemplate, selectButtonTemplate, walletMoneyButtonTemplate} from './template.js'
 import {buttonTextList} from './assets.js';
 
 export class VendingMachineView {
   constructor(){
+    this.selectButtonText=""
+    this.timerId = null;
+    this.defaultTime = 5;
     this.inputEl = gs('.select-input')
     this.snackListEl = gs('.snack-list')
     this.selectButtonsEl = gs('.number-buttons')
@@ -76,34 +79,75 @@ export class VendingMachineView {
   displaySelectedButtonNumber(selectedText){
     this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText} 번</p>`;
   }
-  handleSelectButtonClicked(e){
-    debugger;
-    this.emit('clearAutoClear')
-    const selectButton= e.target
-    if(selectButton.id==='choose') return this.emit('selectSnack')
-    if(selectButton.id==='cancel') return this.emit('handleCancelButtonClicked')
-    this.emit('handleSelectNumberButtonClicked',selectButton.innerText)
+  handleChoseBtnClicked(){
+    const choseText = this.NumberToselectButtonText()
+    this.clearInfo();
+    if (choseText==="") this.updateLogView(null,'notifyNoneSelect')
+    else this.emit('selectSnack', choseText)
+   
   }
-  reRenderVendingMachineMoney(money){
+  updateNumberBtnText(buttonText){
+    this.selectButtonText+=buttonText
+    if(this.selectButtonText.length>2){ 
+      this.selectButtonText = this.selectButtonText.substr(-2)
+    }
+  }
+  handleSelectButtonClicked({target}){
+    if(target.className!=="select-button") return ;
+ 
+    if(target.id==='choose') return this.handleChoseBtnClicked()
+    if(target.id==='cancel') return this.handleCancelButtonClicked()
+    return this.handleNumberBtnClicked(target)
+    // this.emit('clearAutoClear')
+    // const selectButton= e.target
+    // if(selectButton.id==='choose') return this.emit('selectSnack')
+    // if(selectButton.id==='cancel') return this.emit('handleCancelButtonClicked')
+    // this.emit('handleSelectNumberButtonClicked',selectButton.innerText)
+  }
+  handleNumberBtnClicked(buttonEl){
+    // numberBtn Clicked
+    const buttonText = buttonEl.innerText 
+    this.updateNumberBtnText(buttonText)
+    this.clearTimeInfo();
+    this.startTimer(this.defaultTime)
+    // BtnTextUpdate
+    this.updateLogView(this.selectButtonText, 'nowSelectedNumber')
+  }
+  updateViewVendingMachineMoney(money){
    ut(this.insertedMoneyEl, `${money}`)
   }
-  startTimer(time, type){
+  NumberToselectButtonText(){
+    return Number(this.selectButtonText)
+  }
+  clearInfo(){
+    this.clearSelectedInfo();
+    this.clearTimeInfo();
+  }
+  clearSelectedInfo(){
+    this.selectButtonText = "";
+  }
+  clearTimeInfo(){
+    clearTimeout(this.timerId);
+    this.timerId = null;
+    this.clearTimer();
+  }
+  startTimer(time, type = null){
     let initTime = time;
     this.timer.innerText = initTime;
     // setTimeOut 재귀 가능 !
-    const intervalId = setInterval(()=>{
+    this.timerId = setInterval(()=>{
       if(initTime===0){
         if(type==="returnMoney") this.emit('returnMoney')
-        else this.emit('selectSnack')
-        return clearTimeout(intervalId);
+        else this.emit('selectSnack', this.NumberToselectButtonText())
+        return this.clearInfo();
       } 
         initTime-=1
         this.timer.innerText = initTime; 
       },1000)
-    this.emit('updateTimerInfo', intervalId)
   }
   updateLogView(updatedLogData, templateType){
     const logtemplate = {
+      nowSelectedNumber: (nowSelectedNumber)=> `<p class="selected-one">${nowSelectedNumber}</p>`,
       displaySelectedOne: (selectedOne)=>`<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>` ,
       notifyCanNotBuy: ({money})=>`<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`,
       notifyChoseWrongNumber: ({id})=>`<p class="notify">${id}는 선택할 수 없는 번호입니다.</p>`,
@@ -113,10 +157,11 @@ export class VendingMachineView {
       notifyReturnMoney: ({money})=>`<p class="notify">${money} 이 반환 되었습니다</p>`
     }
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
-    this.clearTimer();
-    const type = templateType==='displaySelectedOne' ? 'selected' :null
-    const clearTime = templateType==='notifySecondOrder' ? this.addOrderTime*1000 : this.clearTime
-    this.startAutoClearLog(clearTime, type);
+    
+    // this.clearTimer();
+    // const type = templateType==='displaySelectedOne' ? 'selected' :null
+    // const clearTime = templateType==='notifySecondOrder' ? this.addOrderTime*1000 : this.clearTime
+    // this.startAutoClearLog(clearTime, type);
   }
   notifyNumberButtonBlocked(){
     this.changeStyleselectedLog();
@@ -132,7 +177,6 @@ export class VendingMachineView {
   handleCancelButtonClicked(){
     this.clearLog();
     this.clearTimer();
-    this.setNumberButtonDisable(false);
   }
   startAutoClearLog(clearTime = 1000, type){
     const autoClearId = setTimeout(this.clearLog.bind(this,type), clearTime);
@@ -148,9 +192,6 @@ export class VendingMachineView {
   saveNumberButtonList(){
     const slectButtonList = gsA('button',this.selectButtonsEl)
     return this.numberButtonListEL = [...slectButtonList].filter(buttonEl=> !isNaN(buttonEl.innerText))
-  }
-  setNumberButtonDisable(disbaled){
-    return [...this.numberButtonListEL].forEach(buttonEl=>buttonEl.disabled=disbaled)
   }
   clearTimer(){
     return ct(this.timer)

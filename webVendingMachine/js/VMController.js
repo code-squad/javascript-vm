@@ -38,8 +38,8 @@ export class VmController {
   reRenderWallet(data){
     this.vendingMachineView.reRenderWallet(data);
   }
-  reRenderVendingMachineMoney(money){
-    this.vendingMachineView.reRenderVendingMachineMoney(money);
+  updateViewVendingMachineMoney(money){
+    this.vendingMachineView.updateViewVendingMachineMoney(money);
   }
   displayCanBuyList(money){
     this.vendingMachineView.displayCanBuyList(money);
@@ -60,9 +60,8 @@ export class VmController {
   updateTimerInfo(intervalId){
     this.vendingMachine.updateTimerInfo(intervalId)
   }
-  selectSnack(){
-    this.vendingMachine.selectSnack()
-    this.vendingMachineView.setNumberButtonDisable(false);
+  selectSnack(selectedId){
+    this.vendingMachine.selectSnack(selectedId)
   }
   updateLogView({logType, ...updatedlogData}){
     this.vendingMachineView.updateLogView(updatedlogData, logType)
@@ -79,7 +78,7 @@ export class VmController {
     this.vendingMachine.getAutoClearId(autoClearId)
   }
   clearSelectedInfo(){
-    this.vendingMachine.clearSelectedInfo();
+    this.vendingMachineView.clearTimeInfo();
   }
   clearAutoClear(){
     this.vendingMachine.clearAutoClear();

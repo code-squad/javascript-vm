@@ -1,5 +1,4 @@
 export function VendingMachineModel(snackList){
-    this.selectedText = '';
     this.money = 0;
     this.snackList= snackList
     this.controller = null;
@@ -13,7 +12,7 @@ VendingMachineModel.prototype = {
     this.money += money;
     this.logInsert('insertMoney', money);
     this.emit('displayCanBuyList', this.money);
-    this.emit('reRenderVendingMachineMoney', this.money)
+    this.emit('updateViewVendingMachineMoney', this.money)
   },
   getSnackList(){
     return this.snackList;
@@ -33,11 +32,7 @@ VendingMachineModel.prototype = {
   updatedSelectedText(selectedText){
     return this.selectedText += selectedText
   },
-  clearSelectedInfo(){
-    this.selectedText = "";
-    clearTimeout(this.timerId);
-    this.timerId = null;
-  },
+
   savelogHistory(logData){
     this.logHistoryList = [...this.logHistoryList, logData];
   },
@@ -47,14 +42,11 @@ VendingMachineModel.prototype = {
   },
   getSnackId(selectedSnackId){
     this.selectedText = selectedSnackId;
-    this.selectSnack()
+    this.selectSnack(selectedSnackId)
   },
-  selectSnack(){
-    if(this.selectedText==="") return this.emit('updateLogView',{logType: 'notifyNoneSelect'})
-    const snackId = Number(this.selectedText)
-    const selectedOne = this.snackList.find(snack=>snack.id===snackId);
-    this.clearSelectedInfo();    
-    return this.checkValidSelection(selectedOne, snackId)
+  selectSnack(selectedId){
+    const selectedOne = this.snackList.find(snack=>snack.id===selectedId);   
+    return this.checkValidSelection(selectedOne, selectedId)
   },
   checkValidSelection(selectedOne={name: 'outOfRange'}, snackId){
     if(this.isInValidCase(selectedOne)) return this.handleErrorCase(selectedOne, snackId)
@@ -81,7 +73,7 @@ VendingMachineModel.prototype = {
   },
   useMoney(snackPrice){
     this.money-=snackPrice
-    this.emit('reRenderVendingMachineMoney', this.money)
+    this.emit('updateViewVendingMachineMoney', this.money)
     this.emit('updateCanBuyList', this.money)
   },
   returnMoney(){
@@ -89,7 +81,7 @@ VendingMachineModel.prototype = {
     this.money = 0;
     const updateLogData = {money: returnMoney, logType: 'notifyReturnMoney'}
     this.logHistoryList = [];
-    this.emit('reRenderVendingMachineMoney', this.money)
+    this.emit('updateViewVendingMachineMoney', this.money)
     this.emit('updateLogView', updateLogData)
     this.emit('updateCanBuyList', this.money)
   },
@@ -104,6 +96,20 @@ VendingMachineModel.prototype = {
     this.controller.on(eventName, data);
   },
 }
+
+
+
+
+
+// class Timer {
+//   constructor(){
+//     this.timerId = null;
+//     this.autoClearId = null;
+//   }
+// }
+
+
+// 재고 
 
 
 

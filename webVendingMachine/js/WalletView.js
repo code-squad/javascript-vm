@@ -19,7 +19,6 @@ export class WalletView {
     if(target.className!=="money-button") return;
     const moneyCountEl = target.nextElementSibling
     const moneyCount =  Number(moneyCountEl.dataset.count)
-    console.log('moneyCountEl',moneyCountEl)
     if(!moneyCount) return;
     this.emit('clearSelectedInfo')
     const money = Number(target.dataset.money)

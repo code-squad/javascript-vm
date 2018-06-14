@@ -38,7 +38,7 @@ describe('VendingMachineModel Test', () => {
     //when
     vendingMachineModel.insertMoney(inputMoney)
     //then
-    expect(vendingMachineModel.emit).toHaveBeenCalledWith('reRenderVendingMachineMoney',initialMoney+inputMoney)
+    expect(vendingMachineModel.emit).toHaveBeenCalledWith('updateViewVendingMachineMoney',initialMoney+inputMoney)
 
   });
 
@@ -83,10 +83,11 @@ describe('VendingMachineModel Test', () => {
       vendingMachineModel.emit = jest.fn();
       //when 
       
-      vendingMachineModel.selectSnack()
+      vendingMachineModel.selectSnack(Number(vendingMachineModel.selectedText))
       expect(vendingMachineModel.money).toBe(inputMoney-selectedOne.price)
       expect(vendingMachineModel.emit).toHaveBeenCalled()
       const updateLogdata = {...selectedOne, logType:'displaySelectedOne'}
+      console.log(updateLogdata);
       expect(vendingMachineModel.emit).toHaveBeenCalledWith('updateLogView',updateLogdata)
       });
 });
