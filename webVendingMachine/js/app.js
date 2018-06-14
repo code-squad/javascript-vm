@@ -1,5 +1,5 @@
 // testCode
-import { gs, gsA, ut, acL, rcL, ct } from'../js/utils.js'
+import { getEl, getElAll, updateText, addClassToList, removeClassToList, clearText } from'../js/utils.js'
 import { VendingMachineModel } from'./VendingMachineModel.js'
 import { WalletModel } from'./WalletModel.js'
 import { VmController } from'./VMController.js'
