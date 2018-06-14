@@ -1,9 +1,9 @@
 export class VmController {
   constructor({wallet, vendingMachine}, {vendingMachineView,walletView}){
     Object.assign(this, { vendingMachine, wallet, vendingMachineView, walletView});
+    this.bindController()
   }
   bindController(){
-    // controller bind
     this.vendingMachine.controller = this;
     this.wallet.controller = this 
     this.vendingMachineView.controller = this;

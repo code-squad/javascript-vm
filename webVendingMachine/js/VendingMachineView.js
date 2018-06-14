@@ -1,4 +1,4 @@
-import {gs, gsA, ut, acL, rcL, ct} from './utils.js';
+import {getEl, getElAll, updateText, addClassToList, removeClassToList, clearText} from './utils.js';
 import {snackTemplate, selectButtonTemplate, walletMoneyButtonTemplate} from './template.js'
 import {buttonTextList} from './assets.js';
 
@@ -7,14 +7,14 @@ export class VendingMachineView {
     this.selectButtonText=""
     this.timerId = null;
     this.defaultTime = 5;
-    this.inputEl = gs('.select-input')
-    this.snackListEl = gs('.snack-list')
-    this.selectButtonsEl = gs('.number-buttons')
-    this.moneyButtonListEl = gs('.money-button-list')
-    this.myTotalMoneyEl = gs('.total-my-assets .money')
-    this.insertedMoneyEl = gs('.diplay-inserted-money .money')
-    this.displayLogEl = gs('.display-log-box')
-    this.timer = gs('.time')
+    this.inputEl = getEl('.select-input')
+    this.snackListEl = getEl('.snack-list')
+    this.selectButtonsEl = getEl('.number-buttons')
+    this.moneyButtonListEl = getEl('.money-button-list')
+    this.myTotalMoneyEl = getEl('.total-my-assets .money')
+    this.insertedMoneyEl = getEl('.diplay-inserted-money .money')
+    this.displayLogEl = getEl('.display-log-box')
+    this.timer = getEl('.time')
     this.controller = null;
     this.actions = {
       'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
@@ -48,17 +48,17 @@ export class VendingMachineView {
     }
   }
   getCanBuyList(money){
-    const eachSnacks = gsA(`[data-id]`, this.snackListEl);
+    const eachSnacks = getElAll(`[data-id]`, this.snackListEl);
     return [...eachSnacks].filter(({dataset})=>dataset.price<=money)
   }
   updateCanBuyList(money){
-    const lastDisplayList = gsA('.red')
+    const lastDisplayList = getElAll('.red')
     const canNotBuyList = [...lastDisplayList].filter(snackEl=>snackEl.dataset.price>money)
-    rcL(canNotBuyList,'red')
+    removeClassToList(canNotBuyList,'red')
   }
   displayCanBuyList(money){
     const canBuyList = this.getCanBuyList(money);
-    acL(canBuyList,'red')
+    addClassToList(canBuyList,'red')
   }
   makeLogTemplate(latestHistorys){
      return latestHistorys.reduce(
@@ -114,7 +114,7 @@ export class VendingMachineView {
     this.updateLogView(this.selectButtonText, 'nowSelectedNumber')
   }
   updateViewVendingMachineMoney(money){
-   ut(this.insertedMoneyEl, `${money}`)
+   updateText(this.insertedMoneyEl, `${money}`)
   }
   NumberToselectButtonText(){
     return Number(this.selectButtonText)
@@ -171,7 +171,7 @@ export class VendingMachineView {
     ); 
   }
   changeStyleselectedLog(){
-    const selectedLog = gs('.selected-button-info', this.displayLogEl)
+    const selectedLog = getEl('.selected-button-info', this.displayLogEl)
     selectedLog.classList.add('with-notify')
   }
   handleCancelButtonClicked(){
@@ -183,18 +183,18 @@ export class VendingMachineView {
     this.emit('sendAutoClearId', autoClearId)
   }
   clearLog(type){
-    ct(this.displayLogEl);
+    clearText(this.displayLogEl);
     if(type==="selected"){
       this.emit('notifySecondOrder', {logType: 'notifySecondOrder'})
       this.startTimer(this.addOrderTime, 'returnMoney')
     } 
   }
   saveNumberButtonList(){
-    const slectButtonList = gsA('button',this.selectButtonsEl)
+    const slectButtonList = getElAll('button',this.selectButtonsEl)
     return this.numberButtonListEL = [...slectButtonList].filter(buttonEl=> !isNaN(buttonEl.innerText))
   }
   clearTimer(){
-    return ct(this.timer)
+    return clearText(this.timer)
   }
 }
 

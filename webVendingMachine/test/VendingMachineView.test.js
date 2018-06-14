@@ -1,5 +1,5 @@
 import {VendingMachineView} from '../js/VendingMachineView.js';
-import {gs, acL, gsA} from '../js/utils.js';
+import {getEl, getElAll} from '../js/utils.js';
 import {templateMock} from './templateMock.js';
 
 describe('VendingMachineView Test', () => {
@@ -34,7 +34,7 @@ describe('VendingMachineView Test', () => {
    const getList =vendingMachineView.getCanBuyList(vendingMachineMoney)
   
    //then
-   expect( getList.length ).toBe(gsA('.red').length)
+   expect( getList.length ).toBe(getElAll('.red').length)
   });
   
   // test('선택할 수 없는 번호가 선택시 선택할 수 없다는 메시지 출력된다 테스트', () => {

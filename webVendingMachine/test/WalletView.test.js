@@ -1,5 +1,5 @@
 import {WalletView} from '../js/WalletView.js';
-import {gs} from '../js/utils';
+import {getEl} from '../js/utils';
 
 
 describe('walletView Test', () => {
@@ -59,9 +59,8 @@ describe('walletView Test', () => {
     //given
     walletView.emit = jest.fn();
     const evtMock = {}
-    evtMock.target = gs('.money-button')
-    const moneyCountEl = gs('.money-count')
-    console.log('moneyCountEl', moneyCountEl)
+    evtMock.target = getEl('.money-button')
+    const moneyCountEl = getEl('.money-count')
     const initCount = Number(moneyCountEl.dataset.count)
     const money = Number(evtMock.target.dataset.money)
     //when
@@ -77,7 +76,7 @@ describe('walletView Test', () => {
     //given
     walletView.emit = jest.fn();
     const evtMock = {}
-    evtMock.target = gs('.money-button')
+    evtMock.target = getEl('.money-button')
     const mockMoney = 1000
     console.dir(evtMock)
     //when

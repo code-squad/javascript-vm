@@ -1,5 +1,5 @@
 // testCode
-import { gs,gsA,ut,acL,rcL,ct } from'../js/utils.js'
+import { gs, gsA, ut, acL, rcL, ct } from'../js/utils.js'
 import { VendingMachineModel } from'./VendingMachineModel.js'
 import { WalletModel } from'./WalletModel.js'
 import { VmController } from'./VMController.js'
@@ -26,13 +26,12 @@ const view = {
 }
 const vendingMachineController = new VmController(model, view);
 
-// bind Controller 
+
 
 document.addEventListener("DOMContentLoaded", (e)=> {
   console.log("DOM fully loaded and parsed");
   // rendering 
-
-  vendingMachineController.init();
+  vendingMachineController.initRender();
 });
 
 

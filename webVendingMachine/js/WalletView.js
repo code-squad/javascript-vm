@@ -1,10 +1,10 @@
-import {gs, ut} from './utils.js';
+import {getEl, updateText} from './utils.js';
 import { walletMoneyButtonTemplate } from './template.js'
 
 export class WalletView {
   constructor(){
-    this.moneyButtonListEl = gs('.money-button-list')
-    this.myTotalMoneyEl = gs('.total-my-assets .money')
+    this.moneyButtonListEl = getEl('.money-button-list')
+    this.myTotalMoneyEl = getEl('.total-my-assets .money')
     this.controller = null;
     this.bindEvent()
   }
@@ -31,11 +31,11 @@ export class WalletView {
   }
   updateMoneyCount(el){
     el.dataset.count-=1
-    ut(el, `${el.dataset.count}개`);
+    updateText(el, `${el.dataset.count}개`);
   }
   updateTotalMoney(money){
     const totalMoney = Number(this.myTotalMoneyEl.innerText)
-    ut(this.myTotalMoneyEl, totalMoney-money)
+    updateText(this.myTotalMoneyEl, totalMoney-money)
   }
   emit(eventName, data){
     this.controller.on(eventName, data);

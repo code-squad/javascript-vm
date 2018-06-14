@@ -83,6 +83,8 @@ describe('VendingMachineModel Test', () => {
       vendingMachineModel.emit = jest.fn();
       //when 
       
+      
+      // assertion 여러개로 쪼개기 
       vendingMachineModel.selectSnack(Number(vendingMachineModel.selectedText))
       expect(vendingMachineModel.money).toBe(inputMoney-selectedOne.price)
       expect(vendingMachineModel.emit).toHaveBeenCalled()
