@@ -1,17 +1,13 @@
 export class VmController {
   constructor({wallet, vendingMachine}, {vendingMachineView,walletView}){
-    this.vendingMachine = vendingMachine;
-    this.wallet = wallet;
-    this.vendingMachineView = vendingMachineView;
-    this.walletView = walletView;
+    Object.assign(this, { vendingMachine, wallet, vendingMachineView, walletView});
   }
-  init(){
+  bindController(){
     // controller bind
     this.vendingMachine.controller = this;
     this.wallet.controller = this 
     this.vendingMachineView.controller = this;
     this.walletView.controller = this;
-    this.initRender()
   }
   initRender(){
     this.vendingMachineViewInitRender()
