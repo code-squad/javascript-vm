@@ -17,6 +17,9 @@ VendingMachineModel.prototype = {
   getSnackList(){
     return this.snackList;
   },
+  getLogHistory(){
+    return this.logHistoryList();
+  },
   logInsert(type, data){
     const logData = {type, data};
     this.savelogHistory(logData);

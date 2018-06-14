@@ -68,7 +68,7 @@ describe('VendingMachineModel Test', () => {
       console.log(vendingMachineModel.logHistoryList)
       // length만 test
       // ...
-      expect(vendingMachineModel.logHistoryList.length).toBe(3)
+      expect(vendingMachineModel.getLogHistory().length).toBe(3)
       });
       
     test('select Snack Test', () => {
