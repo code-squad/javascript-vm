@@ -9,18 +9,9 @@ export class VmController {
     this.vendingMachineView.controller = this;
     this.walletView.controller = this;
   }
-  initRender(){
-    this.vendingMachineViewInitRender()
-    this.walletViewInitRender()
-  }
   vendingMachineViewInitRender(){
     const snackList = this.vendingMachine.getSnackList()
     this.vendingMachineView.initRender(snackList)    
-  }
-  walletViewInitRender(){
-    const myMoney  = this.wallet.getMyMoney();
-    const toatlMoney = this.wallet.getTotalMoney()
-    this.walletView.initRender(myMoney, toatlMoney);
   }
   on(eventName, data){
     this[eventName](data)

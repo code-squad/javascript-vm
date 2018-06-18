@@ -98,11 +98,6 @@ export class VendingMachineView {
     if(target.id==='choose') return this.handleChoseBtnClicked()
     if(target.id==='cancel') return this.handleCancelButtonClicked()
     return this.handleNumberBtnClicked(target)
-    // this.emit('clearAutoClear')
-    // const selectButton= e.target
-    // if(selectButton.id==='choose') return this.emit('selectSnack')
-    // if(selectButton.id==='cancel') return this.emit('handleCancelButtonClicked')
-    // this.emit('handleSelectNumberButtonClicked',selectButton.innerText)
   }
   handleNumberBtnClicked(buttonEl){
     // numberBtn Clicked

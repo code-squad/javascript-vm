@@ -31,7 +31,8 @@ const vendingMachineController = new VmController(model, view);
 document.addEventListener("DOMContentLoaded", (e)=> {
   console.log("DOM fully loaded and parsed");
   // rendering 
-  vendingMachineController.initRender();
+  walletView.initRender(myMoney,wallet.getTotalMoney());
+  vendingMachineView.initRender(snackList);
 });
 
 
