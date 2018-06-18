@@ -71,7 +71,7 @@ describe('VendingMachineModel Test', () => {
       expect(vendingMachineModel.getLogHistory().length).toBe(3)
       });
       
-    test('select Snack Test', () => {
+    test('select Snack Test 살 수 있는 경우 selectSnack을 했을 때 그 상품만큼 가격만큼 차감되는지 test', () => {
       // 1. 유효 번호 선택경우 살 수 있는 경우 테스트 
       
       //given
@@ -80,17 +80,26 @@ describe('VendingMachineModel Test', () => {
       vendingMachineModel.insertMoney(inputMoney);
 
       const selectedOne = vendingMachineModel.snackList.find(snack=>snack.id===Number(vendingMachineModel.selectedText))
-      vendingMachineModel.emit = jest.fn();
-      //when 
-      
-      
-      // assertion 여러개로 쪼개기 
       vendingMachineModel.selectSnack(Number(vendingMachineModel.selectedText))
+      //when 
       expect(vendingMachineModel.money).toBe(inputMoney-selectedOne.price)
-      expect(vendingMachineModel.emit).toHaveBeenCalled()
-      const updateLogdata = {...selectedOne, logType:'displaySelectedOne'}
-      console.log(updateLogdata);
-      expect(vendingMachineModel.emit).toHaveBeenCalledWith('updateLogView',updateLogdata)
+
+      });
+      test('select Snack Test 살 수 있는 경우 selectSnack을 했을 때 그 상품정보를 메소드에 잘 보내주는지 test', () => {
+        // 1. 유효 번호 선택경우 살 수 있는 경우 테스트 
+        
+        //given
+        vendingMachineModel.selectedText = '1';
+        const inputMoney = 10000;
+        vendingMachineModel.insertMoney(inputMoney);
+  
+        const selectedOne = vendingMachineModel.snackList.find(snack=>snack.id===Number(vendingMachineModel.selectedText))
+        vendingMachineModel.emit = jest.fn();
+        vendingMachineModel.selectSnack(Number(vendingMachineModel.selectedText))
+        
+        //when         
+        const updateLogdata = {...selectedOne, logType:'displaySelectedOne'}
+        expect(vendingMachineModel.emit).toHaveBeenCalledWith('updateLogView',updateLogdata)
       });
 });
 
