@@ -1,0 +1,30 @@
+.container{
+    margin : 40px;
+  }
+  .ul{
+    width : 360px;
+    height : 540px;
+    border : 10px solid;
+    overflow : auto;
+    list-style : none;
+    background-color : #0365bf;
+    padding : 10px 20px 10px 10px;
+  }
+  .ul>li{
+    width : 70px;
+    height : 70px;
+    margin : 0px 10px 0px 10px;
+    float : left;
+    text-align : center;
+    position : relative;;.
+    right : 20px;
+  }
+  .ul>li>div{
+    border : 4px solid slategray;
+    width : 100%;
+    height : 50%;
+    background-color : white;
+  }
+  .ul>li>span{
+    background-color : white;
+  }
