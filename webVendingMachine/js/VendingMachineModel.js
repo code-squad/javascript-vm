@@ -24,7 +24,7 @@ VendingMachineModel.prototype = {
     const logData = {type, data};
     this.savelogHistory(logData);
     const latestHistorys = this.logHistoryList.slice(-3);
-    this.emit('reRenderLog',latestHistorys)
+    // this.emit('reRenderLog',latestHistorys)
   },
   handleSelectNumberButtonClicked(selectedText){
     this.selectedText += selectedText
@@ -35,7 +35,11 @@ VendingMachineModel.prototype = {
   updatedSelectedText(selectedText){
     return this.selectedText += selectedText
   },
-
+  clearTimeInfo(){
+    clearTimeout(this.timerId)
+    this.timerId = null;
+    this.emit('notifyClearedTime')
+  },
   savelogHistory(logData){
     this.logHistoryList = [...this.logHistoryList, logData];
   },
@@ -94,6 +98,9 @@ VendingMachineModel.prototype = {
   clearAutoClear(){
     clearTimeout(this.autoClearId);
     this.autoClearId = null;
+  },
+  getTimerId(timerId){
+    this.timerId = timerId;
   },
   emit(eventName, data){
     this.controller.on(eventName, data);

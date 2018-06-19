@@ -20,14 +20,14 @@ export class WalletView {
     const moneyCountEl = target.nextElementSibling
     const moneyCount =  Number(moneyCountEl.dataset.count)
     if(!moneyCount) return;
-    this.emit('clearSelectedInfo')
+    // this.emit('clearSelectedInfo')
     const money = Number(target.dataset.money)
     this.handleMoneyBtnUpdate(moneyCountEl, money)
+    this.emit('useMoney', money)
   }
   handleMoneyBtnUpdate(moneyCountEl, money){
     this.updateMoneyCount(moneyCountEl)
     this.updateTotalMoney(money)
-    this.emit('useMoney', money)
   }
   updateMoneyCount(el){
     el.dataset.count-=1

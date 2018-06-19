@@ -53,16 +53,15 @@ export class VmController {
   updateLogView({logType, ...updatedlogData}){
     this.vendingMachineView.updateLogView(updatedlogData, logType)
   }
-  handleCancelButtonClicked(){
-    this.clearAutoClear();
-    this.clearSelectedInfo();
-    this.vendingMachineView.handleCancelButtonClicked();
-  }
   updateCanBuyList(money){
     this.vendingMachineView.updateCanBuyList(money)
   }
   sendAutoClearId(autoClearId){
+    debugger;
     this.vendingMachine.getAutoClearId(autoClearId)
+  }
+  clearTimeInfo(){
+    this.vendingMachine.clearTimeInfo();
   }
   clearSelectedInfo(){
     this.vendingMachineView.clearTimeInfo();
@@ -81,6 +80,12 @@ export class VmController {
   }
   sendSnackNumber(selectedSnackId){
     this.vendingMachine.getSnackId(selectedSnackId)
+  }
+  notifyClearedTime(){
+    this.vendingMachineView.clearTimer();
+  }
+  sendTimerId(timerId){
+    this.vendingMachine.getTimerId(timerId)
   }
 }
 
