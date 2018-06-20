@@ -38,9 +38,6 @@ export class VmController {
     this.clearAutoClear();
     this.vendingMachine.handleSelectNumberButtonClicked(buttonText)
   }
-  displaySelectedButtonNumber(selectedText){
-    this.vendingMachineView.displaySelectedButtonNumber(selectedText)
-  }
   startTimer(time){
     this.vendingMachineView.startTimer(time);
   }

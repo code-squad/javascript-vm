@@ -77,9 +77,6 @@ export class VendingMachineView {
   //   this.emit('clearAutoClear')
   //   this.startAutoClearLog(this.clearTime);
   // }
-  displaySelectedButtonNumber(selectedText){
-    this.displayLogEl.innerHTML = `<p class="selected-button-info">${selectedText} 번</p>`;
-  }
   checkHasMoney(){
     return Number(this.insertedMoneyEl.innerText)
   }

@@ -24,7 +24,7 @@ VendingMachineModel.prototype = {
     const logData = {type, data};
     this.savelogHistory(logData);
     const latestHistorys = this.logHistoryList.slice(-3);
-    // this.emit('reRenderLog',latestHistorys)
+    this.emit('reRenderLog',latestHistorys)
   },
   handleSelectNumberButtonClicked(selectedText){
     this.selectedText += selectedText
@@ -108,18 +108,6 @@ VendingMachineModel.prototype = {
 }
 
 
-
-
-
-// class Timer {
-//   constructor(){
-//     this.timerId = null;
-//     this.autoClearId = null;
-//   }
-// }
-
-
-// 재고 
 
 
 
