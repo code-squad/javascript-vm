@@ -1,30 +1,61 @@
+header{
+  text-align : center;
+}
+body{
+  font-size : 1.3vmax;
+}
 .container{
-    margin : 40px;
-  }
-  .ul{
-    width : 360px;
-    height : 540px;
-    border : 10px solid;
-    overflow : auto;
-    list-style : none;
-    background-color : #0365bf;
-    padding : 10px 20px 10px 10px;
-  }
-  .ul>li{
-    width : 70px;
-    height : 70px;
-    margin : 0px 10px 0px 10px;
-    float : left;
-    text-align : center;
-    position : relative;;.
-    right : 20px;
-  }
-  .ul>li>div{
-    border : 4px solid slategray;
-    width : 100%;
-    height : 50%;
-    background-color : white;
-  }
-  .ul>li>span{
-    background-color : white;
-  }
+  width: 100vmax;
+  height: 50vmax;
+  margin : auto;
+  padding : 2vmax;
+  box-sizing : border-box;
+  border : 1px solid;
+}
+.brick-bowel{
+  width : 33%;
+  height : 100%;
+  float : left;
+}
+.beverage-menu{    
+  border-top : 0.3vmax solid;
+  border-bottom : 0.3vmax solid;
+  border-left : 0.3vmax solid;
+  height : 100%;
+  margin : 0px;
+  padding : 0 0 0.6vmax 0;
+  margin : auto;
+  overflow : auto;
+  box-sizing : border-box;
+  background-color : #0400ff;
+}
+.items{
+  list-style : none;
+  width : 7vmax;
+  height : 7vmax;
+  margin-left : 0.6vmax;
+  margin-top : 0.6vmax;
+  float : left;
+  text-align : center;
+  padding : 0.2vmax;
+  box-sizing : border-box;
+}
+.items > div{
+  width : 100%;
+  height : 70%;
+  border : 0.2vmax solid gray;
+  line-height : 2vmax;
+  background-color : #fff;
+  margin-bottom : 0.15vmax;
+}
+.items > span{
+  background-color : #fff;
+}
+.choose-menu{
+ height : 100%;
+ border : 0.3vmax solid;
+ box-sizing : border-box;
+}
+.wallet{
+
+}
