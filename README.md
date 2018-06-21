@@ -1,1 +1,1 @@
-# javascript-vm
+# 웹 자판기
