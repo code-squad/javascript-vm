@@ -12,7 +12,7 @@ body{
   box-sizing : border-box;
   border : 1px solid;
 }
-.brick-bowel{
+.vm-frame{
   width : 33%;
   height : 100%;
   float : left;
@@ -50,7 +50,7 @@ body{
 .items > span{
   background-color : #fff;
 }
-.choose-menu{
+.menu-selection{
  height : 100%;
  border : 0.3vmax solid;
  box-sizing : border-box;
