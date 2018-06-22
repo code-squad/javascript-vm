@@ -17,10 +17,9 @@ body{
   height : 100%;
   float : left;
 }
-.beverage-menu{    
-  border-top : 0.3vmax solid;
-  border-bottom : 0.3vmax solid;
-  border-left : 0.3vmax solid;
+.beverage-menu{
+  border-width : 0.3vmax 0 0.3vmax 0.3vmax;
+  border-style : solid;
   height : 100%;
   margin : 0px;
   padding : 0 0 0.6vmax 0;
