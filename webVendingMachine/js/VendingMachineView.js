@@ -17,12 +17,6 @@ export class VendingMachineView {
     this.numberButtonListEL = null;
     this.bindEvents();
   }
-  getMessageByType(type, data){
-    const actions = {
-      'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
-    }
-    return actions[type](data)
-  }
   initRender(){
     this.selectButtonsEl.insertAdjacentHTML('beforeend', selectButtonTemplate(buttonTextList))
     this.saveNumberButtonList();
@@ -44,18 +38,13 @@ export class VendingMachineView {
       this.emit('clearAutoClear')
     }
   }
-  makeLogTemplate(latestHistorys){
-     return latestHistorys.reduce(
-      (ac,{type, data})=>{
-        return ac+=this.getMessageByType(type,data)
-      },``);
-  }
-  reRenderLog(latestHistorys){
-    const latestMsgTemplate = this.makeLogTemplate(latestHistorys);
-    this.displayLogEl.innerHTML = latestMsgTemplate;
-    this.displayLogEl.lastElementChild.classList.add('now')
-    this.startAutoClearLog()
-  }
+
+  // reRenderLog(latestHistorys){
+  //   const latestMsgTemplate = this.makeLogTemplate(latestHistorys);
+  //   this.displayLogEl.innerHTML = latestMsgTemplate;
+  //   this.displayLogEl.lastElementChild.classList.add('now')
+  //   this.startAutoClearLog()
+  // }
   checkHasMoney(){
     return Number(this.insertedMoneyEl.innerText)
   }
@@ -135,8 +124,10 @@ export class VendingMachineView {
     this.handleSelectByTime(type)
   }
   reStartTimer(){
-    this.clearSelectedInfo()
-    this.startTimer()
+    if(this.selectButtonText){
+      this.clearSelectedInfo()
+      this.startTimer()
+    }
   }
   updateLogView(updatedLogData, templateType){
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
@@ -152,7 +143,7 @@ export class VendingMachineView {
           this.setSelectTime(nextOrderTime)
           this.handleSelectByTime("returnMoney")
         } 
-        else if(type!=='notifySecondOrder'&& type!==undefined) this.handleCancelButtonClicked()
+        else if(type!=='notifySecondOrder'&& type!=='insertMoney') this.handleCancelButtonClicked()
       }, autoClearTime)
       this.emit('sendAutoClearId', autoClearId)
   }

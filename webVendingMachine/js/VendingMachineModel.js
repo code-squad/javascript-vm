@@ -21,10 +21,10 @@ VendingMachineModel.prototype = {
     return this.logHistoryList;
   },
   logInsert(type, data){
-    const logData = {type, data};
-    this.savelogHistory(logData);
+    this.savelogHistory(data);
     const latestHistorys = this.logHistoryList.slice(-3);
-    this.emit('reRenderLog',latestHistorys)
+    const updatelogData = {latestHistorys, logType: 'insertMoney'} 
+    this.emit('updateLogView',updatelogData)
   },
   handleSelectNumberButtonClicked(selectedText){
     this.selectedText += selectedText

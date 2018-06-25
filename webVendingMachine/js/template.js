@@ -41,4 +41,10 @@ export const logtemplate = {
     notifySecondOrder: ()=>`<p class="notify">추가 선택이 3초 동안 안 이뤄질 시<br>입력한 돈을 반환 합니다</p>`,
     notifyReturnMoney: ({money})=>`<p class="notify">${money} 이 반환 되었습니다</p>`,
     notifyHasNoMoney: ()=>`<p class="notify">상품 선택 전에 돈을 먼저 넣어주세요</p>`,
+    insertMoney: ({latestHistorys})=>latestHistorys.reduce((ac,c,ci)=>{
+        return latestHistorys.length-1===ci ? 
+        ac+=`<p class="log now">${c}원이 입력되었습니다</p>`
+         :ac+=`<p class="log ">${c}원이 입력되었습니다</p>`
+
+    },'')
 }
