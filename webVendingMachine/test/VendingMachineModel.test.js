@@ -1,6 +1,10 @@
 import { VendingMachineModel } from'../js/VendingMachineModel.js';
-import {snackList} from'../js/assets';
+import { snackList } from'../js/assets';
+import { VendingMachineView } from '../js/VendingMachineView';
+import { getEl } from '../js/utils.js';
+import { templateMock } from './templateMock.js';
 
+document.body.innerHTML = templateMock;
 
 // 전체를 다 하면 좋지만 주요메소드 위주로만 우선 테스트-> 시간 대비 학습효과!
 // 1. insertMoney 
@@ -31,15 +35,24 @@ describe('VendingMachineModel Test', () => {
   test('insertMoney가 실행되면 뷰에 현재 money를 넘겨준다.', () => {
     
     //given
+    const vendingMachineView = new VendingMachineView()
+    vendingMachineModel.controller.on = (eventName, data)=> {
+      const events = {
+        'reRenderLog': ()=>{},
+        'displayCanBuyList': ()=>{},
+        'updateViewVendingMachineMoney': vendingMachineView.updateViewVendingMachineMoney.bind(vendingMachineView),
+      }
+      events[eventName](data);
+    } 
     const inputMoney = 1000;
     const initialMoney = vendingMachineModel.money
-    vendingMachineModel.emit = jest.fn();
+    const changedMoney = initialMoney+inputMoney
+    
     
     //when
     vendingMachineModel.insertMoney(inputMoney)
     //then
-    expect(vendingMachineModel.emit).toHaveBeenCalledWith('updateViewVendingMachineMoney',initialMoney+inputMoney)
-
+    expect(vendingMachineView.insertedMoneyEl.innerText).toBe((changedMoney).toString())
   });
 
   test('뷰에 살 수 있는 목록들을 가지고 와서 넘겨준다.  displayCanBuyList에 넘겨주는지 테스트', () => {

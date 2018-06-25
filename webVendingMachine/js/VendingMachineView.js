@@ -137,20 +137,26 @@ export class VendingMachineView {
   initSelectedTime(){
     this.selectTime = 5;
   }
-  handleTime(type){
-    if(this.selectTime===0){
+  updateSelectTime(){
+    this.selectTime-=1
+    this.timer.innerText = this.selectTime; 
+  }
+  handleSelectByTime(type){
+    const second = 1000;
+    if(this.selectTime>=0){
+      this.timerId = setTimeout(()=>{
+        this.updateSelectTime()
+        this.handleSelectByTime()
+      }, second)
+     this.emit('sendTimerId', this.timerId)
+    }else {
       if(type==="returnMoney") this.emit('returnMoney')
       else this.handleChoseBtnClicked()
-    }else {
-      this.selectTime-=1
-      this.timer.innerText = this.selectTime; 
     }
   }
   startTimer(type = null){
     this.timer.innerText = this.selectTime;
-    // setTimeOut 재귀 가능 !
-    this.timerId = setInterval(()=>this.handleTime(type),1000)
-    this.emit('sendTimerId', this.timerId)
+    this.handleSelectByTime(type)
   }
   updateLogView(updatedLogData, templateType){
     const logtemplate = {

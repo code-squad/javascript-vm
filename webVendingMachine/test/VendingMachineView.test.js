@@ -7,7 +7,6 @@ describe('VendingMachineView Test', () => {
   beforeEach(()=>{
     document.body.innerHTML = templateMock.trim()
     vendingMachineView = new VendingMachineView()
-    // console.log('test',gs('.money-button-list') === vendingMachineView.moneyButtonListEl)
     vendingMachineView.bindEvents();
     vendingMachineView.controller = {}
     vendingMachineView.controller.on = (evtName, data)=> {evtName, data} 
@@ -79,9 +78,7 @@ describe('VendingMachineView Test', () => {
    vendingMachineView.handleNumberBtnClicked(mock1)
    vendingMachineView.handleNumberBtnClicked(mock2)
    vendingMachineView.handleNumberBtnClicked(mock3)
-  // vendingMachineView.handleNumberBtnClicked(getEl('.select-button'))
-  //  vendingMachineView.handleNumberBtnClicked(getEl('.mock-2'))
-  //  vendingMachineView.handleNumberBtnClicked(getEl('.mock-3'))
+
   
    //then
    expect(vendingMachineView.updateLogView).toHaveBeenCalledWith("23", 'nowSelectedNumber')
@@ -95,14 +92,14 @@ describe('VendingMachineView Test', () => {
     
     //given
     jest.useFakeTimers();
-    vendingMachineView.handleTime = jest.fn();
+    vendingMachineView.handleSelectByTime = jest.fn();
     vendingMachineView.startTimer()
    
     //when
     jest.advanceTimersByTime(1000);
     // jest.advanceTimersByTime(5000);
     //then
-    expect(vendingMachineView.handleTime).toBeCalled();
+    expect(vendingMachineView.handleSelectByTime).toBeCalled();
 
 
     });
@@ -121,7 +118,7 @@ describe('VendingMachineView Test', () => {
       //then
       expect(vendingMachineView.handleChoseBtnClicked).toBeCalled();
   
-  
+      // 상황에 맞춰진 case값들을 넣고 테스트 하는 것이 더 적절?
       });
 
 });

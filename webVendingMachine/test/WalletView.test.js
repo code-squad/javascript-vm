@@ -38,8 +38,9 @@ describe('walletView Test', () => {
     walletView.controller = {}
     walletView.controller.on = (evtName, data)=> {evtName, data} 
   })
-  test('moneyButton이 클릭되었을 떄 money를 handleMoneyBtn ClickedMethod가 불리는지', () => {
+  test('moneyButton이 클릭되었을 떄 handleMoneyButtonClicked 메소드가 불린다.', () => {
     // 이벤트 캡쳐링 ?.? 어떻게 해야 될지 
+    // 머니 버튼이 클릭되었을 때 이벤트 메소드가 불리는지 테스트?
     
     //given
     walletView.handleMoneyButtonClicked = jest.fn();
@@ -64,14 +65,16 @@ describe('walletView Test', () => {
     const initCount = Number(moneyCountEl.dataset.count)
     const money = Number(evtMock.target.dataset.money)
     //when
+    // 모델에서 가지고 오도록 테스트 
     const initTotalMoney = Number(walletView.myTotalMoneyEl.innerText)
-    walletView.handleMoneyButtonClicked(evtMock)       
+    walletView.handleMoneyButtonClicked(evtMock)    
+    const changedMoney = initTotalMoney-money   
     //then
-    expect(Number(walletView.myTotalMoneyEl.innerText)).toBe(initTotalMoney-money)
+    expect(Number(walletView.myTotalMoneyEl.innerText)).toBe(changedMoney)
     expect(Number(moneyCountEl.dataset.count)).toBe(initCount-1)
    });  
 
-  test('handleMoneyButtonClicked되고 해당 MoneyBtn data-money와 함께 메소드 useMoney를 emit한다', () => {
+  test('handleMoneyButtonClicked되고 해당 MoneyBtn data-money와 함께  useMoney 메소드를 emit한다', () => {
     
     //given
     walletView.emit = jest.fn();
