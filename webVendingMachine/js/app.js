@@ -3,6 +3,7 @@ import { getEl, getElAll, updateText, addClassToList, removeClassToList, clearTe
 import { VendingMachineModel } from'./VendingMachineModel.js'
 import { WalletModel } from'./WalletModel.js'
 import { VmController } from'./VMController.js'
+import { SnackListView } from './SnackListView.js'
 import { VendingMachineView } from'./VendingMachineView.js'
 import { WalletView } from './WalletView.js'
 import { snackList, buttonTextList, myMoney} from'./assets.js'
@@ -14,7 +15,7 @@ const vendingMachine = new VendingMachineModel(snackList);
 const wallet = new WalletModel(myMoney);
 const vendingMachineView = new VendingMachineView();
 const walletView = new WalletView();
-
+const snackListView = new SnackListView();
 
 const model = {
   wallet,
@@ -22,9 +23,15 @@ const model = {
 }
 const view = {
   vendingMachineView,
-  walletView
+  walletView,
+  snackListView,
 }
 const vendingMachineController = new VmController(model, view);
+
+// vendingMachine.controller = vendingMachineController
+// wallet.controller = vendingMachineController
+// vendingMachineView.controller = vendingMachineController
+// walletView.controller = vendingMachineController
 
 
 
@@ -32,7 +39,8 @@ document.addEventListener("DOMContentLoaded", (e)=> {
   console.log("DOM fully loaded and parsed");
   // rendering 
   walletView.initRender(myMoney,wallet.getTotalMoney());
-  vendingMachineView.initRender(snackList);
+  vendingMachineView.initRender();
+  snackListView.initRender(snackList)
 });
 
 

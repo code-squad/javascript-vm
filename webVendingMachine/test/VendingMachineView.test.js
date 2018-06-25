@@ -23,18 +23,6 @@ describe('VendingMachineView Test', () => {
     expect(loggedMoney).toBe(vendingMachineMoney)
    });
 
-   test('vendingMachine View 돈 입력된 만큼 살 수 있는 목록을 하이라이트 시켜준다.', () => {
-  
-    //given
-   const vendingMachineMoney = 1000;
-   //when
-   vendingMachineView.displayCanBuyList(vendingMachineMoney)
-   const getList =vendingMachineView.getCanBuyList(vendingMachineMoney)
-  
-   //then
-   expect( getList.length ).toBe(getElAll('.red').length)
-  });
-
   test('vendingMachineView number Button Click시 timer메소드가 불린다.', () => {
   
     //given

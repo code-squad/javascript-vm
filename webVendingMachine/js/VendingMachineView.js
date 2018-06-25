@@ -2,34 +2,28 @@ import {getEl, getElAll, updateText, addClassToList, removeClassToList, clearTex
 import {snackTemplate, selectButtonTemplate, walletMoneyButtonTemplate, logtemplate} from './template.js'
 import {buttonTextList} from './assets.js';
 
-
 export class VendingMachineView {
   constructor(){
     this.selectButtonText=""
     this.timerId = null;
     this.selectTime = 5;
-    this.inputEl = getEl('.select-input')
     this.snackListEl = getEl('.snack-list')
     this.selectButtonsEl = getEl('.number-buttons')
     this.moneyButtonListEl = getEl('.money-button-list')
-    this.myTotalMoneyEl = getEl('.total-my-assets .money')
     this.insertedMoneyEl = getEl('.diplay-inserted-money .money')
     this.displayLogEl = getEl('.display-log-box')
     this.timer = getEl('.time')
     this.controller = null;
-    this.actions = {
-      'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
-    }
     this.numberButtonListEL = null;
-    this.clearTime = 2000;
-    this.addOrderTime = 3;
     this.bindEvents();
   }
   getMessageByType(type, data){
-    return this.actions[type](data)
+    const actions = {
+      'insertMoney': (data)=> `<p class="log">${data}원이 입력되었습니다</p>`,
+    }
+    return actions[type](data)
   }
-  initRender(snackList){
-    this.snackListEl.insertAdjacentHTML('beforeend', snackTemplate(snackList))
+  initRender(){
     this.selectButtonsEl.insertAdjacentHTML('beforeend', selectButtonTemplate(buttonTextList))
     this.saveNumberButtonList();
   }
@@ -37,7 +31,7 @@ export class VendingMachineView {
     this.controller.on(eventName, data);
   }
   bindEvents(){
-    this.inputEl.addEventListener('keydown', e=>this.handleInputSelected(e))
+    getEl('.select-input').addEventListener('keydown', e=>this.handleInputSelected(e))
     this.selectButtonsEl.addEventListener('click', e =>this.handleSelectButtonClicked(e));
     return this;
   }
@@ -47,19 +41,6 @@ export class VendingMachineView {
       selectedSnackId && this.emit('sendSnackNumber', selectedSnackId)
       e.target.value = ''
     }
-  }
-  getCanBuyList(money){
-    const eachSnacks = getElAll(`[data-id]`, this.snackListEl);
-    return [...eachSnacks].filter(({dataset})=>dataset.price<=money)
-  }
-  updateCanBuyList(money){
-    const lastDisplayList = getElAll('.red')
-    const canNotBuyList = [...lastDisplayList].filter(snackEl=>snackEl.dataset.price>money)
-    removeClassToList(canNotBuyList,'red')
-  }
-  displayCanBuyList(money){
-    const canBuyList = this.getCanBuyList(money);
-    addClassToList(canBuyList,'red')
   }
   makeLogTemplate(latestHistorys){
      return latestHistorys.reduce(
@@ -74,6 +55,7 @@ export class VendingMachineView {
     // this.reStartAutoClear();
   }
   // reStartAutoClear(){
+  // const clearTime = 2000
   //   // clearAutoClear
   //   this.emit('clearAutoClear')
   //   this.startAutoClearLog(this.clearTime);
@@ -175,10 +157,11 @@ export class VendingMachineView {
     this.emit('sendAutoClearId', autoClearId)
   }
   clearLog(type){
+    const addOrderTime = 3
     clearText(this.displayLogEl);
     if(type==="selected"){
       this.emit('notifySecondOrder', {logType: 'notifySecondOrder'})
-      this.startTimer(this.addOrderTime, 'returnMoney')
+      this.startTimer(addOrderTime, 'returnMoney')
     } 
   }
   saveNumberButtonList(){

@@ -1,6 +1,6 @@
 export class VmController {
-  constructor({wallet, vendingMachine}, {vendingMachineView,walletView}){
-    Object.assign(this, { vendingMachine, wallet, vendingMachineView, walletView});
+  constructor({wallet, vendingMachine}, {vendingMachineView,walletView, snackListView}){
+    Object.assign(this, { vendingMachine, wallet, vendingMachineView, walletView, snackListView});
     this.bindController()
   }
   bindController(){
@@ -8,6 +8,7 @@ export class VmController {
     this.wallet.controller = this 
     this.vendingMachineView.controller = this;
     this.walletView.controller = this;
+    this.snackListView.controller = this;
   }
   vendingMachineViewInitRender(){
     const snackList = this.vendingMachine.getSnackList()
@@ -29,7 +30,7 @@ export class VmController {
     this.vendingMachineView.updateViewVendingMachineMoney(money);
   }
   displayCanBuyList(money){
-    this.vendingMachineView.displayCanBuyList(money);
+    this.snackListView.displayCanBuyList(money);
   }
   reRenderLog(latestHistorys){
     this.vendingMachineView.reRenderLog(latestHistorys);
@@ -51,7 +52,7 @@ export class VmController {
     this.vendingMachineView.updateLogView(updatedlogData, logType)
   }
   updateCanBuyList(money){
-    this.vendingMachineView.updateCanBuyList(money)
+    this.snackListView.updateCanBuyList(money)
   }
   sendAutoClearId(autoClearId){
     debugger;
