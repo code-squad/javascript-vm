@@ -55,8 +55,7 @@ export class VmController {
     this.snackListView.updateCanBuyList(money)
   }
   sendAutoClearId(autoClearId){
-    debugger;
-    this.vendingMachine.getAutoClearId(autoClearId)
+    this.vendingMachine.takeAutoClearId(autoClearId)
   }
   clearTimeInfo(){
     this.vendingMachine.clearTimeInfo();

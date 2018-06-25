@@ -92,7 +92,7 @@ VendingMachineModel.prototype = {
     this.emit('updateLogView', updateLogData)
     this.emit('updateCanBuyList', this.money)
   },
-  getAutoClearId(autoClearId){
+  takeAutoClearId(autoClearId){
     return this.autoClearId = autoClearId;
   },
   clearAutoClear(){

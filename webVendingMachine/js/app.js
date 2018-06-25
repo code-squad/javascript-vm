@@ -28,13 +28,6 @@ const view = {
 }
 const vendingMachineController = new VmController(model, view);
 
-// vendingMachine.controller = vendingMachineController
-// wallet.controller = vendingMachineController
-// vendingMachineView.controller = vendingMachineController
-// walletView.controller = vendingMachineController
-
-
-
 document.addEventListener("DOMContentLoaded", (e)=> {
   console.log("DOM fully loaded and parsed");
   // rendering 

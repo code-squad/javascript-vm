@@ -38,8 +38,10 @@ export class VendingMachineView {
   handleInputSelected(e){
     if(e.keyCode===13){
       const selectedSnackId = e.target.value.trim()
-      selectedSnackId && this.emit('sendSnackNumber', selectedSnackId)
+      this.selectButtonText = selectedSnackId
+      this.handleChoseBtnClicked()      
       e.target.value = ''
+      this.emit('clearAutoClear')
     }
   }
   makeLogTemplate(latestHistorys){
@@ -52,14 +54,8 @@ export class VendingMachineView {
     const latestMsgTemplate = this.makeLogTemplate(latestHistorys);
     this.displayLogEl.innerHTML = latestMsgTemplate;
     this.displayLogEl.lastElementChild.classList.add('now')
-    // this.reStartAutoClear();
+    this.startAutoClearLog()
   }
-  // reStartAutoClear(){
-  // const clearTime = 2000
-  //   // clearAutoClear
-  //   this.emit('clearAutoClear')
-  //   this.startAutoClearLog(this.clearTime);
-  // }
   checkHasMoney(){
     return Number(this.insertedMoneyEl.innerText)
   }
@@ -67,9 +63,7 @@ export class VendingMachineView {
     return this.selectButtonText===""
   }
   handleChoseBtnClicked(){
-    if(!this.checkHasMoney()){
-      this.handleHasNoMoney()
-    } 
+    if(!this.checkHasMoney()) return this.handleHasNoMoney()
     if(this.checkNoneSelected()){
       this.clearSelectedInfo()
       return this.updateLogView(null,'notifyNoneSelect')
@@ -100,10 +94,10 @@ export class VendingMachineView {
     return this.handleNumberBtnClicked(target)
   }
   handleNumberBtnClicked(buttonEl){
-
     const buttonText = buttonEl.innerText 
     this.updateNumberBtnText(buttonText)
     this.emit('clearTimeInfo')
+    this.emit('clearAutoClear')
     if(!this.checkHasMoney()) return this.handleHasNoMoney()
     this.startTimer()
     // BtnTextUpdate
@@ -118,30 +112,26 @@ export class VendingMachineView {
   clearSelectedInfo(){
     this.emit('clearTimeInfo')
     this.clearSelectButtonText()
-    this.initSelectedTime()
+    this.setSelectTime()
   }
-  initSelectedTime(){
-    this.selectTime = 5;
+  setSelectTime(time=5){
+    this.selectTime = time;
   }
   updateSelectTime(){
-    this.selectTime-=1
     this.timer.innerText = this.selectTime; 
+    this.selectTime-=1    
   }
   handleSelectByTime(type){
     const second = 1000;
-    if(this.selectTime>=0){
-      this.timerId = setTimeout(()=>{
-        this.updateSelectTime()
-        this.handleSelectByTime()
+    this.updateSelectTime()
+    this.timerId = setTimeout(()=>{
+        if(this.selectTime>=0) this.handleSelectByTime(type)
+        else if(type==="returnMoney") this.emit('returnMoney')
+        else this.handleChoseBtnClicked()
       }, second)
      this.emit('sendTimerId', this.timerId)
-    }else {
-      if(type==="returnMoney") this.emit('returnMoney')
-      else this.handleChoseBtnClicked()
-    }
   }
   startTimer(type = null){
-    this.timer.innerText = this.selectTime;
     this.handleSelectByTime(type)
   }
   reStartTimer(){
@@ -150,6 +140,21 @@ export class VendingMachineView {
   }
   updateLogView(updatedLogData, templateType){
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
+    this.startAutoClearLog(templateType)
+  }
+  startAutoClearLog(type){
+    const autoClearTime = 2000
+    const nextOrderTime = 3
+    if(type==='nowSelectedNumber') return ;
+    const autoClearId = setTimeout(()=> {
+        if(type==="displaySelectedOne"){
+          this.updateLogView(null,'notifySecondOrder')
+          this.setSelectTime(nextOrderTime)
+          this.handleSelectByTime("returnMoney")
+        } 
+        else if(type!=='notifySecondOrder'&& type!==undefined) this.handleCancelButtonClicked()
+      }, autoClearTime)
+      this.emit('sendAutoClearId', autoClearId)
   }
   changeStyleselectedLog(){
     const selectedLog = getEl('.selected-button-info', this.displayLogEl)
@@ -159,17 +164,8 @@ export class VendingMachineView {
     this.clearSelectedInfo()   
     this.clearLog();
   }
-  startAutoClearLog(clearTime = 1000, type){
-    const autoClearId = setTimeout(this.clearLog.bind(this,type), clearTime);
-    this.emit('sendAutoClearId', autoClearId)
-  }
-  clearLog(type){
-    const addOrderTime = 3
+  clearLog(){
     clearText(this.displayLogEl);
-    if(type==="selected"){
-      this.emit('notifySecondOrder', {logType: 'notifySecondOrder'})
-      this.startTimer(addOrderTime, 'returnMoney')
-    } 
   }
   saveNumberButtonList(){
     const slectButtonList = getElAll('button',this.selectButtonsEl)
