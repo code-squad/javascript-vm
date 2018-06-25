@@ -38,7 +38,7 @@ describe('VendingMachineModel Test', () => {
     const vendingMachineView = new VendingMachineView()
     vendingMachineModel.controller.on = (eventName, data)=> {
       const events = {
-        'reRenderLog': ()=>{},
+        'updateLogView': ()=>{},
         'displayCanBuyList': ()=>{},
         'updateViewVendingMachineMoney': vendingMachineView.updateViewVendingMachineMoney.bind(vendingMachineView),
       }
