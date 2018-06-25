@@ -1,6 +1,7 @@
 import {getEl, getElAll, updateText, addClassToList, removeClassToList, clearText} from './utils.js';
-import {snackTemplate, selectButtonTemplate, walletMoneyButtonTemplate} from './template.js'
+import {snackTemplate, selectButtonTemplate, walletMoneyButtonTemplate, logtemplate} from './template.js'
 import {buttonTextList} from './assets.js';
+
 
 export class VendingMachineView {
   constructor(){
@@ -159,17 +160,6 @@ export class VendingMachineView {
     this.handleSelectByTime(type)
   }
   updateLogView(updatedLogData, templateType){
-    const logtemplate = {
-      nowSelectedNumber: (nowSelectedNumber)=> `<p class="selected-one">${nowSelectedNumber}</p>`,
-      displaySelectedOne: (selectedOne)=>`<p class="selected-one">${selectedOne.name} 가 나왔습니다</p>` ,
-      notifyCanNotBuy: ({money})=>`<p class="notify">${money} 원으로 살 수 없는 스낵입니다</p>`,
-      notifyChoseWrongNumber: ({id})=>`<p class="notify">${id}는 선택할 수 없는 번호입니다.</p>`,
-      notifyBreakdown: ({id})=>`<p class="notify">죄송합니다 ${id}는 고장으로 선택할 수 없습니다</p>`,
-      notifyNoneSelect: ()=>`<p class="notify">선택하기 전에 <br>선택할 번호를 입력해주세요</p>`,
-      notifySecondOrder: ()=>`<p class="notify">추가 선택이 3초 동안 안 이뤄질 시<br>입력한 돈을 반환 합니다</p>`,
-      notifyReturnMoney: ({money})=>`<p class="notify">${money} 이 반환 되었습니다</p>`,
-      notifyHasNoMoney: ()=>`<p class="notify">상품 선택 전에 돈을 먼저 넣어주세요</p>`,
-    }
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
   }
   changeStyleselectedLog(){
