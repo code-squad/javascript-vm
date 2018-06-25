@@ -85,6 +85,9 @@ export class VmController {
   sendTimerId(timerId){
     this.vendingMachine.getTimerId(timerId)
   }
+  reStartTimer(){
+    this.vendingMachineView.reStartTimer();
+  }
 }
 
 

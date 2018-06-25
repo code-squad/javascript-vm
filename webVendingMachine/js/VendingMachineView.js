@@ -100,7 +100,7 @@ export class VendingMachineView {
     return this.handleNumberBtnClicked(target)
   }
   handleNumberBtnClicked(buttonEl){
-    
+
     const buttonText = buttonEl.innerText 
     this.updateNumberBtnText(buttonText)
     this.emit('clearTimeInfo')
@@ -143,6 +143,10 @@ export class VendingMachineView {
   startTimer(type = null){
     this.timer.innerText = this.selectTime;
     this.handleSelectByTime(type)
+  }
+  reStartTimer(){
+    this.clearSelectedInfo()
+    this.startTimer()
   }
   updateLogView(updatedLogData, templateType){
     this.displayLogEl.innerHTML = logtemplate[templateType](updatedLogData);
