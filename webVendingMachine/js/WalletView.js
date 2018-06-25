@@ -33,7 +33,6 @@ export class WalletView {
     el.dataset.count-=1
     updateText(el, `${el.dataset.count}개`);
   }
-  //  메소드 자체가 여기는 뷰에서 처리를 해주고 있는데 수정하는게 낫겠죠
   updateTotalMoney(money){
     const totalMoney = Number(this.myTotalMoneyEl.innerText)
     updateText(this.myTotalMoneyEl, totalMoney-money)

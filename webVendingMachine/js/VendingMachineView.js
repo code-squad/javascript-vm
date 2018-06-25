@@ -68,8 +68,7 @@ export class VendingMachineView {
   }
   handleChoseBtnClicked(){
     if(!this.checkHasMoney()){
-      this.clearSelectedInfo()
-      return this.updateLogView(null, 'notifyHasNoMoney')
+      this.handleHasNoMoney()
     } 
     if(this.checkNoneSelected()){
       this.clearSelectedInfo()
@@ -90,6 +89,10 @@ export class VendingMachineView {
     this.emit('selectSnack', this.NumberToselectButtonText())
     this.clearSelectedInfo()    
   }
+  handleHasNoMoney(){
+    this.clearSelectedInfo()
+    return this.updateLogView(null, 'notifyHasNoMoney')
+  }
   handleSelectButtonClicked({target}){
     if(target.className!=="select-button") return ;
     if(target.id==='choose') return this.handleChoseBtnClicked()
@@ -97,12 +100,12 @@ export class VendingMachineView {
     return this.handleNumberBtnClicked(target)
   }
   handleNumberBtnClicked(buttonEl){
-    // numberBtn Clicked
+    
     const buttonText = buttonEl.innerText 
     this.updateNumberBtnText(buttonText)
     this.emit('clearTimeInfo')
+    if(!this.checkHasMoney()) return this.handleHasNoMoney()
     this.startTimer()
-    
     // BtnTextUpdate
     this.updateLogView(this.selectButtonText, 'nowSelectedNumber')
   }

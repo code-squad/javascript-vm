@@ -31,6 +31,7 @@ describe('VendingMachineView Test', () => {
     const mockButton = getEl('button')
 
    //when
+   vendingMachineView.checkHasMoney = ()=>true
    vendingMachineView.handleNumberBtnClicked(mockButton)
   
    //then
@@ -40,6 +41,7 @@ describe('VendingMachineView Test', () => {
   test('누적된 버튼 텍스트를 최근 두자리를 저장한다.', () => {
   
     //given
+    vendingMachineView.checkHasMoney = ()=>true
     vendingMachineView.updateLogView = jest.fn();
     const mocktemplate = `
                     <button class="mock-1">1</button>
@@ -47,12 +49,8 @@ describe('VendingMachineView Test', () => {
                     <button class="mock-3">3</button>
                     `
     document.body.insertAdjacentHTML('beforeend' , mocktemplate)
-   
-
    //when
-
-  //  console.log(getEl('.mock-1').innerText) 
-   
+    // console.log(getEl('.mock-1').innerText) 
     // undefined 나옴 .... domMethod로 test하기 어려운 상황 mockData를 통해서 test
    const mock1 = {
      innerText : '1'

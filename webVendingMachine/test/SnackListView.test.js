@@ -1,4 +1,3 @@
-import { snackList } from'../js/assets';
 import { SnackListView } from '../js/SnackListView.js';
 import { getElAll } from '../js/utils.js';
 import { templateMock } from './templateMock.js';
@@ -11,7 +10,6 @@ describe('SnackListView Test', () => {
   beforeEach(()=>{
     document.body.innerHTML = templateMock.trim()
     snackListView = new SnackListView()
-    // snackListView.initRender(snackList)
     snackListView.controller = {}
     snackListView.controller.on = (evtName, data)=> {evtName, data} 
   })
