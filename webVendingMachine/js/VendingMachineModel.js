@@ -1,52 +1,4 @@
-// class SnackList {
-//   constructor(snackList){
-//     this.snackList = snackList;
-//   }
-//   add(snack){
-//     this.snackList = [...this.snackList, snack]
-//   }
-// }
-
-// class Account {
-//   constructor(money){
-//     this.money = money
-//   }
-//   addMoney(kind){
-//     if(this.money[kind]===undefined) this.money[kind] = 1
-//     this.money[kind]+=1
-//   }
-// }
-
-
-function WalletModel(myMoney) {
-    this.myMoney=myMoney;
-    this.controller = null;
-    this.totalMoney = null;
-  
-}
-WalletModel.prototype = {
-  getTotalMoney(){
-    return this.totalMoney = Object.keys(this.myMoney).reduce((ac,money)=> {
-      return ac+=Number(money)*this.myMoney[money]
-    },0)
-  },
-  useMoney(data){
-    if(this.myMoney[data.money]){
-      this.myMoney[data.money]-=1;
-      data.totalMoney = this.getTotalMoney();
-      data.moneyCount = this.myMoney[data.money]
-      this.emit('reRenderWallet',data)
-      return Number(data.money)
-    }
-  },
-  emit(eventName, data){
-    this.controller.on(eventName, data);
-  }
-}
-
-
-function VendingMachineModel(snackList){
-    this.selectedText = '';
+export function VendingMachineModel(snackList){
     this.money = 0;
     this.snackList= snackList
     this.controller = null;
@@ -56,17 +8,23 @@ function VendingMachineModel(snackList){
 }
 
 VendingMachineModel.prototype = {
-  insertMoney(data){
-    this.money += Number(data.money);
-    this.logInsert('insertMoney', data.money);
+  insertMoney(money){
+    this.money += money;
+    this.logInsert('insertMoney', money);
     this.emit('displayCanBuyList', this.money);
-    this.emit('reRenderVendingMachineMoney', this.money)
+    this.emit('updateViewVendingMachineMoney', this.money)
+  },
+  getSnackList(){
+    return this.snackList;
+  },
+  getLogHistory(){
+    return this.logHistoryList;
   },
   logInsert(type, data){
-    const logData = {type, data};
-    this.savelogHistory(logData);
+    this.savelogHistory(data);
     const latestHistorys = this.logHistoryList.slice(-3);
-    this.emit('reRenderLog',latestHistorys)
+    const updatelogData = {latestHistorys, logType: 'insertMoney'} 
+    this.emit('updateLogView',updatelogData)
   },
   handleSelectNumberButtonClicked(selectedText){
     this.selectedText += selectedText
@@ -77,10 +35,10 @@ VendingMachineModel.prototype = {
   updatedSelectedText(selectedText){
     return this.selectedText += selectedText
   },
-  clearSelectedInfo(){
-    this.selectedText = "";
-    clearTimeout(this.timerId);
+  clearTimeInfo(){
+    clearTimeout(this.timerId)
     this.timerId = null;
+    this.emit('notifyClearedTime')
   },
   savelogHistory(logData){
     this.logHistoryList = [...this.logHistoryList, logData];
@@ -91,14 +49,11 @@ VendingMachineModel.prototype = {
   },
   getSnackId(selectedSnackId){
     this.selectedText = selectedSnackId;
-    this.selectSnack()
+    this.selectSnack(selectedSnackId)
   },
-  selectSnack(){
-    if(this.selectedText==="") return this.emit('updateLogView',{logType: 'notifyNoneSelect'})
-    const snackId = Number(this.selectedText)
-    const selectedOne = this.snackList.find(snack=>snack.id===snackId);
-    this.clearSelectedInfo();    
-    return this.checkValidSelection(selectedOne, snackId)
+  selectSnack(selectedId){
+    const selectedOne = this.snackList.find(snack=>snack.id===selectedId);   
+    return this.checkValidSelection(selectedOne, selectedId)
   },
   checkValidSelection(selectedOne={name: 'outOfRange'}, snackId){
     if(this.isInValidCase(selectedOne)) return this.handleErrorCase(selectedOne, snackId)
@@ -125,7 +80,7 @@ VendingMachineModel.prototype = {
   },
   useMoney(snackPrice){
     this.money-=snackPrice
-    this.emit('reRenderVendingMachineMoney', this.money)
+    this.emit('updateViewVendingMachineMoney', this.money)
     this.emit('updateCanBuyList', this.money)
   },
   returnMoney(){
@@ -133,19 +88,26 @@ VendingMachineModel.prototype = {
     this.money = 0;
     const updateLogData = {money: returnMoney, logType: 'notifyReturnMoney'}
     this.logHistoryList = [];
-    this.emit('reRenderVendingMachineMoney', this.money)
+    this.emit('updateViewVendingMachineMoney', this.money)
     this.emit('updateLogView', updateLogData)
     this.emit('updateCanBuyList', this.money)
   },
-  getAutoClearId(autoClearId){
+  takeAutoClearId(autoClearId){
     return this.autoClearId = autoClearId;
   },
   clearAutoClear(){
     clearTimeout(this.autoClearId);
     this.autoClearId = null;
   },
+  getTimerId(timerId){
+    this.timerId = timerId;
+  },
   emit(eventName, data){
     this.controller.on(eventName, data);
   },
 }
+
+
+
+
 

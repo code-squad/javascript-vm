@@ -1,5 +1,5 @@
 // static data
-const snackList = [
+export const snackList = [
   { "id": 1, "name": "콜라", "price": 500, "working": true },
   { "id": 2, "name": "사이다", "price": 1000, "working": true },
   { "id": 3, "name": "파인애플맛 환타", "price": 400, "working": true },
@@ -34,7 +34,7 @@ const snackList = [
   { "id": 32, "name": "포도맛 환타", "price": 1000, "working": true }
 ]
 
-const buttonTextList = [
+export const buttonTextList = [
   {
     buttonText:1,
     type: 'normal',
@@ -85,7 +85,7 @@ const buttonTextList = [
   },
 ]
   
-const myMoney = {
+export const myMoney = {
   100: 5,
   500: 5,
   1000: 5,
