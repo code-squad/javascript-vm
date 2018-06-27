@@ -102,6 +102,7 @@ class Display {
   }
   displayBeverage() {
     const beverageList = document.createElement('ul');
+    beverageList.className = 'beverageListContainer';
     document.querySelector('.beverageDisplay').appendChild(beverageList);
     this.beverage.forEach((ele, idx) => {
       let item = document.createElement('li');
