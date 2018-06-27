@@ -32,6 +32,7 @@ ul{
   width : 33%;
   height : 100%;
   float : left;
+  box-sizing : border-box;
 }
 .beverage-menu{
   border-width : 0.3vmax 0 0.3vmax 0.3vmax;
@@ -99,6 +100,21 @@ ul{
   margin-top : 1vmax;
   float : left;
 }
+.vm-frame.wallet-part{
+  padding : 2vmax 1vmax;
+}
 .wallet{
-
+  width : 100%;
+  height : 100%;
+  border : 0.3vmax solid #888;
+}
+.basic-button-style.select-button.insert-button{
+  width : 10vmax;
+  height : 5.5vmax;
+  margin-left : 3vmax;
+}
+.basic-button-style.select-button.your-money{
+  margin-left : 3vmax;
+  width : 23vmax;
+  height : 5.5vmax;
 }
