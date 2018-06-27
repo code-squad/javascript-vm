@@ -1,0 +1,45 @@
+.beverageDisplay {
+  width: 550px;
+  border: 5px solid #575377;
+  background-color: white;
+}
+
+.paymentDisplay {
+  display: block;
+}
+
+ul {
+  padding: 20px;
+  margin: 0 auto;
+  width: 500px;
+}
+
+.beverageContainer {
+  border: 1px solid #314263;
+  margin: 5px;
+}
+
+.beverageDisplay>ul>li {
+  display: inline-block;
+  color: white;
+  margin: 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.beverageName {
+  background-color: #e0b1b1;
+  border: 2px solid slategray;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100px;
+  height: 60px;
+  box-sizing: border-box;
+  line-height: 100%;
+}
+
+.beveragePrice {
+  background-color: #b3b3b3;
+  border: 2px solid slategray;
+  margin-top: 5px;
+}
