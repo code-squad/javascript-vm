@@ -4,6 +4,19 @@ header{
 body{
   font-size : 1.3vmax;
 }
+.basic-button-style{
+  border : 0.2vmax solid #888;
+  background-color : #fff;
+  box-sizing : border-box;
+  position : relative;
+}
+.center-alignment{
+  position : absolute;
+  top : 50%;
+  transform : translate(0, -50%);
+  width : 100%;
+  text-align : center;
+}
 .container{
   width: 100vmax;
   height: 50vmax;
@@ -28,7 +41,7 @@ body{
   box-sizing : border-box;
   background-color : #0400ff;
 }
-.items{
+.items-box{
   list-style : none;
   width : 7vmax;
   height : 7vmax;
@@ -38,22 +51,10 @@ body{
   padding : 0.2vmax;
   box-sizing : border-box;
 }
-.items > .item-name{
-  width : 100%;
+.basic-button-style.item-name{
   height : 70%;
-  border : 0.2vmax solid gray;
-  background-color : #fff;
-  position : relative;
-  box-sizing : border-box;
 }
-.item-name > div{
-  position : absolute;
-  top : 50%;
-  transform : translate(0, -50%);
-  width : 100%;
-  text-align : center;
-}
-.items > .item-data{
+.item-data{
   margin-left : auto;
   margin-right : auto;
   width : 80%;
