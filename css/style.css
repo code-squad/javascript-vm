@@ -4,6 +4,9 @@ header{
 body{
   font-size : 1.3vmax;
 }
+ul{
+  list-style : none;
+}
 .basic-button-style{
   border : 0.2vmax solid #888;
   background-color : #fff;
@@ -62,10 +65,39 @@ body{
   background-color : #fff;
   box-sizing : border-box;
 }
-.menu-selection{
+.your-action{
   height : 100%;
   border : 0.3vmax solid;
   box-sizing : border-box;
+  padding : 2vmax 1vmax;
+}
+.input-money{
+  border : 0.2vmax solid #888;
+  height : 3vmax;
+  padding : 0vmax 1vmax;
+  text-align : right;
+  line-height : 3vmax;
+  margin-bottom : 2vmax;
+}
+.select-button-part{
+  border : 0.2vmax solid #888;
+  height : 15vmax;
+  margin-bottom : 2vmax;
+  overflow : auto;
+  padding : 0 0 1vmax 0;
+}
+.print-action{
+  border : 0.2vmax solid #888;
+  height : 15vmax;
+}
+.basic-button-style.select-button{
+  width : 5vmax;
+  height  : 4vmax;
+  float : left;
+  border-radius : 1vmax;
+  margin-left : 1.7vmax;
+  margin-top : 1vmax;
+  float : left;
 }
 .wallet{
 
