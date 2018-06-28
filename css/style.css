@@ -1,11 +1,20 @@
-.beverageDisplay {
-  width: 550px;
-  border: 5px solid #575377;
-  background-color: #eae5dd;
+/* vendingMachine UI */
+
+.vendingMachine {
+  float: left;
+  width: 900px;
+  height: 950px;
+  border: 5px solid slategray;
 }
 
-.paymentDisplay {
-  display: block;
+/* beverageDisplay UI */
+
+.beverageDisplay {
+  width: 550px;
+  height: 100%;
+  border: 2px solid #575377;
+  background-color: #eae5dd;
+  float: left;
 }
 
 .beverageListContainer {
@@ -42,4 +51,108 @@
   background-color: #b3b3b3;
   border: 2px solid slategray;
   margin-top: 5px;
+}
+
+/* paymentDisplay UI */
+
+.paymentDisplay {
+  float: left;
+  width: 342px;
+  height: 100%;
+  border: 2px solid #575377;
+  background-color: #eae5dd;
+}
+
+.currentCoinDisplay {
+  display: table;
+  width: 320px;
+  border: 2px solid #575377;
+  height: 40px;
+  margin: 10px;
+  text-align: right;
+}
+
+.currentCoin {
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+.coinButtonListContainer {
+  display: inline;
+  padding: 10px 10px 10px 20px;
+  margin: 0 auto;
+}
+
+.coinButtonContainer {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 320px;
+  height: 250px;
+  border: 2px solid #575377;
+}
+
+.coinButtonItem {
+  display: inline-block;
+}
+
+.coinButton {
+  display: table-cell;
+  height: 60px;
+  width: 60px;
+  border: 2px solid #575377;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 15px;
+}
+
+.progressContainer {
+  width: 316px;
+  height: 200px;
+  border: 2px solid #575377;
+  margin: 10px;
+}
+
+.wallet {
+  float: left;
+  width: 300px;
+  height: 100%;
+  margin: 20px;
+  border: 2px solid #575377;
+}
+
+.coinList {
+  display: inline;
+}
+
+.coinItem {
+  display: inline;
+}
+
+.coinContainer {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 5px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.coin {
+  display: inline-block;
+  vertical-align: middle;
+  width: 45%;
+  height: 100%;
+  font-size: 20px;
+  border: 2px solid #575377;
+}
+
+.numberOfCoin {
+  display: inline-block;
+  vertical-align: middle;
+  width: 45%;
+  height: 100%;
+  font-size: 20px;
+  border: 2px solid #575377;
 }
