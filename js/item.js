@@ -1,4 +1,4 @@
-const beverage = [{
+const item = [{
   name: '콜라',
   price: 500
 }, {

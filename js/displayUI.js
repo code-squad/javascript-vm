@@ -1,11 +1,11 @@
 class Display {
-  constructor(beverage) {
-    this.beverage = beverage;
+  constructor(item) {
+    this.item = item;
   }
-  createBeverageListContainer() {
-    const beverageList = document.createElement('ul');
-    beverageList.className = 'beverageListContainer';
-    document.querySelector('.beverageDisplay').appendChild(beverageList);
+  createItemListContainer() {
+    const itemList = document.createElement('ul');
+    itemList.className = 'itemListContainer';
+    document.querySelector('.itemDisplay').appendChild(itemList);
   }
   createCoinButtontDiplay() {
     const coinButtonList = document.createElement('ul');
@@ -13,18 +13,18 @@ class Display {
     document.querySelector('.coinButtonContainer').appendChild(coinButtonList);
   }
   displayBeverage() {
-    this.createBeverageListContainer();
+    this.createItemListContainer();
     let beverageListHTML = '';
-    this.beverage.forEach((ele, idx) => {
+    this.item.forEach((ele, idx) => {
       beverageListHTML +=
-        `<li class="beverageItem">
-          <div class="beverageContainer">
-            <div class="beverageName">${ele.name}</div>
-            <div class="beveragePrice">${idx+1}. ${ele.price}</div>
+        `<li class="item">
+          <div class="itemContainer">
+            <div class="itemName">${ele.name}</div>
+            <div class="itemPrice">${idx+1}. ${ele.price}</div>
           </div>
         </li>`;
     })
-    document.querySelector('.beverageListContainer').innerHTML = beverageListHTML;
+    document.querySelector('.itemListContainer').innerHTML = beverageListHTML;
   }
   displayCoinButton() {
     this.createCoinButtontDiplay();
@@ -40,6 +40,6 @@ class Display {
   }
 }
 
-const vmDisplay = new Display(beverage);
+const vmDisplay = new Display(item);
 vmDisplay.displayBeverage();
 vmDisplay.displayCoinButton();
