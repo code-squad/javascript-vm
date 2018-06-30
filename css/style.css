@@ -1,0 +1,177 @@
+/* vendingMachine UI */
+
+.vendingMachine {
+  float: left;
+  width: 900px;
+  height: 950px;
+  border: 5px solid slategray;
+}
+
+/* itemDisplay UI */
+
+.itemDisplay {
+  width: 60%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 2px solid #575377;
+  background-color: #eae5dd;
+  float: left;
+}
+
+.itemListContainer {
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.itemContainer {
+  border: 1px solid #314263;
+  margin: 5px;
+}
+
+.item {
+  display: inline-block;
+  color: white;
+  margin: 5px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.itemName {
+  background-color: #bba1a1;
+  border: 2px solid slategray;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100px;
+  height: 60px;
+  box-sizing: border-box;
+  line-height: 100%;
+}
+
+.itemPrice {
+  background-color: #b3b3b3;
+  border: 2px solid slategray;
+  margin-top: 5px;
+}
+
+/* paymentDisplay UI */
+
+.paymentDisplay {
+  float: left;
+  width: 40%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 2px solid #575377;
+  background-color: #eae5dd;
+  text-align: center;
+}
+
+.currentCoinDisplay {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 320px;
+  border: 3px solid #575377;
+  margin: 10px;
+  text-align: right;
+}
+
+.currentCoin {
+  display: inline-block;
+  height: 100%;
+  padding: 10px;
+}
+
+.coinButtonListContainer {
+  display: inline-block;
+  padding-left: 0px;
+}
+
+.coinButtonContainer {
+  font-size: 1.2em;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 320px;
+  height: 220px;
+  border: 3px solid #575377;
+}
+
+.coinButtonItem {
+  display: inline-block;
+}
+
+.coinButton {
+  display: inline-block;
+  height: 100%;
+  padding: 10px;
+  width: 40px;
+  border: 2px solid #575377;
+  vertical-align: middle;
+  margin: 3px;
+  border-radius: 15px;
+}
+
+.progressContainer {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 316px;
+  height: 200px;
+  border: 3px solid #575377;
+  margin: 10px;
+}
+
+.wallet {
+  float: left;
+  width: 250px;
+  height: 100%;
+  margin: 30px;
+  font-size: 15px;
+  color:;
+  border: 4px solid #4d4871;
+  background-color: #9fa8bf;
+  text-align: center;
+}
+
+.coinList {
+  display: inline;
+}
+
+.coinItem {
+  display: inline;
+}
+
+.coinContainer {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.coin {
+  display: inline-block;
+  vertical-align: middle;
+  width: 40%;
+  height: 100%;
+  padding: 10px 0px 10px 0px;
+  border-radius: 15px;
+  margin: 5px;
+  border: 2px solid #575377;
+}
+
+.numberOfCoin {
+  display: inline-block;
+  vertical-align: middle;
+  width: 40%;
+  padding: 10px 0px 10px 0px;
+  height: 100%;
+  border-radius: 15px;
+  border: 2px solid #575377;
+}
+
+.fullAmount {
+  display:  inline-block;
+  border: 2px solid #575377;
+  height: 100%;
+  width: 90%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
