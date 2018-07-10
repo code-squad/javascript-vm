@@ -1,26 +1,14 @@
-### 웹 자판기 - HTML, CSS
+# 웹 자판기 - HTML, CSS
 
 ---
 
-`HTML` `CSS` `JAVASCRIPT` 의 기본기능을 이용한 **웹 개발을 시작**할 수 있으며, 웹에서 동작하는 자판기를 구현할 것입니다.
+`HTML` `CSS` `JAVASCRIPT` 의 기본기능을 이용한 **웹 개발을 시작**할 수 있으며, 웹에서 동작하는 자판기를 구현할 것입니다. 
 
-  
+<br />
 
-  
+<br />
 
-### STEP 1 구조화 설계
-
----
-
-다음과 같은 UI를 만들기 위해 HTML를 구현하자. (다음과 같은 UI는 코드스쿼드 자산이므로 공유하지 않습니다)
-
-아직 CSS를 구현하지 않는다.
-
-  
-
-  
-
-### 힌트
+# 힌트
 
 ---
 
@@ -28,11 +16,11 @@
 - 디자인(css)를 전혀 고려하지 않고 구현한다.
 - 구조화설계는 HTML을 구조대로 구현하는 것이다. 문서를 쓰듯이 HTML의 구조를 잡아나가보자.
 
-  
+<br />
 
-  
+<br />
 
-### 설계
+# 설계
 
 ---
 
@@ -65,11 +53,96 @@
   - 금액을 투입할 수 있게 할 창이 필요함
   - 내가 가지고 있는 금액을 표현할 부분이 필요함 With 계산
 
-  
+<br />
 
-  
+<br />
 
-### HTML5 태그 의미 From [HTML 태그사전](https://opentutorials.org/module/552)
+# 피드백
+
+---
+
+- meta 데이터가 의미하는게 무엇인지?
+
+  - HTML 문서에 대한 정보를 표현하는 것
+
+  - `head` 태그 안에 위치하며, 렌더링 과정에서 해석되지 않음
+
+  - [메타 데이터 (metadata)](https://ko.wikipedia.org/wiki/%EB%A9%94%ED%83%80%EB%8D%B0%EC%9D%B4%ED%84%B0)
+
+    - 데이터(data)에 대한 데이터
+    - 정해진 규칙은 없음
+    - 어떤 목적을 가지고 만들어진 데이터 (Constructed data with a purpose)
+      - 문서의 성격을 파악하는데 사용하기도 함
+        - 제공자(author), 저작권(copyright), 키워드(keyword), 언어(language)
+      - 사람보다는 기계를 위한 정보들이 주를 이룸
+
+  - [HTML MetaData](https://developer.mozilla.org/ko/docs/Web/HTML/Element/meta)
+
+    - `head`는 페이지를 열 때 웹브라우저에 표시되지 않는다.
+
+      - `head` 는 `title` 이나 `CSS Link` `파비콘(favicon)` `메타데이터` 을 포함
+        - 메타데이터 : 작성자, 중요한 키워드와 같은 HTML에 대한 내용
+
+      ![](https://i.imgur.com/NiCvSMa.png)
+
+      ​	해당 `메타데이터` 는 배달의 민족 웹페이지
+
+    - **Specifying your document's character encoding**
+
+      ```html
+      <meta charset="utf-8">
+      ```
+
+      - 문서의 character incoding에 대해서 간단히 표시함
+      - `utf-8` 전세계적인 character set (= 많은 언어 문자들을 포함)
+      - 즉, 웹페이지에서 어떤 문자라도 취급할 수 있다는 것을 의미함
+
+    - **Adding an author and description**
+
+      ```html
+      <meta name="author" content="Chris Mills">
+      <meta name="description" content="The MDN Learning Area aims to provide
+      complete beginners to the Web with all they need to know to get
+      started with developing web sites and applications.">
+      ```
+
+      - 관리자를 정의하고 (author) 머릿말을 요약 (description) 하는데 유용하다
+      - 저자를 지정하는 것은 컨텐츠 작성자에 대한 정보를 볼 수 있게 해줌
+      - 일부 컨텐츠 관리 시스템에는 페이지 작성자 정보를 자동으로 추출해서 사요할 수 있는 기능이 존재함
+      - 페이지 콘텐츠 관련 키워드를 포함시키는 것은 검색엔진에서 해당 페이지가 더 많이 표시 될 가능성이 생기게 할 수 있음 ([Search Engine Optimization, SEO](https://developer.mozilla.org/en-US/docs/Glossary/SEO))
+      - `<meta name="keyword" content=""/>` 는 스팸으로 악용사례가 발생했기 때문에, 검색엔진에서 아예 무시하게 됨
+
+    - **Other types of metadata**
+
+      - [Open Graph Data](http://ogp.me/) : Facebook이 웹 사이트에 더 풍부한 메타데이터를 제공하기 위해 발명한 메타데이터 프로토콜
+
+        ```html
+        <meta property="og:image" content="https://developer.cdn.mozilla.net/static/img/opengraph-logo.dc4e08e2f6af.png">
+        <meta property="og:description" content="The Mozilla Developer Network (MDN) provides
+        information about Open Web technologies including HTML, CSS, and APIs for both Web sites
+        and HTML5 Apps. It also documents Mozilla products, like Firefox OS.">
+        <meta property="og:title" content="Mozilla Developer Network">
+        ```
+
+    - **맞춤 아이콘 추가하기**
+
+      - 같은 디렉토리에 `.gif` 또는 `.ico` 포맷 파일을 저장
+
+        ```html
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        ```
+
+      - 해당 `link` 태그를 `head` 태그 안에 삽입
+
+    - **기타 참고할 링크들**
+
+      - [HEAD 영역 #2 - META 요소](http://webdir.tistory.com/308)
+
+<br />
+
+<br />
+
+# HTML5 태그 의미 From [HTML 태그사전](https://opentutorials.org/module/552)
 
 ---
 
