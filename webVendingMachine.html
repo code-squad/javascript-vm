@@ -2,18 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="TaeHyeon An">
+    <meta name="description" content="코드스쿼드 Lv3 과정에서 진행하는 웹 자판기 프로젝트 입니다">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
 <body>
     
-    <header></header>
-    <nav></nav>
     <section>
         <article id="itemList">
-            <div>콜라</div>
-            <div>1. 500</div>
+            <div id="coke">
+                <div>콜라</div>
+                <div>1. 500</div>
+            </div>
+
             <div>사이다</div>
             <div>2. 1000</div>
             <div>환타(파인애플맛)</div>
@@ -95,15 +98,20 @@
         </article>
 
     </section>
-    <aside id="moneySelector">
-        <button>10원</button>
+    <section id="moneySelector">
+
+        <div>
+            <button>10원</button>
+            <div>0개</div>
+        </div>
+
         <button>50원</button>
         <button>100원</button>
         <button>500원</button>
         <button>1000원</button>
         <button>5000원</button>
         <button>10000원</button>
-        <div>0개</div>
+
         <div>0개</div>
         <div>0개</div>
         <div>0개</div>
@@ -112,8 +120,7 @@
         <div>0개</div>
         <div>0개</div>
         <div id="amountMoney">0원</div>
-    </aside>
-    <footer></footer>
+    </section>
 
 </body>
 </html>
