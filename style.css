@@ -12,9 +12,17 @@
 }
 
 #amountDisplay {
-    widows: 280px; height: 10%;
-    border: 5px solid slategray;
+    widows: 270px; height: 10%;
+    border: 5px solid #D32F2F;
     text-align: right;
+    font-size: 42px;
+    margin: 10px;
+}
+
+#itemSelectorPanel {
+    width: 270px; height: 50%;
+    border: 5px solid #D32F2F;
+    margin: 10px;
 }
 
 
@@ -27,6 +35,13 @@
 
 .item {
     width: 150px; height: 50px;
+}
+
+.number {
+    width: 65px; height: 60px;
+}
+
+.grid {
     display: inline-block;
     border: 1px solid #212121;
     text-align: center;
@@ -37,4 +52,18 @@
     display: block;
     float: left;
     border: 10px solid #212121;
+}
+
+.functionColumnBase {
+    width: 270px; height: 50px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.numberBtn {
+    width: 85px; height: 45px;
+}
+
+.zeroNumberBtn {
+    width: 265px; height: 45px;;
 }
