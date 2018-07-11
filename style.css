@@ -25,6 +25,17 @@
     margin: 10px;
 }
 
+#statusPanel {
+    width: 270px; height: 23%;
+    border: 5px solid #D32F2F;
+    margin: 10px;
+    background-color: black;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+    padding-top: 10px;
+}
+
 
 
 /* CLASS -------------------------------------------------- */
