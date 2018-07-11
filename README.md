@@ -9,7 +9,7 @@
 # 개발 log
 
 1. [[STEP 1] 구조화 설계](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step1.md)
-2. [STEP 2] CSS 기본 스타일 적용
+2. [[STEP 2] CSS 기본 스타일 적용](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step2.md)
 3. [STEP 3] CSS Layout 적용
 
 <br />
