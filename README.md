@@ -1,7 +1,5 @@
 # 웹 자판기 - HTML, CSS
 
----
-
 `HTML` `CSS` `JAVASCRIPT` 의 기본기능을 이용한 **웹 개발을 시작**할 수 있으며, 웹에서 동작하는 자판기를 구현할 것입니다. 
 
 <br />
@@ -9,8 +7,6 @@
 <br />
 
 # 힌트
-
----
 
 - 먼저 아래 설명을 보고 HTML을 이해한다.
 - 디자인(css)를 전혀 고려하지 않고 구현한다.
@@ -21,8 +17,6 @@
 <br />
 
 # 설계
-
----
 
 ![](https://i.imgur.com/K4lv912.png)
 
@@ -58,8 +52,6 @@
 <br />
 
 # 피드백
-
----
 
 - meta 데이터가 의미하는게 무엇인지?
 
@@ -138,13 +130,13 @@
 
       - [HEAD 영역 #2 - META 요소](http://webdir.tistory.com/308)
 
+- 
+
 <br />
 
 <br />
 
 # HTML5 태그 의미 From [HTML 태그사전](https://opentutorials.org/module/552)
-
----
 
 - #### section : 문서나 응용프로그램의 일반적인 섹션
 
