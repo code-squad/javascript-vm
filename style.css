@@ -37,19 +37,22 @@
 }
 
 #moneyPanel {
-    width: 200px; height: 435px;
-    border: 3px solid slategray;
-    margin: 10px 0px 10px 10px;
+    width: 190px; height: 340px;
+    border: 1px solid black;
     display: inline-block;
+    position: relative;
+    top: 60px; left: 10px;
 }
 
 #amountMoneyWindow {
-    width: 177px; height: 41px;
-    border: 1px solid slategray;
-    margin: 10px 10px;
+    width: 170px; height: 30px;
+    position: absolute;
+    left: 10px; top: 290px;
+    border: 1px solid black;
     text-align: center;
-    font-size: 32px;
+    font-size: 24px;
     padding-top: 4px;
+    
 }
 
 
@@ -95,22 +98,75 @@
     width: 265px; height: 45px;;
 }
 
-.UI-ColumnBase {
-    width: 180px; height: 45px;
-    margin: 7px 10px;
-}
-
 .UI-item-base {
-    width: 83px;
-    margin-top: 5px;
-}
-
-.UI-ColumnBase > div {
-    height: 27px;
-    padding-top: 6px;
-    margin-left: 7px;
+    width: 80px; height: 30px;
+    border: 1px solid slategray;
+    position: absolute;
 }
 
 .UI-ColumnBase > button {
-    height: 35px;
+    left: 10px;
+}
+
+.UI-ColumnBase > button:nth-of-type(1) {
+    top: 10px;
+}
+
+.UI-ColumnBase > button:nth-of-type(2) {
+    top: 50px;
+}
+
+.UI-ColumnBase > button:nth-of-type(3) {
+    top: 90px;
+}
+
+.UI-ColumnBase > button:nth-of-type(4) {
+    top: 130px;
+}
+
+.UI-ColumnBase > button:nth-of-type(5) {
+    top: 170px; 
+}
+
+.UI-ColumnBase > button:nth-of-type(6) {
+    top: 210px; 
+}
+
+.UI-ColumnBase > button:nth-of-type(7) {
+    top: 250px; 
+}
+
+.UI-ColumnBase > div {
+    left: 100px;
+    text-align: center;
+    height: 22px;
+    padding-top: 6px;
+}
+
+.UI-ColumnBase > div:nth-of-type(1) {
+    top: 10px;
+}
+
+.UI-ColumnBase > div:nth-of-type(2) {
+    top: 50px;
+}
+
+.UI-ColumnBase > div:nth-of-type(3) {
+    top: 90px;
+}
+
+.UI-ColumnBase > div:nth-of-type(4) {
+    top: 130px;
+}
+
+.UI-ColumnBase > div:nth-of-type(5) {
+    top: 170px;
+}
+
+.UI-ColumnBase > div:nth-of-type(6) {
+    top: 210px;
+}
+
+.UI-ColumnBase > div:nth-of-type(7) {
+    top: 250px;
 }
