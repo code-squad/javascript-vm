@@ -1,12 +1,61 @@
 
 
 /* ID -------------------------------------------------- */
-#itemList {
-    width: 635px;
-    height: 445px;
-    border: 10px solid #212121;
+#itemPanel {
+    width: 635px; height: 445px;
     background-color: #D32F2F;
 }
+
+#functionPanel {
+    width: 300px; height: 445px;
+    border: 10px solid #212121;
+}
+
+#amountDisplay {
+    widows: 270px; height: 10%;
+    border: 5px solid #D32F2F;
+    text-align: right;
+    font-size: 42px;
+    margin: 10px;
+}
+
+#itemSelectorPanel {
+    width: 270px; height: 50%;
+    border: 5px solid #D32F2F;
+    margin: 10px;
+}
+
+#statusPanel {
+    width: 270px; height: 23%;
+    border: 5px solid #D32F2F;
+    margin: 10px;
+    background-color: black;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+    padding-top: 10px;
+}
+
+#moneyPanel {
+    width: 190px; height: 340px;
+    border: 1px solid black;
+    display: inline-block;
+    position: relative;
+    top: 60px; left: 10px;
+}
+
+#amountMoneyWindow {
+    width: 170px; height: 30px;
+    position: absolute;
+    left: 10px; top: 290px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 24px;
+    padding-top: 4px;
+    
+}
+
+
 
 /* CLASS -------------------------------------------------- */
 .columnBase {
@@ -16,8 +65,108 @@
 
 .item {
     width: 150px; height: 50px;
+}
+
+.number {
+    width: 65px; height: 60px;
+}
+
+.grid {
     display: inline-block;
     border: 1px solid #212121;
     text-align: center;
     background-color: #f5f5f5;
+}
+
+.panel {
+    display: block;
+    float: left;
+    border: 10px solid #212121;
+}
+
+.functionColumnBase {
+    width: 270px; height: 50px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.numberBtn {
+    width: 85px; height: 45px;
+}
+
+.zeroNumberBtn {
+    width: 265px; height: 45px;;
+}
+
+.UI-item-base {
+    width: 80px; height: 30px;
+    border: 1px solid slategray;
+    position: absolute;
+}
+
+.UI-ColumnBase > button {
+    left: 10px;
+}
+
+.UI-ColumnBase > button:nth-of-type(1) {
+    top: 10px;
+}
+
+.UI-ColumnBase > button:nth-of-type(2) {
+    top: 50px;
+}
+
+.UI-ColumnBase > button:nth-of-type(3) {
+    top: 90px;
+}
+
+.UI-ColumnBase > button:nth-of-type(4) {
+    top: 130px;
+}
+
+.UI-ColumnBase > button:nth-of-type(5) {
+    top: 170px; 
+}
+
+.UI-ColumnBase > button:nth-of-type(6) {
+    top: 210px; 
+}
+
+.UI-ColumnBase > button:nth-of-type(7) {
+    top: 250px; 
+}
+
+.UI-ColumnBase > div {
+    left: 100px;
+    text-align: center;
+    height: 22px;
+    padding-top: 6px;
+}
+
+.UI-ColumnBase > div:nth-of-type(1) {
+    top: 10px;
+}
+
+.UI-ColumnBase > div:nth-of-type(2) {
+    top: 50px;
+}
+
+.UI-ColumnBase > div:nth-of-type(3) {
+    top: 90px;
+}
+
+.UI-ColumnBase > div:nth-of-type(4) {
+    top: 130px;
+}
+
+.UI-ColumnBase > div:nth-of-type(5) {
+    top: 170px;
+}
+
+.UI-ColumnBase > div:nth-of-type(6) {
+    top: 210px;
+}
+
+.UI-ColumnBase > div:nth-of-type(7) {
+    top: 250px;
 }

@@ -26,11 +26,21 @@
 
 Grid Layout 을 적용해서, 4x8 의 블럭을 구성한 후, 나중에 width는 똑같이 맞춰놓은 상태로 상품명의 height를 70% 가격의 height를 30% 정도로 배치하면 될 것 같다.
 
-![](C:\Users\HYEON\AppData\Local\Temp\1531282459345.png)
+![](https://imgur.com/ylknBpl.png)
+
+Grid Layout 을 적용해서, 4x8 의 블럭을 구성한 후, 나중에 width는 똑같이 맞춰놓은 상태로 상품명의 height를 70% 가격의 height를 30% 정도로 배치하면 될 것 같다.
+
+![](https://i.imgur.com/FpCQUTe.png)
 
 몇가지 버그(아이템 하나 빠트린 것)와 스타일(색깔, 간격)을 조정한 후 완성된 모습
 
-<br/>
+Grid Layout 대신 position 과 float 를 이용해보자
+
+일단은 Grid 형태를 내기 위해서 8개의 div가 다시 필요할 듯 함, 이 8개의 div 를 block 형태로 떨어트리고 안에 아이템과 가격을 담은 div(table) 를 inline-block 형태로 (형태를 유지해야 하므로) 옆으로 배열시키는 것부터 해보자
+
+display 속성으로만 대체할 수 있을 것 같아서, 4개의 item 씩 한 div 로 묶어버림 (=총 8개의 div)
+
+그리고 div 안의 4개의 item 의 position 을 inline-block 형태로 주고 간격을 맞춰주기 위해서 margin 을 지정함
 
 - Grid Layout
 
@@ -80,3 +90,19 @@ Grid Layout 을 적용해서, 4x8 의 블럭을 구성한 후, 나중에 width�
   ```
 
   `grid-colunm-gap` 속성과 `grid-row-gap` 속성으로 **가로-세로의 테이블 간 간격을 조정**할 수 있음
+
+  <br/>
+
+  <br/>
+
+  # 피드백
+
+  1. Grid Layout (=Grid 문법) 은 최신 문법이라 편하고 막강하다. 하지만, float 와 position 속성을 잘 이해하고 사용하길 바란다. grid 는 현재에도 브라우저 제약때문에 많이 사용하는 편은 아니다.
+
+     chrome 과 edge 에서 테스트 했을 때는 원하던 결과 (Grid Layout) 가 적용되었지만, IE11 에서는 아래와 같은 참사가 펼쳐졌다.
+
+     ![](https://imgur.com/x22tlWS.png)
+
+     
+
+  2. caniuse.com 같은 사이트에서 css속성의 브라우저 호환성 확인을 가끔씩 해보는 것도 좋다!
