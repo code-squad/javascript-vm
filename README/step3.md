@@ -94,3 +94,23 @@
 
     - 높이를 줄이고, padding 을 줌으로써 글자의 가운데를 맞추긴 했으나
     - button 과 div를 정렬할 때, div의 글씨크기를 아래로 내려버리면 button과 높이가 틀려진다.
+
+  <br />
+
+  <br />
+
+  # 리팩토링
+
+  금액 투입하는 Layout 을 position 속성을 이용해서 바꿔볼 것이다
+
+  - position: relative
+    - `margin-left` 대신 `left` 속성을 이용하였다
+  - position: absolute
+    - 안의 아이템들을 해당 속성으로 설정하였다
+      - 금액 투입 button
+      - 금액 표시 div
+      - 내 지갑 잔액 div
+    - 이렇게 되면, 하나하나씩 top, left 속성을 주어야 하는데 효율적인가?
+    - 반복문이 너무 필요해보임
+  - 역시나 button과 div정렬은 할 수가 없음
+    - height 와 padding-top 값 조정
