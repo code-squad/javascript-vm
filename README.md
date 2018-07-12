@@ -1,77 +1,22 @@
-### 웹 자판기 - HTML, CSS
+# 웹 자판기 - HTML, CSS
 
----
+`HTML` `CSS` `JAVASCRIPT` 의 기본기능을 이용한 **웹 개발을 시작**할 수 있으며, 웹에서 동작하는 자판기를 구현할 것입니다. 
 
-`HTML` `CSS` `JAVASCRIPT` 의 기본기능을 이용한 **웹 개발을 시작**할 수 있으며, 웹에서 동작하는 자판기를 구현할 것입니다.
+<br />
 
-  
+<br />
 
-  
+# 개발 log
 
-### STEP 1 구조화 설계
+1. [[STEP 1] 구조화 설계](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step1.md)
+2. [[STEP 2] CSS 기본 스타일 적용](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step2.md)
+3. [STEP 3] CSS Layout 적용
 
----
+<br />
 
-다음과 같은 UI를 만들기 위해 HTML를 구현하자. (다음과 같은 UI는 코드스쿼드 자산이므로 공유하지 않습니다)
+<br />
 
-아직 CSS를 구현하지 않는다.
-
-  
-
-  
-
-### 힌트
-
----
-
-- 먼저 아래 설명을 보고 HTML을 이해한다.
-- 디자인(css)를 전혀 고려하지 않고 구현한다.
-- 구조화설계는 HTML을 구조대로 구현하는 것이다. 문서를 쓰듯이 HTML의 구조를 잡아나가보자.
-
-  
-
-  
-
-### 설계
-
----
-
-![](https://i.imgur.com/K4lv912.png)
-
-- **HTML의 레이아웃을 참고해서, 해당 웹 자판기에 필요한 부분이 무엇인지 생각해보자.**
-  - header 은 필요 없어보임 (나중에 필요할지도?)
-  - nav 필요 없어보임
-  - **section 부분 필요해보임**
-    - 여기서 article 을 2 개로 분배 해야 할 듯 함
-    - article 1 : 상품 부분
-    - article 2 : 금액 투입 표시기, 번호 선택판, 상태 창
-    - footer 필요 없어보임
-  - **aside 필요해보임**
-    - 금액을 투입하는 패널창
-  - footer 필요 없어보임
-- **section**
-  - **article 1. 제품을 선택하는 부분**
-    - 이름을 표시할 32개의 항목이 존재함
-    - 아래 번호.가격 을 표시할 32개의 항목이 존재함
-  - **article 2-1. 투입된 금액을 알려주는 부분**
-    - 텍스트를 표시할 수 있는 부분이 필요
-  - **article 2-2. 제품을 선택하는 부분**
-    - 0~9 까지의 버튼이 존재
-  - **article 2-3. 상태창**
-    - 입력금액
-    - 선택한 상품
-    - 반환 정보
-- **aside**
-  - 금액을 투입할 수 있게 할 창이 필요함
-  - 내가 가지고 있는 금액을 표현할 부분이 필요함 With 계산
-
-  
-
-  
-
-### HTML5 태그 의미 From [HTML 태그사전](https://opentutorials.org/module/552)
-
----
+# HTML5 태그 의미 From [HTML 태그사전](https://opentutorials.org/module/552)
 
 - #### section : 문서나 응용프로그램의 일반적인 섹션
 

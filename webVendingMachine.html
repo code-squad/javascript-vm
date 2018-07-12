@@ -2,80 +2,168 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="TaeHyeon An">
+    <meta name="description" content="코드스쿼드 Lv3 과정에서 진행하는 웹 자판기 프로젝트 입니다">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
     
-    <header></header>
-    <nav></nav>
     <section>
         <article id="itemList">
-            <div>콜라</div>
-            <div>1. 500</div>
-            <div>사이다</div>
-            <div>2. 1000</div>
-            <div>환타(파인애플맛)</div>
-            <div>3. 400</div>
-            <div>환타(포도맛)</div>
-            <div>4. 300</div>
-            <div>레몬에이드</div>
-            <div>5. 900</div>
-            <div>붕붕</div>
-            <div>6. 1200</div>
-            <div>코코아 주스</div>
-            <div>7. 1000</div>
-            <div>제로 콜라</div>
-            <div>8. 1000</div>
-            <div>파워에이드</div>
-            <div>9. 2000</div>
-            <div>초코우유</div>
-            <div>10. 1000</div>
-            <div>초코우유2</div>
-            <div>11. 7000</div>
-            <div>초코우유3</div>
-            <div>12. 600</div>
-            <div>딸바 주스</div>
-            <div>13. 1000</div>
-            <div>바나나 우유</div>
-            <div>14. 500</div>
-            <div>커피 우유</div>
-            <div>15. 1000</div>
-            <div>알로에</div>
-            <div>16. 1200</div>
-            <div>콘칩</div>
-            <div>17. 1000</div>
-            <div>새우깡</div>
-            <div>18. 1000</div>
-            <div>감자칩</div>
-            <div>19. 2000</div>
-            <div>칸쵸</div>
-            <div>20. 1000</div>
-            <div>아몬드</div>
-            <div>21. 450</div>
-            <div>다크 초콜릿</div>
-            <div>22. 1500</div>
-            <div>가나 초콜릿</div>
-            <div>23. 1200</div>
-            <div>견과류</div>
-            <div>24. 900</div>
-            <div>육포</div>
-            <div>25. 1000</div>
-            <div>오징어포</div>
-            <div>26. 900</div>
-            <div>미니땅콩</div>
-            <div>27. 4000</div>
-            <div>오징어</div>
-            <div>28. 2300</div>
-            <div>{고장}</div>
-            <div>29. 1000</div>
-            <div>신라면</div>
-            <div>30. 700</div>
-            <div>진라면</div>
-            <div>31. 800</div>
-            <div>포도맛 환타</div>
-            <div>32. 1000</div>
+            <div class="columnBase firstColumn">
+                <div class="item">
+                    <div>콜라</div>
+                    <div>1. 500</div>
+                </div>
+                <div class="item">
+                    <div>사이다</div>
+                    <div>2. 1000</div>
+                </div>
+                <div class="item">
+                    <div>환타(파인애플맛)</div>
+                    <div>3. 400</div>
+                </div>
+                <div class="item">
+                    <div>환타(포도맛)</div>
+                    <div>4. 300</div>
+                </div>
+            </div>
+
+            <div class="columnBase secondColumn">
+                <div class="item">
+                    <div>레몬에이드</div>
+                    <div>5. 900</div>
+                </div>
+                <div class="item">
+                    <div>붕붕</div>
+                    <div>6. 1200</div>
+                </div>
+                <div class="item">
+                    <div>코코아 주스</div>
+                    <div>7. 1000</div>
+                </div>
+                <div class="item">
+                    <div>제로 콜라</div>
+                    <div>8. 1000</div>
+                </div>
+            </div>
+
+            <div class="columnBase thirdColumn">
+                <div class="item">
+                    <div>파워에이드</div>
+                    <div>9. 2000</div>
+                </div>
+                <div class="item">
+                    <div>초코우유</div>
+                    <div>10. 1000</div>
+                </div>
+                <div class="item">
+                    <div>초코우유2</div>
+                    <div>11. 7000</div>
+                </div>
+                <div class="item">
+                    <div>초코우유3</div>
+                    <div>12. 600</div>
+                </div>
+            </div>
+
+            <div class="columnBase fourthColumn">
+                <div class="item">
+                    <div>딸바 주스</div>
+                    <div>13. 1000</div>
+                </div>
+                <div class="item">
+                    <div>바나나 우유</div>
+                    <div>14. 500</div>
+                </div>
+                <div class="item">
+                    <div>커피 우유</div>
+                    <div>15. 1000</div>
+                </div>
+                <div class="item">
+                    <div>알로에</div>
+                    <div>16. 1200</div>
+                </div>
+            </div>
+
+            <div class="columnBase fifthColumn">
+                <div class="item">
+                    <div>콘칩</div>
+                    <div>17. 1000</div>
+                </div>
+                <div class="item">
+                    <div>새우깡</div>
+                    <div>18. 1000</div>
+                </div>
+                <div class="item">
+                    <div>감자칩</div>
+                    <div>19. 2000</div>
+                </div>
+                <div class="item">
+                    <div>칸쵸</div>
+                    <div>20. 1000</div>
+                </div>
+            </div>
+
+            <div class="columnBase sixthColumn">
+                <div class="item">
+                    <div>아몬드</div>
+                    <div>21. 450</div>
+                </div>
+                <div class="item">
+                    <div>다크 초콜릿</div>
+                    <div>22. 1500</div>
+                </div>
+                <div class="item">
+                    <div>가나 초콜릿</div>
+                    <div>23. 1200</div>
+                </div>
+                <div class="item">
+                    <div>견과류</div>
+                    <div>24. 900</div>
+                </div>
+            </div>
+
+            <div class="columnBase seventhColumn">
+                <div class="item">
+                    <div>육포</div>
+                    <div>25. 1000</div>
+                </div>
+                <div class="item">
+                    <div>오징어포</div>
+                    <div>26. 900</div>
+                </div>
+                <div class="item">
+                    <div>미니땅콩</div>
+                    <div>27. 4000</div>
+                </div>
+                <div class="item">
+                    <div>오징어</div>
+                    <div>28. 2300</div>
+                </div>
+            </div>
+
+            <div class="columnBase eighth">
+                <div class="item">
+                    <div>{고장}</div>
+                    <div>29. 1000</div>
+                </div>
+                <div class="item">
+                    <div>신라면</div>
+                    <div>30. 700</div>
+                </div>
+                <div class="item">
+                    <div>진라면</div>
+                    <div>31. 800</div>
+                </div>
+                <div class="item">
+                    <div>포도맛 환타</div>
+                    <div>32. 1000</div>
+                </div>
+            </div>
         </article>
         <article id="VendingMachineFunction">
             <div class="amoutIndicator">0원</div>
@@ -95,15 +183,20 @@
         </article>
 
     </section>
-    <aside id="moneySelector">
-        <button>10원</button>
+    <section id="moneySelector">
+
+        <div>
+            <button>10원</button>
+            <div>0개</div>
+        </div>
+
         <button>50원</button>
         <button>100원</button>
         <button>500원</button>
         <button>1000원</button>
         <button>5000원</button>
         <button>10000원</button>
-        <div>0개</div>
+
         <div>0개</div>
         <div>0개</div>
         <div>0개</div>
@@ -112,8 +205,7 @@
         <div>0개</div>
         <div>0개</div>
         <div id="amountMoney">0원</div>
-    </aside>
-    <footer></footer>
+    </section>
 
 </body>
 </html>
