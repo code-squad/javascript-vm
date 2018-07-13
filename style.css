@@ -1,17 +1,15 @@
-
-
 /* ID -------------------------------------------------- */
-#itemPanel {
+#item-panel {
     width: 635px; height: 445px;
     background-color: #D32F2F;
 }
 
-#functionPanel {
+#function-panel {
     width: 300px; height: 445px;
     border: 10px solid #212121;
 }
 
-#amountDisplay {
+#money-display {
     widows: 270px; height: 10%;
     border: 5px solid #D32F2F;
     text-align: right;
@@ -19,13 +17,13 @@
     margin: 10px;
 }
 
-#itemSelectorPanel {
+#item-selector-panel {
     width: 270px; height: 50%;
     border: 5px solid #D32F2F;
     margin: 10px;
 }
 
-#statusPanel {
+#status-panel {
     width: 270px; height: 23%;
     border: 5px solid #D32F2F;
     margin: 10px;
@@ -36,39 +34,32 @@
     padding-top: 10px;
 }
 
-#moneyPanel {
-    width: 190px; height: 340px;
-    border: 1px solid black;
+#money-panel {
+    width: 200px; height: 435px;
+    border: 3px solid slategray;
+    margin: 10px 0px 10px 10px;
     display: inline-block;
-    position: relative;
-    top: 60px; left: 10px;
 }
 
-#amountMoneyWindow {
-    width: 170px; height: 30px;
-    position: absolute;
-    left: 10px; top: 290px;
-    border: 1px solid black;
+#money-amount-window {
+    width: 177px; height: 41px;
+    border: 1px solid slategray;
+    margin: 10px 10px;
     text-align: center;
-    font-size: 24px;
+    font-size: 32px;
     padding-top: 4px;
-    
 }
 
 
 
 /* CLASS -------------------------------------------------- */
-.columnBase {
+.column-base {
     width: 630px; height: 50px;
     margin: 5px;
 }
 
-.item {
+.d-item {
     width: 150px; height: 50px;
-}
-
-.number {
-    width: 65px; height: 60px;
 }
 
 .grid {
@@ -84,89 +75,36 @@
     border: 10px solid #212121;
 }
 
-.functionColumnBase {
+.function-column-base {
     width: 270px; height: 50px;
     text-align: center;
     margin-top: 5px;
 }
 
-.numberBtn {
+.btn-num {
     width: 85px; height: 45px;
 }
 
-.zeroNumberBtn {
+.btn-zero-num {
     width: 265px; height: 45px;;
 }
 
-.UI-item-base {
-    width: 80px; height: 30px;
-    border: 1px solid slategray;
-    position: absolute;
+.ui-column-base {
+    width: 180px; height: 45px;
+    margin: 7px 10px;
 }
 
-.UI-ColumnBase > button {
-    left: 10px;
+.ui-item-base {
+    width: 83px;
+    margin-top: 5px;
 }
 
-.UI-ColumnBase > button:nth-of-type(1) {
-    top: 10px;
-}
-
-.UI-ColumnBase > button:nth-of-type(2) {
-    top: 50px;
-}
-
-.UI-ColumnBase > button:nth-of-type(3) {
-    top: 90px;
-}
-
-.UI-ColumnBase > button:nth-of-type(4) {
-    top: 130px;
-}
-
-.UI-ColumnBase > button:nth-of-type(5) {
-    top: 170px; 
-}
-
-.UI-ColumnBase > button:nth-of-type(6) {
-    top: 210px; 
-}
-
-.UI-ColumnBase > button:nth-of-type(7) {
-    top: 250px; 
-}
-
-.UI-ColumnBase > div {
-    left: 100px;
-    text-align: center;
-    height: 22px;
+.ui-column-base > div {
+    height: 27px;
     padding-top: 6px;
+    margin-left: 7px;
 }
 
-.UI-ColumnBase > div:nth-of-type(1) {
-    top: 10px;
-}
-
-.UI-ColumnBase > div:nth-of-type(2) {
-    top: 50px;
-}
-
-.UI-ColumnBase > div:nth-of-type(3) {
-    top: 90px;
-}
-
-.UI-ColumnBase > div:nth-of-type(4) {
-    top: 130px;
-}
-
-.UI-ColumnBase > div:nth-of-type(5) {
-    top: 170px;
-}
-
-.UI-ColumnBase > div:nth-of-type(6) {
-    top: 210px;
-}
-
-.UI-ColumnBase > div:nth-of-type(7) {
-    top: 250px;
+.ui-column-base > button {
+    height: 35px;
 }
