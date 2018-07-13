@@ -114,3 +114,194 @@
     - 반복문이 너무 필요해보임
   - 역시나 button과 div정렬은 할 수가 없음
     - height 와 padding-top 값 조정
+
+<br />
+
+<br />
+
+# 피드백
+
+```css
+.UI-ColumnBase > button:nth-of-type(1) {
+    top: 10px;
+}
+
+.UI-ColumnBase > button:nth-of-type(2) {
+    top: 50px;
+}
+
+.UI-ColumnBase > button:nth-of-type(3) {
+    top: 90px;
+}
+
+.UI-ColumnBase > button:nth-of-type(4) {
+    top: 130px;
+}
+
+.UI-ColumnBase > button:nth-of-type(5) {
+    top: 170px; 
+}
+
+.UI-ColumnBase > button:nth-of-type(6) {
+    top: 210px; 
+}
+
+.UI-ColumnBase > button:nth-of-type(7) {
+    top: 250px; 
+}
+```
+
+1. 아 이건 좀 이상한데요. 10-50-90 이렇게 반복적으로 서로 의존하면서 쓰는 것이 좀 이상합니다. 하나가 수정되면 주르륵 영향을 받는 코드라서요 . 이렇게 나열하지 않는 방법을 찾아보면 좋겠어요.
+   - position 을 사용하기 위해서.. 자체적인 리팩토링 과정에서 발생한 코드다. 음.. 그냥 display 로 배열하는게 더 좋은 방법일까? position 속성을 다르게 사용할 수 있는 방법을 찾아봐야겠다
+
+2. id를 부여하는것도 좋은데요. **고유한 (html안에 유일하게 존재하는 영역)에 쓰이는 게 일반적**이에요. 참고하세요.
+
+```css
+<button class="UI-item-base">50원</button>
+<div class="UI-item-base">0개</div>
+<button class="UI-item-base">100원</button>
+<div class="UI-item-base">0개</div>
+```
+
+3. class 이름이 대소문자가 섞여 있어서 별로에요.
+
+```css
+.UI-ColumnBase > div {
+.UI-ColumnBase > div:nth-of-type(1) {
+.UI-ColumnBase > div:nth-of-type(2) {
+...
+```
+
+4. UI라는 이름은.. 다 UI라 안붙혀도 좋을 듯.
+
+<br />
+
+<br />
+
+# HTML Class 네이밍
+
+> 제가 자주 쓰는 서비스 및 좋아하는 회사의 웹페이지에서 class 부분에 대한 네이밍을 조사한 것 입니다.
+>
+> 각 회사마다의 코딩컨벤션에 의거하여 작성되어서 '이것이 표준이다' 라고 할 수는 당연히 없지만, 그래도 제가하는 네이밍보다는 훨씬 나을 것 같습니다 :)
+
+1. ### Github
+
+![](https://i.imgur.com/W69cqkM.png)
+
+```HTML
+<!-- div class 부분만 발췌함 (완벽한 태그가 아님) -->
+...
+<div class="position-relative js-heaer-wrapper">
+<a ... class="p-3 bg-blue text-white show-on-focus js-skip-to-content">
+<div class="footer container-lg px-3"
+<haeder class="Header f5"
+<div class="d-flex flex-justify-between px-3 container-lg">
+<div class="Popover js-hovercard-content position-absolute">
+<div class="h-card col-3 float-left pr-3">
+<div class="u-photo d-block tooltipped tooltipped-s">
+...
+```
+
+- class 에서 대부분 `-` 기호를 통해서 구분함
+  - header 는 `class="Header"` 를 적용함
+    - 다른데서는 class="header-logo-invertocat" 라는 태그도 있음
+      - invertocat 가 그 깃허브 고양이 이름인가봄
+  - footer 는 `div` 태그에서, class로 `footer` 을 적용함
+  - `d-flex` 이런것은 Bootstrap 문법(?) 인가보다
+
+<br/>
+
+2. ### MDN web docs
+
+   ![](https://imgur.com/5OYImoM.png)
+
+   ```HTML
+   <body id="home" class>
+   <header id="main-header class="header-main">
+   <div class="nav-toolbox-wrapper">
+   	<nav id="main-nav class="nav-main">
+   	<div id="toolbox" class="toolbox">
+   		<li class="nav-log">
+   <form id="nav-main-search">
+   	<div class="search-wrap">
+   		<span class="search-trigger">
+   			<svg class="icon icon-search">
+   <main id="content">
+   	<div class="home-masthead">
+   		<div class="center">
+   	<div class="center clear">
+   		<div class="home-callouts">
+   			<div class="column-container center">
+   				<div class="column-callout callout-standard callout-survey">
+   				<div class="column-callout callout-newsletter">
+   					<div class="newsletter">
+   						<div id="newsletterForm">
+   		<div class="home-hacks">
+   		<div class="home-contribute">
+   <footer id="nav-footer class="nav-footer">
+   ```
+
+   - 확실히 아직 HTML을 개발한지 얼마 되지 않은 입장에서 MDN web site 가 더 보기 편한 듯 함
+   - 근데 id와 class 를 바꿔서 사용하는 경우가 조금 있는 것 같음
+     - `id="main-header"` `class="header-main"` 이렇게?
+   - 맨 외부를 감싸는 부분을 id로 지정해놓는 경우가 대다수임
+     - 도중도중 id 가 쓰이는 부분들이 있는데 (id="newsletterForm")
+     - @crong의 피드백을 기억하자
+       - **고유한 (HTML안에 유일하게 존재하는 영역) 곳에 쓰이는게 일반적!**
+
+<br/>
+
+<br/>
+
+# STEP 3 질문 사항
+
+1. display ? position ?
+2. 내가 설계한 size 와 다르게 나온다
+   - 크롬 개발자도구를 이용해서 계속 수치를 고치는것이 정상인가?
+3. button 과 div 를 한 div로 묶고 정렬하면 다르게 나온다
+   - 아무래도 button 의 가운데 정렬 속성 때문인가?
+4. CSS를 작성하면서 스타일 코드가 중첩된다는 것을 느꼈다
+   - 처음부터 잡지 않으면 나중에 더 고치기 힘들어 질 것 같은데.. 조언?
+5. github 네이밍에 관련해서
+   - 왜 id와 class 를 바꿔쓰는지?..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
