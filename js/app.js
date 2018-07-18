@@ -5,26 +5,14 @@ class VendingMachine {
   numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  createItemListContainer() {
-    const itemList = document.createElement('ul');
-    itemList.className = 'itemListContainer';
-    document.querySelector('.itemDisplay').appendChild(itemList);
-  }
-
-  createCoinButtontDiplay() {
-    const coinButtonList = document.createElement('ul');
-    coinButtonList.className = 'coinButtonListContainer';
-    document.querySelector('.coinButtonContainer').appendChild(coinButtonList);
-  }
-
-  createWallet() {
-    const coinList = document.createElement('ul');
-    coinList.className = 'coinList';
-    document.querySelector('.coinUI').appendChild(coinList);
+  createListByClassName(parentClass, childClass) {
+    const list = document.createElement('ul');
+    list.className = childClass;
+    document.querySelector(`.${parentClass}`).appendChild(list);
   }
 
   displayItem() {
-    this.createItemListContainer();
+    this.createListByClassName('itemDisplay', 'itemListContainer');
     let itemListHTML = '';
     this.item.forEach((ele, idx) => {
       itemListHTML +=
@@ -38,7 +26,7 @@ class VendingMachine {
     document.querySelector('.itemListContainer').innerHTML = itemListHTML;
   }
   displayCoinButton() {
-    this.createCoinButtontDiplay();
+    this.createListByClassName('coinButtonContainer', 'coinButtonListContainer');
     let coinButtonHTML = '';
     for (let i = 1; i <= 10; i++) {
       coinButtonHTML +=
@@ -50,7 +38,7 @@ class VendingMachine {
     document.querySelector('.coinButtonListContainer').innerHTML = coinButtonHTML;
   }
   displayWallet(myWallet) {
-    this.createWallet();
+    this.createListByClassName('coinUI', 'coinList');
     let coinList = '';
     myWallet.forEach((ele, idx) => {
       coinList +=
