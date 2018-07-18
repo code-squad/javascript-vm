@@ -1,4 +1,4 @@
-class Display {
+class VendingMachine {
   constructor(item) {
     this.item = item;
     this.numberWithCommas = function (x) {
@@ -67,7 +67,7 @@ class Display {
   }
 }
 
-const vmDisplay = new Display(item);
-vmDisplay.displayItem();
-vmDisplay.displayCoinButton();
-vmDisplay.displayWallet(wallet);
+const vendingMachine = new VendingMachine(item);
+vendingMachine.displayItem();
+vendingMachine.displayCoinButton();
+vendingMachine.displayWallet(wallet);
