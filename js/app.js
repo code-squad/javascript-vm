@@ -52,6 +52,14 @@ class VendingMachine {
       `
     })
     document.querySelector('.coinList').innerHTML = coinList;
+    this.displayFullAmount(myWallet);
+  }
+  displayFullAmount(myWallet) {
+    let fullAmount = myWallet.reduce((ac, cv) => {
+      ac += (cv.unit * cv.number);
+      return ac;
+    }, 0);
+    document.querySelector('.fullAmount').innerHTML = `${this.numberWithCommas(fullAmount)}원`;
   }
 }
 

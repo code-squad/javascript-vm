@@ -12,11 +12,11 @@ const wallet = [{
   number: 5
 }, {
   unit: 1000,
-  number: 9
+  number: 5
 }, {
   unit: 5000,
-  number: 4
+  number: 3
 }, {
   unit: 10000,
-  number: 7
+  number: 1
 }];
