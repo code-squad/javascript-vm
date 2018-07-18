@@ -129,10 +129,7 @@
   text-align: center;
 }
 
-.coinList {
-  display: inline;
-}
-
+.coinList,
 .coinItem {
   display: inline;
 }
@@ -143,23 +140,13 @@
   box-sizing: border-box;
 }
 
+.numberOfCoin,
 .coin {
   display: inline-block;
   vertical-align: middle;
   width: 40%;
   height: 100%;
   padding: 10px 0px 10px 0px;
-  border-radius: 15px;
-  margin: 5px;
-  border: 2px solid #575377;
-}
-
-.numberOfCoin {
-  display: inline-block;
-  vertical-align: middle;
-  width: 40%;
-  padding: 10px 0px 10px 0px;
-  height: 100%;
   border-radius: 15px;
   border: 2px solid #575377;
 }
