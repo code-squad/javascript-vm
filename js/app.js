@@ -28,10 +28,11 @@ class VendingMachine {
   displayCoinButton() {
     this.createListByClassName('coinButtonContainer', 'coinButtonListContainer');
     let coinButtonHTML = '';
-    for (let i = 1; i <= 10; i++) {
+    const MAX_COUNT = 10;
+    for (let i = 1; i <= MAX_COUNT; i++) {
       coinButtonHTML +=
         `<li class="coinButtonItem">
-          <div class="coinButton">${i === 10 ? 0 : i}</div>
+          <div class="coinButton">${i === MAX_COUNT ? 0 : i}</div>
         </li>
         `
     }
