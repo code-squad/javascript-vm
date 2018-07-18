@@ -1,11 +1,10 @@
 class VendingMachine {
   constructor(item) {
     this.item = item;
-    this.numberWithCommas = function (x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
   }
-
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   createItemListContainer() {
     const itemList = document.createElement('ul');
     itemList.className = 'itemListContainer';
