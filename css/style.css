@@ -4,7 +4,7 @@
   float: left;
   width: 900px;
   height: 950px;
-  border: 5px solid slategray;
+  border: 5px solid #567194;
 }
 
 /* itemDisplay UI */
@@ -30,7 +30,7 @@
 
 .item {
   display: inline-block;
-  color: white;
+  color: #000;
   margin: 5px;
   text-align: center;
   vertical-align: middle;
@@ -38,7 +38,7 @@
 
 .itemName {
   background-color: #bba1a1;
-  border: 2px solid slategray;
+  border: 2px solid #567194;
   display: table-cell;
   vertical-align: middle;
   width: 100px;
@@ -49,7 +49,7 @@
 
 .itemPrice {
   background-color: #b3b3b3;
-  border: 2px solid slategray;
+  border: 2px solid #567194;
   margin-top: 5px;
 }
 
