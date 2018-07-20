@@ -5,6 +5,17 @@ class WalletView extends CommonFunction {
   displayWalletHandler(wallet) {
     this.displayWallet(wallet);
   }
+  clickCoinButtonHandler() {
+    let coinButtons = document.querySelectorAll('.coinList .coin');
+    this.printClickedCoin(coinButtons);
+  }
+  printClickedCoin(coinButtons) {
+    coinButtons.forEach(v => {
+      v.addEventListener('click', (e) => {
+        console.log(e.target.innerHTML);
+      })
+    });
+  }
 
   displayWallet(myWallet) {
     this.createListByClassName('coinUI', 'coinList');
