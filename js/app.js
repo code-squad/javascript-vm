@@ -1,20 +1,25 @@
 class VendingMachine {
-  constructor(itemList, wallet, machineView, walletView) {
-    this.itemList = itemList;
-    this.wallet = wallet;
+  constructor(machineModel, walletModel, machineView, walletView) {
+    this.machineModel = machineModel;
+    this.walletModel = walletModel;
     this.machineView = machineView;
     this.walletView = walletView;
     this.init();
   }
   init() {
-    this.initDisplayHandler(this.wallet, this.itemList);
+    this.initWalletHandler(this.walletModel.wallet);
+    this.initMachineHandler(this.machineModel.itemList);
   }
-  initDisplayHandler(wallet, itemList) {
-    this.machineView.init(itemList);
-    this.walletView.init(wallet);
+  initWalletHandler(wallet) {
+    this.walletView.displayWalletHandler(wallet);
+  }
+  initMachineHandler(machineModel) {
+    this.machineView.displayMachineHandler(machineModel);
   }
 }
 
 const walletView = new WalletView();
 const machineView = new MachineView();
-const vendingMachine = new VendingMachine(item, wallet, machineView, walletView);
+const walletModel = new WalletModel(myWallet);
+const machineModel = new MachineModel(itemList);
+const vendingMachine = new VendingMachine(machineModel, walletModel, machineView, walletView);

@@ -1,24 +1,11 @@
-class MachineView {
+class MachineView extends CommonFunction {
   constructor() {
-
-  }
-  init(itemList) {
-    this.displayMachineHandler(itemList);
+    super();
   }
 
   displayMachineHandler(itemList) {
     this.displayCoinButton();
     this.displayItem(itemList);
-  }
-
-  numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
-  createListByClassName(parentClass, childClass) {
-    const list = document.createElement('ul');
-    list.className = childClass;
-    document.querySelector(`.${parentClass}`).appendChild(list);
   }
 
   displayItem(itemList) {

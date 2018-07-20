@@ -1,4 +1,10 @@
-const wallet = [{
+class WalletModel {
+  constructor(wallet) {
+    this.wallet = wallet;
+  }
+
+}
+const myWallet = [{
   unit: 10,
   number: 5
 }, {
@@ -19,4 +25,4 @@ const wallet = [{
 }, {
   unit: 10000,
   number: 1
-}];
+}]
