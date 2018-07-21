@@ -10,17 +10,17 @@ class MachineView extends CommonFunction {
 
   displayItem(itemList) {
     this.createListByClassName('itemDisplay', 'itemListContainer');
-    let itemListHTML = '';
-    itemList.forEach((ele, idx) => {
-      itemListHTML +=
+    let processedItemList = itemList.reduce((acc, ele, idx) => {
+      acc +=
         `<li class="item">
           <div class="itemContainer">
             <div class="itemName">${ele.name}</div>
             <div class="itemPrice">${idx+1}. ${ele.price}</div>
           </div>
         </li>`;
-    })
-    document.querySelector('.itemListContainer').innerHTML = itemListHTML;
+      return acc;
+    }, '');
+    document.querySelector('.itemListContainer').innerHTML = processedItemList;
   }
 
   displayCoinButton() {
