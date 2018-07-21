@@ -7,15 +7,9 @@ class VendingMachine {
     this.init();
   }
   init() {
-    this.initWallet(this.walletModel.wallet);
-    this.initMachineHandler(this.machineModel.itemList);
-  }
-  initWallet(wallet) {
-    this.walletView.displayWalletHandler(wallet);
+    this.walletView.displayWalletHandler(this.walletModel.wallet);
     this.walletView.clickCoinButtonHandler();
-  }
-  initMachineHandler(machineModel) {
-    this.machineView.displayMachineHandler(machineModel);
+    this.machineView.displayMachineHandler(this.machineModel.itemList);
   }
 }
 
