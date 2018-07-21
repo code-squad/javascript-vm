@@ -2,9 +2,6 @@ class WalletView extends CommonFunction {
   constructor() {
     super();
   }
-  displayWalletHandler(wallet) {
-    this.displayWallet(wallet);
-  }
   clickCoinButtonHandler() {
     let coinButtons = document.querySelectorAll('.coinList .coin');
     this.printClickedCoin(coinButtons);
