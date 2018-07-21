@@ -19,8 +19,9 @@ class VendingMachine {
   }
 }
 
-const walletView = new WalletView();
-const machineView = new MachineView();
-const walletModel = new WalletModel(myWallet);
-const machineModel = new MachineModel(itemList);
-const vendingMachine = new VendingMachine(machineModel, walletModel, machineView, walletView);
+const vendingMachine = new VendingMachine(
+  new MachineModel(itemList),
+  new WalletModel(myWallet),
+  new MachineView,
+  new WalletView
+);
