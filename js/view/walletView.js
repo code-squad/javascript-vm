@@ -6,10 +6,11 @@ class WalletView extends CommonFunction {
     let coinButtons = document.querySelectorAll('.coinList .coin');
     this.printClickedCoin(coinButtons);
   }
+
   printClickedCoin(coinButtons) {
     coinButtons.forEach(v => {
-      v.addEventListener('click', (e) => {
-        console.log(e.target.innerHTML);
+      v.addEventListener('click', ({ target }) => {
+        console.log(target.innerHTML);
       })
     });
   }

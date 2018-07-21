@@ -2,7 +2,9 @@ class WalletModel {
   constructor(wallet) {
     this.wallet = wallet;
   }
-
+  getWallet() {
+    return this.wallet;
+  }
 }
 const myWallet = [{
   unit: 10,
