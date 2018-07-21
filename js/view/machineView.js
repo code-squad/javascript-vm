@@ -25,15 +25,16 @@ class MachineView extends CommonFunction {
 
   displayCoinButton() {
     this.createListByClassName('coinButtonContainer', 'coinButtonListContainer');
-    let coinButtonHTML = '';
     const MAX_COUNT = 10;
-    for (let i = 1; i <= MAX_COUNT; i++) {
-      coinButtonHTML +=
+    const completedCoinButton = Array.from(Array(MAX_COUNT).keys()).reduce((acc, ele, idx) => {
+      acc +=
         `<li class="coinButtonItem">
-          <div class="coinButton">${i === MAX_COUNT ? 0 : i}</div>
+          <div class="coinButton">${++ele === MAX_COUNT ? 0 : ele}</div>
         </li>
         `
-    }
-    document.querySelector('.coinButtonListContainer').innerHTML = coinButtonHTML;
+      return acc;
+    }, '');
+    console.log(completedCoinButton);
+    document.querySelector('.coinButtonListContainer').innerHTML = completedCoinButton;
   }
 }
