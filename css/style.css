@@ -111,7 +111,7 @@ ul{
   border : 0.3vmax solid #888;
   box-sizing : border-box;
 }
-.insert-button{
+.insert-coin-button,.insert-coin-count{
   width : 10vmax;
   height : 5.5vmax;
   margin-left : 3vmax;
