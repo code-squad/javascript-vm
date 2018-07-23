@@ -1,4 +1,12 @@
-const item = [{
+class MachineModel {
+  constructor(itemList) {
+    this.itemList = itemList;
+  }
+  getItemList() {
+    return this.itemList;
+  }
+}
+const itemList = [{
   name: '콜라',
   price: 500
 }, {

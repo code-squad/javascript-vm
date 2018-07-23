@@ -4,7 +4,7 @@
   float: left;
   width: 900px;
   height: 950px;
-  border: 5px solid slategray;
+  border: 5px solid #567194;
 }
 
 /* itemDisplay UI */
@@ -30,7 +30,7 @@
 
 .item {
   display: inline-block;
-  color: white;
+  color: #000;
   margin: 5px;
   text-align: center;
   vertical-align: middle;
@@ -38,7 +38,7 @@
 
 .itemName {
   background-color: #bba1a1;
-  border: 2px solid slategray;
+  border: 2px solid #567194;
   display: table-cell;
   vertical-align: middle;
   width: 100px;
@@ -49,7 +49,7 @@
 
 .itemPrice {
   background-color: #b3b3b3;
-  border: 2px solid slategray;
+  border: 2px solid #567194;
   margin-top: 5px;
 }
 
@@ -124,16 +124,12 @@
   height: 100%;
   margin: 30px;
   font-size: 15px;
-  color:;
   border: 4px solid #4d4871;
   background-color: #9fa8bf;
   text-align: center;
 }
 
-.coinList {
-  display: inline;
-}
-
+.coinList,
 .coinItem {
   display: inline;
 }
@@ -144,33 +140,21 @@
   box-sizing: border-box;
 }
 
+.numberOfCoin,
 .coin {
   display: inline-block;
   vertical-align: middle;
   width: 40%;
   height: 100%;
-  padding: 10px 0px 10px 0px;
-  border-radius: 15px;
-  margin: 5px;
-  border: 2px solid #575377;
-}
-
-.numberOfCoin {
-  display: inline-block;
-  vertical-align: middle;
-  width: 40%;
-  padding: 10px 0px 10px 0px;
-  height: 100%;
+  padding: 10px 5px;
   border-radius: 15px;
   border: 2px solid #575377;
 }
 
 .fullAmount {
-  display:  inline-block;
   border: 2px solid #575377;
-  height: 100%;
   width: 90%;
-  margin-bottom: 20px;
+  margin: 0px auto 20px auto;
   padding: 10px;
   border-radius: 15px;
   box-sizing: border-box;
