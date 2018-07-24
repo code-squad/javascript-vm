@@ -15,18 +15,16 @@ class InsertCoinView{
         btns.addEventListener("click", e=>{
             const target = e.target;
             if(target.className === "basic-button insert-coin-button"){
-                const coin = target.dataset.coin;
+                const coin = +target.dataset.coin;
                 console.log("넣은 동전 : " + coin);
                 this.plusCoinCount(coin);
                 target.nextElementSibling.innerText = this.coinCount[coin] + "개";
-                this.insertCoinHandler(+coin);
+                this.insertCoinHandler(coin);
             }
         })
     }
     plusCoinCount(coin){
-        for(let key in this.coinCount){
-            if(coin === key)this.coinCount[key]++;
-        }
+        this.coinCount[coin]++;
     }
 }
 
