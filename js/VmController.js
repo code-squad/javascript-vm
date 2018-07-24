@@ -1,9 +1,9 @@
 class VmController{
-    constructor(model, insertCoinView, moneyView){
+    constructor(model, coinCountView, moneyView){
         this.model = model;
-        this.insertCoinView = insertCoinView;
+        this.coinCountView = coinCountView;
         this.moneyView = moneyView;
-        this.insertCoinView.insertCoinHandler = this.insertCoinHandler.bind(this);
+        this.coinCountView.insertCoinHandler = this.insertCoinHandler.bind(this);
     }
     insertCoinHandler(coin){
         this.model.insertCoin(coin);
@@ -15,6 +15,6 @@ class VmController{
 }
 
 const vmModel = new VmModel();
-const insertCoinView = new InsertCoinView();
+const coinCountView = new CoinCountView();
 const moneyView = new MoneyView();
-const vmController = new VmController(vmModel, insertCoinView, moneyView);
+const vmController = new VmController(vmModel, coinCountView, moneyView);

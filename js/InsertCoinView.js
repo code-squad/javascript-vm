@@ -1,4 +1,4 @@
-class InsertCoinView{
+class CoinCountView{
     constructor(){
         this.insertCoinHandler = null;
         this.coinCount = {
@@ -8,11 +8,11 @@ class InsertCoinView{
             5000 : 0,
             10000 : 0
         }
-        this.clickBtn();
+        this.clickCoinBtns();
     }
-    clickBtn(){
-        const btns = document.querySelector(".wallet > ul");
-        btns.addEventListener("click", e=>{
+    clickCoinBtns(){
+        const selectCoinBtns = document.querySelector(".wallet > ul");
+        selectCoinBtns.addEventListener("click", e=>{
             const target = e.target;
             if(target.className === "basic-button insert-coin-button"){
                 const coin = +target.dataset.coin;
