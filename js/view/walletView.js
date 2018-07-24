@@ -16,19 +16,19 @@ class WalletView {
   }
 
   displayWallet(myWallet) {
-    this.commonView.createListByClassName('coinUI', 'coinList');
-    const coinList = myWallet.reduce((acc, ele, idx) => {
+    this.commonView.createListByClassName('wallet_container', 'money_list');
+    const moneyList = myWallet.reduce((acc, ele, idx) => {
       acc +=
-        `<li class= "coinItem">
-        <div class="coinContainer">
-          <span class="coin">${Util.numberWithCommas(ele.unit)}원</span>
-          <span class="numberOfCoin">${ele.number}개</span>
+        `<li class= "money_item">
+        <div class="money_container">
+          <span class="money">${Util.numberWithCommas(ele.unit)}원</span>
+          <span class="number_of_money">${ele.number}개</span>
         </div>
       </li>
       `
       return acc;
     }, '');
-    document.querySelector('.coinList').innerHTML = coinList;
+    document.querySelector('.money_list').innerHTML = moneyList;
     this.displayFullAmount(myWallet);
   }
 
@@ -37,6 +37,6 @@ class WalletView {
       ac += (cv.unit * cv.number);
       return ac;
     }, 0);
-    document.querySelector('.fullAmount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
+    document.querySelector('.full_amount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
   }
 }
