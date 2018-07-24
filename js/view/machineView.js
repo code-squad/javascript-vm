@@ -1,6 +1,6 @@
-class MachineView extends CommonFunction {
-  constructor() {
-    super();
+class MachineView {
+  constructor(commonView) {
+    this.commonView = commonView;
   }
 
   displayMachineHandler(itemList) {
@@ -9,13 +9,13 @@ class MachineView extends CommonFunction {
   }
 
   displayItem(itemList) {
-    this.createListByClassName('itemDisplay', 'itemListContainer');
+    this.commonView.createListByClassName('itemDisplay', 'itemListContainer');
     let processedItemList = itemList.reduce((acc, ele, idx) => {
       acc +=
         `<li class="item">
           <div class="itemContainer">
             <div class="itemName">${ele.name}</div>
-            <div class="itemPrice">${idx+1}. ${ele.price}</div>
+            <div class="itemPrice">${idx + 1}. ${ele.price}</div>
           </div>
         </li>`;
       return acc;
@@ -24,7 +24,7 @@ class MachineView extends CommonFunction {
   }
 
   displayCoinButton() {
-    this.createListByClassName('coinButtonContainer', 'coinButtonListContainer');
+    this.commonView.createListByClassName('coinButtonContainer', 'coinButtonListContainer');
     const MAX_COUNT = 10;
     const completedCoinButton = Array.from(Array(MAX_COUNT).keys()).reduce((acc, ele, idx) => {
       acc +=

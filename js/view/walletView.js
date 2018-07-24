@@ -1,9 +1,9 @@
-class WalletView extends CommonFunction {
-  constructor() {
-    super();
+class WalletView {
+  constructor(commonView) {
+    this.commonView = commonView;
   }
   clickCoinButtonHandler() {
-    let coinButtons = document.querySelectorAll('.coinList .coin');
+    const coinButtons = document.querySelectorAll('.coinList .coin');
     this.printClickedCoin(coinButtons);
   }
 
@@ -16,27 +16,27 @@ class WalletView extends CommonFunction {
   }
 
   displayWallet(myWallet) {
-    this.createListByClassName('coinUI', 'coinList');
-    let coinList = '';
-    myWallet.forEach((ele, idx) => {
-      coinList +=
+    this.commonView.createListByClassName('coinUI', 'coinList');
+    const coinList = myWallet.reduce((acc, ele, idx) => {
+      acc +=
         `<li class= "coinItem">
         <div class="coinContainer">
-          <span class="coin">${this.numberWithCommas(ele.unit)}원</span>
+          <span class="coin">${Util.numberWithCommas(ele.unit)}원</span>
           <span class="numberOfCoin">${ele.number}개</span>
         </div>
       </li>
       `
-    })
+      return acc;
+    }, '');
     document.querySelector('.coinList').innerHTML = coinList;
     this.displayFullAmount(myWallet);
   }
 
   displayFullAmount(myWallet) {
-    let fullAmount = myWallet.reduce((ac, cv) => {
+    const fullAmount = myWallet.reduce((ac, cv) => {
       ac += (cv.unit * cv.number);
       return ac;
     }, 0);
-    document.querySelector('.fullAmount').innerHTML = `${this.numberWithCommas(fullAmount)}원`;
+    document.querySelector('.fullAmount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
   }
 }

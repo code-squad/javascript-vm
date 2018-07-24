@@ -12,10 +12,9 @@ class VendingMachine {
     this.machineView.displayMachineHandler(this.machineModel.getItemList());
   }
 }
-
 const vendingMachine = new VendingMachine(
   new MachineModel(itemList),
   new WalletModel(myWallet),
-  new MachineView,
-  new WalletView
+  new MachineView(CommonView),
+  new WalletView(CommonView)
 );
