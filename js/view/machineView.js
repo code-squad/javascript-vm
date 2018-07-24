@@ -4,7 +4,6 @@ class MachineView {
   }
 
   displayMachineHandler(itemList) {
-    this.displayCoinButton();
     this.displayItem(itemList);
   }
 
@@ -21,20 +20,5 @@ class MachineView {
       return acc;
     }, '');
     document.querySelector('.itemListContainer').innerHTML = processedItemList;
-  }
-
-  displayCoinButton() {
-    this.commonView.createListByClassName('coinButtonContainer', 'coinButtonListContainer');
-    const MAX_COUNT = 10;
-    const completedCoinButton = Array.from(Array(MAX_COUNT).keys()).reduce((acc, ele, idx) => {
-      acc +=
-        `<li class="coinButtonItem">
-          <div class="coinButton">${++ele === MAX_COUNT ? 0 : ele}</div>
-        </li>
-        `
-      return acc;
-    }, '');
-    console.log(completedCoinButton);
-    document.querySelector('.coinButtonListContainer').innerHTML = completedCoinButton;
   }
 }
