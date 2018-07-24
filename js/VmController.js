@@ -7,16 +7,10 @@ class VmController{
     }
     insertCoinHandler(coin){
         this.model.insertCoin(coin);
-        this.moneyView.yourMoney = this.yourMoney.bind(this)();
-        this.moneyView.inputMoney = this.inputMoney.bind(this)();
+        this.moneyView.yourMoney = this.model.getYourMoney();
+        this.moneyView.inputMoney = this.model.getInputMoney();
         this.moneyView.walletView();
         this.moneyView.inputMoneyView();
-    }
-    yourMoney(){
-        return this.model.getYourMoney();
-    }
-    inputMoney(){
-        return this.model.getInputMoney();
     }
 }
 
