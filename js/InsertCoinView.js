@@ -12,15 +12,13 @@ class CoinCountView{
     }
     clickCoinBtns(){
         const selectCoinBtns = document.querySelector(".wallet > ul");
-        selectCoinBtns.addEventListener("click", e=>{
-            const target = e.target;
-            if(target.className === "basic-button insert-coin-button"){
-                const coin = +target.dataset.coin;
-                console.log("넣은 동전 : " + coin);
-                this.plusCoinCount(coin);
-                target.nextElementSibling.innerText = this.coinCount[coin] + "개";
-                this.insertCoinHandler(coin);
-            }
+        selectCoinBtns.addEventListener("click", ({target})=>{
+            if(target.className !== "basic-button insert-coin-button")return ;            
+            const coin = +target.dataset.coin;
+            console.log("넣은 동전 : " + coin);
+            this.plusCoinCount(coin);
+            target.nextElementSibling.innerText = this.coinCount[coin] + "개";
+            this.insertCoinHandler(coin);
         })
     }
     plusCoinCount(coin){
