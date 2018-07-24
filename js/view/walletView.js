@@ -2,17 +2,16 @@ class WalletView {
   constructor(commonView) {
     this.commonView = commonView;
   }
-  clickCoinButtonHandler() {
-    const coinButtons = document.querySelectorAll('.coinList .coin');
-    this.printClickedCoin(coinButtons);
-  }
-
-  printClickedCoin(coinButtons) {
-    coinButtons.forEach(v => {
+  clickMoneyButtonHandler() {
+    const moneyButtons = document.querySelectorAll('.money_list .money');
+    moneyButtons.forEach(v => {
       v.addEventListener('click', ({ target }) => {
-        console.log(target.innerHTML);
+        this.printClickedMoney(target.innerHTML);
       })
     });
+  }
+  printClickedMoney(clickedMoney) {
+    console.log(clickedMoney);
   }
 
   displayWallet(myWallet) {
