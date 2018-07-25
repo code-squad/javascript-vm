@@ -7,7 +7,8 @@ body{
 ul{
   list-style : none;
 }
-.basic-button-style{
+.item-name{
+  height : 70%;
   border : 0.2vmax solid #888;
   background-color : #fff;
   box-sizing : border-box;
@@ -34,7 +35,7 @@ ul{
   float : left;
   box-sizing : border-box;
 }
-.beverage-menu{
+.vm-frame.beverage-menu{
   border-width : 0.3vmax 0 0.3vmax 0.3vmax;
   border-style : solid;
   height : 100%;
@@ -55,9 +56,6 @@ ul{
   padding : 0.2vmax;
   box-sizing : border-box;
 }
-.basic-button-style.item-name{
-  height : 70%;
-}
 .item-data{
   margin-left : auto;
   margin-right : auto;
@@ -66,7 +64,7 @@ ul{
   background-color : #fff;
   box-sizing : border-box;
 }
-.your-action{
+.vm-frame.your-action{
   height : 100%;
   border : 0.3vmax solid;
   box-sizing : border-box;
@@ -91,14 +89,18 @@ ul{
   border : 0.2vmax solid #888;
   height : 15vmax;
 }
-.basic-button-style.select-button{
+.basic-button{
   width : 5vmax;
   height  : 4vmax;
-  float : left;
   border-radius : 1vmax;
   margin-left : 1.7vmax;
   margin-top : 1vmax;
+  border : 0.2vmax solid #888;
   float : left;
+  background-color : #fff;
+  box-sizing : border-box;
+  text-align : center;
+  line-height : 4vmax;
 }
 .vm-frame.wallet-part{
   padding : 2vmax 1vmax;
@@ -107,14 +109,18 @@ ul{
   width : 100%;
   height : 100%;
   border : 0.3vmax solid #888;
+  box-sizing : border-box;
 }
-.basic-button-style.select-button.insert-button{
+.insert-coin-button,.insert-coin-count{
   width : 10vmax;
   height : 5.5vmax;
   margin-left : 3vmax;
+  margin-top : 1.2vmax;
+  line-height : 5.5vmax;
 }
-.basic-button-style.select-button.your-money{
+.your-money{
   margin-left : 3vmax;
   width : 23vmax;
   height : 5.5vmax;
+  line-height : 5.5vmax;
 }
