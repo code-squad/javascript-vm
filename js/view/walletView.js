@@ -11,13 +11,30 @@ class WalletView {
       })
     });
   }
+  rerender(price, walletModel) {
+    this.changeFullAmount(walletModel.fullAmount);
+    this.changeNumberOfItem(price, walletModel.getMoneyList());
+  }
+  changeFullAmount(fullAmount) {
+    const fullAmountElement = document.querySelector('.full_amount');
+    fullAmountElement.innerText = `${Util.numberWithCommas(fullAmount)}원`;
+  }
+  changeNumberOfItem(price, moneyList) {
+    const item = document.querySelector(`[data-price='${price}'`);
+    const numberOfItem = item.nextElementSibling;
+    numberOfItem.innerText = `${moneyList[price]}개`;
 
+  }
   printClickedMoney(clickedMoney) {
     console.log(clickedMoney.innerText);
   }
 
-  displayMoney(money) {
+  displayMoney(walletModel) {
     this.commonView.createListByClassName('wallet_container', 'money_list');
+    this.updateMoney(walletModel.money);
+    this.displayFullAmount(walletModel.fullAmount);
+  }
+  updateMoney(money) {
     const moneyUnit = Object.keys(money);
     const moneyNumber = Object.values(money);
     const moneyList = moneyUnit.reduce((acc, ele, idx) => {
@@ -32,14 +49,9 @@ class WalletView {
       return acc;
     }, '');
     document.querySelector('.money_list').innerHTML = moneyList;
-    this.displayFullAmount(moneyUnit, moneyNumber);
   }
 
-  displayFullAmount(moneyUnit, moneyNumber) {
-    const fullAmount = moneyUnit.reduce((acc, ele, idx) => {
-      acc += (ele * moneyNumber[idx]);
-      return acc;
-    }, 0);
+  displayFullAmount(fullAmount) {
     document.querySelector('.full_amount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
   }
 }

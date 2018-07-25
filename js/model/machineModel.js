@@ -2,12 +2,14 @@ class MachineModel {
   constructor(itemList) {
     this.itemList = itemList;
     this.insertedMoney = 0;
+    this.alertReceiveMoney = null;
   }
   getItemList() {
     return this.itemList;
   }
   receiveMoney(money) {
     this.insertedMoney += Number(money);
+    this.alertReceiveMoney(this.insertedMoney);
   }
 }
 const itemList = [{
