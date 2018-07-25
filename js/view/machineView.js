@@ -3,8 +3,9 @@ class MachineView {
     this.commonView = commonView;
   }
 
-  displayMachineHandler(itemList) {
-    this.displayItem(itemList);
+  displayMachineHandler(machineModel) {
+    this.displayItem(machineModel.itemList);
+    this.displayInsertedMoney(machineModel.insertedMoney);
   }
 
   displayItem(itemList) {
@@ -20,5 +21,9 @@ class MachineView {
       return acc;
     }, '');
     document.querySelector('.item_list_container').innerHTML = processedItemList;
+  }
+  displayInsertedMoney(insertedMoney) {
+    let currentCoin = document.querySelector('.current_coin');
+    currentCoin.innerHTML = `${Util.numberWithCommas(insertedMoney)}원`;
   }
 }
