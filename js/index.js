@@ -4,6 +4,13 @@ function getCurrentMoney(){
     return currentMoney;
 }
 
+function addList(data){
+    const itemListElement = document.querySelector(".beverage-menu > ul");
+    itemListElement.insertAdjacentHTML("beforebegin",data)
+}
+
+const itemList = templateItemList(itemData);
+addList(itemList);
 const vmModel = new VmModel(getCurrentMoney());
 const coinCountView = new CoinCountView();
 const moneyView = new MoneyView();
