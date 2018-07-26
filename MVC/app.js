@@ -5,9 +5,3 @@ window.addEventListener('DOMContentLoaded', () => {
 
     console.log("Success Loaded MODEL VIEW CONTROLLER !");
 });
-
-    /*
-        INPUT:
-        OUTPUT:
-        DESCRIPTION:
-    */
