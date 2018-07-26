@@ -10,7 +10,7 @@ class VendingMachineModel {
         OUTPUT: currentMoney (현재 돈)
         DESCRIPTION: 현재 가지고 있는 돈을 반환하는 함수입니다.
     */
-    getCurrentMoney() {
+    getWalletMoney() {
         return this.currentMoney;
     }
 
@@ -19,7 +19,7 @@ class VendingMachineModel {
         OUTPUT: none
         DESCRIPTION: 현재 가지고 있는 돈을 증가시키는 함수입니다.
     */
-    increaseCurrentMoney(money) {
+    increaseWalletMoney(money) {
         this.currentMoney += money;
     }
 

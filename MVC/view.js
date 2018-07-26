@@ -32,9 +32,9 @@ class VendingMachineView {
         OUTPUT: NONE
         DESCRIPTION: model 로 접근해 돈을 투입하고, 내 지갑의 돈을 화면에 표시합니다.
     */
-    insertMoney(money) {
-        this.model.increaseCurrentMoney(money);
-        this.showCurrentMoney();
+    insertMoneyToWallet(money) {
+        this.model.increaseWalletMoney(money);
+        this.indicateWalletMoney();
     }
 
     /*
@@ -42,10 +42,10 @@ class VendingMachineView {
         OUTPUT: NONE
         DESCRIPTION: 내 지갑의 돈을 표시합니다 (VIEW)
     */
-    showCurrentMoney() {
+    indicateWalletMoney() {
         const currentMoneyDivNode = document.querySelector('#money-amount-window');
         // console.log(currentMoneyDiv);
-        let currentMoneyDataWithCommas = this.numberWithCommas(this.model.getCurrentMoney());
+        let currentMoneyDataWithCommas = this.numberWithCommas(this.model.getWalletMoney());
         currentMoneyDivNode.textContent = currentMoneyDataWithCommas + "원";
     }
 

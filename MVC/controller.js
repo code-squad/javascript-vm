@@ -3,8 +3,7 @@ class VendingMachineController {
         this.model = model;
         this.view = view;
 
-        view.insertMoney(10000);
-        console.log(model.getCurrentMoney());
+        view.insertMoneyToWallet(10000);
 
         console.log("Success Exit - Controller Constructor");
     }
