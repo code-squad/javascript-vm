@@ -32,9 +32,7 @@ class VendingMachineView {
     /*
         INPUT: money (투입된 돈)
         OUTPUT: NONE
-        DESCRIPTION: 
-         model 로 접근해 데이터를 저장합니다.
-         내 지갑의 돈을 화면에 표시합니다.
+        DESCRIPTION: model 로 접근해 데이터를 저장하고, 내 지갑의 돈을 화면에 표시합니다.
     */
     insertMoneyToWallet(money) {
         this.model.increaseWalletMoney(money);
@@ -49,8 +47,9 @@ class VendingMachineView {
     refreshWalletMoney() {
         const walletMoneyDivNode = document.querySelector('#money-amount-window');
         // console.log(currentMoneyDiv);
-        let walletMoneyDataWithCommas = this.numberWithCommas(this.model.getWalletMoney());
-        walletMoneyDivNode.textContent = walletMoneyDataWithCommas + "원";
+        // let walletMoneyDataWithCommas = this.numberWithCommas(this.model.getWalletMoney());
+        // walletMoneyDivNode.textContent = walletMoneyDataWithCommas + "원";
+        this.changeMoneyNodeTextContent(walletMoneyDivNode, this.model.getWalletMoney());
     }
 
     /*
@@ -61,8 +60,20 @@ class VendingMachineView {
     refreshInvestedMoneyInVendingMachine() {
         const vendingMachineInvestedMoneyDivNode = document.querySelector('#money-display');
         // console.log(vendingMachineInvestedMoneyDivNode);
-        let InvestedMoneyWithCommas = this.numberWithCommas(this.model.getInvestedMoney());
-        vendingMachineInvestedMoneyDivNode.textContent = InvestedMoneyWithCommas + "원";
+        // let InvestedMoneyWithCommas = this.numberWithCommas(this.model.getInvestedMoney());
+        // vendingMachineInvestedMoneyDivNode.textContent = InvestedMoneyWithCommas + "원";
+        this.changeMoneyNodeTextContent(
+          vendingMachineInvestedMoneyDivNode, this.model.getInvestedMoney());
+    }
+
+    /*
+        INPUT: node, money
+        OUTPUT: NONE
+        DESCRIPTION: 돈을 표시하는 노드의 textContent 를 수정합니다
+    */
+    changeMoneyNodeTextContent(node, money) {
+        let moneyWithCommas = this.numberWithCommas(money);
+        node.textContent = money + "원";
     }
 
     /*
