@@ -116,3 +116,33 @@ this.changeMoneyNodeTextContent(
   ![img](https://imgur.com/LTuRZ7U.png)
 
   가장 간편한것이 `insertAdjacentHTML ` 을 사용하면 될 것 같다
+
+<br/>
+
+## 피드백
+
+- 네이밍이 긴건 문제가 아닌데, 네이밍이 길다는 게 함수의 역할이 많다는 거라 그게 문제같습니다.
+
+- 클래스(객체)의 역할정의를 잘하는 것이 중요합니다. controller 은 필수가 아니라 필요 없을 수 있는거죠.
+
+- 조금더 수정해보세요. 그리고 view가 커지는건 문제가 아니고요. view가 꼭 하나일필요는 없습니다. 의미적으로 콘텐츠가 여러개로 나뉠수 있다면 분리할 수도 있는거죠. 분리의 필요성이 있을지도 고민해보세요.
+
+- 주석으로 함수 정의를 하는것은 나쁘지 않습니다만, 단지 함수를 설명하려고 넣을필요는 없습니다. 코드로 의도를 드러내는게 좀 더 나아요. 형식을 맞추려면 jsdoc 이라는 것도 시간될 때 살펴보세요
+
+  - [JSDoc 사용하기](http://usejsdoc.org/about-getting-started.html)
+
+  - [JSDoc Index](http://usejsdoc.org/index.html#block-tags)
+
+    ![](https://i.imgur.com/7JLOBYQ.png)
+
+    꽤 괜찮은 기능인 것 같다. 내가 작성한 부분이 메서드를 호출할 때 나온다 헤헿
+
+- 약간 길지만 이름에서 의도가 잘 드러나서 좋네요 ㅎ `registerClickEventToInsertMoneyBtn()`
+
+- Indent 항상 줄이려고 노력할 것 :9
+
+- 모델에 몇몇 메서드들의 크기가 작은데요. 이런건 혹시라도신경쓰지 마세요. 메서드를 여러개 만들어두는 건 좋습니다.
+
+- console.log로 디버깅하지 말고, debugger 를 통해서 디버깅하세요~
+
+- 반복적인 document.queryselector 메서드같은경우 유틸리티로 간단한이름의 함수를 만들어서 써보세요.
