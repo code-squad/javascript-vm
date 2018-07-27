@@ -1,4 +1,8 @@
+/** 자판기에 대한 모델을 나타내는 클래스입니다 */
 class VendingMachineModel {
+    /** 
+     * 자판기의 초기상태를 지정합니다.
+    */
     constructor() {
         this.walletMoney = 0;
         this.investedMoney = 0;
@@ -7,10 +11,8 @@ class VendingMachineModel {
         console.log("Success Exit - Model Constructor");
     }
 
-    /*
-        INPUT: NONE
-        OUTPUT: currentMoney (현재 돈)
-        DESCRIPTION: 현재 가지고 있는 돈을 반환하는 함수입니다
+    /** 
+     * 현재 가지고 있는 돈을 반환하는 함수입니다
     */
     getWalletMoney() {
         return this.walletMoney;

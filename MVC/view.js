@@ -1,4 +1,9 @@
+/** 자판기에 대한 VIEW를 나타내는 클래스 입니다 */
 class VendingMachineView {
+    /**
+     * 이벤트를 지정합니다.
+     * @param {Class} model - 자판기 MODEL 클래스 객체입니다.
+     */
     constructor(model) {
         this.model = model;
 
@@ -7,10 +12,8 @@ class VendingMachineView {
         console.log("Success Exit - View Constructor");
     }
 
-    /*
-        INPUT: NONE
-        OUTPUT: NONE
-        DESCRIPTION: 동전을 투입하는 버튼에 이벤트를 등록합니다   
+    /** 
+     * 동전을 투입하는 버튼에 이벤트를 등록합니다
     */
     registerClickEventToInsertMoneyBtn() {
         const moneyInputBtnList = document.querySelectorAll('.ui-item-base');        
@@ -29,30 +32,25 @@ class VendingMachineView {
 
     } // function
 
-    /*
-        INPUT: money (투입된 돈)
-        OUTPUT: NONE
-        DESCRIPTION: model 로 접근해 데이터를 저장하고, 내 지갑의 돈을 화면에 표시합니다
-    */
+    /**
+     * model 로 접근해 데이터를 저장하고, 내 지갑의 돈을 화면에 표시합니다
+     * @param {number} money - 금액 데이터
+     */
     insertMoneyToWallet(money) {
         this.model.increaseWalletMoney(money);
         this.refreshWalletMoney();
     }
 
-    /*
-        INPUT: NONE
-        OUTPUT: NONE
-        DESCRIPTION: 내 지갑의 돈을 새로고침합니다 (VIEW)
+    /** 
+     * 내 지갑의 돈을 새로고침합니다 (VIEW)
     */
     refreshWalletMoney() {
         const walletMoneyDivNode = document.querySelector('#money-amount-window');
         this.changeMoneyNodeTextContent(walletMoneyDivNode, this.model.getWalletMoney());
     }
 
-    /*
-        INPUT: NONE
-        OUTPUT: NONE
-        DESCRIPTION: 자판기에 투입된 돈을 새로고침합니다 (VIEW)
+    /** 
+     * 자판기에 투입된 돈을 새로고침합니다 (VIEW)
     */
     refreshInvestedMoneyInVendingMachine() {
         const vendingMachineInvestedMoneyDivNode = document.querySelector('#money-display');
@@ -60,39 +58,38 @@ class VendingMachineView {
           vendingMachineInvestedMoneyDivNode, this.model.getInvestedMoney());
     }
 
-    /*
-        INPUT: node, money
-        OUTPUT: NONE
-        DESCRIPTION: 돈을 표시하는 노드의 textContent 를 수정합니다
-    */
+    /**
+     * 돈을 표시하는 노드의 textContent 를 수정합니다
+     * @param {DOM NODE} node - 노드 데이터
+     * @param {number} money - 금액 데이터
+     */
     changeMoneyNodeTextContent(node, money) {
         let moneyWithCommas = this.numberWithCommas(money);
         node.textContent = money + "원";
     }
 
-    /*
-        INPUT: x (INT 형 데이터)
-        OUTPUT: STRING
-        DESCRIPTION: 숫자 3자리마다 콤마를 찍습니다
-    */
+    /**
+     * 숫자 3자리마다 콤마를 찍습니다
+     * @param {number} x - 숫자 데이터
+     * @return {string} 콤마가 포함된 숫자데이터
+     */
     numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    /*
-        INPUT: STRING
-        OUTPUT: INT
-        DESCRIPTION: 숫자만 골라내는 정규식입니다
-    */
+    /**
+     * 숫자만 골라내는 정규식입니다
+     * @param {string} data - 금액 데이터
+     * @return {number} 숫자 데이터
+     */
     sortOutNumber(data) {
         return Number(data.replace(/[^0-9]/g,''));
     }
 
-    /*
-        INPUT: money
-        OUTPUT: NONE
-        DESCRIPTION: 자판기에 돈을 투입합니다
-    */
+    /**
+     * 자판기에 돈을 투입합니다
+     * @param {number} money - 금액 데이터
+     */
     insertMoneyToVendingMachine(money) {
         this.model.decreaseWalletMoney(money);
         if (this.checkWalletMoneyMinus()) {
@@ -106,20 +103,18 @@ class VendingMachineView {
         this.refreshWalletMoney();
     }
 
-    /*
-        INPUT: NONE
-        OUTPUT: BOOLEAN
-        DESCRIPTION: 지갑의 돈이 마이너스 되는지 검사합니다
+    /** 
+     * 지갑의 돈이 마이너스 되는지 검사합니다
+     * @return {boolean}
     */
     checkWalletMoneyMinus() {
         return this.model.getWalletMoney() < 0;
     }
 
-    /*
-        INPUT: message (STRING)
-        OUTPUT: NONE
-        DESCRIPTION: 브라우저에 경고창을 띄웁니다.
-    */
+    /**
+     * 브라우저에 경고창을 띄웁니다.
+     * @param {string} message - 메세지 데이터
+     */
     alertErrorMessage(message) {
         alert(message);
     }
