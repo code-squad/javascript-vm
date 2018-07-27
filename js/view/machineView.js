@@ -1,18 +1,16 @@
 class MachineView {
-  constructor(commonView) {
+  constructor(commonView, machineModel) {
     this.commonView = commonView;
-  }
-
-  displayMachineHandler(machineModel) {
+    this.machineModel = machineModel;
     this.displayItem(machineModel.itemList);
     this.displayInsertedMoney(machineModel.insertedMoney);
   }
 
   displayItem(itemList) {
     this.commonView.createListByClassName('item_display', 'item_list_container');
-    this.updateItem(itemList);
+    this.renderItem(itemList);
   }
-  updateItem(itemList) {
+  renderItem(itemList) {
     let processedItemList = itemList.reduce((acc, ele, idx) => {
       acc +=
         `<li class="item">

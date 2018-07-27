@@ -1,9 +1,17 @@
+/*
+Wallet의 랜더링을 담당하는 파일
+초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
+*/
 class WalletView {
-  constructor(commonView) {
+  constructor(commonView, walletModel) {
     this.commonView = commonView;
+    this.walletModel = walletModel;
     this.clickMoneyButtonHandler = null;
+    this.displayMoney(walletModel);
+    this.addEventMoneyButton();
   }
-  clickMoneyButtons() {
+
+  addEventMoneyButton() {
     const moneyButtons = document.querySelectorAll('.money_list .money');
     moneyButtons.forEach((v, i) => {
       v.addEventListener('click', ({ target }) => {
@@ -11,30 +19,34 @@ class WalletView {
       })
     });
   }
+
   rerender(price, walletModel) {
-    this.changeFullAmount(walletModel.fullAmount);
+    this.displayFullAmount(walletModel.fullAmount);
     this.changeNumberOfItem(price, walletModel.getMoneyList());
   }
+
   changeFullAmount(fullAmount) {
     const fullAmountElement = document.querySelector('.full_amount');
     fullAmountElement.innerText = `${Util.numberWithCommas(fullAmount)}원`;
   }
+
   changeNumberOfItem(price, moneyList) {
     const item = document.querySelector(`[data-price='${price}'`);
     const numberOfItem = item.nextElementSibling;
     numberOfItem.innerText = `${moneyList[price]}개`;
-
   }
+
   printClickedMoney(clickedMoney) {
     console.log(clickedMoney.innerText);
   }
 
   displayMoney(walletModel) {
     this.commonView.createListByClassName('wallet_container', 'money_list');
-    this.updateMoney(walletModel.money);
+    this.renderMoney(walletModel.getMoneyList());
     this.displayFullAmount(walletModel.fullAmount);
   }
-  updateMoney(money) {
+
+  renderMoney(money) {
     const moneyUnit = Object.keys(money);
     const moneyNumber = Object.values(money);
     const moneyList = moneyUnit.reduce((acc, ele, idx) => {
@@ -54,4 +66,9 @@ class WalletView {
   displayFullAmount(fullAmount) {
     document.querySelector('.full_amount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
   }
+
+  noMoneyUnit(price) {
+    alert(`지갑에 ${Util.numberWithCommas(price)}원이 부족합니다`);
+  }
+
 }
