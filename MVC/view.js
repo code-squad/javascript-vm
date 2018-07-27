@@ -12,20 +12,28 @@ class VendingMachineView {
         console.log("Success Exit - View Constructor");
     }
 
+    /**
+     * querySelector 함수를 대체합니다
+     * @param {Node Class or ID data} data 
+     * @param {string} mode - all or none
+     */
+    getNodeData(data, mode) {
+        return (mode === "all") ? document.querySelectorAll(data) :
+            document.querySelector(data);
+    }
+
     /** 
      * 동전을 투입하는 버튼에 이벤트를 등록합니다
     */
     registerClickEventToInsertMoneyBtn() {
-        const moneyInputBtnList = document.querySelectorAll('.ui-item-base');        
+        const moneyInputBtnList = this.getNodeData('.ui-item-base', 'all');        
 
         for (let node of moneyInputBtnList) {
-            if (node.nodeName === "BUTTON") {
-                node.addEventListener("click", () => {
-                    console.log(node.innerText);
-                    const selectionMoneyNumberData = this.sortOutNumber(node.innerText);
-                    this.insertMoneyToVendingMachine(selectionMoneyNumberData);
-                });
-            } // if
+            if (node.nodeName !== "BUTTON") continue;
+            node.addEventListener("click", () => {
+                const selectionMoneyNumberData = this.sortOutNumber(node.innerText);
+                this.insertMoneyToVendingMachine(selectionMoneyNumberData);
+            });
         } // for
 
         console.log("success Exit registerClickEventToInsertMoneyBtn");
@@ -45,7 +53,7 @@ class VendingMachineView {
      * 내 지갑의 돈을 새로고침합니다 (VIEW)
     */
     refreshWalletMoney() {
-        const walletMoneyDivNode = document.querySelector('#money-amount-window');
+        const walletMoneyDivNode = this.getNodeData('#money-amount-window');
         this.changeMoneyNodeTextContent(walletMoneyDivNode, this.model.getWalletMoney());
     }
 
@@ -53,7 +61,7 @@ class VendingMachineView {
      * 자판기에 투입된 돈을 새로고침합니다 (VIEW)
     */
     refreshInvestedMoneyInVendingMachine() {
-        const vendingMachineInvestedMoneyDivNode = document.querySelector('#money-display');
+        const vendingMachineInvestedMoneyDivNode = this.getNodeData('#money-display');
         this.changeMoneyNodeTextContent(
           vendingMachineInvestedMoneyDivNode, this.model.getInvestedMoney());
     }
