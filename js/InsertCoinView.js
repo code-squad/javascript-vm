@@ -5,8 +5,8 @@ class CoinCountView{
         this.clickCoinBtns();
     }
     clickCoinBtns(){
-        const selectCoinBtns = document.querySelector(".wallet > ul");
-        selectCoinBtns.addEventListener("click", ({target})=>{
+        const currentCoins = document.querySelector(".wallet > ul");
+        currentCoins.addEventListener("click", ({target})=>{
             if(target.className !== "basic-button insert-coin-button")return ;            
             const coin = +target.dataset.coin;
             if(this.coinCount[coin] === 0) return ;
@@ -14,9 +14,9 @@ class CoinCountView{
         })
     }
     walletCoinView(){
-        let coin = document.querySelectorAll(".insert-coin-button");
-        coin = Array.from(coin);
-        coin.forEach(v=>{
+        let insertCoinBtn = document.querySelectorAll(".insert-coin-button");
+        insertCoinBtn = Array.from(insertCoinBtn);
+        insertCoinBtn.forEach(v=>{
             v.nextElementSibling.innerHTML = this.coinCount[v.dataset.coin] + "개";
         })
     }

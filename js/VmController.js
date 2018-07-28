@@ -11,7 +11,8 @@
     그것이 컨트롤러에 역할이라고 생각합니다!
  */
 class VmController{
-    constructor(model, coinCountView, moneyView){
+    constructor(menuView, model, coinCountView, moneyView){
+        this.menuView = menuView;
         this.model = model;
         this.coinCountView = coinCountView;
         this.moneyView = moneyView;
@@ -21,16 +22,20 @@ class VmController{
         this.moneyView.yourMoney = this.model.getYourMoney();
         this.moneyView.walletView();
         this.coinCountView.coinCount = this.model.getCoinCount();
-        this.coinCountView.walletCoinView(); 
-        this.coinCountView.insertCoinHandler = this.insertCoinHandler.bind(this);        
+        this.coinCountView.walletCoinView();
+        this.coinCountView.insertCoinHandler = this.insertCoinHandler.bind(this);
+        this.moneyView.inputMoneyHandler = this.inputMoneyHandler.bind(this);
     }
     insertCoinHandler(coin){
-        debugger;
         this.model.insertCoin(coin);
         this.moneyView.yourMoney = this.model.getYourMoney();
         this.moneyView.inputMoney = this.model.getInputMoney();
         this.moneyView.walletView();
         this.moneyView.inputMoneyView();
         this.coinCountView.walletCoinView();
+    }
+    inputMoneyHandler(){
+        this.menuView.inputMoney = this.model.getInputMoney();
+        this.menuView.highlightMenu();
     }
 }
