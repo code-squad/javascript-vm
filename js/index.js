@@ -1,17 +1,15 @@
-function getCurrentMoney(){
-    const currentMoneyStr = document.querySelector('.your-money').innerText;
-    const currentMoney = +currentMoneyStr.slice(0, currentMoneyStr.length-1);
-    return currentMoney;
-}
-
-function addList(data){
-    const itemListElement = document.querySelector(".beverage-menu > ul");
-    itemListElement.insertAdjacentHTML("beforebegin",data)
+const walletData = {
+    total : 30000,
+    10000 : 1,
+    5000 : 2,
+    1000 : 5,
+    500 : 8,
+    100 : 10
 }
 
 const itemList = templateItemList(itemData);
-addList(itemList);
-const vmModel = new VmModel(getCurrentMoney());
+const menuView = new MenuView(itemList);
+const vmModel = new VmModel(walletData);
 const coinCountView = new CoinCountView();
 const moneyView = new MoneyView();
 const vmController = new VmController(vmModel, coinCountView, moneyView);
