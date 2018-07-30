@@ -25,6 +25,7 @@ class VendingMachineView {
             node.addEventListener("click", () => {
                 const selectionMoneyNumberData = this.viewUtil.sortOutNumber(node.innerText);
                 this.insertMoneyToVendingMachine(selectionMoneyNumberData);
+                this.showSelctableNodes();
             });
         } // for
 
@@ -68,6 +69,26 @@ class VendingMachineView {
         this.model.insertLogData(logData);
         this.viewUpdate.insertLogDivToLogWindow(logData);
         debugger;
+    }
+
+    /** 
+     * 선택할 수 있는 노드들을 표시합니다
+    */
+    showSelctableNodes() {
+        debugger;
+        const itemNodeList = this.viewUtil.getNodeData('.d-item', 'all');
+        const investedMoney = this.model.getInvestedMoney();
+        // const priceRegex = /[가-힣]+\n\d+.\s/;
+        const priceRegex = /.*\n+\d+.\s/;
+
+        for (let node of itemNodeList) {
+            const itemPrice = Number(node.innerText.replace(priceRegex, ''));
+            console.log(itemPrice);
+            debugger;
+            if (investedMoney >= itemPrice) {
+                this.viewUpdate.setHighLightToItemNode(node);
+            }
+        }
     }
 
 } // class
