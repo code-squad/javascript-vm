@@ -75,14 +75,13 @@ class VendingMachineView {
     */
     showSelctableNodes() {
         const itemNodeList = this.viewUtil.getNodeData('.d-item', 'all');
-        const investedMoney = this.model.getInvestedMoney();
-        const priceRegex = /.*\n+\d+.\s/;
         let repeatCount = 0;
         let itemPrice;
 
         for (let node of itemNodeList) {
             repeatCount++;
-            debugger;
+            if (node.classList.contains('high-light')) { continue; }
+            // debugger;
             if(this.viewUpdate.isInvestedMoneyHigherThanItemPrice(node, repeatCount)) {
                 this.viewUpdate.setHighLightToItemNode(node);
             }

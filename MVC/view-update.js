@@ -88,7 +88,7 @@ class VendingMachineViewUpdate {
             itemPrice = this.model.getItemPrice(index);
         }
 
-        debugger;
+        // debugger;
 
         return (investedMoney >= itemPrice) ? true : false;
     }
