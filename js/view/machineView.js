@@ -1,40 +1,37 @@
-class MachineView extends CommonFunction {
-  constructor() {
-    super();
-  }
-
-  displayMachineHandler(itemList) {
-    this.displayCoinButton();
-    this.displayItem(itemList);
+/*
+  Machine 랜더링을 담당하는 파일
+  초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
+*/
+class MachineView {
+  constructor(commonView, machineModel) {
+    this.commonView = commonView;
+    this.machineModel = machineModel;
+    this.displayItem(machineModel.itemList);
+    this.displayInsertedMoney(machineModel.insertedMoney);
   }
 
   displayItem(itemList) {
-    this.createListByClassName('itemDisplay', 'itemListContainer');
+    this.commonView.createListByClassName('item_display', 'item_list_container');
+    this.renderItem(itemList);
+  }
+  renderItem(itemList) {
     let processedItemList = itemList.reduce((acc, ele, idx) => {
       acc +=
         `<li class="item">
-          <div class="itemContainer">
-            <div class="itemName">${ele.name}</div>
-            <div class="itemPrice">${idx+1}. ${ele.price}</div>
-          </div>
-        </li>`;
+      <div class="item_container">
+      <div class="item_name">${ele.name}</div>
+      <div class="item_price">${idx + 1}. ${ele.price}</div>
+      </div>
+      </li>`;
       return acc;
     }, '');
-    document.querySelector('.itemListContainer').innerHTML = processedItemList;
+    document.querySelector('.item_list_container').innerHTML = processedItemList;
   }
-
-  displayCoinButton() {
-    this.createListByClassName('coinButtonContainer', 'coinButtonListContainer');
-    const MAX_COUNT = 10;
-    const completedCoinButton = Array.from(Array(MAX_COUNT).keys()).reduce((acc, ele, idx) => {
-      acc +=
-        `<li class="coinButtonItem">
-          <div class="coinButton">${++ele === MAX_COUNT ? 0 : ele}</div>
-        </li>
-        `
-      return acc;
-    }, '');
-    console.log(completedCoinButton);
-    document.querySelector('.coinButtonListContainer').innerHTML = completedCoinButton;
+  displayInsertedMoney(insertedMoney) {
+    let currentCoin = document.querySelector('.current_coin');
+    currentCoin.innerHTML = `${Util.numberWithCommas(insertedMoney)}원`;
+  }
+  rerender(insertedMoney) {
+    this.displayInsertedMoney(insertedMoney)
   }
 }

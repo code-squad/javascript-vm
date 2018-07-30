@@ -1,30 +1,37 @@
+/*
+지갑 부분
+이벤트에 따라 wallet data의 변경을 담당한다
+*/
+
 class WalletModel {
-  constructor(wallet) {
-    this.wallet = wallet;
+  constructor(money) {
+    this.money = money;
+    this.fullAmount = this.getFullAmount(this.money);
+    this.notifyDecreasedMoney = null;
+    this.notifyNoUnit = null;
   }
-  getWallet() {
-    return this.wallet;
+
+  getMoneyList() {
+    return this.money;
+  }
+
+  getFullAmount(money) {
+    const moneyUnit = Object.keys(money);
+    const moneyNumber = Object.values(money);
+    const fullAmount = moneyUnit.reduce((acc, ele, idx) => {
+      acc += (ele * moneyNumber[idx]);
+      return acc;
+    }, 0);
+    return fullAmount;
+  }
+
+  decreaseMoney(price) {
+    if (this.money[price] === 0) {
+      this.notifyNoUnit(price);
+      return;
+    }
+    this.money[price] -= 1;
+    this.fullAmount -= Number(price);
+    this.notifyDecreasedMoney(price, this.fullAmount);
   }
 }
-const myWallet = [{
-  unit: 10,
-  number: 5
-}, {
-  unit: 50,
-  number: 4
-}, {
-  unit: 100,
-  number: 8
-}, {
-  unit: 500,
-  number: 5
-}, {
-  unit: 1000,
-  number: 5
-}, {
-  unit: 5000,
-  number: 3
-}, {
-  unit: 10000,
-  number: 1
-}]

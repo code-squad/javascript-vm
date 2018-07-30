@@ -1,21 +1,12 @@
-class VendingMachine {
-  constructor(machineModel, walletModel, machineView, walletView) {
-    this.machineModel = machineModel;
-    this.walletModel = walletModel;
-    this.machineView = machineView;
-    this.walletView = walletView;
-    this.init();
-  }
-  init() {
-    this.walletView.displayWallet(this.walletModel.getWallet());
-    this.walletView.clickCoinButtonHandler();
-    this.machineView.displayMachineHandler(this.machineModel.getItemList());
-  }
-}
+/*
+  app을 초기화하고 실행하는 역할만 한다
+*/
 
-const vendingMachine = new VendingMachine(
-  new MachineModel(itemList),
-  new WalletModel(myWallet),
-  new MachineView,
-  new WalletView
-);
+const machineModel = new MachineModel(itemList);
+const walletModel = new WalletModel(money);
+const machineView = new MachineView(CommonView, machineModel);
+const walletView = new WalletView(CommonView, walletModel);
+
+const vendingMachine = new VendingMachine(machineModel, walletModel, machineView, walletView);
+vendingMachine.initWallet();
+vendingMachine.initMachine();
