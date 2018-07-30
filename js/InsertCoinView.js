@@ -2,6 +2,7 @@ class CoinCountView{
     constructor(){
         this.insertCoinHandler = null;
         this.coinCount = null;
+        this.showNoMoneyHandler = null;
         this.clickCoinBtns();
     }
     clickCoinBtns(){
@@ -9,7 +10,10 @@ class CoinCountView{
         currentCoins.addEventListener("click", ({target})=>{
             if(target.className !== "basic-button insert-coin-button")return ;            
             const coin = +target.dataset.coin;
-            if(this.coinCount[coin] === 0) return ;
+            if(this.coinCount[coin] === 0){
+                this.showNoMoneyHandler(coin);
+                return ;
+            }
             this.insertCoinHandler(coin);
         })
     }
