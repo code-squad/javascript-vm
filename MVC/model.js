@@ -8,7 +8,7 @@ class VendingMachineModel {
         this.investedMoney = 0;
         
 
-        console.log("Success Exit - Model Constructor");
+        console.log("Success Load - Model Constructor");
     }
 
     /** 
