@@ -10,10 +10,7 @@
 /* itemDisplay UI */
 
 .item_display {
-<<<<<<< HEAD
-=======
   color: #fff;
->>>>>>> test6
   width: 60%;
   height: 100%;
   box-sizing: border-box;
@@ -40,11 +37,7 @@
 }
 
 .item_name {
-<<<<<<< HEAD
-  background-color: #bba1a1;
-=======
   background-color: #457ea780;
->>>>>>> test6
   border: 2px solid #567194;
   display: table-cell;
   vertical-align: middle;
@@ -93,11 +86,8 @@
 }
 
 .coin_button_container {
-<<<<<<< HEAD
-=======
   margin: 10px;
   text-align: center;
->>>>>>> test6
   font-size: 1.2em;
   display: inline-block;
   box-sizing: border-box;
