@@ -66,9 +66,9 @@ class VendingMachineView {
      */
     showLogFromLogWindow(logData) {
         logData += "이 투입되었습니다";
-        debugger;
         this.model.insertLogData(logData);
         this.viewUpdate.insertLogDivToLogWindow(logData);
+        debugger;
     }
 
 } // class
