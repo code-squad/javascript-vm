@@ -23,6 +23,11 @@ class VendingMachine {
   }
 
   clickMoneyButtonHandler(button) {
+    const moneyUnit = button.getAttribute('data-price');
+    if (!this.walletModel.hasMoney(moneyUnit)) {
+      this.notifyNoUnit(moneyUnit)
+      return;
+    }
     this.walletView.printClickedMoney(button);
     this.walletModel.decreaseMoney(button.getAttribute('data-price'))
     this.machineModel.receiveMoney(button.getAttribute('data-price'));

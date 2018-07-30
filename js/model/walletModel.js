@@ -34,4 +34,7 @@ class WalletModel {
     this.fullAmount -= Number(price);
     this.notifyDecreasedMoney(price, this.fullAmount);
   }
+  hasMoney(moneyUnit) {
+    return money[moneyUnit];
+  }
 }
