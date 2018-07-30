@@ -7,7 +7,7 @@ class MachineView {
         this.commonView = commonView;
         this.machineModel = machineModel;
         this.displayItem(machineModel.itemList);
-        this.displayInsertedMoney(machineModel.insertedMoney);
+        this.displayTotalInsertedMoney(machineModel.totalInsertedMoney);
     }
 
     displayItem(itemList) {
@@ -16,10 +16,12 @@ class MachineView {
     }
     displayInsertLog(insertedMoney) {
         const logList = document.querySelector('.log_list');
-        logList.innerHTML +=
+        const logItem = document.createElement('li');
+        logItem.innerHTML =
             `<li class="log_item">
-    <span>${Util.numberWithCommas(insertedMoney)}원이 투입됐습니다</span>
-    </li>`
+              <span>${Util.numberWithCommas(insertedMoney)}원이 투입됐습니다</span>
+            </li>`
+        logList.insertAdjacentHTML('afterBegin', logItem.innerHTML);
     }
     renderItem(itemList) {
         let processedItemList = itemList.reduce((acc, ele, idx) => {
@@ -34,11 +36,11 @@ class MachineView {
         }, '');
         document.querySelector('.item_list_container').innerHTML = processedItemList;
     }
-    displayInsertedMoney(insertedMoney) {
+    displayTotalInsertedMoney(totalInsertedMoney) {
         let currentCoin = document.querySelector('.current_coin');
-        currentCoin.innerHTML = `${Util.numberWithCommas(insertedMoney)}원`;
+        currentCoin.innerHTML = `${Util.numberWithCommas(totalInsertedMoney)}원`;
     }
-    rerender(insertedMoney) {
-        this.displayInsertedMoney(insertedMoney)
+    rerender(totalInsertedMoney) {
+        this.displayTotalInsertedMoney(totalInsertedMoney)
     }
 }

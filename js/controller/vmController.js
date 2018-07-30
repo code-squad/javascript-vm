@@ -32,9 +32,9 @@ class VendingMachine {
     this.walletView.rerender(price, this.walletModel);
   }
 
-  notifyReceiveMoney(insertedMoney) {
+  notifyReceiveMoney(insertedMoney, totalInsertedMoney) {
     this.machineView.displayInsertLog(insertedMoney);
-    this.machineView.rerender(insertedMoney);
+    this.machineView.rerender(totalInsertedMoney);
   }
 
   notifyNoUnit(price) {

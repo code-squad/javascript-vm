@@ -10,7 +10,6 @@
 /* itemDisplay UI */
 
 .item_display {
-  color: #fff;
   width: 60%;
   height: 100%;
   box-sizing: border-box;
@@ -37,7 +36,7 @@
 }
 
 .item_name {
-  background-color: #457ea780;
+  background-color: #e8cbbc;
   border: 2px solid #567194;
   display: table-cell;
   vertical-align: middle;
@@ -118,6 +117,7 @@
   height: 300px;
   border: 3px solid #575377;
   margin: 10px;
+  overflow:  scroll;
 }
 .log_list {
   list-style-type: none;
@@ -128,8 +128,6 @@
   margin: 5px;
   text-align: center;
 }
-.log{
-}
 
 .wallet {
   float: left;
@@ -138,7 +136,7 @@
   margin: 30px;
   font-size: 15px;
   border: 4px solid #4d4871;
-  background-color: #eae5de;
+  background-color: #c9ffb8;
   text-align: center;
 }
 
