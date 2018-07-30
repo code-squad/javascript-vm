@@ -20,7 +20,6 @@ class VendingMachineModel {
         return this.walletMoney;
     }
 
-
     /**
      * 현재 가지고 있는 돈을 증가시키는 함수입니다
      * @param {number} money - 금액 데이터
@@ -68,14 +67,21 @@ class VendingMachineModel {
         return this.logDataList;
     }
 
+    /**
+     * 아이템 가격을 보관하는 배열의 index 에 price 데이터를 삽입합니다
+     * @param {number} index 
+     * @param {number} price 
+     */
     addItemPrice(index, price) {
         this.itemPriceArr[index] = price;
     }
 
+    /**
+     * 아이템 가격 배열의 인덱스에 위치한 데이터를 반환합니다
+     * @param {number} index 
+     * @returns itemPriceArr[index]
+     */
     getItemPrice(index) {
         return this.itemPriceArr[index];
     }
-
-
-
 }

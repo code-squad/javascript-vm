@@ -54,15 +54,6 @@
 
 
 /* CLASS -------------------------------------------------- */
-.text-left-align {
-    text-align: left;
-}
-
-.high-light {
-    background-color: #212121 !important;
-    color: #FFF;
-}
-
 .column-base {
     width: 630px; height: 50px;
     margin: 5px;
@@ -117,4 +108,15 @@
 
 .ui-column-base > button {
     height: 35px;
+}
+
+/* CSS CLASS - USER */
+
+.text-left-align {
+    text-align: left;
+}
+
+.high-light {
+    background-color: #212121;
+    color: #FFF;
 }

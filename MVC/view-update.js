@@ -61,7 +61,6 @@ class VendingMachineViewUpdate {
     insertLogDivToLogWindow(logData) {
         const logDivNode = this.createLogDivNode(logData);
         const logWindowNode = this.viewUtil.getNodeData('#status-panel');
-        // logWindowNode.insertAdjacentHTML("beforeend", logDivNode);
         logWindowNode.appendChild(logDivNode);
     }
 
@@ -71,10 +70,14 @@ class VendingMachineViewUpdate {
      */
     setHighLightToItemNode(node) {
         node.classList.add('high-light');
-        // node.style.color = "#FFF";
-        // node.style.backgroundColor = "#222";
     }
 
+    /**
+     * 투입된 금액이 아이템 가격보다 높은지 확인합니다
+     * @param {node} node 
+     * @param {number} index
+     * @returns true - 투입된 금액 > 아이템 가격 
+     */
     isInvestedMoneyHigherThanItemPrice(node, index) {
         let itemPrice;
         const priceRegex = /.*\n+\d+.\s/;
@@ -87,8 +90,6 @@ class VendingMachineViewUpdate {
         } else {
             itemPrice = this.model.getItemPrice(index);
         }
-
-        // debugger;
 
         return (investedMoney >= itemPrice) ? true : false;
     }

@@ -29,7 +29,7 @@ class VendingMachineView {
             });
         } // for
 
-        console.log("success Exit registerClickEventToInsertMoneyBtn");
+        console.log("success Load registerClickEventToInsertMoneyBtn");
 
     } // function
 
