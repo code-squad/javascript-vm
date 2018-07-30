@@ -25,6 +25,8 @@ class VendingMachineView {
             node.addEventListener("click", () => {
                 const selectionMoneyNumberData = this.viewUtil.sortOutNumber(node.innerText);
                 this.insertMoneyToVendingMachine(selectionMoneyNumberData);
+                debugger;
+                this.showLogFromLogWindow(node.innerText);
             });
         } // for
 
@@ -56,6 +58,17 @@ class VendingMachineView {
         this.viewUpdate.refreshInvestedMoneyInVendingMachine();
         
         this.viewUpdate.refreshWalletMoney();
+    }
+
+    /**
+     * 로그 창에 로그를 표시(출력)합니다
+     * @param {string} logData
+     */
+    showLogFromLogWindow(logData) {
+        logData += "이 투입되었습니다";
+        debugger;
+        this.model.insertLogData(logData);
+        this.viewUpdate.insertLogDivToLogWindow(logData);
     }
 
 } // class

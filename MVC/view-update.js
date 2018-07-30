@@ -1,5 +1,5 @@
 /** 
- * MV 구조에서 VIEW 에 해당하며, 갱신을 담당합니다
+ * MV 구조에서 VIEW 에 해당하며, 갱신 및 조작을 담당합니다
 */
 class VendingMachineViewUpdate {
     constructor(model, util) {
@@ -33,6 +33,21 @@ class VendingMachineViewUpdate {
     changeMoneyNodeTextContent(node, money) {
         let moneyWithCommas = this.viewUtil.numberWithCommas(money);
         node.textContent = money + "원";
+    }
+
+    /**
+     * 로그 데이터를 DIV node 로 반환합니다
+     * @param {string} logData 
+     */
+    createLogDiv(logData) {
+        return "<div>" + logData + "</div>";
+    }
+
+    insertLogDivToLogWindow(logData) {
+        const logDivFormat = this.createLogDiv(logData);
+        const logWindowNode = this.viewUtil.getNodeData('#status-panel');
+        logWindowNode.insertAdjacentHTML("beforeend", logDivFormat);
+        debugger;
     }
 
 }

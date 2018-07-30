@@ -6,7 +6,7 @@ class VendingMachineModel {
     constructor() {
         this.walletMoney = 0;
         this.investedMoney = 0;
-        
+        this.logDataList = [];
 
         console.log("Success Load - Model Constructor");
     }
@@ -50,6 +50,21 @@ class VendingMachineModel {
      */
     increaseInvestedMoney(money) {
         this.investedMoney += money;
+    }
+
+    /**
+     * log list 에 log data 를 추가합니다
+     * @param {string} log - 로그
+     */
+    insertLogData(log) {
+        this.logDataList.push(log);
+    }
+
+    /** 
+     * logDataList 를 반환합니다
+    */
+    getLogDataList() {
+        return this.logDataList;
     }
 
 }
