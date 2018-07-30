@@ -10,11 +10,12 @@
 /* itemDisplay UI */
 
 .item_display {
+  color: #fff;
   width: 60%;
   height: 100%;
   box-sizing: border-box;
   border: 2px solid #575377;
-  background-color: #eae5dd;
+  background-color: #eae5df;
   float: left;
 }
 
@@ -30,14 +31,13 @@
 
 .item {
   display: inline-block;
-  color: #000;
   margin: 5px;
   text-align: center;
   vertical-align: middle;
 }
 
 .item_name {
-  background-color: #bba1a1;
+  background-color: #457ea780;
   border: 2px solid #567194;
   display: table-cell;
   vertical-align: middle;
@@ -61,7 +61,7 @@
   height: 100%;
   box-sizing: border-box;
   border: 2px solid #575377;
-  background-color: #eae5dd;
+  background-color: #eae5df;
   text-align: center;
 }
 
@@ -86,6 +86,8 @@
 }
 
 .coin_button_container {
+  margin: 10px;
+  text-align: center;
   font-size: 1.2em;
   display: inline-block;
   box-sizing: border-box;
@@ -113,9 +115,20 @@
   display: inline-block;
   box-sizing: border-box;
   width: 316px;
-  height: 200px;
+  height: 300px;
   border: 3px solid #575377;
   margin: 10px;
+}
+.log_list {
+  list-style-type: none;
+  padding-left: 0px;
+}
+.log_item{
+  display: block;
+  margin: 5px;
+  text-align: center;
+}
+.log{
 }
 
 .wallet {
@@ -125,7 +138,7 @@
   margin: 30px;
   font-size: 15px;
   border: 4px solid #4d4871;
-  background-color: #9fa8bf;
+  background-color: #eae5de;
   text-align: center;
 }
 
