@@ -14,6 +14,16 @@ class MachineView {
     this.commonView.createListByClassName('item_display', 'item_list_container');
     this.renderItem(itemList);
   }
+<<<<<<< HEAD
+=======
+  displayInsertLog(insertedMoney) {
+    const logList = document.querySelector('.log_list');
+    logList.innerHTML +=
+      `<li class="log_item">
+    <span>${Util.numberWithCommas(insertedMoney)}원이 투입됐습니다</span>
+    </li>`
+  }
+>>>>>>> test6
   renderItem(itemList) {
     let processedItemList = itemList.reduce((acc, ele, idx) => {
       acc +=
