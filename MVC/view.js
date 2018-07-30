@@ -64,7 +64,7 @@ class VendingMachineView {
      * @param {string} logData
      */
     showLogFromLogWindow(logData) {
-        logData += "원이 투입되었습니다";
+        logData = this.viewUtil.addLogSentenceText(logData, 'input');
         this.model.insertLogData(logData);
         this.viewUpdate.insertLogDivToLogWindow(logData);
         debugger;

@@ -44,11 +44,35 @@ class VendingMachineViewUtil {
     }
 
     /**
-     * 브라우저에 경고창을 띄웁니다.
+     * 브라우저에 경고창을 띄웁니다
      * @param {string} message - 메세지 데이터
      */
     alertErrorMessage(message) {
         alert(message);
+    }
+
+    /**
+     * 로그의 문장을 만들어서 리턴합니다
+     * @param {string} data 
+     * @param {string} mode 
+     * @returns 문장이 포함된 로그텍스트를 리턴
+     */
+    addLogSentenceText(data, mode) {
+        if (mode == 'input') {
+            data += "원이 투입됨";
+        }
+
+        return data;
+    }
+
+    /**
+     * 식별하기 쉽도록 로그 텍스트 맨 앞에 모드 문자를 추가합니다
+     * @param {string} logData
+     * @param {string} mode - [삽입] or ...
+     * @returns 모드가 포함된 로그텍스트를 리턴
+     */
+    addLogModeText(data, mode) {
+        return mode + data;
     }
 
 }

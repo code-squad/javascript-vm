@@ -39,14 +39,28 @@ class VendingMachineViewUpdate {
      * 로그 데이터를 DIV node 로 반환합니다
      * @param {string} logData 
      */
-    createLogDiv(logData) {
-        return "<div>" + logData + "</div>";
+    createLogDivNode(logData) {
+        /*
+            원래 해당 부분을 insertAdjacentHTML 메서드를 이용해서 노드를 바로 추가했었는데
+            classList 를 사용해보기 위하여 createElement 와 innerText 속성을 이용하였습니다
+        */ 
+        const logDivElement = document.createElement("div");
+        logData = this.viewUtil.addLogModeText(logData, "[투입] ");
+        debugger;
+        logDivElement.innerText = logData;
+        logDivElement.classList.add('text-left-align');
+        return logDivElement;
     }
 
+    /**
+     * 로그창에 로그노드(DIV)를 삽입합니다
+     * @param {string} logData 
+     */
     insertLogDivToLogWindow(logData) {
-        const logDivFormat = this.createLogDiv(logData);
+        const logDivNode = this.createLogDivNode(logData);
         const logWindowNode = this.viewUtil.getNodeData('#status-panel');
-        logWindowNode.insertAdjacentHTML("beforeend", logDivFormat);
+        // logWindowNode.insertAdjacentHTML("beforeend", logDivNode);
+        logWindowNode.appendChild(logDivNode);
         debugger;
     }
 
