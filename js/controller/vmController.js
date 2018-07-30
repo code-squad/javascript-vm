@@ -33,10 +33,7 @@ class VendingMachine {
   }
 
   notifyReceiveMoney(insertedMoney) {
-<<<<<<< HEAD
-=======
     this.machineView.displayInsertLog(insertedMoney);
->>>>>>> test6
     this.machineView.rerender(insertedMoney);
   }
 
