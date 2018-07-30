@@ -12,4 +12,4 @@ const menuView = new MenuView(itemList);
 const vmModel = new VmModel(walletData);
 const coinCountView = new CoinCountView();
 const moneyView = new MoneyView();
-const vmController = new VmController(vmModel, coinCountView, moneyView);
+const vmController = new VmController(menuView ,vmModel, coinCountView, moneyView);
