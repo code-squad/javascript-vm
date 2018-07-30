@@ -12,4 +12,5 @@ const menuView = new MenuView(itemList);
 const vmModel = new VmModel(walletData);
 const coinCountView = new CoinCountView();
 const moneyView = new MoneyView();
-const vmController = new VmController(menuView ,vmModel, coinCountView, moneyView);
+const logView = new LogView();
+const vmController = new VmController(menuView ,vmModel, coinCountView, moneyView, logView);
