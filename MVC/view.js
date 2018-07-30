@@ -25,8 +25,6 @@ class VendingMachineView {
             node.addEventListener("click", () => {
                 const selectionMoneyNumberData = this.viewUtil.sortOutNumber(node.innerText);
                 this.insertMoneyToVendingMachine(selectionMoneyNumberData);
-                debugger;
-                this.showLogFromLogWindow(node.innerText);
             });
         } // for
 
@@ -52,12 +50,13 @@ class VendingMachineView {
         if (this.viewUtil.checkWalletMoneyMinus()) {
             this.model.increaseWalletMoney(money);
             this.viewUtil.alertErrorMessage("지갑의 돈이 부족합니다 :(");
-            return;
+            return false;
         }
         this.model.increaseInvestedMoney(money);
         this.viewUpdate.refreshInvestedMoneyInVendingMachine();
         
         this.viewUpdate.refreshWalletMoney();
+        this.showLogFromLogWindow(money);
     }
 
     /**
@@ -65,7 +64,7 @@ class VendingMachineView {
      * @param {string} logData
      */
     showLogFromLogWindow(logData) {
-        logData += "이 투입되었습니다";
+        logData += "원이 투입되었습니다";
         this.model.insertLogData(logData);
         this.viewUpdate.insertLogDivToLogWindow(logData);
         debugger;
