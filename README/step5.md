@@ -146,3 +146,70 @@ this.changeMoneyNodeTextContent(
 - console.log로 디버깅하지 말고, debugger 를 통해서 디버깅하세요~
 
 - 반복적인 document.queryselector 메서드같은경우 유틸리티로 간단한이름의 함수를 만들어서 써보세요.
+
+- jsdoc 이 문서를 자동으로 만들어주는 장점이 커요. 코드를 읽어서 html등 다양한 형태의 API 문서를 만들어주거든요. jsdoc을 쓰는 것도 지금은 딱히 필요한건 아니고, 문서자동화로 만들어내는 것도 필수는 아닙니다만 참고로 알고 계세요.
+
+- 그리고 querySelector 와 querySelectorAll은, document대신 특정 element를 기준으로 동작할수있습니다. 이렇게 기준이 document가 아니면 root부터 찾는게 아니라 좀더 빨리 검색이 가능합니다.
+
+  > element.querySelector('li');
+
+<br/>
+
+## VIEW를 나눠보자
+
+getNodeData(data, mode)
+registerClickEventToInsertMoneyBtn()
+insertMoneyToWallet(money)
+refreshWalletMoney()
+refreshInvestedMoneyInVendingMachine()
+changeMoneyNodeTextContent(node, money)
+numberWithCommas(x)
+sortOutNumber(data)
+insertMoneyToVendingMachine(money)
+checkWalletMoneyMinus()
+alertErrorMessage(message)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
