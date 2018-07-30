@@ -97,6 +97,18 @@
 
   
 
+  일단 불필요한 작업들을 최소화 시켰다
+
+  예를들어, node 를 반복해서 찾고, 해당 node 에서 innerText 를 계속해서 뽑아내고 이런 부분들을
+
+  Model에 아이템 가격 배열을 만들어서, 처음 찾을 때 저장시킨다음, 다음에 찾을때는 해당 인덱스로 가격이 있다면 모델의 배열에서 바로 받아왔다.
+
+  이것을 작성하면서, 이미 하이라이트 클래스가 적용된 부분에 대해서도 검사할 수 있을 것 같다.
+
+  `node.classList.contains('high-light')` 를 이용해서 true/false 를 받을 수 있으며, 원천적인 부분에서 바로 반복문을 끝내버릴 수 있을 것 같다
+
+  
+
 <br/>
 
 <br/>
@@ -218,3 +230,41 @@ insertMoneyToVendingMachine(money) `조작`
 2. node 에 class 와 id 를 적용할 때, score 가 매겨져서 적용되는 우선순위가 다른것으로 알고있는데요.
    class 내에서도 우선순위가 적용되나요? class를 classList.add 로 적용시켜줬는데, 적용이 안되서
    크롬 개발자도구를 보니까 해당 속성에 취소선이 그어져있어서요
+
+<br/>
+
+<br/>
+
+## CSS Class 가 여러개 적용되었을 때의 우선순위를 알아보자
+
+![](https://i.imgur.com/xnzY3GH.png)
+
+```css
+.high-light {
+    /* background-color: #212121 !important; */
+    background-color: #212121;
+    color: #FFF;
+}
+```
+
+간단한 원리는 투입된 금액에 맞춰 선택할 수 있는 상품들을 표시해 주는건데, 현재 CSS high-light 클래스에서 background-color: #212121 이 적용되지 않는 결과이다.
+
+![](https://i.imgur.com/gOjgzdG.png)
+
+해당 노드에 대한 Styles 이다. 내가 classList로 add한 CSS의 class (high-light) 가 맨 하위에 적용되있는 것을 확인할 수 있다. 그리고 background-color 도 모두 취소선으로 적용이 `.grid` 에 의해 밀린 것 같다.
+
+자 그럼 HTML에서 `<div class="grid d-item">`  으로 되어있던 태그를 `<div class="d-item grid">` 로 바꿔보자
+
+아니다. 선언순서가 문제가 아닌것 같다. 그래도 최상위에는 `.grid` 가 위치해 있다. 내가 놓친것이 있는건가?
+
+검색을 해보니 잘 나온다 [CSS class prioirty](https://stackoverflow.com/questions/3066356/multiple-css-classes-properties-overlapping-based-on-the-order-defined)
+
+스타일 시트에서 마지막으로 선언된 스타일에 따른다고 한다
+
+순서를 확인해보니 가장 맨 처음으로 선언한 것은 `.high-light` 그 다음은 `.d-item` `.grid` 순이였다.
+
+음, 이제 알겠다. CSS에서 내가 만든 클래스들을 맨 아래로 위치시켜보겠다.
+
+![](https://i.imgur.com/86CIQkR.png)
+
+정상적으로 출력된다. 굳..
