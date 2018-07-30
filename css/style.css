@@ -85,6 +85,8 @@ ul{
 .print-action{
   border : 3px solid #888;
   height : 200px;
+  text-align : center;
+  padding : 15px;
 }
 .basic-button{
   width : 60px;
@@ -111,7 +113,7 @@ ul{
 .insert-coin-button,.current-coin-count{
   width : 130px;
   height : 70px;
-  margin-left : 3vmax;
+  margin-left : 40px;
   margin-top : 16px;
   line-height : 70px;
 }
