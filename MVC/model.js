@@ -7,6 +7,7 @@ class VendingMachineModel {
         this.walletMoney = 0;
         this.investedMoney = 0;
         this.logDataList = [];
+        this.itemPriceArr = [];
 
         console.log("Success Load - Model Constructor");
     }
@@ -66,5 +67,15 @@ class VendingMachineModel {
     getLogDataList() {
         return this.logDataList;
     }
+
+    addItemPrice(index, price) {
+        this.itemPriceArr[index] = price;
+    }
+
+    getItemPrice(index) {
+        return this.itemPriceArr[index];
+    }
+
+
 
 }

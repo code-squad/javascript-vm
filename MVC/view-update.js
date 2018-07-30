@@ -49,7 +49,6 @@ class VendingMachineViewUpdate {
         */ 
         const logDivElement = document.createElement("div");
         logData = this.viewUtil.addLogModeText(logData, "[투입] ");
-        debugger;
         logDivElement.innerText = logData;
         logDivElement.classList.add('text-left-align');
         return logDivElement;
@@ -64,7 +63,6 @@ class VendingMachineViewUpdate {
         const logWindowNode = this.viewUtil.getNodeData('#status-panel');
         // logWindowNode.insertAdjacentHTML("beforeend", logDivNode);
         logWindowNode.appendChild(logDivNode);
-        debugger;
     }
 
     /**
@@ -75,7 +73,24 @@ class VendingMachineViewUpdate {
         node.classList.add('high-light');
         // node.style.color = "#FFF";
         // node.style.backgroundColor = "#222";
+    }
+
+    isInvestedMoneyHigherThanItemPrice(node, index) {
+        let itemPrice;
+        const priceRegex = /.*\n+\d+.\s/;
+        const investedMoney = this.model.getInvestedMoney();
+        
+        itemPrice = this.model.getItemPrice[index];
+        if (itemPrice === undefined) {
+            itemPrice = Number(node.innerText.replace(priceRegex, ''));
+            this.model.addItemPrice(index, itemPrice);
+        } else {
+            itemPrice = this.model.getItemPrice(index);
+        }
+
         debugger;
+
+        return (investedMoney >= itemPrice) ? true : false;
     }
 
 }

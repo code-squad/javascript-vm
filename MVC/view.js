@@ -68,24 +68,22 @@ class VendingMachineView {
         logData = this.viewUtil.addLogSentenceText(logData, 'input');
         this.model.insertLogData(logData);
         this.viewUpdate.insertLogDivToLogWindow(logData);
-        debugger;
     }
 
     /** 
      * 선택할 수 있는 노드들을 표시합니다
     */
     showSelctableNodes() {
-        debugger;
         const itemNodeList = this.viewUtil.getNodeData('.d-item', 'all');
         const investedMoney = this.model.getInvestedMoney();
-        // const priceRegex = /[가-힣]+\n\d+.\s/;
         const priceRegex = /.*\n+\d+.\s/;
+        let repeatCount = 0;
+        let itemPrice;
 
         for (let node of itemNodeList) {
-            const itemPrice = Number(node.innerText.replace(priceRegex, ''));
-            console.log(itemPrice);
+            repeatCount++;
             debugger;
-            if (investedMoney >= itemPrice) {
+            if(this.viewUpdate.isInvestedMoneyHigherThanItemPrice(node, repeatCount)) {
                 this.viewUpdate.setHighLightToItemNode(node);
             }
         }
