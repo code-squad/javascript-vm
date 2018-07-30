@@ -108,7 +108,7 @@ ul{
   border : 4px solid #888;
   box-sizing : border-box;
 }
-.insert-coin-button,.insert-coin-count{
+.insert-coin-button,.current-coin-count{
   width : 130px;
   height : 70px;
   margin-left : 3vmax;
