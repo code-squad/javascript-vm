@@ -15,13 +15,22 @@ class VmController{
         this.model = model;
         this.coinCountView = coinCountView;
         this.moneyView = moneyView;
-        this.coinCountView.insertCoinHandler = this.insertCoinHandler.bind(this);
+        this.init();
+    }
+    init(){
+        this.moneyView.yourMoney = this.model.getYourMoney();
+        this.moneyView.walletView();
+        this.coinCountView.coinCount = this.model.getCoinCount();
+        this.coinCountView.walletCoinView(); 
+        this.coinCountView.insertCoinHandler = this.insertCoinHandler.bind(this);        
     }
     insertCoinHandler(coin){
+        debugger;
         this.model.insertCoin(coin);
         this.moneyView.yourMoney = this.model.getYourMoney();
         this.moneyView.inputMoney = this.model.getInputMoney();
         this.moneyView.walletView();
         this.moneyView.inputMoneyView();
+        this.coinCountView.walletCoinView();
     }
 }
