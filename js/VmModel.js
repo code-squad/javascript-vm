@@ -1,6 +1,8 @@
 class VmModel{
-    constructor(currentMoney){
-        this.yourMoney = currentMoney
+    constructor(walletData){
+        this.yourMoney = walletData.total;
+        this.coinCount = walletData;
+        delete walletData.total;
         this.inputMoney = 0;
     }
     getYourMoney(){
@@ -12,5 +14,9 @@ class VmModel{
     insertCoin(coin){
         this.yourMoney -= coin;
         this.inputMoney += coin;
+        this.coinCount[coin]--;
+    }
+    getCoinCount(){
+        return this.coinCount;
     }
 }

@@ -1,27 +1,28 @@
 class CoinCountView{
     constructor(){
         this.insertCoinHandler = null;
-        this.coinCount = {
-            100 : 0,
-            500 : 0,
-            1000 : 0,
-            5000 : 0,
-            10000 : 0
-        }
+        this.coinCount = null;
+        this.showNoMoneyHandler = null;
         this.clickCoinBtns();
     }
     clickCoinBtns(){
-        const selectCoinBtns = document.querySelector(".wallet > ul");
-        selectCoinBtns.addEventListener("click", ({target})=>{
+        const currentCoins = document.querySelector(".wallet > ul");
+        currentCoins.addEventListener("click", ({target})=>{
             if(target.className !== "basic-button insert-coin-button")return ;            
             const coin = +target.dataset.coin;
-            this.plusCoinCount(coin);
-            target.nextElementSibling.innerText = this.coinCount[coin] + "개";
+            if(this.coinCount[coin] === 0){
+                this.showNoMoneyHandler(coin);
+                return ;
+            }
             this.insertCoinHandler(coin);
         })
     }
-    plusCoinCount(coin){
-        this.coinCount[coin]++;
+    walletCoinView(){
+        let insertCoinBtn = document.querySelectorAll(".insert-coin-button");
+        insertCoinBtn = Array.from(insertCoinBtn);
+        insertCoinBtn.forEach(v=>{
+            v.nextElementSibling.innerHTML = this.coinCount[v.dataset.coin] + "개";
+        })
     }
 }
 
