@@ -131,12 +131,15 @@ class VendingMachineView {
             let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductNum));
             if (selectedProductPrice > this.model.getInvestedMoney()) { 
                 this.viewUtil.alertMessage("금액이 부족합니다");
+                this.model.initCurrentSelectNumTxt();
                 return;
             }
             this.displayLog(currentEnteredProductNum, 'select');
+            debugger;
             this.model.decreaseInvestedMoney(selectedProductPrice);
             this.viewUpdate.refreshInvestedMoneyInVendingMachine();
             this.refreshSelectableNodes();
+            this.model.initCurrentSelectNumTxt();
             // debugger;
         }, time);
         this.model.setProductVerificationTimerID(timerID);
