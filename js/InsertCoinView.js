@@ -8,8 +8,8 @@ class CoinCountView{
     clickCoinBtns(){
         const currentCoins = document.querySelector(".wallet > ul");
         currentCoins.addEventListener("click", ({target})=>{
-            if(target.className !== "basic-button insert-coin-button")return ;            
-            const coin = +target.dataset.coin;
+            if(!target.getAttribute("data-coin"))return ;
+            const coin = +target.getAttribute("data-coin");
             if(this.coinCount[coin] === 0){
                 this.showNoMoneyHandler(coin);
                 return ;
