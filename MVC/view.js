@@ -40,11 +40,11 @@ class VendingMachineView {
 
         productClickNumArr.forEach(element => {
             element.addEventListener("click", () => {
+                this.model.clearTimer(this.model.getProductVerificationTimerID());
                 this.model.updateCurrentSelectNumTxt(element.innerText);
-                console.log(this.model.getCurrentSelectedNumTxt());
+                this.excuteCorrectSelectedNumTestTimer();
             });
         });
-        debugger;
     }
 
     /**
@@ -99,5 +99,15 @@ class VendingMachineView {
                 this.viewUpdate.setPropertyToItemNode(node, 'high-light');
             }
         }
+    }
+
+    /** 
+     * 올바른 번호가 선택되었는지 검사하는 타이머를 시작합니다
+    */
+    excuteCorrectSelectedNumTestTimer() {
+        let timerID = setTimeout(() => {
+            console.log(this.model.getCurrentSelectedNumTxt());
+        }, 3000);
+        this.model.setProductVerificationTimerID(timerID);
     }
 } // class

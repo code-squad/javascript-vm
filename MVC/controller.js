@@ -10,8 +10,6 @@ class VendingMachineController {
         this.view = view;
 
         this.initProcess();
-
-        console.log("Success Load - Controller Constructor");
     }
 
     /** 

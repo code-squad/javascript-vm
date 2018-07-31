@@ -9,6 +9,7 @@ class VendingMachineModel {
         this.logDataList = [];
         this.itemPriceArr = [];
         this.currentSelectedNumTxt = "";
+        this.productVerificationTimerID;
 
         console.log("Success Load - Model Constructor");
     }
@@ -112,6 +113,29 @@ class VendingMachineModel {
     */
     initCurrentSelectNumTxt() {
         this.currentSelectedNumTxt = "";
+    }
+
+    /** 
+     * 상품 검증 타이머 ID를 반환합니다
+    */
+    getProductVerificationTimerID() {
+        return this.productVerificationTimerID;
+    }
+
+    /**
+     * 상품검증 타이머의 ID를 지정합니다
+     * @param {number} timerFunc - timer ID
+     */
+    setProductVerificationTimerID(id) {
+        this.productVerificationTimerID = id;
+    }
+
+    /** 
+     * 현재 타이머를 중지시킵니다
+     * @param {number} id - setTimeout 함수를 담고있는 변수
+    */
+    clearTimer(id) {
+        clearTimeout(id);
     }
 
 

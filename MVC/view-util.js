@@ -81,4 +81,12 @@ class VendingMachineViewUtil {
         return Array.prototype.slice.call(nodeList);
     }
 
+    /**
+     * 올바른 상품을 선택했는지 확인합니다
+     * @returns true - 1~32 범위의 숫자
+     */
+    checkCorrectSelectedProductNum(data) {
+        return data >= "1" && data <= "32";
+    }
+
 }

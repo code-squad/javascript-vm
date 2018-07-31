@@ -5,8 +5,6 @@ class VendingMachineViewUpdate {
     constructor(model, util) {
         this.model = model;
         this.viewUtil = util;
-        
-        console.log("Success Load view-update");
     }
 
     /** 
