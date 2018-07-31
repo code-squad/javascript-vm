@@ -12,7 +12,7 @@ class WalletView {
 
   addEventMoneyButton() {
     const moneyButtons = document.querySelectorAll('.money_list .money');
-    moneyButtons.forEach((v, i) => {
+    moneyButtons.forEach((v) => {
       v.addEventListener('click', ({ target }) => {
         this.clickMoneyButtonHandler(target);
       })

@@ -5,12 +5,22 @@
 class MachineView {
     constructor(machineModel) {
         this.machineModel = machineModel;
+        this.clickItemNumberButtonHandler = null;
         this.displayItem(machineModel.itemList);
         this.displayTotalInsertedMoney(machineModel.totalInsertedMoney);
+        this.clickItemNumberButton();
     }
 
     displayItem(itemList) {
         this.renderItem(itemList);
+    }
+    clickItemNumberButton() {
+        const itemNumberList = document.querySelectorAll('.coin_button_item');
+        itemNumberList.forEach(v => {
+            v.addEventListener('click', ({ target }) => {
+                this.clickItemNumberButtonHandler(target);
+            })
+        })
     }
     displayInsertLog(insertedMoney) {
         const logList = document.querySelector('.log_list');
