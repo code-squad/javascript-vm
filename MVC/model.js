@@ -10,8 +10,6 @@ class VendingMachineModel {
         this.itemPriceArr = [];
         this.currentSelectedNumTxt = "";
         this.productVerificationTimerID;
-
-        console.log("Success Load - Model Constructor");
     }
 
     /** 
@@ -111,7 +109,7 @@ class VendingMachineModel {
     /**
      * 현재 선택된 번호를 업데이트합니다
      */
-    updateCurrentSelectNumTxt(numTxt) {
+    updateCurrentSelectedNumTxt(numTxt) {
         this.currentSelectedNumTxt += numTxt;
     }
 

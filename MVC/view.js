@@ -41,8 +41,8 @@ class VendingMachineView {
         productClickNumArr.forEach(element => {
             element.addEventListener("click", () => {
                 this.model.clearTimer(this.model.getProductVerificationTimerID());
-                this.model.updateCurrentSelectNumTxt(element.innerText);
-                this.excuteCorrectSelectedNumTestTimer(1000);
+                this.model.updateCurrentSelectedNumTxt(element.innerText);
+                this.excuteTimerAfterSelectProductNum(1000);
             });
         });
     }
@@ -123,31 +123,30 @@ class VendingMachineView {
      * 올바른 번호가 선택되었는지 검사하는 타이머를 시작합니다
      * 역할에 맞는 네이밍으로 수정하기 - Refactoring
      * 메서드 분할하기
+     * @param {number} time
     */
-    excuteCorrectSelectedNumTestTimer(time) {
+    excuteTimerAfterSelectProductNum(time) {
         let timerID = setTimeout(() => {
-            let currentEnteredProductNum = this.model.getCurrentSelectedNumTxt();
-            debugger;
-            if(!this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductNum)) {
-                this.viewUtil.alertMessage("상품이 존재하지 않습니다 :(");
-                this.model.initCurrentSelectNumTxt();
-                return;
-            }
-            let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductNum));
-            if (selectedProductPrice > this.model.getInvestedMoney() || selectedProductPrice === undefined) { 
-                this.viewUtil.alertMessage("금액이 부족합니다 :(");
-                this.model.initCurrentSelectNumTxt();
-                return;
-            }
-            this.displayLog(currentEnteredProductNum, 'select');
-            // debugger;
-            this.model.decreaseInvestedMoney(selectedProductPrice);
-            this.viewUpdate.refreshInvestedMoneyInVendingMachine();
-            this.refreshSelectableNodes();
-            this.model.initCurrentSelectNumTxt();
-            // debugger;
+            let currentEnteredProductID = this.model.getCurrentSelectedNumTxt();
+            let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductID));
+
+            if (! this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductID)) return;
+            if (! this.viewUtil.checkPossiblePurchase(selectedProductPrice)) return;
+            this.startProductSelectAfterHandler(currentEnteredProductID, selectedProductPrice);
         }, time);
         this.model.setProductVerificationTimerID(timerID);
+    }
+
+    /** 
+     * 상품(을 선택한 후) 처리과정을 시작합니다
+     * setTimeout 이벤트에 의해 호출되므로 -Handler 네이밍을 적용하였습니다
+    */
+    startProductSelectAfterHandler(productID, price) {
+        this.displayLog(productID, 'select');
+        this.model.decreaseInvestedMoney(price);
+        this.viewUpdate.refreshInvestedMoneyInVendingMachine();
+        this.refreshSelectableNodes();
+        this.model.initCurrentSelectNumTxt();
     }
 
     

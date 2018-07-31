@@ -1,7 +1,9 @@
-/** 
- * MV 구조에서 VIEW 에 해당하며, 갱신 및 조작을 담당합니다
-*/
 class VendingMachineViewUpdate {
+    /**
+     * MV 구조에서 VIEW 에 해당하며, 갱신 및 조작을 담당합니다
+     * @param {Class} model 
+     * @param {Class} util 
+     */
     constructor(model, util) {
         this.model = model;
         this.viewUtil = util;
@@ -30,7 +32,7 @@ class VendingMachineViewUpdate {
      */
     changeMoneyNodeTextContent(node, money) {
         let moneyWithCommas = this.viewUtil.numberWithCommas(money);
-        node.textContent = money + "원";
+        node.textContent = moneyWithCommas + "원";
     }
 
     /**

@@ -1,7 +1,8 @@
-/** 
- * MV 구조에서 VIEW 에 해당하며, 유틸을 담당합니다.
-*/
 class VendingMachineViewUtil {
+    /**
+     * MV 구조에서 VIEW 에 해당하며, 유틸을 담당합니다.
+     * @param {Class} model 
+     */
     constructor(model) {
         this.model = model;
     }
@@ -89,10 +90,29 @@ class VendingMachineViewUtil {
 
     /**
      * 올바른 상품을 선택했는지 확인합니다
-     * @returns true - 1~32 범위의 숫자
+     * @returns true - 1~32 범위의 숫자 (올바른 상품)
+     * @returns false - 이외의 숫자
+     * 에러메세지 출력 및 입력된 번호 초기화
      */
     checkCorrectSelectedProductNum(data) {
-        return data >= 1 && data <= 32;
+        if (data >= 1 && data <= 32) return true;
+        this.alertMessage("상품이 존재하지 않습니다 :(");
+        this.model.initCurrentSelectNumTxt();
+        return false;
     }
+
+    /**
+     * 상품을 구매할 수 있는 가격인지 확인합니다
+     * @returns true - 상품을 구매 가능할 때
+     * @returns false - 상품을 구매하지 못할 때
+     */
+    checkPossiblePurchase(price) {
+        debugger;
+        if (price <= this.model.getInvestedMoney()) return true;
+        if (price === undefined) return false;
+        this.alertMessage("금액이 부족합니다 :(");
+        this.model.initCurrentSelectNumTxt();
+    }
+
 
 }
