@@ -8,6 +8,7 @@ class VendingMachineModel {
         this.investedMoney = 0;
         this.logDataList = [];
         this.itemPriceArr = [];
+        this.currentSelectedNumTxt = "";
 
         console.log("Success Load - Model Constructor");
     }
@@ -84,4 +85,34 @@ class VendingMachineModel {
     getItemPrice(index) {
         return this.itemPriceArr[index];
     }
+
+    /** 
+     * 현재 선택된 번호의 문자열을 반환합니다
+    */
+    getCurrentSelectedNumTxt() {
+        return this.currentSelectedNumTxt;
+    }
+
+    /** 
+     * 현재 선택된 번호의 문자열 길이를 반환합니다
+    */
+    getCurrentSelectedNumTxtLen() {
+        return this.currentSelectedNumTxt.length;
+    }
+
+    /**
+     * 현재 선택된 번호를 업데이트합니다
+     */
+    updateCurrentSelectNumTxt(numTxt) {
+        this.currentSelectedNumTxt += numTxt;
+    }
+
+    /** 
+     * 현재 선택된 번호를 빈 문자열로 초기화합니다
+    */
+    initCurrentSelectNumTxt() {
+        this.currentSelectedNumTxt = "";
+    }
+
+
 }

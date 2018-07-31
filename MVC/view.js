@@ -40,7 +40,8 @@ class VendingMachineView {
 
         productClickNumArr.forEach(element => {
             element.addEventListener("click", () => {
-                
+                this.model.updateCurrentSelectNumTxt(element.innerText);
+                console.log(this.model.getCurrentSelectedNumTxt());
             });
         });
         debugger;
