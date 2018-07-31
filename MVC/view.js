@@ -10,8 +10,6 @@ class VendingMachineView {
         this.viewUtil = util;
 
         this.registerClickEventToInsertMoneyBtn();
-
-        console.log("Success Load - View Constructor");
     }
 
     /** 
@@ -28,8 +26,6 @@ class VendingMachineView {
                 this.showSelctableNodes();
             });
         } // for
-
-        console.log("success Load registerClickEventToInsertMoneyBtn");
     } // function
 
     /**
@@ -80,9 +76,8 @@ class VendingMachineView {
         for (let node of itemNodeList) {
             repeatCount++;
             if (node.classList.contains('high-light')) { continue; }
-            // debugger;
             if(this.viewUpdate.isInvestedMoneyHigherThanItemPrice(node, repeatCount)) {
-                this.viewUpdate.setHighLightToItemNode(node);
+                this.viewUpdate.setPropertyToItemNode(node, 'high-light');
             }
         }
     }

@@ -4,8 +4,6 @@
 class VendingMachineViewUtil {
     constructor(model) {
         this.model = model;
-        
-        console.log("Success Load view-util");
     }
 
     /**

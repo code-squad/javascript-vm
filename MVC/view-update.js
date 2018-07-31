@@ -65,11 +65,12 @@ class VendingMachineViewUpdate {
     }
 
     /**
-     * 노드에 Highlight 클래스를 설정합니다
-     * @param {node} node 
+     * 노드에 속성을(클래스) 설정합니다
+     * @param {node} node
+     * @param {string} property - 노드에 적용할 Class명
      */
-    setHighLightToItemNode(node) {
-        node.classList.add('high-light');
+    setPropertyToItemNode(node, property) {
+        node.classList.add(property);
     }
 
     /**

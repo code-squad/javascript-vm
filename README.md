@@ -13,6 +13,7 @@
 3. [[STEP 3] CSS Layout 적용](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step3.md)
 4. [[STEP 4] 지갑에서 돈 선택](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step4.md)
 5. [[STEP 5] 돈 투입 후 UI 변경](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step5.md)
+6. [[STEP 6] 로깅과 구입가능 상품표시](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step6.md)
 
 <br />
 
