@@ -30,7 +30,6 @@ class VendingMachineView {
         } // for
 
         console.log("success Load registerClickEventToInsertMoneyBtn");
-
     } // function
 
     /**
@@ -87,5 +86,4 @@ class VendingMachineView {
             }
         }
     }
-
 } // class
