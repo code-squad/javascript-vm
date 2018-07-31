@@ -56,11 +56,12 @@ class VendingMachineViewUtil {
      * @returns 문장이 포함된 로그텍스트를 리턴
      */
     addLogSentenceText(data, mode) {
-        if (mode == 'input') {
-            data += "원이 투입됨";
+        if (mode === 'input') {
+            return data + "원이 투입됨";
         }
-
-        return data;
+        if (mode === 'select') {
+            return data + "번이 선택됨";
+        }
     }
 
     /**
@@ -70,7 +71,12 @@ class VendingMachineViewUtil {
      * @returns 모드가 포함된 로그텍스트를 리턴
      */
     addLogModeText(data, mode) {
-        return mode + data;
+        if (mode === 'input') {
+            return '[투입] ' + data;
+        }
+        if (mode === 'select') {
+            return '[선택] ' + data;
+        }
     }
 
     /** 

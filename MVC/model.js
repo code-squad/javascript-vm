@@ -55,6 +55,13 @@ class VendingMachineModel {
     }
 
     /**
+     * 투입된 금액을 감소시킵니다
+     */
+    decreaseInvestedMoney(money) {
+        this.investedMoney -= money;
+    }
+
+    /**
      * log list 에 log data 를 추가합니다
      * @param {string} log - 로그
      */

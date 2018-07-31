@@ -42,7 +42,7 @@ class VendingMachineView {
             element.addEventListener("click", () => {
                 this.model.clearTimer(this.model.getProductVerificationTimerID());
                 this.model.updateCurrentSelectNumTxt(element.innerText);
-                this.excuteCorrectSelectedNumTestTimer();
+                this.excuteCorrectSelectedNumTestTimer(1000);
             });
         });
     }
@@ -71,22 +71,22 @@ class VendingMachineView {
         this.viewUpdate.refreshInvestedMoneyInVendingMachine();
         
         this.viewUpdate.refreshWalletMoney();
-        this.showLogFromLogWindow(money);
+        this.displayLog(money, 'input');
     }
 
     /**
      * 로그 창에 로그를 표시(출력)합니다
      * @param {string} logData
      */
-    showLogFromLogWindow(logData) {
-        logData = this.viewUtil.addLogSentenceText(logData, 'input');
+    displayLog(logData, mode) {
+        logData = this.viewUtil.addLogSentenceText(logData, mode);
         this.model.insertLogData(logData);
-        this.viewUpdate.insertLogDivToLogWindow(logData);
+        this.viewUpdate.insertLogDivToLogWindow(logData, mode);
     }
 
     /** 
      * 선택할 수 있는 노드들을 표시합니다
-    */
+     */
     showSelctableNodes() {
         const itemNodeList = this.viewUtil.getNodeData('.d-item', 'all');
         let repeatCount = 0;
@@ -101,13 +101,46 @@ class VendingMachineView {
         }
     }
 
+    /**
+     * 선택된 노드들을 전부 해제합니다
+     */
+    hideSelectableNodes() {
+        const itemNodeList = this.viewUtil.getNodeData('.d-item', 'all');
+        for (let node of itemNodeList) {
+            this.viewUpdate.removeNodeClass(node, 'high-light');
+        }
+    }
+
+    /**
+     * 현재의 가격에 맞춰 노드들을 새로고침 합니다
+     */
+    refreshSelectableNodes() {
+        this.hideSelectableNodes();
+        this.showSelctableNodes();
+    }
+
     /** 
      * 올바른 번호가 선택되었는지 검사하는 타이머를 시작합니다
+     * 역할에 맞는 네이밍으로 수정하기 - Refactoring
+     * 메서드 분할하기
     */
-    excuteCorrectSelectedNumTestTimer() {
+    excuteCorrectSelectedNumTestTimer(time) {
         let timerID = setTimeout(() => {
-            console.log(this.model.getCurrentSelectedNumTxt());
-        }, 3000);
+            let currentEnteredProductNum = this.model.getCurrentSelectedNumTxt();
+            if(!this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductNum)) return;
+            let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductNum));
+            if (selectedProductPrice > this.model.getInvestedMoney()) { 
+                this.viewUtil.alertMessage("금액이 부족합니다");
+                return;
+            }
+            this.displayLog(currentEnteredProductNum, 'select');
+            this.model.decreaseInvestedMoney(selectedProductPrice);
+            this.viewUpdate.refreshInvestedMoneyInVendingMachine();
+            this.refreshSelectableNodes();
+            // debugger;
+        }, time);
         this.model.setProductVerificationTimerID(timerID);
     }
+
+    
 } // class
