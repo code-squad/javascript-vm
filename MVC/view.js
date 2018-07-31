@@ -64,7 +64,7 @@ class VendingMachineView {
         this.model.decreaseWalletMoney(money);
         if (this.viewUtil.checkWalletMoneyMinus()) {
             this.model.increaseWalletMoney(money);
-            this.viewUtil.alertErrorMessage("지갑의 돈이 부족합니다 :(");
+            this.viewUtil.alertMessage("지갑의 돈이 부족합니다 :(");
             return false;
         }
         this.model.increaseInvestedMoney(money);
@@ -127,15 +127,20 @@ class VendingMachineView {
     excuteCorrectSelectedNumTestTimer(time) {
         let timerID = setTimeout(() => {
             let currentEnteredProductNum = this.model.getCurrentSelectedNumTxt();
-            if(!this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductNum)) return;
+            debugger;
+            if(!this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductNum)) {
+                this.viewUtil.alertMessage("상품이 존재하지 않습니다 :(");
+                this.model.initCurrentSelectNumTxt();
+                return;
+            }
             let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductNum));
-            if (selectedProductPrice > this.model.getInvestedMoney()) { 
-                this.viewUtil.alertMessage("금액이 부족합니다");
+            if (selectedProductPrice > this.model.getInvestedMoney() || selectedProductPrice === undefined) { 
+                this.viewUtil.alertMessage("금액이 부족합니다 :(");
                 this.model.initCurrentSelectNumTxt();
                 return;
             }
             this.displayLog(currentEnteredProductNum, 'select');
-            debugger;
+            // debugger;
             this.model.decreaseInvestedMoney(selectedProductPrice);
             this.viewUpdate.refreshInvestedMoneyInVendingMachine();
             this.refreshSelectableNodes();

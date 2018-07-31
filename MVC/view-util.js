@@ -92,7 +92,7 @@ class VendingMachineViewUtil {
      * @returns true - 1~32 범위의 숫자
      */
     checkCorrectSelectedProductNum(data) {
-        return data >= "1" && data <= "32";
+        return data >= 1 && data <= 32;
     }
 
 }
