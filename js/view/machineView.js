@@ -3,15 +3,13 @@
   초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class MachineView {
-    constructor(commonView, machineModel) {
-        this.commonView = commonView;
+    constructor(machineModel) {
         this.machineModel = machineModel;
         this.displayItem(machineModel.itemList);
         this.displayTotalInsertedMoney(machineModel.totalInsertedMoney);
     }
 
     displayItem(itemList) {
-        this.commonView.createListByClassName('item_display', 'item_list_container');
         this.renderItem(itemList);
     }
     displayInsertLog(insertedMoney) {

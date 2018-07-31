@@ -3,8 +3,7 @@ Wallet의 랜더링을 담당하는 파일
 초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class WalletView {
-  constructor(commonView, walletModel) {
-    this.commonView = commonView;
+  constructor(walletModel) {
     this.walletModel = walletModel;
     this.clickMoneyButtonHandler = null;
     this.displayMoney(walletModel);
@@ -41,7 +40,6 @@ class WalletView {
   }
 
   displayMoney(walletModel) {
-    this.commonView.createListByClassName('wallet_container', 'money_list');
     this.renderMoney(walletModel.getMoneyList());
     this.displayFullAmount(walletModel.fullAmount);
   }
