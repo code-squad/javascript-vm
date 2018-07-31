@@ -32,6 +32,7 @@
     text-align: center;
     color: white;
     padding-top: 10px;
+    overflow: auto;
 }
 
 #money-panel {
@@ -66,7 +67,7 @@
     display: inline-block;
     border: 1px solid #212121;
     text-align: center;
-    background-color: #f5f5f5;
+    background-color: #FFF;
 }
 
 .panel {
@@ -107,4 +108,15 @@
 
 .ui-column-base > button {
     height: 35px;
+}
+
+/* CSS CLASS - USER */
+
+.text-left-align {
+    text-align: left;
+}
+
+.high-light {
+    background-color: #212121;
+    color: #FFF;
 }

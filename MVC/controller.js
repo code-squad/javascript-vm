@@ -11,7 +11,7 @@ class VendingMachineController {
 
         this.initProcess();
 
-        console.log("Success Exit - Controller Constructor");
+        console.log("Success Load - Controller Constructor");
     }
 
     /** 
