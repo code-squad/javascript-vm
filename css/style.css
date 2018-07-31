@@ -16,6 +16,7 @@
   border: 2px solid #575377;
   background-color: #eae5df;
   float: left;
+  color: #fff;
 }
 
 .item_list_container {
@@ -36,7 +37,7 @@
 }
 
 .item_name {
-  background-color: #e8cbbc;
+  background-color: #918da7;
   border: 2px solid #567194;
   display: table-cell;
   vertical-align: middle;
@@ -47,9 +48,10 @@
 }
 
 .item_price {
-  background-color: #b3b3b3;
+  background-color: #fff6f5;
   border: 2px solid #567194;
   margin-top: 5px;
+  color: #000;
 }
 
 /* paymentDisplay UI */
@@ -137,10 +139,13 @@
   margin: 30px;
   font-size: 15px;
   border: 4px solid #4d4871;
-  background-color: #7d69e8;
+  background-color: #7b67e6;
   text-align: center;
 }
-
+.available_item{
+  background-color: #6affd7;
+  color: #000;
+}
 .money_list,
 .money_item {
   display: inline;

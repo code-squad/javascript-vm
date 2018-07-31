@@ -29,7 +29,7 @@ class MachineView {
                 `<li class="item">
       <div class="item_container">
       <div class="item_name">${ele.name}</div>
-      <div class="item_price">${idx + 1}. ${ele.price}</div>
+      <div data-price=${ele.price} class="item_price">${idx + 1}. ${ele.price}</div>
       </div>
       </li>`;
             return acc;
@@ -39,6 +39,16 @@ class MachineView {
     displayTotalInsertedMoney(totalInsertedMoney) {
         let currentCoin = document.querySelector('.current_coin');
         currentCoin.innerHTML = `${Util.numberWithCommas(totalInsertedMoney)}원`;
+    }
+    displayAvailableItem() {
+        const itemList = document.querySelectorAll('.item_price');
+        const totalInsertedMoney = this.machineModel.totalInsertedMoney;
+        const availableItemClass = 'available_item';
+        for (let ele of itemList) {
+            if (ele.getAttribute('data-price') <= totalInsertedMoney) {
+                if (!ele.classList.contains(availableItemClass)) ele.classList.add(availableItemClass);
+            }
+        }
     }
     rerender(totalInsertedMoney) {
         this.displayTotalInsertedMoney(totalInsertedMoney)

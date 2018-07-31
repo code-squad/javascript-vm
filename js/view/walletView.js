@@ -31,7 +31,7 @@ class WalletView {
   }
 
   changeNumberOfItem(price, moneyList) {
-    const item = document.querySelector(`[data-price='${price}'`);
+    const item = document.querySelector(`[data-money='${price}'`);
     const numberOfItem = item.nextElementSibling;
     numberOfItem.innerText = `${moneyList[price]}개`;
   }
@@ -53,7 +53,7 @@ class WalletView {
       acc +=
         `<li class= "money_item">
         <div class="money_container">
-          <span class="money" data-price="${ele}">${Util.numberWithCommas(ele)}원</span>
+          <span class="money" data-money="${ele}">${Util.numberWithCommas(ele)}원</span>
           <span class="number_of_money">${moneyNumber[idx]}개</span>
         </div>
       </li>

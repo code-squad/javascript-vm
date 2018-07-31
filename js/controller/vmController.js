@@ -23,14 +23,15 @@ class VendingMachine {
   }
 
   clickMoneyButtonHandler(button) {
-    const moneyUnit = button.getAttribute('data-price');
+    const moneyUnit = button.getAttribute('data-money');
     if (!this.walletModel.hasMoney(moneyUnit)) {
       this.notifyNoUnit(moneyUnit)
       return;
     }
     this.walletView.printClickedMoney(button);
-    this.walletModel.decreaseMoney(button.getAttribute('data-price'))
-    this.machineModel.receiveMoney(button.getAttribute('data-price'));
+    this.walletModel.decreaseMoney(moneyUnit);
+    this.machineModel.receiveMoney(moneyUnit);
+    this.machineView.displayAvailableItem();
   }
 
   notifyDecreasedMoney(price) {
