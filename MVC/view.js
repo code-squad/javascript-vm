@@ -10,11 +10,12 @@ class VendingMachineView {
         this.viewUtil = util;
 
         this.registerClickEventToInsertMoneyBtn();
+        this.registerClickEventToProductClickNumBtn();
     }
 
     /** 
      * 동전을 투입하는 버튼에 이벤트를 등록합니다
-    */
+     */
     registerClickEventToInsertMoneyBtn() {
         const moneyInputBtnList = this.viewUtil.getNodeData('.ui-item-base', 'all');
 
@@ -27,6 +28,23 @@ class VendingMachineView {
             });
         } // for
     } // function
+
+    /**
+     * 상품을 선택하는 버튼에 이벤트를 등록합니다
+     */
+    registerClickEventToProductClickNumBtn() {
+        const productClickNumList = this.viewUtil.getNodeData('.btn-num', 'all');
+        const productClickZeroBtn = this.viewUtil.getNodeData('.btn-zero-num');
+        const productClickNumArr = this.viewUtil.convertNodeListToArray(productClickNumList);
+        productClickNumArr.push(productClickZeroBtn);
+
+        productClickNumArr.forEach(element => {
+            element.addEventListener("click", () => {
+                
+            });
+        });
+        debugger;
+    }
 
     /**
      * model 로 접근해 데이터를 저장하고, 내 지갑의 돈을 화면에 표시합니다

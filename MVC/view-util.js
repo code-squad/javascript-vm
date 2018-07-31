@@ -42,10 +42,10 @@ class VendingMachineViewUtil {
     }
 
     /**
-     * 브라우저에 경고창을 띄웁니다
+     * 브라우저에 메세지 창을 띄웁니다
      * @param {string} message - 메세지 데이터
      */
-    alertErrorMessage(message) {
+    alertMessage(message) {
         alert(message);
     }
 
@@ -71,6 +71,14 @@ class VendingMachineViewUtil {
      */
     addLogModeText(data, mode) {
         return mode + data;
+    }
+
+    /** 
+     * nodeList 를 array 로 변환합니다
+     * @returns nodeList to array
+    */
+    convertNodeListToArray(nodeList) {
+        return Array.prototype.slice.call(nodeList);
     }
 
 }
