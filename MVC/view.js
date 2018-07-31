@@ -121,8 +121,6 @@ class VendingMachineView {
 
     /** 
      * 올바른 번호가 선택되었는지 검사하는 타이머를 시작합니다
-     * 역할에 맞는 네이밍으로 수정하기 - Refactoring
-     * 메서드 분할하기
      * @param {number} time
     */
     excuteTimerAfterSelectProductNum(time) {
