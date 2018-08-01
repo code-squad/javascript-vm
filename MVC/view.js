@@ -4,10 +4,11 @@ class VendingMachineView {
      * 이벤트를 지정합니다.
      * @param {Class} model - 자판기 MODEL 클래스 객체입니다.
      */
-    constructor(model, update, util) {
+    constructor(model, update, util, exception) {
         this.model = model;
         this.viewUpdate = update;
         this.viewUtil = util;
+        this.exceptionView = exception;
 
         this.registerClickEventToInsertMoneyBtn();
         this.registerClickEventToProductClickNumBtn();
@@ -64,11 +65,7 @@ class VendingMachineView {
      */
     insertMoneyToVendingMachine(money) {
         this.model.decreaseWalletMoney(money);
-        if (this.viewUtil.checkWalletMoneyMinus()) {
-            this.model.increaseWalletMoney(money);
-            this.viewUpdate.showAlertMsg('walletMoneyShortage', 1500);
-            return false;
-        }
+        if (this.exceptionView.doInsertMoneyException(money)) return;
         this.model.increaseInvestedMoney(money);
         this.viewUpdate.refreshInvestedMoneyInVendingMachine();
         
@@ -131,26 +128,10 @@ class VendingMachineView {
             let currentEnteredProductID = this.model.getCurrentSelectedNumTxt();
             let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductID));
 
-            if (this.doProductPurchaseException(currentEnteredProductID, selectedProductPrice)) return;
+            if (this.exceptionView.doProductPurchaseException(currentEnteredProductID, selectedProductPrice)) return;
             this.excuteProductPurchaseHandler(currentEnteredProductID, selectedProductPrice);
         }, time);
         this.model.setProductVerificationTimerID(productPurchaseTimerID);
-    }
-
-    /**
-     * 상품을 구입하는 과정에서 예외를 처리합니다
-     * @param {number} id - 현재 선택된 ID
-     * @param {price} price - 현재 선택된 상품의 가격
-     */
-    doProductPurchaseException(id, price) {
-        if (! this.viewUtil.checkCorrectSelectedProductNum(id, 1, 32)) {
-            this.viewUpdate.showAlertMsg('nonExistProduct', 1500);
-            return true;
-        }
-        if (! this.viewUtil.checkPossiblePurchase(price)) {
-            this.viewUpdate.showAlertMsg('investedMoneyShortage', 1500);
-            return true;
-        }
     }
 
     /** 
@@ -174,7 +155,7 @@ class VendingMachineView {
         let refundTimerID = setTimeout(() => {
             const currentInvestedMoney = this.model.getInvestedMoney();
             this.excuteRefundMoneyProcess(currentInvestedMoney);
-            if (this.doRefundException(currentInvestedMoney)) return;
+            if (this.exceptionView.doRefundException(currentInvestedMoney)) return;
             this.displayLog(currentInvestedMoney, 'refund');
             this.refreshView();
         }, time);
@@ -188,13 +169,6 @@ class VendingMachineView {
     excuteRefundMoneyProcess(money) {
         this.model.decreaseInvestedMoney(money);
         this.model.increaseWalletMoney(money);
-    }
-
-    /** 
-     * 반환하는 과정에서 예외사항을 처리합니다.
-    */
-    doRefundException(money) {
-        if (money === 0) return true;
     }
 
     /**
