@@ -123,7 +123,7 @@ class VendingMachineView {
     }
 
     /** 
-     * 상품을 구매하는 타이머를 시작합니다.
+     * 상품을 구매하는 타이머를 시작합니다
      * @param {number} time
      */
     startProductPurchaseTimer(time) {
@@ -131,18 +131,26 @@ class VendingMachineView {
             let currentEnteredProductID = this.model.getCurrentSelectedNumTxt();
             let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductID));
 
-            if (! this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductID, 1, 32)) {
-                this.viewUpdate.showAlertMsg('nonExistProduct', 1500);
-                return;
-            }
-            if (! this.viewUtil.checkPossiblePurchase(selectedProductPrice)) {
-                this.viewUpdate.showAlertMsg('investedMoneyShortage', 1500);
-                return;
-            }
-
+            if (this.doProductPurchaseException(currentEnteredProductID, selectedProductPrice)) return;
             this.excuteProductPurchaseHandler(currentEnteredProductID, selectedProductPrice);
         }, time);
         this.model.setProductVerificationTimerID(productPurchaseTimerID);
+    }
+
+    /**
+     * 상품을 구입하는 과정에서 예외를 처리합니다
+     * @param {number} id - 현재 선택된 ID
+     * @param {price} price - 현재 선택된 상품의 가격
+     */
+    doProductPurchaseException(id, price) {
+        if (! this.viewUtil.checkCorrectSelectedProductNum(id, 1, 32)) {
+            this.viewUpdate.showAlertMsg('nonExistProduct', 1500);
+            return true;
+        }
+        if (! this.viewUtil.checkPossiblePurchase(price)) {
+            this.viewUpdate.showAlertMsg('investedMoneyShortage', 1500);
+            return true;
+        }
     }
 
     /** 
@@ -164,18 +172,32 @@ class VendingMachineView {
      */
     startRefundInvestedMoneyTimer(time) {
         let refundTimerID = setTimeout(() => {
-            // 투입된 금액 초기화
             const currentInvestedMoney = this.model.getInvestedMoney();
-            this.model.decreaseInvestedMoney(currentInvestedMoney);
-            this.model.increaseWalletMoney(currentInvestedMoney);
-            // 로그 출력
+            this.excuteRefundMoneyProcess(currentInvestedMoney);
             this.displayLog(currentInvestedMoney, 'refund');
-            // refresh View
-            this.viewUpdate.refreshWalletMoney();
-            this.viewUpdate.refreshInvestedMoneyInVendingMachine();
-            this.refreshSelectableNodes();
+            this.refreshView();
         }, time);
         this.model.setRefundTimerID(refundTimerID);
     }
+
+    /** 
+     * 돈을 반환하는 과정을 실행합니다
+     * @param {number} money - 현재 투입된 금액
+    */
+    excuteRefundMoneyProcess(money) {
+        this.model.decreaseInvestedMoney(money);
+        this.model.increaseWalletMoney(money);
+    }
+
+    /**
+     * VIEW 를 전체적으로 새로고침 합니다
+     */
+    refreshView() {
+        this.viewUpdate.refreshWalletMoney();
+        this.viewUpdate.refreshInvestedMoneyInVendingMachine();
+        this.refreshSelectableNodes();
+    }
+
+    
 
 } // class
