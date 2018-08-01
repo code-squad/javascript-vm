@@ -25,6 +25,7 @@ class VendingMachineView {
                 const selectionMoneyNumberData = this.viewUtil.sortOutNumber(node.innerText);
                 this.insertMoneyToVendingMachine(selectionMoneyNumberData);
                 this.showSelctableNodes();
+                this.model.clearTimer(this.model.getRefundTimerID());
             });
         } // for
     } // function
@@ -41,6 +42,7 @@ class VendingMachineView {
         productClickNumArr.forEach(element => {
             element.addEventListener("click", () => {
                 this.model.clearTimer(this.model.getProductVerificationTimerID());
+                this.model.clearTimer(this.model.getRefundTimerID());
                 this.model.updateCurrentSelectedNumTxt(element.innerText);
                 this.startProductPurchaseTimer(1000);
             });
@@ -171,8 +173,8 @@ class VendingMachineView {
             // refresh View
             this.viewUpdate.refreshWalletMoney();
             this.viewUpdate.refreshInvestedMoneyInVendingMachine();
-
         }, time);
+        this.model.setRefundTimerID(refundTimerID);
     }
 
 } // class
