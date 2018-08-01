@@ -18,5 +18,4 @@ class VendingMachineController {
     initProcess() {
         this.view.insertMoneyToWallet(10000);
     }
-    
 }

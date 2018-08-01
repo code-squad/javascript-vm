@@ -87,7 +87,7 @@ class VendingMachineViewUtil {
     convertNodeListToArray(nodeList) {
         return Array.prototype.slice.call(nodeList);
     }
-
+    
     /**
      * 올바른 상품을 선택했는지 확인합니다
      * @returns true - 1~32 범위의 숫자 (올바른 상품)
@@ -113,6 +113,4 @@ class VendingMachineViewUtil {
         this.alertMessage("금액이 부족합니다 :(");
         this.model.initCurrentSelectNumTxt();
     }
-
-
 }

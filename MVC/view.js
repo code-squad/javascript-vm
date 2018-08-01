@@ -146,6 +146,5 @@ class VendingMachineView {
         this.refreshSelectableNodes();
         this.model.initCurrentSelectNumTxt();
     }
-
     
 } // class
