@@ -42,7 +42,7 @@ class VendingMachineView {
             element.addEventListener("click", () => {
                 this.model.clearTimer(this.model.getProductVerificationTimerID());
                 this.model.updateCurrentSelectedNumTxt(element.innerText);
-                this.excuteTimerAfterSelectProductNum(1000);
+                this.startProductPurchaseTimer(1000);
             });
         });
     }
@@ -74,16 +74,6 @@ class VendingMachineView {
         this.displayLog(money, 'input');
     }
 
-    /**
-     * 로그 창에 로그를 표시(출력)합니다
-     * @param {string} logData
-     */
-    displayLog(logData, mode) {
-        logData = this.viewUtil.addLogSentenceText(logData, mode);
-        this.model.insertLogData(logData);
-        this.viewUpdate.insertLogDivToLogWindow(logData, mode);
-    }
-
     /** 
      * 선택할 수 있는 노드들을 표시합니다
      */
@@ -112,6 +102,17 @@ class VendingMachineView {
     }
 
     /**
+     * 로그 창에 로그를 표시(출력)합니다
+     * @param {string} logData
+     * @param {string} mode
+     */
+    displayLog(logData, mode) {
+        logData = this.viewUtil.addLogSentenceText(logData, mode);
+        this.model.insertLogData(logData);
+        this.insertLogDivToLogWindow(logData, mode);
+    }
+
+    /**
      * 현재의 가격에 맞춰 노드들을 새로고침 합니다
      */
     refreshSelectableNodes() {
@@ -120,11 +121,11 @@ class VendingMachineView {
     }
 
     /** 
-     * 올바른 번호가 선택되었는지 검사하는 타이머를 시작합니다
+     * 상품을 구매하는 타이머를 시작합니다.
      * @param {number} time
-    */
-    excuteTimerAfterSelectProductNum(time) {
-        let timerID = setTimeout(() => {
+     */
+    startProductPurchaseTimer(time) {
+        let productPurchaseTimerID = setTimeout(() => {
             let currentEnteredProductID = this.model.getCurrentSelectedNumTxt();
             let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductID));
 
@@ -136,21 +137,38 @@ class VendingMachineView {
                 this.viewUpdate.showAlertMsg('investedMoneyShortage', 1500);
                 return;
             }
-            this.startProductSelectAfterHandler(currentEnteredProductID, selectedProductPrice);
+
+            this.excuteProductPurchaseHandler(currentEnteredProductID, selectedProductPrice);
         }, time);
-        this.model.setProductVerificationTimerID(timerID);
+        this.model.setProductVerificationTimerID(productPurchaseTimerID);
     }
 
     /** 
-     * 상품(을 선택한 후) 처리과정을 시작합니다
+     * 상품을 구매하는 핸들러를 실행합니다
      * setTimeout 이벤트에 의해 호출되므로 -Handler 네이밍을 적용하였습니다
-    */
-    startProductSelectAfterHandler(productID, price) {
+     */
+    excuteProductPurchaseHandler(productID, price) {
         this.displayLog(productID, 'select');
         this.model.decreaseInvestedMoney(price);
         this.viewUpdate.refreshInvestedMoneyInVendingMachine();
         this.refreshSelectableNodes();
         this.model.initCurrentSelectNumTxt();
+        this.viewUpdate.startRefundInvestedMoneyTimer(3000);
+    }
+
+    /**
+     * 투입된 금액을 반환하는 타이머를 시작합니다
+     * @param {number} time
+     */
+    startRefundInvestedMoneyTimer(time) {
+        let refundTimerID = setTimeout(() => {
+            debugger;
+            // 투입된 금액 초기화
+            const currentInvestedMoney = this.model.getInvestedMoney();
+            this.model.decreaseInvestedMoney(currentInvestedMoney);
+            this.model.increaseWalletMoney(currentInvestedMoney);
+            this.displayLog(currentInvestedMoney, 'refund');
+        }, time);
     }
 
 } // class

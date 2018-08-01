@@ -10,6 +10,7 @@ class VendingMachineModel {
         this.itemPriceArr = [];
         this.currentSelectedNumTxt = "";
         this.productVerificationTimerID;
+        this.refundTimerID;
     }
 
     /** 
@@ -54,6 +55,7 @@ class VendingMachineModel {
 
     /**
      * 투입된 금액을 감소시킵니다
+     * @param {number} money
      */
     decreaseInvestedMoney(money) {
         this.investedMoney -= money;
@@ -141,6 +143,21 @@ class VendingMachineModel {
     */
     clearTimer(id) {
         clearTimeout(id);
+    }
+
+    /** 
+     * 반환 타이머 ID 를 반환합니다
+    */
+    getRefundTimerID() {
+        return this.refundTimerID;
+    }
+
+    /**
+     * 반환 타이머 ID 를 설정합니다
+     * @param {number} id - setTimeout ID
+     */
+    setRefundTimerID(id) {
+        this.refundTimerID = id;
     }
 
 

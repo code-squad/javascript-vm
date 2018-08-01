@@ -63,6 +63,9 @@ class VendingMachineUtilView {
         if (mode === 'select') {
             return data + "번이 선택됨";
         }
+        if (mode === 'refund') {
+            return data + "원이 반환됨";
+        }
     }
 
     /**
@@ -77,6 +80,9 @@ class VendingMachineUtilView {
         }
         if (mode === 'select') {
             return '[선택] ' + data;
+        }
+        if (mode === 'refund') {
+            return '[반환]' + data;
         }
     }
 

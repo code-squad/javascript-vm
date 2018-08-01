@@ -146,5 +146,5 @@ class VendingMachineUpdateView {
         this.setNodeVisibility(alertDivNode, 'show');
         this.startHideNodeTimer(alertDivNode, time);
     }
-
+    
 }
