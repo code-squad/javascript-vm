@@ -1,12 +1,12 @@
-/** 
- * MV 구조에서 VIEW 에 해당하며, 갱신 및 조작을 담당합니다
-*/
 class VendingMachineViewUpdate {
+    /**
+     * MV 구조에서 VIEW 에 해당하며, 갱신 및 조작을 담당합니다
+     * @param {Class} model 
+     * @param {Class} util 
+     */
     constructor(model, util) {
         this.model = model;
         this.viewUtil = util;
-        
-        console.log("Success Load view-update");
     }
 
     /** 
@@ -32,14 +32,14 @@ class VendingMachineViewUpdate {
      */
     changeMoneyNodeTextContent(node, money) {
         let moneyWithCommas = this.viewUtil.numberWithCommas(money);
-        node.textContent = money + "원";
+        node.textContent = moneyWithCommas + "원";
     }
 
     /**
      * 로그 데이터를 DIV node 로 반환합니다
      * @param {string} logData 
      */
-    createLogDivNode(logData) {
+    createLogDivNode(logData, mode) {
         /*
             원래 해당 부분을 insertAdjacentHTML 메서드를 이용해서 노드를 바로 추가했었는데
             classList 를 사용해보기 위하여 createElement 와 innerText 속성을 이용하였습니다
@@ -48,28 +48,38 @@ class VendingMachineViewUpdate {
             ex. const logDivNodeText = <div class="text-left-align">LOG DATA</div>;
         */ 
         const logDivElement = document.createElement("div");
-        logData = this.viewUtil.addLogModeText(logData, "[투입] ");
+        logData = this.viewUtil.addLogModeText(logData, mode);
         logDivElement.innerText = logData;
         logDivElement.classList.add('text-left-align');
         return logDivElement;
     }
 
     /**
+     * classList 를 사용해 node의 클래스 속성을 제거합니다
+     * @param {node} node 
+     * @param {string} className
+     */
+    removeNodeClass(node, className) {
+        node.classList.remove(className);
+    }
+
+    /**
      * 로그창에 로그노드(DIV)를 삽입합니다
      * @param {string} logData 
      */
-    insertLogDivToLogWindow(logData) {
-        const logDivNode = this.createLogDivNode(logData);
+    insertLogDivToLogWindow(logData, mode) {
+        const logDivNode = this.createLogDivNode(logData, mode);
         const logWindowNode = this.viewUtil.getNodeData('#status-panel');
         logWindowNode.appendChild(logDivNode);
     }
 
     /**
-     * 노드에 Highlight 클래스를 설정합니다
-     * @param {node} node 
+     * 노드에 속성을(클래스) 설정합니다
+     * @param {node} node
+     * @param {string} property - 노드에 적용할 Class명
      */
-    setHighLightToItemNode(node) {
-        node.classList.add('high-light');
+    setPropertyToItemNode(node, property) {
+        node.classList.add(property);
     }
 
     /**

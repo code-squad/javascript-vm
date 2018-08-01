@@ -8,8 +8,8 @@ class VendingMachineModel {
         this.investedMoney = 0;
         this.logDataList = [];
         this.itemPriceArr = [];
-
-        console.log("Success Load - Model Constructor");
+        this.currentSelectedNumTxt = "";
+        this.productVerificationTimerID;
     }
 
     /** 
@@ -53,6 +53,13 @@ class VendingMachineModel {
     }
 
     /**
+     * 투입된 금액을 감소시킵니다
+     */
+    decreaseInvestedMoney(money) {
+        this.investedMoney -= money;
+    }
+
+    /**
      * log list 에 log data 를 추가합니다
      * @param {string} log - 로그
      */
@@ -84,4 +91,57 @@ class VendingMachineModel {
     getItemPrice(index) {
         return this.itemPriceArr[index];
     }
+
+    /** 
+     * 현재 선택된 번호의 문자열을 반환합니다
+    */
+    getCurrentSelectedNumTxt() {
+        return this.currentSelectedNumTxt;
+    }
+
+    /** 
+     * 현재 선택된 번호의 문자열 길이를 반환합니다
+    */
+    getCurrentSelectedNumTxtLen() {
+        return this.currentSelectedNumTxt.length;
+    }
+
+    /**
+     * 현재 선택된 번호를 업데이트합니다
+     */
+    updateCurrentSelectedNumTxt(numTxt) {
+        this.currentSelectedNumTxt += numTxt;
+    }
+
+    /** 
+     * 현재 선택된 번호를 빈 문자열로 초기화합니다
+    */
+    initCurrentSelectNumTxt() {
+        this.currentSelectedNumTxt = "";
+    }
+
+    /** 
+     * 상품 검증 타이머 ID를 반환합니다
+    */
+    getProductVerificationTimerID() {
+        return this.productVerificationTimerID;
+    }
+
+    /**
+     * 상품검증 타이머의 ID를 지정합니다
+     * @param {number} timerFunc - timer ID
+     */
+    setProductVerificationTimerID(id) {
+        this.productVerificationTimerID = id;
+    }
+
+    /** 
+     * 현재 타이머를 중지시킵니다
+     * @param {number} id - setTimeout 함수를 담고있는 변수
+    */
+    clearTimer(id) {
+        clearTimeout(id);
+    }
+
+
 }
