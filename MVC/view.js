@@ -174,6 +174,7 @@ class VendingMachineView {
         let refundTimerID = setTimeout(() => {
             const currentInvestedMoney = this.model.getInvestedMoney();
             this.excuteRefundMoneyProcess(currentInvestedMoney);
+            if (this.doRefundException(currentInvestedMoney)) return;
             this.displayLog(currentInvestedMoney, 'refund');
             this.refreshView();
         }, time);
@@ -187,6 +188,13 @@ class VendingMachineView {
     excuteRefundMoneyProcess(money) {
         this.model.decreaseInvestedMoney(money);
         this.model.increaseWalletMoney(money);
+    }
+
+    /** 
+     * 반환하는 과정에서 예외사항을 처리합니다.
+    */
+    doRefundException(money) {
+        if (money === 0) return true;
     }
 
     /**
