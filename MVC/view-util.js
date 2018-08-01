@@ -103,7 +103,6 @@ class VendingMachineUtilView {
      */
     checkCorrectSelectedProductNum(data, start, end) {
         if (data >= start && data <= end) return true;
-        this.alertMessage("상품이 존재하지 않습니다 :(");
         this.model.initCurrentSelectNumTxt();
         return false;
     }
@@ -114,10 +113,10 @@ class VendingMachineUtilView {
      * @returns false - 상품을 구매하지 못할 때
      */
     checkPossiblePurchase(price) {
+        debugger;
         if (price <= this.model.getInvestedMoney()) return true;
-        if (price === undefined) return false;
-        this.alertMessage("금액이 부족합니다 :(");
         this.model.initCurrentSelectNumTxt();
+        return false;
     }
 
     /**

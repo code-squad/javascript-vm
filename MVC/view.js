@@ -65,7 +65,6 @@ class VendingMachineView {
         if (this.viewUtil.checkWalletMoneyMinus()) {
             this.model.increaseWalletMoney(money);
             this.viewUpdate.showAlertMsg('walletMoneyShortage', 1500);
-            // this.viewUtil.alertMessage("지갑의 돈이 부족합니다 :(");
             return false;
         }
         this.model.increaseInvestedMoney(money);
@@ -129,8 +128,14 @@ class VendingMachineView {
             let currentEnteredProductID = this.model.getCurrentSelectedNumTxt();
             let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductID));
 
-            if (! this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductID, 1, 32)) return;
-            if (! this.viewUtil.checkPossiblePurchase(selectedProductPrice)) return;
+            if (! this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductID, 1, 32)) {
+                this.viewUpdate.showAlertMsg('nonExistProduct', 1500);
+                return;
+            }
+            if (! this.viewUtil.checkPossiblePurchase(selectedProductPrice)) {
+                this.viewUpdate.showAlertMsg('investedMoneyShortage', 1500);
+                return;
+            }
             this.startProductSelectAfterHandler(currentEnteredProductID, selectedProductPrice);
         }, time);
         this.model.setProductVerificationTimerID(timerID);
