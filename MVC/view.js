@@ -128,7 +128,7 @@ class VendingMachineView {
             let currentEnteredProductID = this.model.getCurrentSelectedNumTxt();
             let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductID));
 
-            if (! this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductID)) return;
+            if (! this.viewUtil.checkCorrectSelectedProductNum(currentEnteredProductID, 1, 32)) return;
             if (! this.viewUtil.checkPossiblePurchase(selectedProductPrice)) return;
             this.startProductSelectAfterHandler(currentEnteredProductID, selectedProductPrice);
         }, time);
@@ -146,5 +146,5 @@ class VendingMachineView {
         this.refreshSelectableNodes();
         this.model.initCurrentSelectNumTxt();
     }
-    
+
 } // class

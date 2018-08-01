@@ -1,4 +1,4 @@
-class VendingMachineViewUpdate {
+class VendingMachineUpdateView {
     /**
      * MV 구조에서 VIEW 에 해당하며, 갱신 및 조작을 담당합니다
      * @param {Class} model 

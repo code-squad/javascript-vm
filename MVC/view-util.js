@@ -1,4 +1,4 @@
-class VendingMachineViewUtil {
+class VendingMachineUtilView {
     /**
      * MV 구조에서 VIEW 에 해당하며, 유틸을 담당합니다.
      * @param {Class} model 
@@ -85,17 +85,21 @@ class VendingMachineViewUtil {
      * @returns nodeList to array
     */
     convertNodeListToArray(nodeList) {
-        return Array.prototype.slice.call(nodeList);
+        // return Array.prototype.slice.call(nodeList);
+        // return [].slice.call(nodeList);
+        return Array.from(nodeList);
     }
-    
+
     /**
      * 올바른 상품을 선택했는지 확인합니다
-     * @returns true - 1~32 범위의 숫자 (올바른 상품)
+     * @param {number} start
+     * @param {number} end
+     * @returns true - start~end 범위의 숫자 (올바른 상품)
      * @returns false - 이외의 숫자
      * 에러메세지 출력 및 입력된 번호 초기화
      */
-    checkCorrectSelectedProductNum(data) {
-        if (data >= 1 && data <= 32) return true;
+    checkCorrectSelectedProductNum(data, start, end) {
+        if (data >= start && data <= end) return true;
         this.alertMessage("상품이 존재하지 않습니다 :(");
         this.model.initCurrentSelectNumTxt();
         return false;
