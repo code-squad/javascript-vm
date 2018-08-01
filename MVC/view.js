@@ -173,6 +173,7 @@ class VendingMachineView {
             // refresh View
             this.viewUpdate.refreshWalletMoney();
             this.viewUpdate.refreshInvestedMoneyInVendingMachine();
+            this.refreshSelectableNodes();
         }, time);
         this.model.setRefundTimerID(refundTimerID);
     }
