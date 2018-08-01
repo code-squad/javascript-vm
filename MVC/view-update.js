@@ -133,12 +133,11 @@ class VendingMachineUpdateView {
     }
 
     /**
-     * 메세지를 1.5초동안 보여줍니다
+     * 메세지를 시간동안 보여줍니다
      * @param {string} type - 메세지 타입에 따라 완성된 문자열을 받아옵니다
      * @param {string} time - 표시할 시간을 설정합니다
      */
     showAlertMsg(type, time) {
-        debugger;
         const alertDivNode = this.viewUtil.getNodeData('.alert');
         const errorMsg = this.viewUtil.getErrorMsg(type);
         this.setNodeVisibility(alertDivNode, 'visible');
@@ -146,5 +145,5 @@ class VendingMachineUpdateView {
         this.setNodeVisibility(alertDivNode, 'show');
         this.startHideNodeTimer(alertDivNode, time);
     }
-    
+
 }

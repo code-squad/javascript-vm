@@ -82,7 +82,7 @@ class VendingMachineUtilView {
             return '[선택] ' + data;
         }
         if (mode === 'refund') {
-            return '[반환]' + data;
+            return '[반환] ' + data;
         }
     }
 
@@ -119,7 +119,6 @@ class VendingMachineUtilView {
      * @returns false - 상품을 구매하지 못할 때
      */
     checkPossiblePurchase(price) {
-        debugger;
         if (price <= this.model.getInvestedMoney()) return true;
         this.model.initCurrentSelectNumTxt();
         return false;

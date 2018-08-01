@@ -109,7 +109,7 @@ class VendingMachineView {
     displayLog(logData, mode) {
         logData = this.viewUtil.addLogSentenceText(logData, mode);
         this.model.insertLogData(logData);
-        this.insertLogDivToLogWindow(logData, mode);
+        this.viewUpdate.insertLogDivToLogWindow(logData, mode);
     }
 
     /**
@@ -153,7 +153,7 @@ class VendingMachineView {
         this.viewUpdate.refreshInvestedMoneyInVendingMachine();
         this.refreshSelectableNodes();
         this.model.initCurrentSelectNumTxt();
-        this.viewUpdate.startRefundInvestedMoneyTimer(3000);
+        this.startRefundInvestedMoneyTimer(3000);
     }
 
     /**
@@ -162,12 +162,16 @@ class VendingMachineView {
      */
     startRefundInvestedMoneyTimer(time) {
         let refundTimerID = setTimeout(() => {
-            debugger;
             // 투입된 금액 초기화
             const currentInvestedMoney = this.model.getInvestedMoney();
             this.model.decreaseInvestedMoney(currentInvestedMoney);
             this.model.increaseWalletMoney(currentInvestedMoney);
+            // 로그 출력
             this.displayLog(currentInvestedMoney, 'refund');
+            // refresh View
+            this.viewUpdate.refreshWalletMoney();
+            this.viewUpdate.refreshInvestedMoneyInVendingMachine();
+
         }, time);
     }
 
