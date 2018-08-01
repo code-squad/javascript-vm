@@ -16,6 +16,9 @@ class VmModel{
         this.inputMoney += coin;
         this.coinCount[coin]--;
     }
+    selectItem(coin){
+        this.inputMoney -= coin;
+    }
     getCoinCount(){
         return this.coinCount;
     }
