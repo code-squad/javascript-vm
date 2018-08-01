@@ -82,6 +82,9 @@ class VendingMachineUtilView {
 
     /** 
      * nodeList 를 array 로 변환합니다
+     * Array.prototype.slice.call(nodeList)
+     * [].slice.call(nodeList)
+     * Array.from(nodeList)
      * @returns nodeList to array
     */
     convertNodeListToArray(nodeList) {
@@ -111,10 +114,25 @@ class VendingMachineUtilView {
      * @returns false - 상품을 구매하지 못할 때
      */
     checkPossiblePurchase(price) {
-        debugger;
         if (price <= this.model.getInvestedMoney()) return true;
         if (price === undefined) return false;
         this.alertMessage("금액이 부족합니다 :(");
         this.model.initCurrentSelectNumTxt();
+    }
+
+    /**
+     * 에러메세지를 반환합니다
+     * @param {string} type 
+     */
+    getErrorMsg(type) {
+        if (type === 'walletMoneyShortage') {
+            return "지갑의 돈이 부족합니다 :(";
+        }
+        if (type === 'investedMoneyShortage') {
+            return "금액이 부족합니다 :(";
+        }
+        if (type === 'nonExistProduct') {
+            return "상품이 존재하지 않습니다 :(";
+        }
     }
 }

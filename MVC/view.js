@@ -64,7 +64,8 @@ class VendingMachineView {
         this.model.decreaseWalletMoney(money);
         if (this.viewUtil.checkWalletMoneyMinus()) {
             this.model.increaseWalletMoney(money);
-            this.viewUtil.alertMessage("지갑의 돈이 부족합니다 :(");
+            this.viewUpdate.showAlertMsg('walletMoneyShortage', 1500);
+            // this.viewUtil.alertMessage("지갑의 돈이 부족합니다 :(");
             return false;
         }
         this.model.increaseInvestedMoney(money);

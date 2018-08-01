@@ -104,4 +104,47 @@ class VendingMachineUpdateView {
         return (investedMoney >= itemPrice) ? true : false;
     }
 
+    /**
+     * 노드의 Visibility 속성을 설정합니다
+     * @param {DOM node} node 
+     * @param {string} mode 
+     */
+    setNodeVisibility(node, mode) {
+        node.style.visibility = (mode === 'hidden') ? 'hidden' : 'visible'
+    }
+
+    /**
+     * 노드의 innerText 를 설정합니다
+     * @param {DOM node} node 
+     * @param {string} text 
+     */
+    setNodeInnerText(node, text) {
+        node.innerText = text;
+    }
+
+    /**
+     * 노드를 안보이게 하는 타이머를 시작합니다
+     * @param {number} time 
+     */
+    startHideNodeTimer(node, time) {
+        setTimeout(() => {
+            this.setNodeVisibility(node, 'hidden');
+        }, time);
+    }
+
+    /**
+     * 메세지를 1.5초동안 보여줍니다
+     * @param {string} type - 메세지 타입에 따라 완성된 문자열을 받아옵니다
+     * @param {string} time - 표시할 시간을 설정합니다
+     */
+    showAlertMsg(type, time) {
+        debugger;
+        const alertDivNode = this.viewUtil.getNodeData('.alert');
+        const errorMsg = this.viewUtil.getErrorMsg(type);
+        this.setNodeVisibility(alertDivNode, 'visible');
+        this.setNodeInnerText(alertDivNode, errorMsg);
+        this.setNodeVisibility(alertDivNode, 'show');
+        this.startHideNodeTimer(alertDivNode, time);
+    }
+
 }
