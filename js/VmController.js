@@ -11,12 +11,13 @@
     그것이 컨트롤러에 역할이라고 생각합니다!
  */
 class VmController{
-    constructor(menuView, model, coinCountView, moneyView, logView){
+    constructor(menuView, model, coinCountView, moneyView, logView, selectItemView){
         this.menuView = menuView;
         this.model = model;
         this.coinCountView = coinCountView;
         this.moneyView = moneyView;
         this.logView = logView;
+        this.selectItemView = selectItemView;
         this.init();
     }
     init(){
@@ -27,6 +28,8 @@ class VmController{
         this.coinCountView.insertCoinHandler = this.insertCoinHandler.bind(this);
         this.moneyView.inputMoneyHandler = this.inputMoneyHandler.bind(this);
         this.coinCountView.showNoMoneyHandler = this.showNoMoneyHandler.bind(this);
+        this.selectItemView.selectItemHandler = this.selectItemHandler.bind(this);
+        this.selectItemView.showNoItemHandler = this.showNoItemHandler.bind(this);
     }
     insertCoinHandler(coin){
         this.model.insertCoin(coin);
@@ -43,5 +46,18 @@ class VmController{
     }
     showNoMoneyHandler(coin){
         this.logView.showNoMoney(coin);
+    }
+    selectItemHandler(itemId, itemName, itemPrice){
+        if(this.model.getInputMoney() < itemPrice){
+            this.logView.showLackInputMoney();
+            return ;
+        }
+        this.model.selectItem(itemPrice);
+        this.moneyView.inputMoney = this.model.getInputMoney();
+        this.moneyView.inputMoneyView();
+        this.logView.selectItemLog(itemId,itemName);
+    }
+    showNoItemHandler(){
+        this.logView.showNoItem();
     }
 }

@@ -87,6 +87,7 @@ ul{
   height : 200px;
   text-align : center;
   padding : 15px;
+  overflow : scroll;
 }
 .basic-button{
   width : 60px;
