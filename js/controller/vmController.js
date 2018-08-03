@@ -20,6 +20,7 @@ class VendingMachine {
 
   initMachine() {
     this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
+    this.machineView.clickItemNumberButtonHandler = this.clickItemNumberButtonHandler.bind(this);
   }
 
   clickMoneyButtonHandler(button) {
@@ -37,9 +38,20 @@ class VendingMachine {
   notifyDecreasedMoney(price) {
     this.walletView.rerender(price, this.walletModel);
   }
-
+  clickItemNumberButtonHandler(target, selectObj) {
+    this.calculateSelectionNumber(target, selectObj);
+  }
+  calculateSelectionNumber(target, selectObj) {
+    if (selectObj.acc) clearTimeout(selectObj.acc);
+    selectObj.number.push(target.dataset['select']);
+    selectObj.acc = setTimeout(() => {
+      let number = selectObj.number.join('');
+      this.machineView.selectItem(number);
+      this.machineView.initTimer()
+    }, 3000);
+  }
   notifyReceiveMoney(insertedMoney, totalInsertedMoney) {
-    this.machineView.displayInsertLog(insertedMoney);
+    this.machineView.displayLog('insert', insertedMoney);
     this.machineView.rerender(totalInsertedMoney);
   }
 
