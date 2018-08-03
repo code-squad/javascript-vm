@@ -22,13 +22,12 @@ class VendingMachine {
     this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
   }
 
-  clickMoneyButtonHandler(button) {
-    const moneyUnit = button.getAttribute('data-money');
+  clickMoneyButtonHandler(moneyUnit) {
     if (!this.walletModel.hasMoney(moneyUnit)) {
       this.notifyNoUnit(moneyUnit)
       return;
     }
-    this.walletView.printClickedMoney(button);
+    this.walletView.printClickedMoney(moneyUnit);
     this.walletModel.decreaseMoney(moneyUnit);
     this.machineModel.receiveMoney(moneyUnit);
     this.machineView.displayAvailableItem();

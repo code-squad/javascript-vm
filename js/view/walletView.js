@@ -14,7 +14,7 @@ class WalletView {
     const moneyButtons = document.querySelectorAll('.money_list .money');
     moneyButtons.forEach((v, i) => {
       v.addEventListener('click', ({ target }) => {
-        this.clickMoneyButtonHandler(target);
+        this.clickMoneyButtonHandler(target.dataset["money"]);
       })
     });
   }
@@ -36,7 +36,7 @@ class WalletView {
   }
 
   printClickedMoney(clickedMoney) {
-    console.log(clickedMoney.innerText);
+    console.log(`${clickedMoney}원`);
   }
 
   displayMoney(walletModel) {
