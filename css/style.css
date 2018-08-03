@@ -96,6 +96,7 @@
   height: 220px;
   border: 3px solid #575377;
 }
+.coin_button:hover {background-color: #a4a9d2}
 
 .coin_button_item {
   display: inline-block;
@@ -125,12 +126,22 @@
   list-style-type: none;
   padding-left: 0px;
 }
-.log_item{
+.log_item {
   display: block;
   margin: 5px;
   text-align: center;
 }
+.receive_container {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 316px;
+  height: 200px;
+  border: 3px solid #575377;
+  margin: 10px;
+  overflow:  scroll;
+}
 
+/* wallet UI */
 .wallet {
   color:  #fff;
   float: left;

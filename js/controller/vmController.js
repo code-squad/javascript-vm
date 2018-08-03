@@ -10,6 +10,7 @@ class VendingMachine {
     this.walletModel = walletModel;
     this.machineView = machineView;
     this.walletView = walletView;
+    this.checkSetTimeout = { current: null, number: '' };
   }
 
   initWallet() {
@@ -32,26 +33,41 @@ class VendingMachine {
     this.walletView.printClickedMoney(button);
     this.walletModel.decreaseMoney(moneyUnit);
     this.machineModel.receiveMoney(moneyUnit);
-    this.machineView.displayAvailableItem();
+    this.machineView.displayAvailableItem(this.machineModel.totalInsertedMoney);
+  }
+
+  clickItemNumberButtonHandler(target) {
+    this.calculateSelectionNumber(target);
+  }
+
+  selectItemHandler(number) {
+    if (!this.machineModel.isEnoughMoney(number)) {
+      this.machineView.alertShortOfMoney();
+      return;
+    }
+    this.machineView.displaySelectedItemLog(number);
+    this.machineModel.decreaseItemStock(number);
+    this.machineModel.decreaseTotalInsertedMoney(number);
+    this.machineView.displayTotalInsertedMoney(this.machineModel.totalInsertedMoney);
+    this.machineView.displayAvailableItem(this.machineModel.totalInsertedMoney);
   }
 
   notifyDecreasedMoney(price) {
     this.walletView.rerender(price, this.walletModel);
   }
-  clickItemNumberButtonHandler(target, selectObj) {
-    this.calculateSelectionNumber(target, selectObj);
-  }
-  calculateSelectionNumber(target, selectObj) {
-    if (selectObj.acc) clearTimeout(selectObj.acc);
-    selectObj.number.push(target.dataset['select']);
-    selectObj.acc = setTimeout(() => {
-      let number = selectObj.number.join('');
-      this.machineView.selectItem(number);
-      this.machineView.initTimer()
+
+  calculateSelectionNumber(target) {
+    let checker = this.checkSetTimeout;
+    if (!!checker.current) clearTimeout(checker.current);
+    checker.number += target.dataset['select'];
+    checker.current = setTimeout(() => {
+      this.selectItemHandler(checker.number);
+      this.initChecker();
     }, 3000);
   }
+
   notifyReceiveMoney(insertedMoney, totalInsertedMoney) {
-    this.machineView.displayLog('insert', insertedMoney);
+    this.machineView.displayInsertLog(insertedMoney);
     this.machineView.rerender(totalInsertedMoney);
   }
 
@@ -59,4 +75,7 @@ class VendingMachine {
     this.walletView.noMoneyUnit(price);
   }
 
+  initChecker() {
+    this.checkSetTimeout = { current: null, number: '' };
+  }
 }

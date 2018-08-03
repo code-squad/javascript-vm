@@ -3,24 +3,18 @@
   초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class MachineView {
-  constructor(machineModel) {
-    this.machineModel = machineModel;
+  constructor(itemList) {
+    this.itemList = itemList;
     this.clickItemNumberButtonHandler = null;
-    this.displayItem(this.machineModel.itemList);
-    this.displayTotalInsertedMoney(this.machineModel.totalInsertedMoney);
+    this.displayItem(itemList);
     this.clickItemNumberButton();
-    this.selectObj = { acc: null, number: [] };
   }
-  initTimer() {
-    this.selectObj.number = [];
-  }
-  selectItem(number) {
+
+  checkAvailable(number) {
     const itemNumber = document.querySelector(`[data-number="${number}"]`);
-    const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
-    if (itemNumber.classList.contains('available_item')) {
-      this.displayLog('select', `${number}번 ${itemName}`);
-    } else {
+    if (!itemNumber.classList.contains('available_item')) {
       alert(`금액이 모자랍니다`);
+      return;
     }
   }
   displayItem(itemList) {
@@ -30,20 +24,28 @@ class MachineView {
     const itemNumberList = document.querySelectorAll('.coin_button_item');
     itemNumberList.forEach(v => {
       v.addEventListener('click', ({ target }) => {
-        this.clickItemNumberButtonHandler(target, this.selectObj);
+        this.clickItemNumberButtonHandler(target);
       })
     })
   }
-  displayLog(action, target) {
-    const obj = {
-      insert: function (money) { return `${Util.numberWithCommas(money)}원이 투입됐습니다` },
-      select: function (item) { return `${target}가 선택됨` }
-    }
+
+  displaySelectedItemLog(number) {
+    const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
     const logList = document.querySelector('.log_list');
     const logItem = document.createElement('li');
     logItem.innerHTML =
       `<li class="log_item">
-              <span>${obj[action](target)}</span>
+              <span>${number}번 ${itemName}가 선택됨</span>
+            </li>`
+    logList.insertAdjacentHTML('afterBegin', logItem.innerHTML);
+  }
+
+  displayInsertLog(target) {
+    const logList = document.querySelector('.log_list');
+    const logItem = document.createElement('li');
+    logItem.innerHTML =
+      `<li class="log_item">
+              <span>${Util.numberWithCommas(target)}원이 투입됐습니다</span>
             </li>`
     logList.insertAdjacentHTML('afterBegin', logItem.innerHTML);
   }
@@ -60,21 +62,27 @@ class MachineView {
     }, '');
     document.querySelector('.item_list_container').innerHTML = processedItemList;
   }
+
   displayTotalInsertedMoney(totalInsertedMoney) {
     let currentCoin = document.querySelector('.current_coin');
     currentCoin.innerHTML = `${Util.numberWithCommas(totalInsertedMoney)}원`;
   }
-  displayAvailableItem() {
+
+  displayAvailableItem(totalInsertedMoney) {
     const itemList = document.querySelectorAll('.item_price');
-    const totalInsertedMoney = this.machineModel.totalInsertedMoney;
     const availableItemClass = 'available_item';
     for (let ele of itemList) {
       if (ele.getAttribute('data-price') <= totalInsertedMoney) {
         if (!ele.classList.contains(availableItemClass)) ele.classList.add(availableItemClass);
+      } else {
+        if (ele.classList.contains(availableItemClass)) ele.classList.remove(availableItemClass);
       }
     }
   }
   rerender(totalInsertedMoney) {
     this.displayTotalInsertedMoney(totalInsertedMoney)
+  }
+  alertShortOfMoney() {
+    alert('돈이 부족합니다');
   }
 }
