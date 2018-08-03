@@ -3,8 +3,7 @@ Wallet의 랜더링을 담당하는 파일
 초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class WalletView {
-  constructor(commonView, walletModel) {
-    this.commonView = commonView;
+  constructor(walletModel) {
     this.walletModel = walletModel;
     this.clickMoneyButtonHandler = null;
     this.displayMoney(walletModel);
@@ -31,7 +30,7 @@ class WalletView {
   }
 
   changeNumberOfItem(price, moneyList) {
-    const item = document.querySelector(`[data-price='${price}'`);
+    const item = document.querySelector(`[data-money='${price}'`);
     const numberOfItem = item.nextElementSibling;
     numberOfItem.innerText = `${moneyList[price]}개`;
   }
@@ -41,7 +40,6 @@ class WalletView {
   }
 
   displayMoney(walletModel) {
-    this.commonView.createListByClassName('wallet_container', 'money_list');
     this.renderMoney(walletModel.getMoneyList());
     this.displayFullAmount(walletModel.fullAmount);
   }
@@ -53,7 +51,7 @@ class WalletView {
       acc +=
         `<li class= "money_item">
         <div class="money_container">
-          <span class="money" data-price="${ele}">${Util.numberWithCommas(ele)}원</span>
+          <span class="money" data-money="${ele}">${Util.numberWithCommas(ele)}원</span>
           <span class="number_of_money">${moneyNumber[idx]}개</span>
         </div>
       </li>

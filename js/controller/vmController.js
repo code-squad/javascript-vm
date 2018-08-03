@@ -23,17 +23,24 @@ class VendingMachine {
   }
 
   clickMoneyButtonHandler(button) {
+    const moneyUnit = button.getAttribute('data-money');
+    if (!this.walletModel.hasMoney(moneyUnit)) {
+      this.notifyNoUnit(moneyUnit)
+      return;
+    }
     this.walletView.printClickedMoney(button);
-    this.walletModel.decreaseMoney(button.getAttribute('data-price'))
-    this.machineModel.receiveMoney(button.getAttribute('data-price'));
+    this.walletModel.decreaseMoney(moneyUnit);
+    this.machineModel.receiveMoney(moneyUnit);
+    this.machineView.displayAvailableItem();
   }
 
   notifyDecreasedMoney(price) {
     this.walletView.rerender(price, this.walletModel);
   }
 
-  notifyReceiveMoney(insertedMoney) {
-    this.machineView.rerender(insertedMoney);
+  notifyReceiveMoney(insertedMoney, totalInsertedMoney) {
+    this.machineView.displayInsertLog(insertedMoney);
+    this.machineView.rerender(totalInsertedMoney);
   }
 
   notifyNoUnit(price) {

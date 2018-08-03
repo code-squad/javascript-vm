@@ -6,14 +6,14 @@
 class MachineModel {
   constructor(itemList) {
     this.itemList = itemList;
-    this.insertedMoney = 0;
+    this.totalInsertedMoney = 0;
     this.notifyReceiveMoney = null;
   }
   getItemList() {
     return this.itemList;
   }
   receiveMoney(money) {
-    this.insertedMoney += Number(money);
-    this.notifyReceiveMoney(this.insertedMoney);
+    this.totalInsertedMoney += Number(money);
+    this.notifyReceiveMoney(money, this.totalInsertedMoney);
   }
 }
