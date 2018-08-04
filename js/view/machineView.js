@@ -5,30 +5,34 @@
 class MachineView {
   constructor(itemList) {
     this.itemList = itemList;
-    this.clickItemNumberButtonHandler = null;
+    this.clickItemNumberButton = null;
     this.displayItem(itemList);
-    this.clickItemNumberButton();
+    this.addEventItemNumberClicked();
   }
 
-  checkAvailable(number) {
-    const itemNumber = document.querySelector(`[data-number="${number}"]`);
-    if (!itemNumber.classList.contains('available_item')) {
-      alert(`금액이 모자랍니다`);
-      return;
-    }
-  }
   displayItem(itemList) {
     this.renderItem(itemList);
   }
-  clickItemNumberButton() {
+  addEventItemNumberClicked() {
     const itemNumberList = document.querySelectorAll('.coin_button_item');
     itemNumberList.forEach(v => {
       v.addEventListener('click', ({ target }) => {
-        this.clickItemNumberButtonHandler(target);
+        this.clickItemNumberButton(target);
       })
     })
   }
+  displaySelectedItemImage(number) {
+    const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
+    const item = this.itemList.filter(v => v.name === itemName)[0];
+    const imageList = document.querySelector('.image_list');
+    const imageItem = document.createElement('li');
+    imageItem.innerHTML =
+      `<li>
+        <img class = "item_image" alt="No Image" src="js/model/images/${item.imageName}">
+      </li>`;
+    imageList.insertAdjacentHTML('afterBegin', imageItem.innerHTML);
 
+  }
   displaySelectedItemLog(number) {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
     const logList = document.querySelector('.log_list');
@@ -84,5 +88,8 @@ class MachineView {
   }
   alertShortOfMoney() {
     alert('돈이 부족합니다');
+  }
+  alertNotAvailableNumber() {
+    alert('번호가 유효하지 않습니다')
   }
 }

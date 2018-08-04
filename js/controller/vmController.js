@@ -10,7 +10,6 @@ class VendingMachine {
     this.walletModel = walletModel;
     this.machineView = machineView;
     this.walletView = walletView;
-    this.checkSetTimeout = { current: null, number: '' };
   }
 
   initWallet() {
@@ -21,7 +20,7 @@ class VendingMachine {
 
   initMachine() {
     this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
-    this.machineView.clickItemNumberButtonHandler = this.clickItemNumberButtonHandler.bind(this);
+    this.machineView.clickItemNumberButton = this.clickItemNumberButton.bind(this);
   }
 
   clickMoneyButtonHandler(button) {
@@ -36,34 +35,40 @@ class VendingMachine {
     this.machineView.displayAvailableItem(this.machineModel.totalInsertedMoney);
   }
 
-  clickItemNumberButtonHandler(target) {
-    this.calculateSelectionNumber(target);
+  clickItemNumberButton(target) {
+    this.checkSetTimeout = this.checkSetTimeout || { current: null, number: '' };
+    this.checkUsersSelection(target);
   }
 
-  selectItemHandler(number) {
-    if (!this.machineModel.isEnoughMoney(number)) {
+  checkUsersSelection(target) {
+    let checker = this.checkSetTimeout;
+    if (!!checker.current) clearTimeout(checker.current);
+    checker.number += target.dataset['select'];
+    checker.current = setTimeout(() => {
+      if (checker.number > this.machineModel.getItemList().length) {
+        this.machineView.alertNotAvailableNumber();
+      } else {
+        this.selectItemHandler(checker.number);
+      }
+      this.initChecker();
+    }, 3000);
+  }
+
+  selectItemHandler(itemNumber) {
+    if (!this.machineModel.isEnoughMoney(itemNumber)) {
       this.machineView.alertShortOfMoney();
       return;
     }
-    this.machineView.displaySelectedItemLog(number);
-    this.machineModel.decreaseItemStock(number);
-    this.machineModel.decreaseTotalInsertedMoney(number);
+    this.machineView.displaySelectedItemImage(itemNumber);
+    this.machineView.displaySelectedItemLog(itemNumber);
+    this.machineModel.decreaseItemStock(itemNumber);
+    this.machineModel.decreaseTotalInsertedMoney(itemNumber);
     this.machineView.displayTotalInsertedMoney(this.machineModel.totalInsertedMoney);
     this.machineView.displayAvailableItem(this.machineModel.totalInsertedMoney);
   }
 
   notifyDecreasedMoney(price) {
     this.walletView.rerender(price, this.walletModel);
-  }
-
-  calculateSelectionNumber(target) {
-    let checker = this.checkSetTimeout;
-    if (!!checker.current) clearTimeout(checker.current);
-    checker.number += target.dataset['select'];
-    checker.current = setTimeout(() => {
-      this.selectItemHandler(checker.number);
-      this.initChecker();
-    }, 3000);
   }
 
   notifyReceiveMoney(insertedMoney, totalInsertedMoney) {

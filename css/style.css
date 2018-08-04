@@ -140,7 +140,17 @@
   margin: 10px;
   overflow:  scroll;
 }
+.image_list {
+  list-style-type: none;
+  padding-left: 0px;
+}
 
+.item_image {
+  float: left;
+  width: 50px;
+  height: 70px;
+  border: 1px solid #000;
+}
 /* wallet UI */
 .wallet {
   color:  #fff;
@@ -154,7 +164,7 @@
   text-align: center;
 }
 .available_item{
-  background-color: #6affd7;
+  background-color: #6bf5af;
   color: #000;
 }
 .money_list,
@@ -178,7 +188,9 @@
   border-radius: 15px;
   border: 2px solid #b4b0da;
 }
-
+.number_of_money:hover,.money:hover{
+  background-color:#5a35ef
+}
 .full_amount {
   border: 2px solid #b4b0db;
   width: 90%;
