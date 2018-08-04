@@ -1,7 +1,7 @@
 class SelectItemView{
     constructor(){
         this.itemId = "";
-        this.showNoItemHandler = null;
+        this.lackItemHandler = null;
         this.selectItemHandler = null;
         this.stopReturnMoneyHandler = null;        
         this.clickItemIdBtn();
@@ -30,7 +30,7 @@ class SelectItemView{
     }
     lackItem(items){
         if(items.length < this.itemId){
-            this.showNoItemHandler();
+            this.lackItemHandler();
             this.resetItemId();
             return true;
         }

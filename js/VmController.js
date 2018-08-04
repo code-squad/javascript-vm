@@ -30,7 +30,7 @@ class VmController{
         this.moneyView.returnMoneyHandler = this.returnMoneyHandler.bind(this);
         this.coinCountView.showNoMoneyHandler = this.showNoMoneyHandler.bind(this);
         this.selectItemView.selectItemHandler = this.selectItemHandler.bind(this);
-        this.selectItemView.showNoItemHandler = this.showNoItemHandler.bind(this);
+        this.selectItemView.lackItemHandler = this.lackItemHandler.bind(this);
         this.selectItemView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);
         this.coinCountView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);        
     }
@@ -53,6 +53,8 @@ class VmController{
     selectItemHandler(itemId, itemName, itemPrice){
         if(this.model.getInputMoney() < itemPrice){
             this.logView.showLackInputMoney();
+            this.moneyView.coinCount = this.model.getCoinCount();
+            this.moneyView.returnMoney();
             return ;
         }
         this.model.selectItem(itemPrice);
@@ -62,8 +64,10 @@ class VmController{
         this.moneyView.coinCount = this.model.getCoinCount();
         this.moneyView.returnMoney();
     }
-    showNoItemHandler(){
+    lackItemHandler(){
         this.logView.showNoItem();
+        this.moneyView.coinCount = this.model.getCoinCount();
+        this.moneyView.returnMoney();
     }
     returnMoneyHandler(inputMoney, coinCount){
         this.model.returnMoney(coinCount);
