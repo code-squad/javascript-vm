@@ -28,4 +28,7 @@ class MoneyView{
             this.returnMoneyHandler(this.inputMoney, this.coinCount);
         },'3000');
     }
+    stopReturnMoney(){
+        clearTimeout(this.delayReturnMoneyId);
+    }
 }
