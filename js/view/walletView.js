@@ -14,7 +14,8 @@ class WalletView {
     const moneyButtons = document.querySelectorAll('.money_list .money');
     moneyButtons.forEach((v) => {
       v.addEventListener('click', ({ target }) => {
-        this.clickMoneyButtonHandler(target);
+        let moneyUnit = target.dataset["money"];
+        this.clickMoneyButtonHandler(moneyUnit);
       })
     });
   }
@@ -35,8 +36,8 @@ class WalletView {
     numberOfItem.innerText = `${moneyList[price]}개`;
   }
 
-  printClickedMoney(clickedMoney) {
-    console.log(clickedMoney.innerText);
+  printClickedMoney(moneyUnit) {
+    console.log(`${Util.numberWithCommas(moneyUnit)}원`);
   }
 
   displayMoney() {
