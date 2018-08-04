@@ -15,6 +15,7 @@ class MoneyView{
         this.inputMoneyHandler();
     }
     returnMoney(){
+        if( this.inputMoney <= 0)return ;
         const moneyUnit = Object.keys(this.coinCount).sort((a,b) => b-a);
         let temp = this.inputMoney;
         this.delayReturnMoneyId = this.delayReturnMoney(moneyUnit,temp);
