@@ -31,6 +31,8 @@ class VmController{
         this.coinCountView.showNoMoneyHandler = this.showNoMoneyHandler.bind(this);
         this.selectItemView.selectItemHandler = this.selectItemHandler.bind(this);
         this.selectItemView.showNoItemHandler = this.showNoItemHandler.bind(this);
+        this.selectItemView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);
+        this.coinCountView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);        
     }
     insertCoinHandler(coin){
         this.model.insertCoin(coin);
@@ -72,5 +74,8 @@ class VmController{
         this.coinCountView.coinCount = this.model.getCoinCount();        
         this.coinCountView.walletCoinView();
         this.logView.showReturnMoney(inputMoney);
+    }
+    stopReturnMoneyHandler(){
+        this.moneyView.stopReturnMoney();
     }
 }
