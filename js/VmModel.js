@@ -19,6 +19,11 @@ class VmModel{
     selectItem(coin){
         this.inputMoney -= coin;
     }
+    returnMoney(coinCount){
+        this.yourMoney += this.inputMoney;
+        this.inputMoney = 0;
+        this.coinCount = coinCount;
+    }
     getCoinCount(){
         return this.coinCount;
     }
