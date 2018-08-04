@@ -3,12 +3,14 @@ class SelectItemView{
         this.itemId = "";
         this.showNoItemHandler = null;
         this.selectItemHandler = null;
+        this.stopReturnMoneyHandler = null;        
         this.clickItemIdBtn();
     }
     clickItemIdBtn(){
         const itemIdBtn = document.querySelector('.select-button-part > ul');
         let setTimeoutId = 0;
-        itemIdBtn.addEventListener('click', ({target})=>{            
+        itemIdBtn.addEventListener('click', ({target})=>{
+            this.stopReturnMoneyHandler();
             if(target.tagName !== "LI")return ;
             clearTimeout(setTimeoutId);
             this.combineItemId(target);
