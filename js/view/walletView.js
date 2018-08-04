@@ -3,24 +3,25 @@ Wallet의 랜더링을 담당하는 파일
 초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class WalletView {
-  constructor(walletModel) {
-    this.walletModel = walletModel;
+  constructor(money) {
+    this.money = money;
     this.clickMoneyButtonHandler = null;
-    this.displayMoney(walletModel);
+    this.displayMoney();
     this.addEventMoneyButton();
   }
 
   addEventMoneyButton() {
     const moneyButtons = document.querySelectorAll('.money_list .money');
-    moneyButtons.forEach((v, i) => {
+    moneyButtons.forEach((v) => {
       v.addEventListener('click', ({ target }) => {
-        this.clickMoneyButtonHandler(target.dataset["money"]);
+        let moneyUnit = target.dataset["money"];
+        this.clickMoneyButtonHandler(moneyUnit);
       })
     });
   }
 
   rerender(price, walletModel) {
-    this.displayFullAmount(walletModel.fullAmount);
+    this.displayFullAmount(money);
     this.changeNumberOfItem(price, walletModel.getMoneyList());
   }
 
@@ -39,9 +40,9 @@ class WalletView {
     console.log(`${clickedMoney}원`);
   }
 
-  displayMoney(walletModel) {
-    this.renderMoney(walletModel.getMoneyList());
-    this.displayFullAmount(walletModel.fullAmount);
+  displayMoney() {
+    this.renderMoney(this.money);
+    this.displayFullAmount(this.money);
   }
 
   renderMoney(money) {
@@ -61,7 +62,13 @@ class WalletView {
     document.querySelector('.money_list').innerHTML = moneyList;
   }
 
-  displayFullAmount(fullAmount) {
+  displayFullAmount(money) {
+    const moneyUnit = Object.keys(money);
+    const moneyNumber = Object.values(money);
+    const fullAmount = moneyUnit.reduce((acc, ele, idx) => {
+      acc += (ele * moneyNumber[idx]);
+      return acc;
+    }, 0);
     document.querySelector('.full_amount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
   }
 

@@ -16,4 +16,21 @@ class MachineModel {
     this.totalInsertedMoney += Number(money);
     this.notifyReceiveMoney(money, this.totalInsertedMoney);
   }
+  isEnoughMoney(itemNumber) {
+    const itemPrice = document.querySelector(`[data-number="${itemNumber}"]`).dataset["price"];
+    console.log(itemPrice, this.totalInsertedMoney);
+    return itemPrice <= this.totalInsertedMoney ? true : false;
+  }
+  decreaseTotalInsertedMoney(itemNumber) {
+    const itemPrice = document.querySelector(`[data-number="${itemNumber}"]`).dataset["price"];
+    this.totalInsertedMoney -= itemPrice;
+  }
+  decreaseItemStock(itemNumber) {
+    let item = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
+    for (let value of this.itemList) {
+      if (value.name === item) {
+        value.stock -= 1;
+      }
+    }
+  }
 }

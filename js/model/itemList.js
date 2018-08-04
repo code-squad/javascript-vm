@@ -1,97 +1,160 @@
 const itemList = [{
   name: '콜라',
-  price: 500
+  price: 500,
+  stock: 5,
+  imageName: 'coke.png'
 }, {
   name: '사이다',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'cider.png'
 }, {
   name: '파인애플맛 환타',
-  price: 400
+  price: 400,
+  stock: 5,
+  imageName: 'fanta_pineapple.png'
 }, {
   name: '포도맛 환타',
-  price: 300
+  price: 300,
+  stock: 5,
+  imageName: 'fanta_grape.png'
 }, {
   name: '레몬에이드',
-  price: 900
+  price: 900,
+  stock: 5,
+  imageName: 'lemonade.png'
 }, {
   name: '봉봉',
-  price: 1200
+  price: 1200,
+  stock: 5,
+  imageName: 'bongbong.png'
 }, {
   name: '코코아주스',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'chocoMilk.png'
 }, {
   name: '콜라제로',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'coke.png'
 }, {
   name: '파워에이드',
-  price: 2000
+  price: 2000,
+  stock: 5,
+  imageName: 'powerade.png'
 }, {
   name: '초코우유',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'chocoMilk.png'
 }, {
   name: '초코우유2',
-  price: 7000
+  price: 7000,
+  stock: 5,
+  imageName: 'chocoMilk.png'
 }, {
   name: '초코우유3',
-  price: 600
+  price: 6000,
+  stock: 5,
+  imageName: 'chocoMilk.png'
 }, {
   name: '딸바주스',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'strawberryBanna.png'
 }, {
   name: '바나나우유',
-  price: 500
+  price: 500,
+  stock: 5,
+  imageName: 'bananaMilk.png'
 }, {
   name: '커피우유',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'coffeeMilk.png'
 }, {
   name: '알로에',
-  price: 1200
+  price: 1200,
+  stock: 5,
+  imageName: 'aloeJuice.png'
 }, {
   name: '콘칩',
-  price: 1000
+  price: 1000,
+  stock: 50,
+  imageName: 'cornChip.png'
 }, {
   name: '새우깡',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'shrimpChip.png'
 }, {
   name: '감자칩',
-  price: 2000
+  price: 2000,
+  stock: 5,
+  imageName: 'potatoChip.png'
 }, {
   name: '칸쵸',
-  price: 1000
+  price: 100,
+  stock: 5,
+  imageName: 'kancho.png'
 }, {
   name: '아몬드',
-  price: 450
+  price: 4500,
+  stock: 5,
+  imageName: 'almond.png'
 }, {
   name: '다크초콜릿',
-  price: 1500
+  price: 1500,
+  stock: 5,
+  imageName: 'chocolate.png'
 }, {
   name: '가나초콜릿',
-  price: 1200
+  price: 1200,
+  stock: 5,
+  imageName: 'chocolate.png'
 }, {
   name: '견과류',
-  price: 900
+  price: 900,
+  stock: 5,
+  imageName: 'peanuts.png'
 }, {
   name: '육포',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'driedMeat.png'
 }, {
-  name: '오징어포',
-  price: 900
+  name: '감자칩',
+  price: 2000,
+  stock: 5,
+  imageName: 'potatoChip.png'
 }, {
   name: '미니땅콩',
-  price: 4000
+  price: 4000,
+  stock: 5,
+  imageName: 'peanuts.png'
 }, {
-  name: '오징어',
-  price: 2300
+  name: '포카칩',
+  price: 2300,
+  stock: 5,
+  imageName: 'potatoChip.png'
 }, {
   name: '{고장}',
-  price: 1000
+  price: 1000,
+  stock: 5
 }, {
   name: '신라면',
-  price: 700
+  price: 700,
+  stock: 5,
+  imageName: 'shinlamen.png'
 }, {
   name: '진라면',
-  price: 800
+  price: 800,
+  stock: 5,
+  imageName: 'zinlamen.png'
 }, {
   name: '포도맛 환타',
-  price: 1000
+  price: 1000,
+  stock: 5,
+  imageName: 'fanta_grape.png'
 }]
