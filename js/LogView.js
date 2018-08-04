@@ -1,6 +1,6 @@
 class LogView{
     
-    insertCoinLog(coin){
+    showInsertMoney(coin){
         const logMessage = `<p>${coin}원이 투입됐음.</p>`;
         this.printLogMessage(logMessage);
     }
@@ -12,12 +12,16 @@ class LogView{
         const logMessage = `<p>해당 번호의 물품이 존재하지 않습니다.</p>`
         this.printLogMessage(logMessage);
     }
-    selectItemLog(itemId, itemName){
+    showSelectItem(itemId, itemName){
         const logMessage = `<p>${itemId}번 ${itemName}가(이) 뽑혔습니다.</p>`
         this.printLogMessage(logMessage);
     }
     showLackInputMoney(){
         const logMessage = `<p>돈이 부족합니다. 자판기에 돈을 더 넣어주세요.</p>`
+        this.printLogMessage(logMessage);
+    }
+    showReturnMoney(inputMoney){
+        const logMessage = `<p>${inputMoney}원이 반환되었습니다.</p>`
         this.printLogMessage(logMessage);
     }
     printLogMessage(logMessage){
