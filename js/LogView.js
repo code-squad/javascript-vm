@@ -1,5 +1,7 @@
 class LogView{
-    
+    constructor(logingBox){
+        this.logingBox = logingBox;
+    }
     showInsertMoney(coin){
         const logMessage = `<p>${coin}원이 투입됐음.</p>`;
         this.printLogMessage(logMessage);
@@ -25,7 +27,6 @@ class LogView{
         this.printLogMessage(logMessage);
     }
     printLogMessage(logMessage){
-        const logingBox = document.querySelector('.print-action');        
-        logingBox.insertAdjacentHTML("beforeend", logMessage);
+        this.logingBox.insertAdjacentHTML("afterbegin", logMessage);
     }
 }

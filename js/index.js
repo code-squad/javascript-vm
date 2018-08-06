@@ -6,12 +6,12 @@ const walletData = {
     500 : 8,
     100 : 10
 }
-
+const logingBox = document.querySelector('.print-action');
 const itemList = templateItemList(itemData);
 const menuView = new MenuView(itemList);
 const vmModel = new VmModel(walletData);
 const coinCountView = new CoinCountView();
 const moneyView = new MoneyView();
-const logView = new LogView();
+const logView = new LogView(logingBox);
 const selectItemView = new SelectItemView();
 const vmController = new VmController(menuView ,vmModel, coinCountView, moneyView, logView, selectItemView);
