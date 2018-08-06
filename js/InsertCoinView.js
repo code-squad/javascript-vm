@@ -17,6 +17,7 @@ class CoinCountView{
                 return ;
             }
             this.insertCoinHandler(coin);
+            this.walletCoinView();
         })
     }
     walletCoinView(){

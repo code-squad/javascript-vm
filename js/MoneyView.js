@@ -27,6 +27,8 @@ class MoneyView{
                 temp %= v;
             })
             this.returnMoneyHandler(this.inputMoney, this.coinCount);
+            this.walletView();
+            this.inputMoneyView();
         },'3000');
     }
     stopReturnMoney(){

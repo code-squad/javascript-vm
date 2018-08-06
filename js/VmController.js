@@ -40,7 +40,6 @@ class VmController{
         this.moneyView.inputMoney = this.model.getInputMoney();
         this.moneyView.walletView();
         this.moneyView.inputMoneyView();
-        this.coinCountView.walletCoinView();
         this.logView.showInsertMoney(coin);
     }
     inputMoneyHandler(){
@@ -73,8 +72,6 @@ class VmController{
         this.model.returnMoney(coinCount);
         this.moneyView.yourMoney = this.model.getYourMoney();
         this.moneyView.inputMoney = this.model.getInputMoney();
-        this.moneyView.walletView();
-        this.moneyView.inputMoneyView();
         this.coinCountView.coinCount = this.model.getCoinCount();        
         this.coinCountView.walletCoinView();
         this.logView.showReturnMoney(inputMoney);
