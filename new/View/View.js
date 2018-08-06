@@ -1,7 +1,7 @@
 class VendingMachineView {
     constructor() {
         this.presenter;
-        this.moneyView = new VendingMachineMoneyView();
+        this.moneyView = new VendingMachineMoneyView(this);
         this.itemView = new VendingMachineItemView();
         this.refreshView = new VendingMachineRefreshView();
     }
@@ -20,6 +20,10 @@ class VendingMachineView {
 
     setPresenter(presenter) {
         this.presenter = presenter;
+    }
+
+    getPresenter(presenter) {
+        return this.presenter;
     }
 
 

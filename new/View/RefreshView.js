@@ -1,14 +1,16 @@
 class VendingMachineRefreshView {
     constructor() {
 
+        this.util = new Utility();
+
     }
 
     /** 
      * 내 지갑의 돈을 새로고침합니다 (VIEW)
      * @param {money} money
-    */
+     */
     refreshWalletMoney(money) {
-        const walletMoneyDivNode = this.viewUtil.getNodeData('#money-amount-window');
+        const walletMoneyDivNode = this.util.getNodeData('#money-amount-window');
         this.changeMoneyNodeTextContent(walletMoneyDivNode, money); // this.model.getWalletMoney()
     }
 
@@ -18,8 +20,11 @@ class VendingMachineRefreshView {
      * @param {number} money - 금액 데이터
      */
     changeMoneyNodeTextContent(node, money) {
-        let moneyWithCommas = this.viewUtil.numberWithCommas(money);
+        let moneyWithCommas = this.util.numberWithCommas(money);
         node.textContent = moneyWithCommas + "원";
     }
+    
+
+    
 
 }

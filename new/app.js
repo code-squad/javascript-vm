@@ -3,7 +3,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const view = new VendingMachineView();
     const presenter = new VendingMachinePresenter(model, view);
 
-    view.setPresenter(presenter);    
+    view.setPresenter(presenter);
+    presenter.initProcess();
 
 
 });
