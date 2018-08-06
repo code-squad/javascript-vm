@@ -15,13 +15,13 @@ class MenuView{
     }
     highlightMenu(){
         this.items.forEach( v=> {
-            const firstChild = v.firstElementChild;
+            const firstElementChild = v.firstElementChild;
             if(v.dataset.price <= this.inputMoney){
-                firstChild.classList.add("highlight");
-                firstChild.nextElementSibling.classList.add("highlight");
+                firstElementChild.classList.add("highlight");
+                firstElementChild.nextElementSibling.classList.add("highlight");
             }else{
-                firstChild.classList.remove("highlight");
-                firstChild.nextElementSibling.classList.remove("highlight");               
+                firstElementChild.classList.remove("highlight");
+                firstElementChild.nextElementSibling.classList.remove("highlight");               
             }
         })
     }

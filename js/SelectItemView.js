@@ -1,36 +1,42 @@
 class SelectItemView{
     constructor(){
-        this.items = document.querySelectorAll('.items-box');
-        this.itemIdBtn = document.querySelector('.select-button-part > ul');
         this.itemId = "";
-        this.setTimeoutId = 0;
-        this.showNoItemHandler = null;
+        this.lackItemHandler = null;
         this.selectItemHandler = null;
+        this.stopReturnMoneyHandler = null;        
         this.clickItemIdBtn();
     }
     clickItemIdBtn(){
-        this.itemIdBtn.addEventListener('click', ({target})=>{
+        const itemIdBtn = document.querySelector('.select-button-part > ul');
+        let setTimeoutId = 0;
+        itemIdBtn.addEventListener('click', ({target})=>{
+            this.stopReturnMoneyHandler();
             if(target.tagName !== "LI")return ;
-            clearTimeout(this.setTimeoutId);
+            clearTimeout(setTimeoutId);
             this.combineItemId(target);
-            this.setTimeoutId = setTimeout(()=>{
-                if(this.lackItem())return ;
-                const itemName = this.searchItem().itemName;
-                const itemPrice = this.searchItem().itemPrice;
-                this.selectItemHandler(this.itemId, itemName, itemPrice);
-                this.resetItemId();
-            },'3000');
+            setTimeoutId = this.delaySelectItemHandler();
         })
     }
-    lackItem(){
-        if(this.items.length < this.itemId){
-            this.showNoItemHandler();
+    delaySelectItemHandler(){
+        const items = document.querySelectorAll('.items-box'); 
+        const setTimeoutId = setTimeout(()=>{
+            if(this.lackItem(items))return ;
+            const itemName = this.searchItem(items).itemName;
+            const itemPrice = this.searchItem(items).itemPrice;
+            this.selectItemHandler(this.itemId, itemName, itemPrice);
+            this.resetItemId();
+        },'3000');
+        return setTimeoutId;
+    }
+    lackItem(items){
+        if(items.length < this.itemId){
+            this.lackItemHandler();
             this.resetItemId();
             return true;
         }
     }
-    searchItem(){
-        const item = this.items[this.itemId-1];
+    searchItem(items){
+        const item = items[this.itemId-1];
         const itemName = item.getAttribute('data-name');
         const itemPrice = item.getAttribute('data-price');
         return { itemName : itemName, itemPrice : itemPrice}

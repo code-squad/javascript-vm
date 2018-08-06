@@ -27,9 +27,12 @@ class VmController{
         this.coinCountView.walletCoinView();
         this.coinCountView.insertCoinHandler = this.insertCoinHandler.bind(this);
         this.moneyView.inputMoneyHandler = this.inputMoneyHandler.bind(this);
+        this.moneyView.returnMoneyHandler = this.returnMoneyHandler.bind(this);
         this.coinCountView.showNoMoneyHandler = this.showNoMoneyHandler.bind(this);
         this.selectItemView.selectItemHandler = this.selectItemHandler.bind(this);
-        this.selectItemView.showNoItemHandler = this.showNoItemHandler.bind(this);
+        this.selectItemView.lackItemHandler = this.lackItemHandler.bind(this);
+        this.selectItemView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);
+        this.coinCountView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);        
     }
     insertCoinHandler(coin){
         this.model.insertCoin(coin);
@@ -38,7 +41,7 @@ class VmController{
         this.moneyView.walletView();
         this.moneyView.inputMoneyView();
         this.coinCountView.walletCoinView();
-        this.logView.insertCoinLog(coin);
+        this.logView.showInsertMoney(coin);
     }
     inputMoneyHandler(){
         this.menuView.inputMoney = this.model.getInputMoney();
@@ -50,14 +53,33 @@ class VmController{
     selectItemHandler(itemId, itemName, itemPrice){
         if(this.model.getInputMoney() < itemPrice){
             this.logView.showLackInputMoney();
+            this.moneyView.coinCount = this.model.getCoinCount();
+            this.moneyView.returnMoney();
             return ;
         }
         this.model.selectItem(itemPrice);
         this.moneyView.inputMoney = this.model.getInputMoney();
         this.moneyView.inputMoneyView();
-        this.logView.selectItemLog(itemId,itemName);
+        this.logView.showSelectItem(itemId,itemName);
+        this.moneyView.coinCount = this.model.getCoinCount();
+        this.moneyView.returnMoney();
     }
-    showNoItemHandler(){
+    lackItemHandler(){
         this.logView.showNoItem();
+        this.moneyView.coinCount = this.model.getCoinCount();
+        this.moneyView.returnMoney();
+    }
+    returnMoneyHandler(inputMoney, coinCount){
+        this.model.returnMoney(coinCount);
+        this.moneyView.yourMoney = this.model.getYourMoney();
+        this.moneyView.inputMoney = this.model.getInputMoney();
+        this.moneyView.walletView();
+        this.moneyView.inputMoneyView();
+        this.coinCountView.coinCount = this.model.getCoinCount();        
+        this.coinCountView.walletCoinView();
+        this.logView.showReturnMoney(inputMoney);
+    }
+    stopReturnMoneyHandler(){
+        this.moneyView.stopReturnMoney();
     }
 }

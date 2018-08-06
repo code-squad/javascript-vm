@@ -2,6 +2,7 @@ class CoinCountView{
     constructor(){
         this.insertCoinHandler = null;
         this.coinCount = null;
+        this.stopReturnMoneyHandler = null;        
         this.showNoMoneyHandler = null;
         this.clickCoinBtns();
     }
@@ -9,6 +10,7 @@ class CoinCountView{
         const currentCoins = document.querySelector(".wallet > ul");
         currentCoins.addEventListener("click", ({target})=>{
             if(!target.getAttribute("data-coin"))return ;
+            this.stopReturnMoneyHandler()        
             const coin = +target.getAttribute("data-coin");
             if(this.coinCount[coin] === 0){
                 this.showNoMoneyHandler(coin);
