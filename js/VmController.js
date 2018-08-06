@@ -47,7 +47,7 @@ class VmController{
         this.menuView.highlightMenu();
     }
     showNoMoneyHandler(coin){
-        this.logView.showNoMoney(coin);
+        this.logView.showLackYourMoney(coin);
     }
     selectItemHandler(itemId, itemName, itemPrice){
         if(this.model.getInputMoney() < itemPrice){
