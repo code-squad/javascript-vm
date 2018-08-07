@@ -3,15 +3,9 @@
 */
 
 class MenuView{
-    constructor(itemList){
-        this.itemList = itemList;
-        this.addList();
+    constructor(){
         this.inputMoney = null;
         this.items = Array.from(document.querySelectorAll('.items-box'));
-    }
-    addList(){
-        const itemListElement = document.querySelector(".beverage-menu > ul");
-        itemListElement.insertAdjacentHTML("beforebegin",this.itemList);
     }
     highlightMenu(){
         this.items.forEach( v=> {
