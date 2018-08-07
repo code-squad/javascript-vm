@@ -1,8 +1,36 @@
 class VendingMachineControlView {
-    constructor() {
+    constructor(view) {
 
+        this.mainView = view;
         this.util = new Utility();
 
+    }
+
+    /**
+     * 상품을 선택하는 버튼에 이벤트를 등록합니다
+     */
+    registerClickEventToProductClickNumBtn() {
+        this.createProductNumNodeArr().forEach(element => {
+            element.addEventListener("click", () => {
+                const controlPresenter = this.mainView.getPresenter().getControlPresenter();
+                const logPresenter = this.mainView.getPresenter().getLogPresenter();
+                controlPresenter.doBeforeProductPurchase(element);
+                controlPresenter.startProductPurchaseTimer(1000);
+                
+            });
+        });
+    }
+
+    /** 
+     * 상품을 클릭하는 버튼의 배열을 생성합니다
+     * @returns {array}
+    */
+    createProductNumNodeArr() {
+        const productNumBtnList = this.util.getNodeData('.btn-num', 'all');
+        const productNumZeroBtn = this.util.getNodeData('.btn-zero-num');
+        const productNumBtnArr = this.util.convertNodeListToArray(productNumBtnList);
+        productNumBtnArr.push(productNumZeroBtn);
+        return productNumBtnArr;
     }
 
     /** 
@@ -21,6 +49,21 @@ class VendingMachineControlView {
     changeMoneyNodeTextContent(node, money) {
         let moneyWithCommas = this.util.numberWithCommas(money);
         node.textContent = moneyWithCommas + "원";
+    }
+
+    /**
+     * 투입된 금액을 반환하는 타이머를 시작합니다
+     * @param {number} time
+     */
+    startRefundInvestedMoneyTimer(time) {
+        let refundTimerID = setTimeout(() => {
+            const currentInvestedMoney = this.model.getInvestedMoney();
+            this.excuteRefundMoneyProcess(currentInvestedMoney);
+            if (this.exceptionView.doRefundException(currentInvestedMoney)) return;
+            this.displayLog(currentInvestedMoney, 'refund');
+            this.refreshView();
+        }, time);
+        this.model.setRefundTimerID(refundTimerID);
     }
 
 

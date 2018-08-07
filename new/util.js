@@ -72,5 +72,67 @@ class Utility {
         node.classList.add(property);
     }
 
+    /** 
+     * nodeList 를 array 로 변환합니다
+     * Array.prototype.slice.call(nodeList)
+     * [].slice.call(nodeList)
+     * Array.from(nodeList)
+     * @returns nodeList to array
+    */
+    convertNodeListToArray(nodeList) {
+        // return Array.prototype.slice.call(nodeList);
+        // return [].slice.call(nodeList);
+        return Array.from(nodeList);
+    }
+
+    /**
+     * 올바른 상품을 선택했는지 확인합니다
+     * @param {number} data - 선택된 번호
+     * @param {number} start
+     * @param {number} end
+     * @returns true - start~end 범위의 숫자 (올바른 상품)
+     * @returns false - 이외의 숫자
+     * 에러메세지 출력 및 입력된 번호 초기화
+     */
+    isCorrectSelectedProductNum(data, start, end) {
+        if (data < start || data > end) return false;
+        return true;
+    }
+
+    /**
+     * 상품을 구매할 수 있는 가격인지 확인합니다
+     * @returns true - 상품을 구매 가능할 때
+     * @returns false - 상품을 구매하지 못할 때
+     */
+    isPossiblePurchase(price, investedMoney) {
+        if (price <= investedMoney) return true;
+        return false;
+    }
+
+    /**
+     * classList 를 사용해 node의 클래스 속성을 제거합니다
+     * @param {node} node 
+     * @param {string} className
+     */
+    removeNodeClass(node, className) {
+        node.classList.remove(className);
+    }
+
+    /**
+     * 에러메세지를 반환합니다
+     * @param {string} type 
+     */
+    getErrorMsg(type) {
+        if (type === 'walletMoneyShortage') {
+            return "지갑의 돈이 부족합니다 :(";
+        }
+        if (type === 'investedMoneyShortage') {
+            return "금액이 부족합니다 :(";
+        }
+        if (type === 'nonExistProduct') {
+            return "상품이 존재하지 않습니다 :(";
+        }
+    }
+
 
 }

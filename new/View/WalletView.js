@@ -20,12 +20,11 @@ class VendingMachineWalletView {
                 const presenter = this.mainView.getPresenter();
                 const walletPresenter = presenter.getWalletPresenter();
                 const controlPresenter = presenter.getControlPresenter();
-                const logPresenter = presenter.getLogPresenter();
                 const selectionMoneyNumberData = this.util.sortOutNumber(node.innerText);
                 const result = walletPresenter.insertMoneyToVendingMachine(selectionMoneyNumberData);
                 if (!result) return;
-                controlPresenter.refreshInvestedMoney(selectionMoneyNumberData);
-                logPresenter.insertMoneyLog(selectionMoneyNumberData, 'input');
+                controlPresenter.refreshInvestedMoney();
+                this.mainView.getLogView().displayLog(selectionMoneyNumberData, 'input');
                 this.mainView.getItemView().showSelctableNodes();
                 // this.model.clearTimer(this.model.getRefundTimerID());
             });

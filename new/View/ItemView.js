@@ -24,6 +24,24 @@ class VendingMachineItemView {
         }
     }
 
+    /**
+     * 선택된 노드들을 전부 해제합니다
+     */
+    hideSelectableNodes() {
+        const itemNodeList = this.util.getNodeData('.d-item', 'all');
+        for (let node of itemNodeList) {
+            this.util.removeNodeClass(node, 'high-light');
+        }
+    }
+
+    /**
+     * 현재의 가격에 맞춰 노드들을 새로고침 합니다
+     */
+    refreshSelectableNodes() {
+        this.hideSelectableNodes();
+        this.showSelctableNodes();
+    }
+
 
 
 
