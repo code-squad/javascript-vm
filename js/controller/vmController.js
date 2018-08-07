@@ -10,22 +10,6 @@ class VendingMachine {
     this.walletModel = walletModel;
     this.machineView = machineView;
     this.walletView = walletView;
-    this.initWallet();
-    this.initMachine();
-  }
-
-  initWallet() {
-    this.walletView.renderWallet(this.walletModel.getMoneyList(), this.walletModel.getFullAmount());
-    this.walletView.addEventClickedMoney();
-    this.walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
-    this.walletModel.notifyDecreasedMoney = this.notifyDecreasedMoney.bind(this);
-  }
-
-  initMachine() {
-    this.machineView.renderMachine(this.machineModel.getItemList());
-    this.machineView.addEventClickedItemNumber();
-    this.machineView.clickItemNumberButton = this.clickItemNumberButton.bind(this);
-    this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
   }
 
   clickMoneyButtonHandler(moneyUnit) {
