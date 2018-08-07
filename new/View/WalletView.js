@@ -1,9 +1,7 @@
 class VendingMachineWalletView {
     constructor(view) {
         this.mainView = view;
-
         this.itemView;
-
         this.util = new Utility();
     }
 

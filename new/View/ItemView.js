@@ -2,8 +2,6 @@ class VendingMachineItemView {
     constructor(view) {
         this.util = new Utility();
         this.mainView = view;
-
-
     }
 
     /** 

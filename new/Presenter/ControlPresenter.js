@@ -1,14 +1,12 @@
 class VendingMachineControlPresenter {
     constructor(model, view) {
-
         this.model = model;
+        this.walletView = view.getWalletView();
         this.itemView = view.getItemView();
         this.controlView = view.getControlView();
         this.logView = view.getLogView();
         this.util = new Utility();
-
         this.controlView.registerClickEventToProductClickNumBtn();
-
     }
 
     /**
@@ -53,13 +51,11 @@ class VendingMachineControlPresenter {
     isPossibleProductPurchase(id, price) {
         if (!this.util.isCorrectSelectedProductNum(id, 1, 32)) {
             this.model.initCurrentSelectNumTxt();
-            // alert("상품존재ㄴ");
             this.logView.showAlertMsg('nonExistProduct', 1500);
             return false;
         }
         if (!this.util.isPossiblePurchase(price, this.model.getInvestedMoney())) {
             this.model.initCurrentSelectNumTxt();
-            // alert("투입된 금액 부족");
             this.logView.showAlertMsg('investedMoneyShortage', 1500);
             return false;
         }
@@ -76,12 +72,37 @@ class VendingMachineControlPresenter {
         this.controlView.refreshInvestedMoneyInVendingMachine(this.model.getInvestedMoney());
         this.itemView.refreshSelectableNodes();
         this.model.initCurrentSelectNumTxt();
-        // this.startRefundInvestedMoneyTimer(3000);
+        this.startRefundInvestedMoneyTimer(3000);
     }
 
-    
-    
+    /**
+     * 투입된 금액을 반환하는 타이머를 시작합니다
+     * @param {number} time
+     */
+    startRefundInvestedMoneyTimer(time) {
+        let refundTimerID = setTimeout(() => {
+            const currentInvestedMoney = this.model.getInvestedMoney();
+            this.excuteRefundMoneyProcess(currentInvestedMoney);
+            if (this.util.isMoneyZero(currentInvestedMoney)) return;
+            this.logView.displayLog(currentInvestedMoney, 'refund');
+            this.refreshAllView();
+        }, time);
+        this.model.setRefundTimerID(refundTimerID);
+    }
 
+    /** 
+     * 돈을 반환하는 과정을 실행합니다
+     * @param {number} money - 현재 투입된 금액
+     */
+    excuteRefundMoneyProcess(money) {
+        this.model.decreaseInvestedMoney(money);
+        this.model.increaseWalletMoney(money);
+    }
 
+    refreshAllView() {
+        this.walletView.refreshWalletMoney(this.model.getWalletMoney());
+        this.refreshInvestedMoney();
+        this.itemView.refreshSelectableNodes();
+    }
 
 }

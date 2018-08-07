@@ -1,9 +1,7 @@
 class VendingMachineControlView {
     constructor(view) {
-
         this.mainView = view;
         this.util = new Utility();
-
     }
 
     /**
@@ -49,29 +47,4 @@ class VendingMachineControlView {
         let moneyWithCommas = this.util.numberWithCommas(money);
         node.textContent = moneyWithCommas + "원";
     }
-
-    /**
-     * 투입된 금액을 반환하는 타이머를 시작합니다
-     * @param {number} time
-     */
-    startRefundInvestedMoneyTimer(time) {
-        let refundTimerID = setTimeout(() => {
-            const currentInvestedMoney = this.model.getInvestedMoney();
-            this.excuteRefundMoneyProcess(currentInvestedMoney);
-            if (this.exceptionView.doRefundException(currentInvestedMoney)) return;
-            this.displayLog(currentInvestedMoney, 'refund');
-            this.refreshView();
-        }, time);
-        this.model.setRefundTimerID(refundTimerID);
-    }
-
-
-
-
-
-
-    
-
-    
-
 }

@@ -1,9 +1,7 @@
 class VendingMachineItemPrsenter {
     constructor(model, view) {
-
         this.model = model;
         this.itemView = view.getItemView();
-
     }
 
     /**

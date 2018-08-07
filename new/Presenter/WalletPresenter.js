@@ -1,17 +1,12 @@
 class VendingMachineWalletPresenter {
     constructor(model, view) {
-
         this.model = model;
-
         this.util = new Utility();
-
         this.itemView = view.getItemView();
         this.walletView = view.getWalletView();
         this.controlView = view.getControlView();
         this.logView = view.getLogView();
-
         this.walletView.registerClickEventToInsertMoneyBtn();
-
     }
 
     /**
@@ -48,8 +43,6 @@ class VendingMachineWalletPresenter {
         return (investedMoney >= itemPrice) ? true : false;
     }
 
-    /* ************ 원래 ViewUtil ************ */
-
     /** 
      * 지갑의 돈이 마이너스 되는지 검사합니다
      * @return {boolean}
@@ -57,8 +50,6 @@ class VendingMachineWalletPresenter {
     isWalletMoneyMinus() {
         return this.model.getWalletMoney() < 0;
     }
-
-    /* ************ 원래 Exception ************ */
 
     /**
      * 돈이 부족한지 확인합니다
@@ -68,8 +59,7 @@ class VendingMachineWalletPresenter {
         if (this.isWalletMoneyMinus()) {
             this.model.increaseWalletMoney(money);
             this.logView.showAlertMsg('walletMoneyShortage', 1500);
-            // alert('지갑에 돈이 부족'); // 일단 구현 (나중에 showAlertMsg 메서드로 대체할 것)
-            return false; // 크롱 피드백 적용
+            return false;
         }
         return true;
     }

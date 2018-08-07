@@ -134,5 +134,13 @@ class Utility {
         }
     }
 
+    /** 
+     * 반환하는 과정에서 예외사항을 처리합니다.
+     */
+    isMoneyZero(money) {
+        if (money === 0) return true;
+        return false;
+    }
+
 
 }
