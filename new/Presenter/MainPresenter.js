@@ -6,10 +6,12 @@ class VendingMachineMainPresenter {
         this.itemView = view.getItemView();
         this.walletView = view.getWalletView();
         this.controlView = view.getControlView();
+        this.logView = view.getLogView();
 
         this.itemPresenter = new VendingMachineItemPrsenter(model, view);
         this.walletPresenter = new VendingMachineWalletPresenter(model, view);
         this.controlPresenter = new VendingMachineControlPresenter(model, view);
+        this.logPresenter = new VendingMachineLogPresenter(model, view);
     }
 
     initProcess() {
@@ -28,6 +30,10 @@ class VendingMachineMainPresenter {
 
     getControlPresenter() {
         return this.controlPresenter;
+    }
+
+    getLogPresenter() {
+        return this.logPresenter;
     }
 
 

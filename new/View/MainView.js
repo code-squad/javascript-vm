@@ -4,6 +4,7 @@ class VendingMachineMainView {
         this.controlView = new VendingMachineControlView(this);
         this.itemView = new VendingMachineItemView(this);
         this.walletView = new VendingMachineWalletView(this);
+        this.logView = new VendingMachineLogView(this);
     }
 
     getControlView() {
@@ -16,6 +17,10 @@ class VendingMachineMainView {
 
     getWalletView() {
         return this.walletView;
+    }
+
+    getLogView() {
+        return this.logView;
     }
 
     setPresenter(presenter) {

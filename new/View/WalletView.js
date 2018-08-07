@@ -17,11 +17,15 @@ class VendingMachineWalletView {
         for (let node of moneyInputBtnList) {
             if (node.nodeName !== "BUTTON") continue;
             node.addEventListener("click", () => {
+                const presenter = this.mainView.getPresenter();
+                const walletPresenter = presenter.getWalletPresenter();
+                const controlPresenter = presenter.getControlPresenter();
+                const logPresenter = presenter.getLogPresenter();
                 const selectionMoneyNumberData = this.util.sortOutNumber(node.innerText);
-                const walletPresenter = this.mainView.getPresenter().getWalletPresenter();
-                const controlPresenter = this.mainView.getPresenter().getControlPresenter();
                 const result = walletPresenter.insertMoneyToVendingMachine(selectionMoneyNumberData);
-                controlPresenter.refreshInvestedMoney(result, selectionMoneyNumberData, 'input');
+                if (!result) return;
+                controlPresenter.refreshInvestedMoney(selectionMoneyNumberData);
+                logPresenter.insertMoneyLog(selectionMoneyNumberData, 'input');
                 this.mainView.getItemView().showSelctableNodes();
                 // this.model.clearTimer(this.model.getRefundTimerID());
             });
