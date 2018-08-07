@@ -59,4 +59,32 @@ class VendingMachineLogView {
         this.startHideNodeTimer(alertDivNode, time);
     }
 
+    /**
+     * 노드의 Visibility 속성을 설정합니다
+     * @param {DOM node} node 
+     * @param {string} mode 
+     */
+    setNodeVisibility(node, mode) {
+        node.style.visibility = (mode === 'hidden') ? 'hidden' : 'visible'
+    }
+
+    /**
+     * 노드의 innerText 를 설정합니다
+     * @param {DOM node} node 
+     * @param {string} text 
+     */
+    setNodeInnerText(node, text) {
+        node.innerText = text;
+    }
+
+    /**
+     * 노드를 안보이게 하는 타이머를 시작합니다
+     * @param {number} time 
+     */
+    startHideNodeTimer(node, time) {
+        setTimeout(() => {
+            this.setNodeVisibility(node, 'hidden');
+        }, time);
+    }
+
 }

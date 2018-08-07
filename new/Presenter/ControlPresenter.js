@@ -39,7 +39,7 @@ class VendingMachineControlPresenter {
             let currentEnteredProductID = this.model.getCurrentSelectedNumTxt();
             let selectedProductPrice = this.model.getItemPrice(Number(currentEnteredProductID));
 
-            if (this.isPossibleProductPurchase(currentEnteredProductID, selectedProductPrice)) return;
+            if (!this.isPossibleProductPurchase(currentEnteredProductID, selectedProductPrice)) return;
             this.excuteProductPurchaseHandler(currentEnteredProductID, selectedProductPrice);
         }, time);
         this.model.setProductVerificationTimerID(productPurchaseTimerID);
@@ -53,16 +53,17 @@ class VendingMachineControlPresenter {
     isPossibleProductPurchase(id, price) {
         if (!this.util.isCorrectSelectedProductNum(id, 1, 32)) {
             this.model.initCurrentSelectNumTxt();
-            alert("상품존재ㄴ");
-            // this.viewUpdate.showAlertMsg('nonExistProduct', 1500);
+            // alert("상품존재ㄴ");
+            this.logView.showAlertMsg('nonExistProduct', 1500);
             return false;
         }
         if (!this.util.isPossiblePurchase(price, this.model.getInvestedMoney())) {
             this.model.initCurrentSelectNumTxt();
-            alert("투입된 금액 부족");
-            // this.viewUpdate.showAlertMsg('investedMoneyShortage', 1500);
+            // alert("투입된 금액 부족");
+            this.logView.showAlertMsg('investedMoneyShortage', 1500);
             return false;
         }
+        return true;
     }
 
     /** 
