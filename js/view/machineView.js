@@ -24,12 +24,11 @@ class MachineView {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
     const imageList = document.querySelector('.image_list');
-    const imageItem = document.createElement('li');
-    imageItem.innerHTML =
+    const imageItem =
       `<li>
         <img class = "item_image" alt="No Image" src="js/model/images/${item.imageName}">
       </li>`;
-    imageList.insertAdjacentHTML('afterBegin', imageItem.innerHTML);
+    imageList.insertAdjacentHTML('afterBegin', imageItem);
   }
 
   displaySelectedItemLog(number) {
