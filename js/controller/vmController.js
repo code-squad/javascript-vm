@@ -41,10 +41,10 @@ class VendingMachine {
 
   clickItemNumberButton(target) {
     this.checkSetTimeout = this.checkSetTimeout || { current: null, number: '' };
-    this.checkUsersSelection(target);
+    this.startItemNumberCounting(target);
   }
 
-  checkUsersSelection(target) {
+  startItemNumberCounting(target) {
     let checker = this.checkSetTimeout;
     if (!!checker.current) clearTimeout(checker.current);
     checker.number += target.dataset['select'];
@@ -54,7 +54,7 @@ class VendingMachine {
       } else {
         this.selectItemHandler(checker.number);
       }
-      this.initChecker();
+      this.resetItemNumberCounting();
     }, 3000);
   }
 
@@ -85,7 +85,7 @@ class VendingMachine {
     this.walletView.noMoneyUnit(price);
   }
 
-  initChecker() {
+  resetItemNumberCounting() {
     this.checkSetTimeout = { current: null, number: '' };
   }
 }
