@@ -23,33 +23,31 @@ class MachineView {
   displaySelectedItemImage(itemList, number) {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
-    const imageList = document.querySelector('.image_list');
+    const imageListNode = document.querySelector('.image_list');
     const imageItem =
       `<li>
         <img class = "item_image" alt="No Image" src="js/model/images/${item.imageName}">
       </li>`;
-    imageList.insertAdjacentHTML('afterBegin', imageItem);
+    imageListNode.insertAdjacentHTML('afterBegin', imageItem);
   }
 
   displaySelectedItemLog(number) {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
-    const logList = document.querySelector('.log_list');
-    const logItem = document.createElement('li');
-    logItem.innerHTML =
+    const logListNode = document.querySelector('.log_list');
+    const logItem =
       `<li class="log_item">
               <span>${number}번 ${itemName}가 선택됨</span>
             </li>`
-    logList.insertAdjacentHTML('afterBegin', logItem.innerHTML);
+    logListNode.insertAdjacentHTML('afterBegin', logItem);
   }
 
   displayInsertLog(target) {
-    const logList = document.querySelector('.log_list');
-    const logItem = document.createElement('li');
-    logItem.innerHTML =
+    const logListNode = document.querySelector('.log_list');
+    const logItem =
       `<li class="log_item">
               <span>${Util.numberWithCommas(target)}원이 투입됐습니다</span>
             </li>`
-    logList.insertAdjacentHTML('afterBegin', logItem.innerHTML);
+    logListNode.insertAdjacentHTML('afterBegin', logItem);
   }
 
   renderItem(itemList) {
