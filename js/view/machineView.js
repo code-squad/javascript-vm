@@ -24,44 +24,26 @@ class MachineView {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
     const imageListNode = document.querySelector('.image_list');
-    const imageItem =
-      `<li>
-        <img class = "item_image" alt="No Image" src="js/model/images/${item.imageName}">
-      </li>`;
-    imageListNode.insertAdjacentHTML('afterBegin', imageItem);
+    const imageItemString = Temp.itemImageTemp(item.imageName);
+    imageListNode.insertAdjacentHTML('afterBegin', imageItemString);
   }
 
   displaySelectedItemLog(number) {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
     const logListNode = document.querySelector('.log_list');
-    const logItem =
-      `<li class="log_item">
-              <span>${number}번 ${itemName}가 선택됨</span>
-            </li>`
-    logListNode.insertAdjacentHTML('afterBegin', logItem);
+    const logItemString = Temp.selectedItemLog(number, itemName);
+    logListNode.insertAdjacentHTML('afterBegin', logItemString);
   }
 
-  displayInsertLog(target) {
+  displayInsertLog(money) {
     const logListNode = document.querySelector('.log_list');
-    const logItem =
-      `<li class="log_item">
-              <span>${Util.numberWithCommas(target)}원이 투입됐습니다</span>
-            </li>`
-    logListNode.insertAdjacentHTML('afterBegin', logItem);
+    const logItemString = Temp.insertMoneyLog(money);
+    logListNode.insertAdjacentHTML('afterBegin', logItemString);
   }
 
   renderItem(itemList) {
-    let processedItemList = itemList.reduce((acc, ele, idx) => {
-      acc +=
-        `<li class="item">
-      <div class="item_container">
-      <div class="item_name">${ele.name}</div>
-      <div data-price=${ele.price} data-number=${idx + 1} class="item_price">${idx + 1}. ${ele.price}</div>
-      </div>
-      </li>`;
-      return acc;
-    }, '');
-    document.querySelector('.item_list_container').innerHTML = processedItemList;
+    const itemListString = Temp.itemListTemp(itemList);
+    document.querySelector('.item_list_container').innerHTML = itemListString;
   }
 
   displayTotalInsertedMoney(totalInsertedMoney) {

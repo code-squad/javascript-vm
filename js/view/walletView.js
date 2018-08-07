@@ -44,20 +44,8 @@ class WalletView {
   }
 
   displayMoney(moneyList) {
-    const moneyUnitList = Object.keys(moneyList);
-    const moneyNumberList = Object.values(moneyList);
-    const moneyView = moneyUnitList.reduce((acc, ele, idx) => {
-      acc +=
-        `<li class= "money_item">
-        <div class="money_container">
-          <span class="money" data-money="${ele}">${Util.numberWithCommas(ele)}원</span>
-          <span class="number_of_money">${moneyNumberList[idx]}개</span>
-        </div>
-      </li>
-      `
-      return acc;
-    }, '');
-    document.querySelector('.money_list').innerHTML = moneyView;
+    const moneyListString = Temp.moneyListTemp(moneyList);
+    document.querySelector('.money_list').innerHTML = moneyListString;
   }
 
   displayFullAmount(fullAmount) {
