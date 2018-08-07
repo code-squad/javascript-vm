@@ -26,11 +26,6 @@ class MachineModel {
     this.totalInsertedMoney -= itemPrice;
   }
   decreaseItemStock(itemNumber) {
-    let item = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
-    for (let value of this.itemList) {
-      if (value.name === item) {
-        value.stock -= 1;
-      }
-    }
+    this.itemList[itemNumber - 1].stock -= 1;
   }
 }
