@@ -27,5 +27,41 @@ class Utility {
         return Number(data.replace(/[^0-9]/g,''));
     }
 
+    /**
+     * 로그의 문장을 만들어서 리턴합니다
+     * @param {string} data 
+     * @param {string} mode 
+     * @returns 문장이 포함된 로그텍스트를 리턴
+     */
+    addLogSentenceText(data, mode) {
+        if (mode === 'input') {
+            return data + "원이 투입됨";
+        }
+        if (mode === 'select') {
+            return data + "번이 선택됨";
+        }
+        if (mode === 'refund') {
+            return data + "원이 반환됨";
+        }
+    }
+
+    /**
+     * 식별하기 쉽도록 로그 텍스트 맨 앞에 모드 문자를 추가합니다
+     * @param {string} logData
+     * @param {string} mode - [삽입] or ...
+     * @returns 모드가 포함된 로그텍스트를 리턴
+     */
+    addLogModeText(data, mode) {
+        if (mode === 'input') {
+            return '[투입] ' + data;
+        }
+        if (mode === 'select') {
+            return '[선택] ' + data;
+        }
+        if (mode === 'refund') {
+            return '[반환] ' + data;
+        }
+    }
+
 
 }

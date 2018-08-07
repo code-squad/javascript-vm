@@ -1,4 +1,4 @@
-class VendingMachineMoneyPresenter {
+class VendingMachineWalletPresenter {
     constructor(model, view) {
 
         this.model = model;
@@ -6,13 +6,12 @@ class VendingMachineMoneyPresenter {
         this.util = new Utility();
 
         this.itemView = view.getItemView();
-        this.moneyView = view.getMoneyView();
+        this.walletView = view.getWalletView();
+        this.controlView = view.getControlView();
 
-        this.moneyView.registerClickEventToInsertMoneyBtn();
+        this.walletView.registerClickEventToInsertMoneyBtn();
 
     }
-
-
 
     /**
      * 자판기에 돈을 투입합니다
@@ -20,12 +19,10 @@ class VendingMachineMoneyPresenter {
      */
     insertMoneyToVendingMachine(money) {
         this.model.decreaseWalletMoney(money);
-        if (this.exceptionView.doInsertMoneyException(money)) return;
+        if (!this.isPossibleInvestMoney(money)) return false;
         this.model.increaseInvestedMoney(money);
-        this.viewUpdate.refreshInvestedMoneyInVendingMachine();
-        
-        this.viewUpdate.refreshWalletMoney();
-        this.displayLog(money, 'input');
+        this.walletView.refreshWalletMoney(this.model.getWalletMoney());
+        return true;
     }
 
     /**
@@ -48,6 +45,32 @@ class VendingMachineMoneyPresenter {
         }
 
         return (investedMoney >= itemPrice) ? true : false;
+    }
+
+    /* ************ 원래 ViewUtil ************ */
+
+    /** 
+     * 지갑의 돈이 마이너스 되는지 검사합니다
+     * @return {boolean}
+    */
+    isWalletMoneyMinus() {
+        return this.model.getWalletMoney() < 0;
+    }
+
+    /* ************ 원래 Exception ************ */
+
+    /**
+     * 돈이 부족한지 확인합니다
+     * @param {number} money
+     */
+    isPossibleInvestMoney(money) {
+        if (this.isWalletMoneyMinus()) {
+            this.model.increaseWalletMoney(money);
+            // this.viewUpdate.showAlertMsg('walletMoneyShortage', 1500);
+            alert('지갑에 돈이 부족'); // 일단 구현 (나중에 showAlertMsg 메서드로 대체할 것)
+            return false; // 크롱 피드백 적용
+        }
+        return true;
     }
 
 

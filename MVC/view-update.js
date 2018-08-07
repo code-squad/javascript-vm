@@ -19,7 +19,7 @@ class VendingMachineUpdateView {
 
     /** 
      * 자판기에 투입된 돈을 새로고침합니다 (VIEW)
-    */
+     */
     refreshInvestedMoneyInVendingMachine() {
         const vendingMachineInvestedMoneyDivNode = this.viewUtil.getNodeData('#money-display');
         this.changeMoneyNodeTextContent(vendingMachineInvestedMoneyDivNode, this.model.getInvestedMoney());

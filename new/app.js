@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
     const model = new VendingMachineModel();
-    const view = new VendingMachineView();
-    const presenter = new VendingMachinePresenter(model, view);
+    const view = new VendingMachineMainView();
+    const presenter = new VendingMachineMainPresenter(model, view);
 
     view.setPresenter(presenter);
     presenter.initProcess();
