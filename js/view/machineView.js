@@ -3,14 +3,12 @@
   초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class MachineView {
-  constructor(itemList) {
-    this.itemList = itemList;
+  constructor() {
     this.clickItemNumberButton = null;
-    this.displayItem(itemList);
     this.addEventItemNumberClicked();
   }
 
-  displayItem(itemList) {
+  renderMachine(itemList) {
     this.renderItem(itemList);
   }
   addEventItemNumberClicked() {
@@ -21,9 +19,9 @@ class MachineView {
       })
     })
   }
-  displaySelectedItemImage(number) {
+  displaySelectedItemImage(itemList, number) {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
-    const item = this.itemList.filter(v => v.name === itemName)[0];
+    const item = itemList.filter(v => v.name === itemName)[0];
     const imageList = document.querySelector('.image_list');
     const imageItem = document.createElement('li');
     imageItem.innerHTML =

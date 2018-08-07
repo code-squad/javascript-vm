@@ -12,6 +12,9 @@ class MachineModel {
   getItemList() {
     return this.itemList;
   }
+  getTotalInsertedMoney() {
+    return this.totalInsertedMoney;
+  }
   receiveMoney(money) {
     this.totalInsertedMoney += Number(money);
     this.notifyReceiveMoney(money, this.totalInsertedMoney);

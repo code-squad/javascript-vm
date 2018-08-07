@@ -17,10 +17,10 @@ class WalletView {
     });
   }
 
-  rerender(wallet) {
-    this.renderMoney(wallet.getMoneyList());
+  rerender(moneyList, fullAmount) {
+    this.displayMoney(moneyList);
     this.addEventClickedMoney();
-    this.displayFullAmount(wallet.getFullAmount());
+    this.displayFullAmount(fullAmount);
   }
 
   changeFullAmount(fullAmount) {
@@ -38,12 +38,12 @@ class WalletView {
     console.log(`${clickedMoney}원`);
   }
 
-  displayMoney(wallet) {
-    this.renderMoney(wallet.getMoneyList());
-    this.displayFullAmount(wallet.getFullAmount());
+  renderWallet(moneyList, fullAmount) {
+    this.displayMoney(moneyList);
+    this.displayFullAmount(fullAmount);
   }
 
-  renderMoney(moneyList) {
+  displayMoney(moneyList) {
     const moneyUnit = Object.keys(moneyList);
     const moneyNumber = Object.values(moneyList);
     const moneyView = moneyUnit.reduce((acc, ele, idx) => {

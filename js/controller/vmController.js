@@ -15,7 +15,7 @@ class VendingMachine {
   }
 
   initWallet() {
-    this.walletView.displayMoney(this.walletModel);
+    this.walletView.renderWallet(this.walletModel.getMoneyList(), this.walletModel.getFullAmount());
     this.walletView.addEventClickedMoney();
     this.walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
     this.walletModel.notifyDecreasedMoney = this.notifyDecreasedMoney.bind(this);
@@ -23,6 +23,7 @@ class VendingMachine {
   }
 
   initMachine() {
+    this.machineView.renderMachine(this.machineModel.getItemList());
     this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
     this.machineView.clickItemNumberButton = this.clickItemNumberButton.bind(this);
   }
@@ -58,20 +59,21 @@ class VendingMachine {
   }
 
   selectItemHandler(itemNumber) {
+    const itemList = this.machineModel.getItemList();
     if (!this.machineModel.isEnoughMoney(itemNumber)) {
       this.machineView.alertShortOfMoney();
       return;
     }
-    this.machineView.displaySelectedItemImage(itemNumber);
+    this.machineView.displaySelectedItemImage(itemList, itemNumber);
     this.machineView.displaySelectedItemLog(itemNumber);
     this.machineModel.decreaseItemStock(itemNumber);
     this.machineModel.decreaseTotalInsertedMoney(itemNumber);
-    this.machineView.displayTotalInsertedMoney(this.machineModel.totalInsertedMoney);
-    this.machineView.displayAvailableItem(this.machineModel.totalInsertedMoney);
+    this.machineView.displayTotalInsertedMoney(this.machineModel.getTotalInsertedMoney());
+    this.machineView.displayAvailableItem(this.machineModel.getTotalInsertedMoney());
   }
 
   notifyDecreasedMoney() {
-    this.walletView.rerender(this.walletModel);
+    this.walletView.rerender(this.walletModel.getMoneyList(), this.walletModel.getFullAmount());
   }
 
   notifyReceiveMoney(insertedMoney, totalInsertedMoney) {
