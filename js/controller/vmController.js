@@ -59,12 +59,11 @@ class VendingMachine {
   }
 
   selectItemHandler(itemNumber) {
-    const itemList = this.machineModel.getItemList();
     if (!this.machineModel.isEnoughMoney(itemNumber)) {
       this.machineView.alertShortOfMoney();
       return;
     }
-    this.machineView.displaySelectedItemImage(itemList, itemNumber);
+    this.machineView.displaySelectedItemImage(this.machineModel.getItemList(), itemNumber);
     this.machineView.displaySelectedItemLog(itemNumber);
     this.machineModel.decreaseItemStock(itemNumber);
     this.machineModel.decreaseTotalInsertedMoney(itemNumber);
