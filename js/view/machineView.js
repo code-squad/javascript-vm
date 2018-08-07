@@ -5,13 +5,13 @@
 class MachineView {
   constructor() {
     this.clickItemNumberButton = null;
-    this.addEventItemNumberClicked();
   }
 
   renderMachine(itemList) {
     this.renderItem(itemList);
   }
-  addEventItemNumberClicked() {
+
+  addEventClickedItemNumber() {
     const itemNumberList = document.querySelectorAll('.coin_button_item');
     itemNumberList.forEach(v => {
       v.addEventListener('click', ({ target }) => {
@@ -19,6 +19,7 @@ class MachineView {
       })
     })
   }
+
   displaySelectedItemImage(itemList, number) {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
@@ -29,8 +30,8 @@ class MachineView {
         <img class = "item_image" alt="No Image" src="js/model/images/${item.imageName}">
       </li>`;
     imageList.insertAdjacentHTML('afterBegin', imageItem.innerHTML);
-
   }
+
   displaySelectedItemLog(number) {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
     const logList = document.querySelector('.log_list');
@@ -51,6 +52,7 @@ class MachineView {
             </li>`
     logList.insertAdjacentHTML('afterBegin', logItem.innerHTML);
   }
+
   renderItem(itemList) {
     let processedItemList = itemList.reduce((acc, ele, idx) => {
       acc +=
@@ -64,6 +66,7 @@ class MachineView {
     }, '');
     document.querySelector('.item_list_container').innerHTML = processedItemList;
   }
+
   displayTotalInsertedMoney(totalInsertedMoney) {
     let currentCoin = document.querySelector('.current_coin');
     currentCoin.innerHTML = `${Util.numberWithCommas(totalInsertedMoney)}원`;
@@ -80,12 +83,15 @@ class MachineView {
       }
     }
   }
+
   rerender(totalInsertedMoney) {
     this.displayTotalInsertedMoney(totalInsertedMoney)
   }
+
   alertShortOfMoney() {
     alert('돈이 부족합니다');
   }
+
   alertNotAvailableNumber() {
     alert('번호가 유효하지 않습니다')
   }

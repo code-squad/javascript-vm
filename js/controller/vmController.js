@@ -19,18 +19,18 @@ class VendingMachine {
     this.walletView.addEventClickedMoney();
     this.walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
     this.walletModel.notifyDecreasedMoney = this.notifyDecreasedMoney.bind(this);
-    this.walletModel.notifyNoUnit = this.notifyNoUnit.bind(this);
   }
 
   initMachine() {
     this.machineView.renderMachine(this.machineModel.getItemList());
-    this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
+    this.machineView.addEventClickedItemNumber();
     this.machineView.clickItemNumberButton = this.clickItemNumberButton.bind(this);
+    this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
   }
 
   clickMoneyButtonHandler(moneyUnit) {
     if (!this.walletModel.hasMoney(moneyUnit)) {
-      this.notifyNoUnit(moneyUnit)
+      this.walletView.noMoneyUnit(moneyUnit);
       return;
     }
     this.walletView.printClickedMoney(moneyUnit);
@@ -79,10 +79,6 @@ class VendingMachine {
   notifyReceiveMoney(insertedMoney, totalInsertedMoney) {
     this.machineView.displayInsertLog(insertedMoney);
     this.machineView.rerender(totalInsertedMoney);
-  }
-
-  notifyNoUnit(price) {
-    this.walletView.noMoneyUnit(price);
   }
 
   resetItemNumberCounting() {

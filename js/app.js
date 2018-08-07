@@ -7,5 +7,3 @@ const walletModel = new WalletModel(money);
 const machineView = new MachineView(itemList);
 const walletView = new WalletView();
 const vendingMachine = new VendingMachine(machineModel, walletModel, machineView, walletView);
-// vendingMachine.initWallet();
-// vendingMachine.initMachine();
