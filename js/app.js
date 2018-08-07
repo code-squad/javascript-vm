@@ -5,7 +5,7 @@
 const machineModel = new MachineModel(itemList);
 const walletModel = new WalletModel(money);
 const machineView = new MachineView(itemList);
-const walletView = new WalletView(money);
+const walletView = new WalletView();
 const vendingMachine = new VendingMachine(machineModel, walletModel, machineView, walletView);
-vendingMachine.initWallet();
-vendingMachine.initMachine();
+// vendingMachine.initWallet();
+// vendingMachine.initMachine();

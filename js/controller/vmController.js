@@ -10,9 +10,13 @@ class VendingMachine {
     this.walletModel = walletModel;
     this.machineView = machineView;
     this.walletView = walletView;
+    this.initWallet();
+    this.initMachine();
   }
 
   initWallet() {
+    this.walletView.displayMoney(this.walletModel.getMoneyList());
+    this.walletView.addEventClickedMoney();
     this.walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
     this.walletModel.notifyDecreasedMoney = this.notifyDecreasedMoney.bind(this);
     this.walletModel.notifyNoUnit = this.notifyNoUnit.bind(this);
