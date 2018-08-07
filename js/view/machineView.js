@@ -74,9 +74,9 @@ class MachineView {
     const availableItemClass = 'available_item';
     for (let ele of itemList) {
       if (ele.getAttribute('data-price') <= totalInsertedMoney) {
-        if (!ele.classList.contains(availableItemClass)) ele.classList.add(availableItemClass);
+        ele.classList.toggle(availableItemClass, true);
       } else {
-        if (ele.classList.contains(availableItemClass)) ele.classList.remove(availableItemClass);
+        ele.classList.toggle(availableItemClass, false);
       }
     }
   }
