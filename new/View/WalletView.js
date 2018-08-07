@@ -22,9 +22,7 @@ class VendingMachineWalletView {
                 const controlPresenter = this.mainView.getPresenter().getControlPresenter();
                 const result = walletPresenter.insertMoneyToVendingMachine(selectionMoneyNumberData);
                 controlPresenter.refreshInvestedMoney(result, selectionMoneyNumberData, 'input');
-                // this.model.decreaseWalletMoney(selectionMoneyNumberData);
-                // this.insertMoneyToVendingMachine(selectionMoneyNumberData);
-                // this.itemView.showSelctableNodes();
+                this.mainView.getItemView().showSelctableNodes();
                 // this.model.clearTimer(this.model.getRefundTimerID());
             });
         }

@@ -1,15 +1,9 @@
 class VendingMachineItemView {
-    constructor() {
-
-        this.presenter;
+    constructor(view) {
         this.util = new Utility();
+        this.mainView = view;
 
 
-
-    }
-
-    setPresenter(presenter) {
-        this.presenter = presenter;
     }
 
     /** 
@@ -19,14 +13,20 @@ class VendingMachineItemView {
         const itemNodeList = this.util.getNodeData('.d-item', 'all');
         let repeatCount = 0;
         let itemPrice;
+        let itemPresenter = this.mainView.getPresenter().getItemPresenter();
 
         for (let node of itemNodeList) {
             repeatCount++;
             if (node.classList.contains('high-light')) { continue; }
-            if(this.isInvestedMoneyHigherThanItemPrice(node, repeatCount, money)) {
-                this.viewUpdate.setPropertyToItemNode(node, 'high-light');
+            if(itemPresenter.isInvestedMoneyHigherThanItemPrice(node, repeatCount, money)) {
+                this.util.setPropertyToItemNode(node, 'high-light');
             }
         }
     }
+
+
+
+
+
     
 }

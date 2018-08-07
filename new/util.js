@@ -63,5 +63,14 @@ class Utility {
         }
     }
 
+    /**
+     * 노드에 속성을(클래스) 설정합니다
+     * @param {node} node
+     * @param {string} property - 노드에 적용할 Class명
+     */
+    setPropertyToItemNode(node, property) {
+        node.classList.add(property);
+    }
+
 
 }
