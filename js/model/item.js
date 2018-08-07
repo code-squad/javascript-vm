@@ -1,4 +1,4 @@
-const itemList = [{
+const item = [{
   name: '콜라',
   price: 500,
   stock: 5,
