@@ -1,7 +1,6 @@
-/** 자판기에 대한 모델을 나타내는 클래스입니다 */
 class VendingMachineModel {
     /** 
-     * 자판기의 초기상태를 지정합니다.
+     * 자판기에 대한 모델을 나타내는 클래스입니다
     */
     constructor() {
         this.walletMoney = 0;

@@ -32,6 +32,7 @@ class VendingMachineControlView {
 
     /** 
      * 자판기에 투입된 돈을 새로고침합니다 (VIEW)
+     * @param {number} money - 새로고침 할 돈
      */
     refreshInvestedMoneyInVendingMachine(money) {
         const vendingMachineInvestedMoneyDivNode = this.util.getNodeData('#money-display');

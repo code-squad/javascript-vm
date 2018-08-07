@@ -5,6 +5,4 @@ window.addEventListener('DOMContentLoaded', () => {
 
     view.setPresenter(presenter);
     presenter.initProcess();
-
-
 });
