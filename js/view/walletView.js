@@ -3,25 +3,24 @@ Wallet의 랜더링을 담당하는 파일
 초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class WalletView {
-  constructor(walletModel) {
-    this.walletModel = walletModel;
+  constructor() {
     this.clickMoneyButtonHandler = null;
-    this.displayMoney(walletModel);
-    this.addEventMoneyButton();
   }
 
-  addEventMoneyButton() {
+  addEventClickedMoney() {
     const moneyButtons = document.querySelectorAll('.money_list .money');
-    moneyButtons.forEach((v, i) => {
+    moneyButtons.forEach((v) => {
       v.addEventListener('click', ({ target }) => {
-        this.clickMoneyButtonHandler(target);
+        let moneyUnit = target.dataset["money"];
+        this.clickMoneyButtonHandler(moneyUnit);
       })
     });
   }
 
-  rerender(price, walletModel) {
-    this.displayFullAmount(walletModel.fullAmount);
-    this.changeNumberOfItem(price, walletModel.getMoneyList());
+  rerender(moneyList, fullAmount) {
+    this.displayMoney(moneyList);
+    this.addEventClickedMoney();
+    this.displayFullAmount(fullAmount);
   }
 
   changeFullAmount(fullAmount) {
@@ -36,29 +35,17 @@ class WalletView {
   }
 
   printClickedMoney(clickedMoney) {
-    console.log(clickedMoney.innerText);
+    console.log(`${clickedMoney}원`);
   }
 
-  displayMoney(walletModel) {
-    this.renderMoney(walletModel.getMoneyList());
-    this.displayFullAmount(walletModel.fullAmount);
+  renderWallet(moneyList, fullAmount) {
+    this.displayMoney(moneyList);
+    this.displayFullAmount(fullAmount);
   }
 
-  renderMoney(money) {
-    const moneyUnit = Object.keys(money);
-    const moneyNumber = Object.values(money);
-    const moneyList = moneyUnit.reduce((acc, ele, idx) => {
-      acc +=
-        `<li class= "money_item">
-        <div class="money_container">
-          <span class="money" data-money="${ele}">${Util.numberWithCommas(ele)}원</span>
-          <span class="number_of_money">${moneyNumber[idx]}개</span>
-        </div>
-      </li>
-      `
-      return acc;
-    }, '');
-    document.querySelector('.money_list').innerHTML = moneyList;
+  displayMoney(moneyList) {
+    const moneyListString = Temp.moneyListTemp(moneyList);
+    document.querySelector('.money_list').innerHTML = moneyListString;
   }
 
   displayFullAmount(fullAmount) {

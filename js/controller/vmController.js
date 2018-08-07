@@ -10,32 +10,72 @@ class VendingMachine {
     this.walletModel = walletModel;
     this.machineView = machineView;
     this.walletView = walletView;
+    this.initWallet();
+    this.initMachine();
   }
 
   initWallet() {
+    this.walletView.renderWallet(this.walletModel.getMoneyList(), this.walletModel.getFullAmount());
+    this.walletView.addEventClickedMoney();
     this.walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
     this.walletModel.notifyDecreasedMoney = this.notifyDecreasedMoney.bind(this);
-    this.walletModel.notifyNoUnit = this.notifyNoUnit.bind(this);
   }
 
   initMachine() {
+    this.machineView.renderMachine(this.machineModel.getItemList());
+    this.machineView.addEventClickedItemNumber();
+    this.machineView.clickItemNumberButton = this.clickItemNumberButton.bind(this);
     this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
   }
 
-  clickMoneyButtonHandler(button) {
-    const moneyUnit = button.getAttribute('data-money');
+  clickMoneyButtonHandler(moneyUnit) {
     if (!this.walletModel.hasMoney(moneyUnit)) {
-      this.notifyNoUnit(moneyUnit)
+      this.walletView.noMoneyUnit(moneyUnit);
       return;
     }
-    this.walletView.printClickedMoney(button);
+    this.walletView.printClickedMoney(moneyUnit);
     this.walletModel.decreaseMoney(moneyUnit);
     this.machineModel.receiveMoney(moneyUnit);
-    this.machineView.displayAvailableItem();
+    this.machineView.displayAvailableItem(this.machineModel.totalInsertedMoney);
   }
 
-  notifyDecreasedMoney(price) {
-    this.walletView.rerender(price, this.walletModel);
+  clickItemNumberButton(target) {
+    this.checkSetTimeout = this.checkSetTimeout || { current: null, number: '' };
+    this.startItemNumberCounting(target); // 완료되면 confirmItemNumber 함수 실행
+  }
+  confirmItemNumber(itemNumber) {
+    this.selectItemHandler(itemNumber);
+  }
+
+  selectItemHandler(itemNumber) {
+    if (!this.machineModel.isEnoughMoney(itemNumber)) {
+      this.machineView.alertShortOfMoney();
+      return;
+    }
+    this.machineView.displaySelectedItemImage(this.machineModel.getItemList(), itemNumber);
+    this.machineView.displaySelectedItemLog(itemNumber);
+    this.machineModel.decreaseItemStock(itemNumber);
+    this.machineModel.decreaseTotalInsertedMoney(itemNumber);
+    this.machineView.displayTotalInsertedMoney(this.machineModel.getTotalInsertedMoney());
+    this.machineView.displayAvailableItem(this.machineModel.getTotalInsertedMoney());
+  }
+
+  startItemNumberCounting(target) {
+    let checker = this.checkSetTimeout;
+    if (!!checker.current) clearTimeout(checker.current);
+    checker.number += target.dataset['select'];
+    checker.current = setTimeout(() => {
+      if (checker.number > this.machineModel.getItemList().length) {
+        this.machineView.alertNotAvailableNumber();
+      } else {
+        this.confirmItemNumber(checker.number);
+      }
+      this.resetItemNumberCounting();
+    }, 3000);
+  }
+
+  notifyDecreasedMoney() {
+    this.walletView.rerender(this.walletModel.getMoneyList(), this.walletModel.getFullAmount());
   }
 
   notifyReceiveMoney(insertedMoney, totalInsertedMoney) {
@@ -43,8 +83,7 @@ class VendingMachine {
     this.machineView.rerender(totalInsertedMoney);
   }
 
-  notifyNoUnit(price) {
-    this.walletView.noMoneyUnit(price);
+  resetItemNumberCounting() {
+    this.checkSetTimeout = { current: null, number: '' };
   }
-
 }

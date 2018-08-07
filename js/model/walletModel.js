@@ -6,16 +6,19 @@
 class WalletModel {
   constructor(money) {
     this.money = money;
-    this.fullAmount = this.getFullAmount(this.money);
+    this.fullAmount = this.calculateFullAmount(this.money);
     this.notifyDecreasedMoney = null;
-    this.notifyNoUnit = null;
   }
 
   getMoneyList() {
     return this.money;
   }
 
-  getFullAmount(money) {
+  getFullAmount() {
+    return this.fullAmount;
+  }
+
+  calculateFullAmount(money) {
     const moneyUnit = Object.keys(money);
     const moneyNumber = Object.values(money);
     const fullAmount = moneyUnit.reduce((acc, ele, idx) => {
@@ -32,8 +35,9 @@ class WalletModel {
     }
     this.money[price] -= 1;
     this.fullAmount -= Number(price);
-    this.notifyDecreasedMoney(price, this.fullAmount);
+    this.notifyDecreasedMoney();
   }
+
   hasMoney(moneyUnit) {
     return money[moneyUnit];
   }
