@@ -169,7 +169,7 @@
 }
 .money_list,
 .money_item {
-  display: inline;
+  display: block;
 }
 
 .money_container {

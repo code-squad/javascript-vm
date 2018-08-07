@@ -15,7 +15,7 @@ class VendingMachine {
   }
 
   initWallet() {
-    this.walletView.displayMoney(this.walletModel.getMoneyList());
+    this.walletView.displayMoney(this.walletModel);
     this.walletView.addEventClickedMoney();
     this.walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
     this.walletModel.notifyDecreasedMoney = this.notifyDecreasedMoney.bind(this);
@@ -70,8 +70,8 @@ class VendingMachine {
     this.machineView.displayAvailableItem(this.machineModel.totalInsertedMoney);
   }
 
-  notifyDecreasedMoney(price) {
-    this.walletView.rerender(price, this.walletModel);
+  notifyDecreasedMoney() {
+    this.walletView.rerender(this.walletModel);
   }
 
   notifyReceiveMoney(insertedMoney, totalInsertedMoney) {

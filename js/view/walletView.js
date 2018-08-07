@@ -17,9 +17,10 @@ class WalletView {
     });
   }
 
-  rerender(price, walletModel) {
-    this.displayFullAmount(money);
-    this.changeNumberOfItem(price, walletModel.getMoneyList());
+  rerender(wallet) {
+    this.renderMoney(wallet.getMoneyList());
+    this.addEventClickedMoney();
+    this.displayFullAmount(wallet.getFullAmount());
   }
 
   changeFullAmount(fullAmount) {
@@ -37,15 +38,15 @@ class WalletView {
     console.log(`${clickedMoney}원`);
   }
 
-  displayMoney(money) {
-    this.renderMoney(money);
-    this.displayFullAmount(money);
+  displayMoney(wallet) {
+    this.renderMoney(wallet.getMoneyList());
+    this.displayFullAmount(wallet.getFullAmount());
   }
 
-  renderMoney(money) {
-    const moneyUnit = Object.keys(money);
-    const moneyNumber = Object.values(money);
-    const moneyList = moneyUnit.reduce((acc, ele, idx) => {
+  renderMoney(moneyList) {
+    const moneyUnit = Object.keys(moneyList);
+    const moneyNumber = Object.values(moneyList);
+    const moneyView = moneyUnit.reduce((acc, ele, idx) => {
       acc +=
         `<li class= "money_item">
         <div class="money_container">
@@ -56,16 +57,10 @@ class WalletView {
       `
       return acc;
     }, '');
-    document.querySelector('.money_list').innerHTML = moneyList;
+    document.querySelector('.money_list').innerHTML = moneyView;
   }
 
-  displayFullAmount(money) {
-    const moneyUnit = Object.keys(money);
-    const moneyNumber = Object.values(money);
-    const fullAmount = moneyUnit.reduce((acc, ele, idx) => {
-      acc += (ele * moneyNumber[idx]);
-      return acc;
-    }, 0);
+  displayFullAmount(fullAmount) {
     document.querySelector('.full_amount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
   }
 
