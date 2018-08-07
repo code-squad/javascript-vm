@@ -64,6 +64,13 @@ class VendingMachineWalletPresenter {
         return true;
     }
 
+    /** 
+     * 현재 동작중인 타이머를 취소합니다
+     */
+    calcelCurrentRunningTimer() {
+        this.model.clearTimer(this.model.getRefundTimerID());
+    }
+
 
 
 }

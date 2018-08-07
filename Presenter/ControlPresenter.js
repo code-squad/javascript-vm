@@ -99,6 +99,9 @@ class VendingMachineControlPresenter {
         this.model.increaseWalletMoney(money);
     }
 
+    /** 
+     * 모든 VIEW (Item, Control, View) 를 새로고침 합니다
+    */
     refreshAllView() {
         this.walletView.refreshWalletMoney(this.model.getWalletMoney());
         this.refreshInvestedMoney();

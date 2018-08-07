@@ -10,7 +10,6 @@ class VendingMachineWalletView {
      */
     registerClickEventToInsertMoneyBtn() {
         const moneyInputBtnList = this.util.getNodeData('.ui-item-base', 'all');
-        // const investedMoney = this.model.getInvestedMoney();
 
         for (let node of moneyInputBtnList) {
             if (node.nodeName !== "BUTTON") continue;
@@ -24,7 +23,7 @@ class VendingMachineWalletView {
                 controlPresenter.refreshInvestedMoney();
                 this.mainView.getLogView().displayLog(selectionMoneyNumberData, 'input');
                 this.mainView.getItemView().showSelctableNodes();
-                // this.model.clearTimer(this.model.getRefundTimerID());
+                walletPresenter.calcelCurrentRunningTimer();
             });
         }
     }
