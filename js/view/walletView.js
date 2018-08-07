@@ -44,14 +44,14 @@ class WalletView {
   }
 
   displayMoney(moneyList) {
-    const moneyUnit = Object.keys(moneyList);
-    const moneyNumber = Object.values(moneyList);
-    const moneyView = moneyUnit.reduce((acc, ele, idx) => {
+    const moneyUnitList = Object.keys(moneyList);
+    const moneyNumberList = Object.values(moneyList);
+    const moneyView = moneyUnitList.reduce((acc, ele, idx) => {
       acc +=
         `<li class= "money_item">
         <div class="money_container">
           <span class="money" data-money="${ele}">${Util.numberWithCommas(ele)}원</span>
-          <span class="number_of_money">${moneyNumber[idx]}개</span>
+          <span class="number_of_money">${moneyNumberList[idx]}개</span>
         </div>
       </li>
       `

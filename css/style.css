@@ -164,18 +164,20 @@
   text-align: center;
 }
 .available_item{
-  background-color: #6bf5af;
+  background-color: #b0ffaa;
   color: #000;
 }
 .money_list,
 .money_item {
   display: block;
+  padding-left: 0px;
 }
 
 .money_container {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  padding: 10px;
 }
 
 .number_of_money,

@@ -25,7 +25,6 @@ class MachineModel {
 
   isEnoughMoney(itemNumber) {
     const itemPrice = document.querySelector(`[data-number="${itemNumber}"]`).dataset["price"];
-    console.log(itemPrice, this.totalInsertedMoney);
     return !!(itemPrice <= this.totalInsertedMoney)
   }
 

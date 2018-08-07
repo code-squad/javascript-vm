@@ -41,21 +41,10 @@ class VendingMachine {
 
   clickItemNumberButton(target) {
     this.checkSetTimeout = this.checkSetTimeout || { current: null, number: '' };
-    this.startItemNumberCounting(target);
+    this.startItemNumberCounting(target); // 완료되면 confirmItemNumber 함수 실행
   }
-
-  startItemNumberCounting(target) {
-    let checker = this.checkSetTimeout;
-    if (!!checker.current) clearTimeout(checker.current);
-    checker.number += target.dataset['select'];
-    checker.current = setTimeout(() => {
-      if (checker.number > this.machineModel.getItemList().length) {
-        this.machineView.alertNotAvailableNumber();
-      } else {
-        this.selectItemHandler(checker.number);
-      }
-      this.resetItemNumberCounting();
-    }, 3000);
+  confirmItemNumber(itemNumber) {
+    this.selectItemHandler(itemNumber);
   }
 
   selectItemHandler(itemNumber) {
@@ -69,6 +58,20 @@ class VendingMachine {
     this.machineModel.decreaseTotalInsertedMoney(itemNumber);
     this.machineView.displayTotalInsertedMoney(this.machineModel.getTotalInsertedMoney());
     this.machineView.displayAvailableItem(this.machineModel.getTotalInsertedMoney());
+  }
+
+  startItemNumberCounting(target) {
+    let checker = this.checkSetTimeout;
+    if (!!checker.current) clearTimeout(checker.current);
+    checker.number += target.dataset['select'];
+    checker.current = setTimeout(() => {
+      if (checker.number > this.machineModel.getItemList().length) {
+        this.machineView.alertNotAvailableNumber();
+      } else {
+        this.confirmItemNumber(checker.number);
+      }
+      this.resetItemNumberCounting();
+    }, 3000);
   }
 
   notifyDecreasedMoney() {
