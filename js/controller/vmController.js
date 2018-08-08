@@ -27,6 +27,21 @@ class VendingMachine {
     this.checkSetTimeout = this.checkSetTimeout || { current: null, number: '' };
     this.startItemNumberCounting(target); // 완료되면 confirmItemNumber 함수 실행
   }
+
+  startItemNumberCounting(target) {
+    let checker = this.checkSetTimeout;
+    if (!!checker.current) clearTimeout(checker.current);
+    checker.number += target.dataset['select'];
+    checker.current = setTimeout(() => {
+      if (checker.number > this.machineModel.getItemList().length) {
+        this.machineView.alertNotAvailableNumber();
+      } else {
+        this.confirmItemNumber(checker.number);
+      }
+      this.resetItemNumberCounting();
+    }, 3000);
+  }
+
   confirmItemNumber(itemNumber) {
     this.selectItemHandler(itemNumber);
   }
@@ -44,22 +59,10 @@ class VendingMachine {
     this.machineView.displayAvailableItem(this.machineModel.getTotalInsertedMoney());
   }
 
-  startItemNumberCounting(target) {
-    let checker = this.checkSetTimeout;
-    if (!!checker.current) clearTimeout(checker.current);
-    checker.number += target.dataset['select'];
-    checker.current = setTimeout(() => {
-      if (checker.number > this.machineModel.getItemList().length) {
-        this.machineView.alertNotAvailableNumber();
-      } else {
-        this.confirmItemNumber(checker.number);
-      }
-      this.resetItemNumberCounting();
-    }, 3000);
-  }
-
-  notifyDecreasedMoney() {
-    this.walletView.rerender(this.walletModel.getMoneyList(), this.walletModel.getFullAmount());
+  notifyDecreasedMoney(moneyUnit) {
+    const moneyList = this.walletModel.getMoneyList();
+    const fullAmount = this.walletModel.getFullAmount();
+    this.walletView.updateRendering(moneyUnit, moneyList, fullAmount);
   }
 
   notifyReceiveMoney(insertedMoney, totalInsertedMoney) {

@@ -28,14 +28,14 @@ class WalletModel {
     return fullAmount;
   }
 
-  decreaseMoney(price) {
-    if (this.money[price] === 0) {
-      this.notifyNoUnit(price);
+  decreaseMoney(moneyUnit) {
+    if (this.money[moneyUnit] === 0) {
+      this.notifyNoUnit(moneyUnit);
       return;
     }
-    this.money[price] -= 1;
-    this.fullAmount -= Number(price);
-    this.notifyDecreasedMoney();
+    this.money[moneyUnit] -= 1;
+    this.fullAmount -= Number(moneyUnit);
+    this.notifyDecreasedMoney(moneyUnit);
   }
 
   hasMoney(moneyUnit) {

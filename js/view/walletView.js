@@ -17,9 +17,8 @@ class WalletView {
     });
   }
 
-  rerender(moneyList, fullAmount) {
-    this.displayMoney(moneyList);
-    this.addEventClickedMoney();
+  updateRendering(moneyUnit, moneyList, fullAmount) {
+    this.changeNumberOfItem(moneyUnit, moneyList);
     this.displayFullAmount(fullAmount);
   }
 
@@ -28,10 +27,10 @@ class WalletView {
     fullAmountElement.innerText = `${Util.numberWithCommas(fullAmount)}원`;
   }
 
-  changeNumberOfItem(price, moneyList) {
-    const item = document.querySelector(`[data-money='${price}'`);
+  changeNumberOfItem(moneyUnit, moneyList) {
+    const item = document.querySelector(`[data-money='${moneyUnit}'`);
     const numberOfItem = item.nextElementSibling;
-    numberOfItem.innerText = `${moneyList[price]}개`;
+    numberOfItem.innerText = `${moneyList[moneyUnit]}개`;
   }
 
   printClickedMoney(clickedMoney) {
