@@ -1,4 +1,4 @@
-class LogView{
+export default class LogView{
     constructor(logingBox){
         this.logingBox = logingBox;
         this.logCount = 0;

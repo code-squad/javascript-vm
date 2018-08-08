@@ -1,3 +1,13 @@
+import CoinCountView from './CoinCountView.js'
+import {itemData} from './itemData.js'
+import LogView from './LogView.js'
+import MenuView from './MenuView.js'
+import MoneyView from './MoneyView.js'
+import SelectItemView from './SelectItemView.js'
+import {templateItemList} from './Template.js'
+import VmController from './VmController.js'
+import VmModel from './VmModel.js'
+
 const walletData = {
     total : 30000,
     10000 : 1,

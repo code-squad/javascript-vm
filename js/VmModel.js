@@ -1,4 +1,4 @@
-class VmModel{
+export default class VmModel{
     constructor(walletData){
         this.yourMoney = walletData.total;
         this.coinCount = walletData;

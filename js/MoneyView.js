@@ -1,4 +1,4 @@
-class MoneyView{
+export default class MoneyView{
     constructor(){
         this.yourMoney = null;
         this.inputMoney = null;

@@ -2,7 +2,7 @@
     자판기 menu들의 view를 담당하고 있는 클래스!
 */
 
-class MenuView{
+export default class MenuView{
     constructor(itemList){
         this.itemList = itemList;
         this.displayItemList();

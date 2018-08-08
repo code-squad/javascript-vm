@@ -10,7 +10,7 @@
     그래서 독립적인 기능들을 연결해줄 수 있는 역할이 필요한데
     그것이 컨트롤러에 역할이라고 생각합니다!
  */
-class VmController{
+export default class VmController{
     constructor(menuView, model, coinCountView, moneyView, logView, selectItemView){
         this.menuView = menuView;
         this.model = model;

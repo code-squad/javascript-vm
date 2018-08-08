@@ -1,4 +1,3 @@
-
 const itemData = [
     {id : 1, name : "콜라", price : 500},
     {id : 2, name : "사이다", price : 1000},
@@ -34,3 +33,5 @@ const itemData = [
     {id : 32, name : "포도맛환타", price : 1000},
     
 ]
+
+export {itemData}

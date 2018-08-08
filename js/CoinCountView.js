@@ -1,4 +1,4 @@
-function CoinCountView(){
+export default function CoinCountView(){
     this.insertCoinHandler = null;
     this.coinCount = null;
     this.stopReturnMoneyHandler = null;        

@@ -1,4 +1,4 @@
-class SelectItemView{
+export default class SelectItemView{
     constructor(){
         this.itemId = "";
         this.lackItemHandler = null;
