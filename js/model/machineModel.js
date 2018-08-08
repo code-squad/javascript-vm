@@ -26,7 +26,7 @@ class MachineModel {
 
   receiveMoney(money) {
     this.totalInsertedMoney += Number(money);
-    this.notifyReceiveMoney(money, this.totalInsertedMoney);
+    this.notifyReceiveMoney(money);
   }
 
   isEnoughMoney(itemNumber) {

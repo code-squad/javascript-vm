@@ -21,7 +21,8 @@ class VendingMachine {
     this.walletView.printClickedMoney(moneyUnit);
     this.walletModel.decreaseMoney(moneyUnit);
     this.machineModel.receiveMoney(moneyUnit);
-    this.machineView.displayAvailableItem(this.machineModel.totalInsertedMoney);
+    const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
+    this.machineView.displayAvailableItem(totalInsertedMoney);
   }
 
   clickItemNumberButton(target) {
@@ -38,14 +39,10 @@ class VendingMachine {
       if (checker.number > this.machineModel.getItemList().length) {
         this.machineView.alertNotAvailableNumber();
       } else {
-        this.confirmItemNumber(checker.number);
+        this.selectItemHandler(checker.number);
       }
       this.initItemNumberCounting();
     }, 3000);
-  }
-
-  confirmItemNumber(itemNumber) {
-    this.selectItemHandler(itemNumber);
   }
 
   selectItemHandler(itemNumber) {
@@ -53,12 +50,11 @@ class VendingMachine {
       this.machineView.alertShortOfMoney();
       return;
     }
-    this.machineView.displaySelectedItemImage(this.machineModel.getItemList(), itemNumber);
     this.machineView.displaySelectedItemLog(itemNumber);
     this.machineModel.decreaseItemStock(itemNumber);
     this.machineModel.decreaseTotalInsertedMoney(itemNumber);
-    this.machineView.displayTotalInsertedMoney(this.machineModel.getTotalInsertedMoney());
-    this.machineView.displayAvailableItem(this.machineModel.getTotalInsertedMoney());
+    const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
+    this.machineView.updateRendering(totalInsertedMoney);
     this.startReturnTimeCounting();
   }
 
@@ -72,6 +68,8 @@ class VendingMachine {
 
   returnChangeHandler() {
     const change = this.machineModel.returnChange();
+    const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
+    this.machineView.updateRendering(totalInsertedMoney);
     this.machineView.displayReturnLog(change);
     this.walletModel.receiveChange(change);
   }
@@ -82,9 +80,10 @@ class VendingMachine {
     this.walletView.updateRendering(moneyUnit, moneyList, fullAmount);
   }
 
-  notifyReceiveMoney(insertedMoney, totalInsertedMoney) {
+  notifyReceiveMoney(insertedMoney) {
     this.machineView.displayInsertLog(insertedMoney);
-    this.machineView.rerender(totalInsertedMoney);
+    const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
+    this.machineView.updateRendering(totalInsertedMoney);
   }
 
   initItemNumberCounting() {

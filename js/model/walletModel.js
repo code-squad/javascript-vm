@@ -6,7 +6,7 @@
 class WalletModel {
   constructor(money) {
     this.money = money;
-    this.fullAmount = this.calculateFullAmount(this.money);
+    this.fullAmount = this.calculateFullAmount(money);
     this.notifyDecreasedMoney = null;
   }
 

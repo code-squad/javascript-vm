@@ -8,7 +8,7 @@ class MachineView {
   }
 
   renderMachine(itemList) {
-    this.renderItem(itemList);
+    this.displayItem(itemList);
   }
 
   addEventClickedItemNumber() {
@@ -49,7 +49,7 @@ class MachineView {
     logListNode.insertAdjacentHTML('afterBegin', message);
   }
 
-  renderItem(itemList) {
+  displayItem(itemList) {
     const itemListString = Temp.itemListTemp(itemList);
     document.querySelector('.item_list_container').innerHTML = itemListString;
   }
@@ -71,8 +71,9 @@ class MachineView {
     }
   }
 
-  rerender(totalInsertedMoney) {
-    this.displayTotalInsertedMoney(totalInsertedMoney)
+  updateRendering(totalInsertedMoney) {
+    this.displayTotalInsertedMoney(totalInsertedMoney);
+    this.displayAvailableItem(totalInsertedMoney);
   }
 
   alertShortOfMoney() {
