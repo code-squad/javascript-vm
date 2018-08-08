@@ -6,7 +6,7 @@ function CoinCountView(){
     this.clickCoinBtns();
 }
 CoinCountView.prototype = {
-    clickCoinBtns : function(){
+    clickCoinBtns(){
         const currentCoins = document.querySelector(".wallet > ul");
         currentCoins.addEventListener("click", ({target})=>{
             if(!target.getAttribute("data-coin"))return ;
@@ -20,11 +20,11 @@ CoinCountView.prototype = {
             this.walletCoinView();
         })
     },
-    walletCoinView : function(){
+    walletCoinView(){
         let insertCoinBtn = document.querySelectorAll(".insert-coin-button");
         insertCoinBtn = Array.from(insertCoinBtn);
         insertCoinBtn.forEach(v=>{
             v.nextElementSibling.innerHTML = this.coinCount[v.dataset.coin] + "개";
         })
-    }    
+    }
 }

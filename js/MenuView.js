@@ -3,9 +3,15 @@
 */
 
 class MenuView{
-    constructor(){
+    constructor(itemList){
+        this.itemList = itemList;
+        this.displayItemList();
         this.inputMoney = null;
         this.items = Array.from(document.querySelectorAll('.items-box'));
+    }
+    displayItemList(){
+        const itemListElement = document.querySelector(".beverage-menu > ul");
+        itemListElement.insertAdjacentHTML("beforebegin",this.itemList);
     }
     highlightMenu(){
         this.items.forEach( v=> {
