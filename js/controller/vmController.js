@@ -13,6 +13,7 @@ class VendingMachine {
   }
 
   clickMoneyButtonHandler(moneyUnit) {
+    this.clearChangeTimeCounting();
     if (!this.walletModel.hasMoney(moneyUnit)) {
       this.walletView.noMoneyUnit(moneyUnit);
       return;
@@ -29,6 +30,7 @@ class VendingMachine {
   }
 
   monitorItemNumber(target) {
+    this.clearChangeTimeCounting();
     let checker = this.setTimeoutItemNumber;
     if (!!checker.current) clearTimeout(checker.current);
     checker.number += target.dataset['select'];
@@ -38,7 +40,7 @@ class VendingMachine {
       } else {
         this.confirmItemNumber(checker.number);
       }
-      this.resetItemNumberCounting();
+      this.initItemNumberCounting();
     }, 3000);
   }
 
@@ -61,12 +63,15 @@ class VendingMachine {
   }
 
   startReturnTimeCounting() {
-    this.setTimeoutChange = this.setTimeoutChange || { current: null };
-    if (this.setTimeoutChange.current) clearTimeout(this.setTimeoutChange.current);
-    this.setTimeoutChange.current = setTimeout(() => {
-      // returnChangeHandler();
-      console.log('hello');
+    this.setTimeoutChange = this.setTimeoutChange || null;
+    if (this.setTimeoutChange) clearTimeout(this.setTimeoutChange);
+    this.setTimeoutChange = setTimeout(() => {
+      this.returnChangeHandler();
     }, 3000);
+  }
+
+  returnChangeHandler() {
+
   }
 
   notifyDecreasedMoney(moneyUnit) {
@@ -80,10 +85,10 @@ class VendingMachine {
     this.machineView.rerender(totalInsertedMoney);
   }
 
-  resetItemNumberCounting() {
+  initItemNumberCounting() {
     this.setTimeoutItemNumber = { current: null, number: '' };
   }
-  resetChangeTimeCounting() {
-    this.setTimeoutItemNumber = { current: null };
+  clearChangeTimeCounting() {
+    clearTimeout(this.setTimeoutChange);
   }
 }
