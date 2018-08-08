@@ -71,10 +71,12 @@ class VendingMachine {
   }
 
   returnChangeHandler() {
-
+    const change = this.machineModel.returnChange();
+    this.machineView.displayReturnLog(change);
+    this.walletModel.receiveChange(change);
   }
 
-  notifyDecreasedMoney(moneyUnit) {
+  notifyChangedMoney(moneyUnit) {
     const moneyList = this.walletModel.getMoneyList();
     const fullAmount = this.walletModel.getFullAmount();
     this.walletView.updateRendering(moneyUnit, moneyList, fullAmount);
@@ -88,6 +90,7 @@ class VendingMachine {
   initItemNumberCounting() {
     this.setTimeoutItemNumber = { current: null, number: '' };
   }
+
   clearChangeTimeCounting() {
     clearTimeout(this.setTimeoutChange);
   }

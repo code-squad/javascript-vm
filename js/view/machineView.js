@@ -30,15 +30,23 @@ class MachineView {
 
   displaySelectedItemLog(number) {
     const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
-    const logListNode = document.querySelector('.log_list');
     const logItemString = Temp.selectedItemLog(number, itemName);
-    logListNode.insertAdjacentHTML('afterBegin', logItemString);
+    this.displayLog(logItemString);
   }
 
   displayInsertLog(money) {
-    const logListNode = document.querySelector('.log_list');
     const logItemString = Temp.insertMoneyLog(money);
-    logListNode.insertAdjacentHTML('afterBegin', logItemString);
+    this.displayLog(logItemString);
+  }
+
+  displayReturnLog(money) {
+    const returnLogString = Temp.returnChangeLog(money);
+    this.displayLog(returnLogString);
+  }
+
+  displayLog(message) {
+    const logListNode = document.querySelector('.log_list');
+    logListNode.insertAdjacentHTML('afterBegin', message);
   }
 
   renderItem(itemList) {

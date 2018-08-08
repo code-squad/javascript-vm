@@ -35,7 +35,17 @@ class WalletModel {
     }
     this.money[moneyUnit] -= 1;
     this.fullAmount -= Number(moneyUnit);
-    this.notifyDecreasedMoney(moneyUnit);
+    this.notifyChangedMoney([moneyUnit]);
+  }
+
+  receiveChange(money) {
+    this.fullAmount += money;
+    const changeUnitObject = Util.changeAlgorithm(money);
+    for (let unit in changeUnitObject) {
+      this.money[unit] += changeUnitObject[unit];
+    }
+    const changedUnitList = Object.keys(changeUnitObject);
+    this.notifyChangedMoney(changedUnitList);
   }
 
   hasMoney(moneyUnit) {

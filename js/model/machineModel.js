@@ -18,6 +18,12 @@ class MachineModel {
     return this.totalInsertedMoney;
   }
 
+  returnChange() {
+    const change = this.totalInsertedMoney;
+    this.totalInsertedMoney = 0;
+    return change;
+  }
+
   receiveMoney(money) {
     this.totalInsertedMoney += Number(money);
     this.notifyReceiveMoney(money, this.totalInsertedMoney);

@@ -13,7 +13,7 @@ const fullAmount = walletModel.getFullAmount();
 walletView.renderWallet(moneyList, fullAmount);
 walletView.addEventClickedMoney();
 walletView.clickMoneyButtonHandler = vendingMachine.clickMoneyButtonHandler.bind(vendingMachine);
-walletModel.notifyDecreasedMoney = vendingMachine.notifyDecreasedMoney.bind(vendingMachine);
+walletModel.notifyChangedMoney = vendingMachine.notifyChangedMoney.bind(vendingMachine);
 
 const itemList = machineModel.getItemList();
 machineView.renderMachine(itemList);

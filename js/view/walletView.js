@@ -17,26 +17,6 @@ class WalletView {
     });
   }
 
-  updateRendering(moneyUnit, moneyList, fullAmount) {
-    this.changeNumberOfItem(moneyUnit, moneyList);
-    this.displayFullAmount(fullAmount);
-  }
-
-  changeFullAmount(fullAmount) {
-    const fullAmountElement = document.querySelector('.full_amount');
-    fullAmountElement.innerText = `${Util.numberWithCommas(fullAmount)}원`;
-  }
-
-  changeNumberOfItem(moneyUnit, moneyList) {
-    const item = document.querySelector(`[data-money='${moneyUnit}'`);
-    const numberOfItem = item.nextElementSibling;
-    numberOfItem.innerText = `${moneyList[moneyUnit]}개`;
-  }
-
-  printClickedMoney(clickedMoney) {
-    console.log(`${clickedMoney}원`);
-  }
-
   renderWallet(moneyList, fullAmount) {
     this.displayMoney(moneyList);
     this.displayFullAmount(fullAmount);
@@ -49,6 +29,28 @@ class WalletView {
 
   displayFullAmount(fullAmount) {
     document.querySelector('.full_amount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
+  }
+
+  updateRendering(moneyUnit, moneyList, fullAmount) {
+    this.changeNumberOfItem(moneyUnit, moneyList);
+    this.displayFullAmount(fullAmount);
+  }
+
+  changeFullAmount(fullAmount) {
+    const fullAmountElement = document.querySelector('.full_amount');
+    fullAmountElement.innerText = `${Util.numberWithCommas(fullAmount)}원`;
+  }
+
+  changeNumberOfItem(moneyUnit, moneyList) {
+    moneyUnit.forEach(unit => {
+      const item = document.querySelector(`[data-money='${unit}'`);
+      const numberOfItem = item.nextElementSibling;
+      numberOfItem.innerText = `${moneyList[unit]}개`;
+    });
+  }
+
+  printClickedMoney(clickedMoney) {
+    console.log(`${clickedMoney}원`);
   }
 
   noMoneyUnit(price) {
