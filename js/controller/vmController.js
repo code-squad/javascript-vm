@@ -50,6 +50,7 @@ class VendingMachine {
       this.machineView.alertShortOfMoney();
       return;
     }
+    this.machineView.displaySelectedItemImage(this.machineModel.getItemList(), itemNumber);
     this.machineView.displaySelectedItemLog(itemNumber);
     this.machineModel.decreaseItemStock(itemNumber);
     this.machineModel.decreaseTotalInsertedMoney(itemNumber);
