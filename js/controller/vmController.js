@@ -24,12 +24,12 @@ class VendingMachine {
   }
 
   clickItemNumberButton(target) {
-    this.checkSetTimeout = this.checkSetTimeout || { current: null, number: '' };
-    this.startItemNumberCounting(target); // 완료되면 confirmItemNumber 함수 실행
+    this.setTimeoutItemNumber = this.setTimeoutItemNumber || { current: null, number: '' };
+    this.monitorItemNumber(target); // 완료되면 confirmItemNumber 함수 실행
   }
 
-  startItemNumberCounting(target) {
-    let checker = this.checkSetTimeout;
+  monitorItemNumber(target) {
+    let checker = this.setTimeoutItemNumber;
     if (!!checker.current) clearTimeout(checker.current);
     checker.number += target.dataset['select'];
     checker.current = setTimeout(() => {
@@ -57,6 +57,16 @@ class VendingMachine {
     this.machineModel.decreaseTotalInsertedMoney(itemNumber);
     this.machineView.displayTotalInsertedMoney(this.machineModel.getTotalInsertedMoney());
     this.machineView.displayAvailableItem(this.machineModel.getTotalInsertedMoney());
+    this.startReturnTimeCounting();
+  }
+
+  startReturnTimeCounting() {
+    this.setTimeoutChange = this.setTimeoutChange || { current: null };
+    if (this.setTimeoutChange.current) clearTimeout(this.setTimeoutChange.current);
+    this.setTimeoutChange.current = setTimeout(() => {
+      // returnChangeHandler();
+      console.log('hello');
+    }, 3000);
   }
 
   notifyDecreasedMoney(moneyUnit) {
@@ -71,6 +81,9 @@ class VendingMachine {
   }
 
   resetItemNumberCounting() {
-    this.checkSetTimeout = { current: null, number: '' };
+    this.setTimeoutItemNumber = { current: null, number: '' };
+  }
+  resetChangeTimeCounting() {
+    this.setTimeoutItemNumber = { current: null };
   }
 }
