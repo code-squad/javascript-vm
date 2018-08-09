@@ -17,6 +17,10 @@ class MachineModel {
   getTotalInsertedMoney() {
     return this.totalInsertedMoney;
   }
+  provideItemHandler(itemNumber) {
+    this.decreaseItemStock(itemNumber);
+    this.decreaseTotalInsertedMoney(itemNumber);
+  }
 
   returnChange() {
     const change = this.totalInsertedMoney;

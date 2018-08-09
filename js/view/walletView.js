@@ -58,7 +58,7 @@ class WalletView {
     console.log(`${clickedMoney}원`);
   }
 
-  noMoneyUnit(price) {
+  alertNoMoneyUnit(price) {
     alert(`지갑에 ${Util.numberWithCommas(price)}원이 부족합니다`);
   }
 

@@ -25,17 +25,33 @@ class MachineView {
     })
   }
 
-  displaySelectedItemImage(itemList, number) {
-    const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
+  displayFromMoneyInserted(insertedMoney, totalInsertedMoney) {
+    this.displayInsertLog(insertedMoney);
+    this.updateRendering(totalInsertedMoney);
+  }
+
+  displayFromItemSelected(itemList, itemNumber, totalInsertedMoney) {
+    this.displaySelectedItemImage(itemList, itemNumber);
+    this.displaySelectedItemLog(itemNumber);
+    this.updateRendering(totalInsertedMoney);
+  }
+
+  displayFromChangeReturned(change, totalInsertedMoney) {
+    this.updateRendering(totalInsertedMoney);
+    this.displayReturnLog(change);
+  }
+
+  displaySelectedItemImage(itemList, itemNumber) {
+    const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
     const imageListNode = document.querySelector('.image_list');
     const imageItemString = Temp.itemImageTemp(item.imageName);
     imageListNode.insertAdjacentHTML('afterBegin', imageItemString);
   }
 
-  displaySelectedItemLog(number) {
-    const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
-    const logItemString = Temp.selectedItemLog(number, itemName);
+  displaySelectedItemLog(itemNumber) {
+    const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
+    const logItemString = Temp.selectedItemLog(itemNumber, itemName);
     this.displayLog(logItemString);
   }
 
