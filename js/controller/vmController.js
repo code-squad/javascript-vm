@@ -12,6 +12,13 @@ class VendingMachine {
     this.walletView = walletView;
   }
 
+  initializeConnection() {
+    walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
+    walletModel.notifyChangedMoney = this.notifyChangedMoney.bind(this);
+    machineView.clickItemNumberButton = this.clickItemNumberButton.bind(this);
+    machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
+  }
+
   clickMoneyButtonHandler(moneyUnit) {
     this.clearChangeTimeCounting();
     if (!this.walletModel.hasMoney(moneyUnit)) {

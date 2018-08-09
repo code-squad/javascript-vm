@@ -7,6 +7,11 @@ class WalletView {
     this.clickMoneyButtonHandler = null;
   }
 
+  initializeView(moneyList, fullAmount) {
+    this.renderWallet(moneyList, fullAmount);
+    this.addEventClickedMoney();
+  }
+
   addEventClickedMoney() {
     const moneyButtons = document.querySelectorAll('.money_list .money');
     moneyButtons.forEach((v) => {

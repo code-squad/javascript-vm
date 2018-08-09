@@ -7,6 +7,11 @@ class MachineView {
     this.clickItemNumberButton = null;
   }
 
+  initializeView(itemList) {
+    this.renderMachine(itemList);
+    this.addEventClickedItemNumber();
+  }
+
   renderMachine(itemList) {
     this.displayItem(itemList);
   }
