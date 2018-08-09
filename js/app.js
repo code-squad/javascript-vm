@@ -4,8 +4,8 @@
 
 const machineModel = new MachineModel(item);
 const walletModel = new WalletModel(money);
-const machineView = new MachineView();
-const walletView = new WalletView();
+const machineView = new MachineView(Temp);
+const walletView = new WalletView(Temp);
 const vendingMachine = new VendingMachine(machineModel, walletModel, machineView, walletView);
 
 const moneyList = walletModel.getMoneyList();

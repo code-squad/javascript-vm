@@ -3,8 +3,9 @@ Wallet의 랜더링을 담당하는 파일
 초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class WalletView {
-  constructor() {
+  constructor(template) {
     this.clickMoneyButtonHandler = null;
+    this.TMP = template;
   }
 
   initializeView(moneyList, fullAmount) {
@@ -28,7 +29,7 @@ class WalletView {
   }
 
   displayMoney(moneyList) {
-    const moneyListString = Temp.moneyListTemp(moneyList);
+    const moneyListString = this.TMP.moneyListTemp(moneyList);
     document.querySelector('.money_list').innerHTML = moneyListString;
   }
 

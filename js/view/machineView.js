@@ -3,8 +3,9 @@
   초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class MachineView {
-  constructor() {
+  constructor(template) {
     this.clickItemNumberButton = null;
+    this.TMP = template;
   }
 
   initializeView(itemList) {
@@ -45,23 +46,23 @@ class MachineView {
     const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
     const imageListNode = document.querySelector('.image_list');
-    const imageItemString = Temp.itemImageTemp(item.imageName);
+    const imageItemString = this.TMP.itemImageTemp(item.imageName);
     imageListNode.insertAdjacentHTML('afterBegin', imageItemString);
   }
 
   displaySelectedItemLog(itemNumber) {
     const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
-    const logItemString = Temp.selectedItemLog(itemNumber, itemName);
+    const logItemString = this.TMP.selectedItemLog(itemNumber, itemName);
     this.displayLog(logItemString);
   }
 
   displayInsertLog(money) {
-    const logItemString = Temp.insertMoneyLog(money);
+    const logItemString = this.TMP.insertMoneyLog(money);
     this.displayLog(logItemString);
   }
 
   displayReturnLog(money) {
-    const returnLogString = Temp.returnChangeLog(money);
+    const returnLogString = this.TMP.returnChangeLog(money);
     this.displayLog(returnLogString);
   }
 
@@ -71,7 +72,7 @@ class MachineView {
   }
 
   displayItem(itemList) {
-    const itemListString = Temp.itemListTemp(itemList);
+    const itemListString = this.TMP.itemListTemp(itemList);
     document.querySelector('.item_list_container').innerHTML = itemListString;
   }
 
