@@ -11,39 +11,34 @@
     그것이 컨트롤러에 역할이라고 생각합니다!
  */
 export default class VmController{
-    constructor(menuView, model, coinCountView, moneyView, logView, selectItemView){
+    constructor(menuView, model, moneyView, logView, selectItemView){
         this.menuView = menuView;
         this.model = model;
-        this.coinCountView = coinCountView;
         this.moneyView = moneyView;
         this.logView = logView;
         this.selectItemView = selectItemView;
-        this.init();
     }
-    init(){
-        this.moneyView.yourMoney = this.model.getYourMoney();
-        this.moneyView.walletView();
-        this.coinCountView.coinCount = this.model.getCoinCount();
-        this.coinCountView.walletCoinView();
-        this.coinCountView.insertCoinHandler = this.insertCoinHandler.bind(this);
+    initializeView(){
+        this.moneyView.setMoneyData(this.model.getMoneyData());
+        this.moneyView.moneyView();
+    }
+    initializeConnection(){
+        this.moneyView.insertCoinHandler = this.insertCoinHandler.bind(this);
         this.moneyView.inputMoneyHandler = this.inputMoneyHandler.bind(this);
         this.moneyView.returnMoneyHandler = this.returnMoneyHandler.bind(this);
-        this.coinCountView.showNoMoneyHandler = this.showNoMoneyHandler.bind(this);
+        this.moneyView.showNoMoneyHandler = this.showNoMoneyHandler.bind(this);
+
         this.selectItemView.selectItemHandler = this.selectItemHandler.bind(this);
         this.selectItemView.lackItemHandler = this.lackItemHandler.bind(this);
         this.selectItemView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);
-        this.coinCountView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);        
     }
     insertCoinHandler(coin){
         this.model.insertCoin(coin);
-        this.moneyView.yourMoney = this.model.getYourMoney();
-        this.moneyView.inputMoney = this.model.getInputMoney();
-        this.moneyView.walletView();
-        this.moneyView.inputMoneyView();
+        this.moneyView.setMoneyData(this.model.getMoneyData());
         this.logView.showInsertMoney(coin);
     }
     inputMoneyHandler(){
-        this.menuView.highlightMenu(this.model.getInputMoeny());
+        this.menuView.highlightMenu(this.model.getInputMoney());
     }
     showNoMoneyHandler(coin){
         this.logView.showLackYourMoney(coin);
@@ -51,29 +46,27 @@ export default class VmController{
     selectItemHandler(itemId, itemName, itemPrice){
         if(this.model.getInputMoney() < itemPrice){
             this.logView.showLackInputMoney();
-            this.moneyView.coinCount = this.model.getCoinCount();
             this.moneyView.returnMoney();
             return ;
         }
         this.model.selectItem(itemPrice);
-        this.moneyView.inputMoney = this.model.getInputMoney();
+
+        this.moneyView.setMoneyData(this.model.getMoneyData());
         this.moneyView.inputMoneyView();
-        this.logView.showSelectItem(itemId,itemName);
-        this.moneyView.coinCount = this.model.getCoinCount();
         this.moneyView.returnMoney();
+
+        this.logView.showSelectItem(itemId,itemName);
     }
     lackItemHandler(){
         this.logView.showNoItem();
-        this.moneyView.coinCount = this.model.getCoinCount();
         this.moneyView.returnMoney();
     }
-    returnMoneyHandler(inputMoney, coinCount){
-        this.model.returnMoney(coinCount);
-        this.moneyView.yourMoney = this.model.getYourMoney();
-        this.moneyView.inputMoney = this.model.getInputMoney();
-        this.coinCountView.coinCount = this.model.getCoinCount();        
-        this.coinCountView.walletCoinView();
+    returnMoneyHandler(){
+        const inputMoney = this.model.getInputMoney();
+        if(inputMoney <= 0 )return ;
         this.logView.showReturnMoney(inputMoney);
+        this.model.returnMoney();
+        this.moneyView.setMoneyData(this.model.getMoneyData());
     }
     stopReturnMoneyHandler(){
         this.moneyView.stopReturnMoney();
