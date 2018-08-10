@@ -14,7 +14,6 @@ class WalletView {
   }
 
   addEventClickedMoney() {
-    const moneyButtons = document.querySelectorAll('.money_list .money');
     const moneyList = document.querySelector('.money_list');
     moneyList.addEventListener('click', ({ target }) => {
       if (target.className === 'money') {
