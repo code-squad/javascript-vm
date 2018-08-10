@@ -15,12 +15,13 @@ class WalletView {
 
   addEventClickedMoney() {
     const moneyButtons = document.querySelectorAll('.money_list .money');
-    moneyButtons.forEach((v) => {
-      v.addEventListener('click', ({ target }) => {
+    const moneyList = document.querySelector('.money_list');
+    moneyList.addEventListener('click', ({ target }) => {
+      if (target.className === 'money') {
         let moneyUnit = target.dataset["money"];
         this.clickMoneyButtonHandler(moneyUnit);
-      })
-    });
+      }
+    })
   }
 
   renderWallet(moneyList, fullAmount) {

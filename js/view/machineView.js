@@ -18,11 +18,9 @@ class MachineView {
   }
 
   addEventClickedItemNumber() {
-    const itemNumberList = document.querySelectorAll('.coin_button_item');
-    itemNumberList.forEach(v => {
-      v.addEventListener('click', ({ target }) => {
-        this.clickItemNumberButton(target);
-      })
+    const itemNumberList = document.querySelector('.coin_button_list_container');
+    itemNumberList.addEventListener('click', ({ target }) => {
+      if (target.className === 'coin_button') this.clickItemNumberButton(target);
     })
   }
 
