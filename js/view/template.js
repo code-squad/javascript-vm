@@ -50,5 +50,12 @@ const Temp = {
               <span>${Util.numberWithCommas(money)}원이 투입됐습니다</span>
             </li>`;
     return insertMoneyLogString;
+  },
+
+  returnChangeLog(money) {
+    const changLogString = `<li class="log_item">
+              <span>잔돈 ${Util.numberWithCommas(money)}원 반환</span>
+            </li>`;
+    return changLogString;
   }
 }

@@ -3,12 +3,18 @@
   초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
 class MachineView {
-  constructor() {
+  constructor(template) {
     this.clickItemNumberButton = null;
+    this.TMP = template;
+  }
+
+  initializeView(itemList) {
+    this.renderMachine(itemList);
+    this.addEventClickedItemNumber();
   }
 
   renderMachine(itemList) {
-    this.renderItem(itemList);
+    this.displayItem(itemList);
   }
 
   addEventClickedItemNumber() {
@@ -20,29 +26,53 @@ class MachineView {
     })
   }
 
-  displaySelectedItemImage(itemList, number) {
-    const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
+  displayFromMoneyInserted(insertedMoney, totalInsertedMoney) {
+    this.displayInsertLog(insertedMoney);
+    this.updateRendering(totalInsertedMoney);
+  }
+
+  displayFromItemSelected(itemList, itemNumber, totalInsertedMoney) {
+    this.displaySelectedItemImage(itemList, itemNumber);
+    this.displaySelectedItemLog(itemNumber);
+    this.updateRendering(totalInsertedMoney);
+  }
+
+  displayFromChangeReturned(change, totalInsertedMoney) {
+    this.updateRendering(totalInsertedMoney);
+    this.displayReturnLog(change);
+  }
+
+  displaySelectedItemImage(itemList, itemNumber) {
+    const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
     const imageListNode = document.querySelector('.image_list');
-    const imageItemString = Temp.itemImageTemp(item.imageName);
+    const imageItemString = this.TMP.itemImageTemp(item.imageName);
     imageListNode.insertAdjacentHTML('afterBegin', imageItemString);
   }
 
-  displaySelectedItemLog(number) {
-    const itemName = document.querySelector(`[data-number="${number}"]`).previousElementSibling.innerHTML;
-    const logListNode = document.querySelector('.log_list');
-    const logItemString = Temp.selectedItemLog(number, itemName);
-    logListNode.insertAdjacentHTML('afterBegin', logItemString);
+  displaySelectedItemLog(itemNumber) {
+    const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
+    const logItemString = this.TMP.selectedItemLog(itemNumber, itemName);
+    this.displayLog(logItemString);
   }
 
   displayInsertLog(money) {
-    const logListNode = document.querySelector('.log_list');
-    const logItemString = Temp.insertMoneyLog(money);
-    logListNode.insertAdjacentHTML('afterBegin', logItemString);
+    const logItemString = this.TMP.insertMoneyLog(money);
+    this.displayLog(logItemString);
   }
 
-  renderItem(itemList) {
-    const itemListString = Temp.itemListTemp(itemList);
+  displayReturnLog(money) {
+    const returnLogString = this.TMP.returnChangeLog(money);
+    this.displayLog(returnLogString);
+  }
+
+  displayLog(message) {
+    const logListNode = document.querySelector('.log_list');
+    logListNode.insertAdjacentHTML('afterBegin', message);
+  }
+
+  displayItem(itemList) {
+    const itemListString = this.TMP.itemListTemp(itemList);
     document.querySelector('.item_list_container').innerHTML = itemListString;
   }
 
@@ -63,8 +93,9 @@ class MachineView {
     }
   }
 
-  rerender(totalInsertedMoney) {
-    this.displayTotalInsertedMoney(totalInsertedMoney)
+  updateRendering(totalInsertedMoney) {
+    this.displayTotalInsertedMoney(totalInsertedMoney);
+    this.displayAvailableItem(totalInsertedMoney);
   }
 
   alertShortOfMoney() {
