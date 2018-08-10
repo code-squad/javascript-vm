@@ -1,3 +1,9 @@
+/*
+    돈에 관련된 view를 담당합니다.
+    - 지갑에 있는 동전,지폐의 갯수와 총 금액, 자판기에 넣은 돈의 view에 보여줍니다.
+    - 지갑에 있는 돈을 자판기에 넣는 동작을 수행합니다.
+    - 돈을 반환하는 동작을 수행합니다.
+*/
 export default class MoneyView{
     constructor(){
         this.inputMoneyHandler = null;

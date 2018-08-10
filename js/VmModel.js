@@ -1,3 +1,9 @@
+/*
+    웹자판기프로젝트에 필요한 데이터를 담당합니다.
+    - 자판기에 넣은 금액, 지갑에 있는 돈의 데이터를 가지고있습니다.
+    - 데이터의 변화는 이 클래스에서 수행합니다.
+    - 다른클래스에서 여기 클래스의 메소드를 통해 데이터를 넣어주거나, 데이터가 필요할 때 가져갈 수 있습니다.
+*/
 export default class VmModel{
     constructor(walletData){
         this.yourMoney = walletData.total;

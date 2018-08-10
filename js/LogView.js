@@ -1,3 +1,6 @@
+/*
+    모든 동작을 logingBox에 메시지를 통해서 알려주는 view를 담당하고있습니다.
+*/
 export default class LogView{
     constructor(logingBox){
         this.logingBox = logingBox;
