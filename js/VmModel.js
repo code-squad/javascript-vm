@@ -11,6 +11,16 @@ export default class VmModel{
     getInputMoney(){
         return this.inputMoney;
     }
+    getCoinCount(){
+        return this.coinCount;
+    }
+    getMoneyData(){
+        return {
+            inputMoney : this.getInputMoney(),
+            yourMoney : this.getYourMoney(),
+            coinCount : this.getCoinCount()
+        }
+    }
     insertCoin(coin){
         this.yourMoney -= coin;
         this.inputMoney += coin;
@@ -19,12 +29,17 @@ export default class VmModel{
     selectItem(coin){
         this.inputMoney -= coin;
     }
-    returnMoney(coinCount){
+    returnMoney(){
         this.yourMoney += this.inputMoney;
+        this.returnCoinCount();        
         this.inputMoney = 0;
-        this.coinCount = coinCount;
     }
-    getCoinCount(){
-        return this.coinCount;
+    returnCoinCount(){
+        let temp = this.inputMoney;
+        const coinUnit = Object.keys(this.coinCount).sort((a,b) => b-a);
+        coinUnit.forEach(v=>{
+            this.coinCount[v] += Math.floor(temp/v);
+            temp %= v;
+        })
     }
 }
