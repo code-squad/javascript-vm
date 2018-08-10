@@ -1,11 +1,13 @@
 export default class MoneyView{
     constructor(){
-        this.yourMoney = null;
-        this.inputMoney = null;
-        this.coinCount = null;
         this.inputMoneyHandler = null;
         this.returnMoneyHandler = null;
         this.delayReturnMoneyId = 0;
+    }
+    setMoneyData({inputMoney, yourMoney, coinCount}){
+        this.inputMoney = inputMoney;
+        this.yourMoney = yourMoney;
+        this.coinCount = coinCount;
     }
     walletView(){
         document.querySelector(".your-money").innerText = this.yourMoney + "원";
