@@ -6,17 +6,16 @@ export default class MenuView{
     constructor(itemList){
         this.itemList = itemList;
         this.displayItemList();
-        this.inputMoney = null;
         this.items = Array.from(document.querySelectorAll('.items-box'));
     }
     displayItemList(){
         const itemListElement = document.querySelector(".beverage-menu > ul");
         itemListElement.insertAdjacentHTML("beforebegin",this.itemList);
     }
-    highlightMenu(){
+    highlightMenu(inputMoney){
         this.items.forEach( v=> {
             const firstElementChild = v.firstElementChild;
-            if(v.dataset.price <= this.inputMoney){
+            if(v.dataset.price <= inputMoney){
                 firstElementChild.classList.add("highlight");
                 firstElementChild.nextElementSibling.classList.add("highlight");
             }else{

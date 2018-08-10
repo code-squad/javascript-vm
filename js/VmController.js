@@ -43,8 +43,7 @@ export default class VmController{
         this.logView.showInsertMoney(coin);
     }
     inputMoneyHandler(){
-        this.menuView.inputMoney = this.model.getInputMoney();
-        this.menuView.highlightMenu();
+        this.menuView.highlightMenu(this.model.getInputMoeny());
     }
     showNoMoneyHandler(coin){
         this.logView.showLackYourMoney(coin);
