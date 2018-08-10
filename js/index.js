@@ -1,4 +1,3 @@
-import CoinCountView from './CoinCountView.js'
 import {itemData} from './itemData.js'
 import LogView from './LogView.js'
 import MenuView from './MenuView.js'
@@ -21,10 +20,11 @@ function init(){
     const itemList = templateItemList(itemData);
     const menuView = new MenuView(itemList);
     const vmModel = new VmModel(walletData);
-    const coinCountView = new CoinCountView();
     const moneyView = new MoneyView();
     const logView = new LogView(logingBox);
     const selectItemView = new SelectItemView();
-    const vmController = new VmController(menuView ,vmModel, coinCountView, moneyView, logView, selectItemView);    
+    const vmController = new VmController(menuView ,vmModel, moneyView, logView, selectItemView);
+    vmController.initializeConnection();
+    vmController.initializeView();
 }
 document.addEventListener('DOMContentLoaded', init);
