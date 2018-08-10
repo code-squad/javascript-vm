@@ -10,7 +10,7 @@ class WalletView {
 
   initializeView(moneyList, fullAmount) {
     this.renderWallet(moneyList, fullAmount);
-    this.addEventClickedMoney();
+    document.addEventListener('DOMContentLoaded', () => { this.addEventClickedMoney() });
   }
 
   addEventClickedMoney() {

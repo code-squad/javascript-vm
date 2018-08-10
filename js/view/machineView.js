@@ -10,7 +10,7 @@ class MachineView {
 
   initializeView(itemList) {
     this.renderMachine(itemList);
-    this.addEventClickedItemNumber();
+    document.addEventListener('DOMContentLoaded', () => { this.addEventClickedItemNumber() });
   }
 
   renderMachine(itemList) {
