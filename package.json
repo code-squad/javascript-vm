@@ -1,0 +1,15 @@
+{
+  "name": "vendingMachine",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "repository": "https://github.com/LOG91/javascript-vm.git",
+  "author": "Log91 <peter1636@naver.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
