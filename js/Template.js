@@ -7,3 +7,5 @@ function templateItemList(items){
     },"")
     return itemList;
 }
+
+export {templateItemList}
