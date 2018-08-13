@@ -10,39 +10,37 @@ class MachineView {
 
   initializeView(itemList) {
     this.renderMachine(itemList);
-    this.addEventClickedItemNumber();
+    document.addEventListener('DOMContentLoaded', () => { this.addEventClickedItemNumber() });
   }
 
   renderMachine(itemList) {
-    this.displayItem(itemList);
+    this.renderItem(itemList);
   }
 
   addEventClickedItemNumber() {
-    const itemNumberList = document.querySelectorAll('.coin_button_item');
-    itemNumberList.forEach(v => {
-      v.addEventListener('click', ({ target }) => {
-        this.clickItemNumberButton(target);
-      })
+    const itemNumberList = document.querySelector('.coin_button_list_container');
+    itemNumberList.addEventListener('click', ({ target }) => {
+      if (target.className === 'coin_button') this.clickItemNumberButton(target);
     })
   }
 
-  displayFromMoneyInserted(insertedMoney, totalInsertedMoney) {
-    this.displayInsertLog(insertedMoney);
+  renderFromMoneyInserted(insertedMoney, totalInsertedMoney) {
+    this.renderInsertLog(insertedMoney);
     this.updateRendering(totalInsertedMoney);
   }
 
-  displayFromItemSelected(itemList, itemNumber, totalInsertedMoney) {
-    this.displaySelectedItemImage(itemList, itemNumber);
-    this.displaySelectedItemLog(itemNumber);
+  renderFromItemSelected(itemList, itemNumber, totalInsertedMoney) {
+    this.renderSelectedItemImage(itemList, itemNumber);
+    this.renderSelectedItemLog(itemNumber);
     this.updateRendering(totalInsertedMoney);
   }
 
-  displayFromChangeReturned(change, totalInsertedMoney) {
+  renderFromChangeReturned(change, totalInsertedMoney) {
     this.updateRendering(totalInsertedMoney);
-    this.displayReturnLog(change);
+    this.renderReturnLog(change);
   }
 
-  displaySelectedItemImage(itemList, itemNumber) {
+  renderSelectedItemImage(itemList, itemNumber) {
     const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
     const item = itemList.filter(v => v.name === itemName)[0];
     const imageListNode = document.querySelector('.image_list');
@@ -50,38 +48,38 @@ class MachineView {
     imageListNode.insertAdjacentHTML('afterBegin', imageItemString);
   }
 
-  displaySelectedItemLog(itemNumber) {
+  renderSelectedItemLog(itemNumber) {
     const itemName = document.querySelector(`[data-number="${itemNumber}"]`).previousElementSibling.innerHTML;
     const logItemString = this.TMP.selectedItemLog(itemNumber, itemName);
-    this.displayLog(logItemString);
+    this.renderLog(logItemString);
   }
 
-  displayInsertLog(money) {
+  renderInsertLog(money) {
     const logItemString = this.TMP.insertMoneyLog(money);
-    this.displayLog(logItemString);
+    this.renderLog(logItemString);
   }
 
-  displayReturnLog(money) {
+  renderReturnLog(money) {
     const returnLogString = this.TMP.returnChangeLog(money);
-    this.displayLog(returnLogString);
+    this.renderLog(returnLogString);
   }
 
-  displayLog(message) {
+  renderLog(message) {
     const logListNode = document.querySelector('.log_list');
     logListNode.insertAdjacentHTML('afterBegin', message);
   }
 
-  displayItem(itemList) {
+  renderItem(itemList) {
     const itemListString = this.TMP.itemListTemp(itemList);
     document.querySelector('.item_list_container').innerHTML = itemListString;
   }
 
-  displayTotalInsertedMoney(totalInsertedMoney) {
+  renderTotalInsertedMoney(totalInsertedMoney) {
     let currentCoin = document.querySelector('.current_coin');
     currentCoin.innerHTML = `${Util.numberWithCommas(totalInsertedMoney)}원`;
   }
 
-  displayAvailableItem(totalInsertedMoney) {
+  renderAvailableItem(totalInsertedMoney) {
     const itemList = document.querySelectorAll('.item_price');
     const availableItemClass = 'available_item';
     for (let ele of itemList) {
@@ -94,8 +92,8 @@ class MachineView {
   }
 
   updateRendering(totalInsertedMoney) {
-    this.displayTotalInsertedMoney(totalInsertedMoney);
-    this.displayAvailableItem(totalInsertedMoney);
+    this.renderTotalInsertedMoney(totalInsertedMoney);
+    this.renderAvailableItem(totalInsertedMoney);
   }
 
   alertShortOfMoney() {

@@ -29,7 +29,7 @@ class VendingMachine {
     this.walletModel.decreaseMoney(moneyUnit);
     this.machineModel.receiveMoney(moneyUnit);
     const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
-    this.machineView.displayAvailableItem(totalInsertedMoney);
+    this.machineView.renderAvailableItem(totalInsertedMoney);
   }
 
   clickItemNumberButton(target) {
@@ -60,7 +60,7 @@ class VendingMachine {
     this.machineModel.provideItemHandler(itemNumber);
     const itemList = this.machineModel.getItemList();
     const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
-    this.machineView.displayFromItemSelected(itemList, itemNumber, totalInsertedMoney);
+    this.machineView.renderFromItemSelected(itemList, itemNumber, totalInsertedMoney);
     this.startReturnTimeCounting();
   }
 
@@ -75,7 +75,7 @@ class VendingMachine {
   returnChangeHandler() {
     const change = this.machineModel.returnChange();
     const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
-    this.machineView.displayFromChangeReturned(change, totalInsertedMoney);
+    this.machineView.renderFromChangeReturned(change, totalInsertedMoney);
     this.walletModel.receiveChange(change);
   }
 
@@ -87,7 +87,7 @@ class VendingMachine {
 
   notifyReceiveMoney(insertedMoney) {
     const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
-    this.machineView.displayFromMoneyInserted(insertedMoney, totalInsertedMoney);
+    this.machineView.renderFromMoneyInserted(insertedMoney, totalInsertedMoney);
   }
 
   initItemNumberCounting() {

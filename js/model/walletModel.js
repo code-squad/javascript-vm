@@ -3,20 +3,20 @@
 이벤트에 따라 wallet data의 변경을 담당한다
 */
 
-class WalletModel {
-  constructor(money) {
-    this.money = money;
-    this.fullAmount = this.calculateFullAmount(money);
-    this.notifyDecreasedMoney = null;
-  }
+function WalletModel() {
+  this.money = money;
+  this.fullAmount = this.calculateFullAmount(money);
+  this.notifyDecreasedMoney = null;
+}
 
+WalletModel.prototype = {
   getMoneyList() {
     return this.money;
-  }
+  },
 
   getFullAmount() {
     return this.fullAmount;
-  }
+  },
 
   calculateFullAmount(money) {
     const moneyUnit = Object.keys(money);
@@ -26,7 +26,7 @@ class WalletModel {
       return acc;
     }, 0);
     return fullAmount;
-  }
+  },
 
   decreaseMoney(moneyUnit) {
     if (this.money[moneyUnit] === 0) {
@@ -36,7 +36,7 @@ class WalletModel {
     this.money[moneyUnit] -= 1;
     this.fullAmount -= Number(moneyUnit);
     this.notifyChangedMoney([moneyUnit]);
-  }
+  },
 
   receiveChange(money) {
     this.fullAmount += money;
@@ -46,7 +46,7 @@ class WalletModel {
     }
     const changedUnitList = Object.keys(changeUnitObject);
     this.notifyChangedMoney(changedUnitList);
-  }
+  },
 
   hasMoney(moneyUnit) {
     return money[moneyUnit];

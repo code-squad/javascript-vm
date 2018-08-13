@@ -10,36 +10,36 @@ class WalletView {
 
   initializeView(moneyList, fullAmount) {
     this.renderWallet(moneyList, fullAmount);
-    this.addEventClickedMoney();
+    document.addEventListener('DOMContentLoaded', () => { this.addEventClickedMoney() });
   }
 
   addEventClickedMoney() {
-    const moneyButtons = document.querySelectorAll('.money_list .money');
-    moneyButtons.forEach((v) => {
-      v.addEventListener('click', ({ target }) => {
+    const moneyList = document.querySelector('.money_list');
+    moneyList.addEventListener('click', ({ target }) => {
+      if (target.className === 'money') {
         let moneyUnit = target.dataset["money"];
         this.clickMoneyButtonHandler(moneyUnit);
-      })
-    });
+      }
+    })
   }
 
   renderWallet(moneyList, fullAmount) {
-    this.displayMoney(moneyList);
-    this.displayFullAmount(fullAmount);
+    this.renderMoney(moneyList);
+    this.renderFullAmount(fullAmount);
   }
 
-  displayMoney(moneyList) {
+  renderMoney(moneyList) {
     const moneyListString = this.TMP.moneyListTemp(moneyList);
     document.querySelector('.money_list').innerHTML = moneyListString;
   }
 
-  displayFullAmount(fullAmount) {
+  renderFullAmount(fullAmount) {
     document.querySelector('.full_amount').innerHTML = `${Util.numberWithCommas(fullAmount)}원`;
   }
 
   updateRendering(moneyUnit, moneyList, fullAmount) {
-    this.displayChangedMoney(moneyUnit, moneyList);
-    this.displayFullAmount(fullAmount);
+    this.renderChangedMoney(moneyUnit, moneyList);
+    this.renderFullAmount(fullAmount);
   }
 
   changeFullAmount(fullAmount) {
@@ -47,7 +47,7 @@ class WalletView {
     fullAmountElement.innerText = `${Util.numberWithCommas(fullAmount)}원`;
   }
 
-  displayChangedMoney(moneyUnit, moneyList) {
+  renderChangedMoney(moneyUnit, moneyList) {
     moneyUnit.forEach(unit => {
       const item = document.querySelector(`[data-money='${unit}'`);
       const numberOfItem = item.nextElementSibling;
