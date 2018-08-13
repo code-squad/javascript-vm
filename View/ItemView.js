@@ -1,7 +1,8 @@
 class VendingMachineItemView {
-    constructor(view) {
-        this.util = new Utility();
+    constructor(view, util) {
+        this.util = util;
         this.mainView = view;
+        this.mainPresenter;
     }
 
     /** 
@@ -11,8 +12,8 @@ class VendingMachineItemView {
     showSelctableNodes(money) {
         const itemNodeList = this.util.getNodeData('.d-item', 'all');
         let repeatCount = 0;
-        let itemPrice;
-        let itemPresenter = this.mainView.getPresenter().getItemPresenter();
+        this.mainPresenter = this.mainView.getPresenter();
+        let itemPresenter = this.mainPresenter.getItemPresenter();
 
         for (let node of itemNodeList) {
             repeatCount++;

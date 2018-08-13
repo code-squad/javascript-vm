@@ -1,7 +1,8 @@
 class VendingMachineLogView {
-    constructor(view) {
+    constructor(view, util) {
         this.mainView = view;
-        this.util = new Utility();
+        this.mainPresenter;
+        this.util = util;
     }
 
     /**
@@ -10,7 +11,8 @@ class VendingMachineLogView {
      * @param {string} mode
      */
     displayLog(logData, mode) {
-        const logPresenter = this.mainView.getPresenter().getLogPresenter();
+        this.mainPresenter = this.mainView.getPresenter();
+        const logPresenter = this.mainPresenter.getLogPresenter();
         logData = this.util.addLogSentenceText(logData, mode);
         logData = this.util.addLogModeText(logData, mode);
         logPresenter.sendLogDataToModel(logData);

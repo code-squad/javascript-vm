@@ -1,7 +1,8 @@
 class VendingMachineControlView {
-    constructor(view) {
+    constructor(view, util) {
         this.mainView = view;
-        this.util = new Utility();
+        this.mainPresenter;
+        this.util = util;
     }
 
     /**
@@ -10,8 +11,8 @@ class VendingMachineControlView {
     registerClickEventToProductClickNumBtn() {
         this.createProductNumNodeArr().forEach(element => {
             element.addEventListener("click", () => {
-                const controlPresenter = this.mainView.getPresenter().getControlPresenter();
-                const logPresenter = this.mainView.getPresenter().getLogPresenter();
+                this.mainPresenter = this.mainView.getPresenter();
+                const controlPresenter = this.mainPresenter.getControlPresenter();
                 controlPresenter.doBeforeProductPurchase(element);
                 controlPresenter.startProductPurchaseTimer(1000);
             });

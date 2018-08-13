@@ -1,11 +1,11 @@
 class VendingMachineControlPresenter {
-    constructor(model, view) {
+    constructor(util, model, view) {
         this.model = model;
         this.walletView = view.getWalletView();
         this.itemView = view.getItemView();
         this.controlView = view.getControlView();
         this.logView = view.getLogView();
-        this.util = new Utility();
+        this.util = util;
         this.controlView.registerClickEventToProductClickNumBtn();
     }
 
@@ -28,7 +28,7 @@ class VendingMachineControlPresenter {
         this.model.updateCurrentSelectedNumTxt(element.innerText);
     }
 
-    /** 
+    /**
      * 상품을 구매하는 타이머를 시작합니다
      * @param {number} time
      */

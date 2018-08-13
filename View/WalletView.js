@@ -1,8 +1,9 @@
 class VendingMachineWalletView {
-    constructor(view) {
+
+    constructor(view, util) {
         this.mainView = view;
-        this.itemView;
-        this.util = new Utility();
+        this.util = util;
+        this.mainPresenter;
     }
 
     /** 
@@ -13,19 +14,25 @@ class VendingMachineWalletView {
 
         for (let node of moneyInputBtnList) {
             if (node.nodeName !== "BUTTON") continue;
-            node.addEventListener("click", () => {
-                const presenter = this.mainView.getPresenter();
-                const walletPresenter = presenter.getWalletPresenter();
-                const controlPresenter = presenter.getControlPresenter();
-                const selectionMoneyNumberData = this.util.sortOutNumber(node.innerText);
-                const result = walletPresenter.insertMoneyToVendingMachine(selectionMoneyNumberData);
-                if (!result) return;
-                controlPresenter.refreshInvestedMoney();
-                this.mainView.getLogView().displayLog(selectionMoneyNumberData, 'input');
-                this.mainView.getItemView().showSelctableNodes();
-                walletPresenter.calcelCurrentRunningTimer();
-            });
+            node.addEventListener("click", this.insertMoneyBtnHandler.bind(this, node));
         }
+    }
+
+    /**
+     * 동전을 투입하는 이벤트 핸들러입니다
+     * @param {DOM Node} node - 금액 버튼 노드 
+     */
+    insertMoneyBtnHandler(node) {
+        this.mainPresenter = this.mainView.getPresenter();
+        const walletPresenter = this.mainPresenter.getWalletPresenter();
+        const controlPresenter = this.mainPresenter.getControlPresenter();
+        const selectionMoneyNumberData = this.util.sortOutNumber(node.innerText);
+        const result = walletPresenter.insertMoneyToVendingMachine(selectionMoneyNumberData);
+        if (!result) return;
+        controlPresenter.refreshInvestedMoney();
+        this.mainView.getLogView().displayLog(selectionMoneyNumberData, 'input');
+        this.mainView.getItemView().showSelctableNodes();
+        walletPresenter.calcelCurrentRunningTimer();
     }
 
     /** 
@@ -45,7 +52,4 @@ class VendingMachineWalletView {
         let moneyWithCommas = this.util.numberWithCommas(money);
         node.textContent = moneyWithCommas + "원";
     }
-
-
-    
 }

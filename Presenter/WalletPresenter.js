@@ -1,10 +1,9 @@
 class VendingMachineWalletPresenter {
-    constructor(model, view) {
+    constructor(util, model, view) {
         this.model = model;
-        this.util = new Utility();
+        this.util = util;
         this.itemView = view.getItemView();
         this.walletView = view.getWalletView();
-        this.controlView = view.getControlView();
         this.logView = view.getLogView();
         this.walletView.registerClickEventToInsertMoneyBtn();
     }

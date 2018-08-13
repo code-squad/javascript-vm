@@ -1,5 +1,5 @@
 class VendingMachineMainPresenter {
-    constructor(model, view) {
+    constructor(util, model, view) {
         this.model = model;
         this.view = view;
         
@@ -9,8 +9,8 @@ class VendingMachineMainPresenter {
         this.logView = view.getLogView();
 
         this.itemPresenter = new VendingMachineItemPrsenter(model, view);
-        this.walletPresenter = new VendingMachineWalletPresenter(model, view);
-        this.controlPresenter = new VendingMachineControlPresenter(model, view);
+        this.walletPresenter = new VendingMachineWalletPresenter(util, model, view);
+        this.controlPresenter = new VendingMachineControlPresenter(util, model, view);
         this.logPresenter = new VendingMachineLogPresenter(model, view);
     }
 
