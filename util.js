@@ -84,7 +84,7 @@ class Utility {
         // return [].slice.call(nodeList);
         return Array.from(nodeList);
     }
-
+    
     /**
      * 올바른 상품을 선택했는지 확인합니다
      * @param {number} data - 선택된 번호
@@ -142,6 +142,5 @@ class Utility {
         return false;
     }
 
-
+    
 }
-
