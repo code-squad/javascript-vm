@@ -1,31 +1,16 @@
-// import { VendingMachineModel } from './Model/Model';
-// import { VendingMachineMainView } from './View/MainView';
-// import { VendingMachineMainPresenter } from './Presenter/MainPresenter';
-import { Utility } from './util';
-
-// window.addEventListener('DOMContentLoaded', () => {
-
-//     const util = new Utility();
-
-//     const model = new VendingMachineModel();
-//     const view = new VendingMachineMainView(util);
-//     const presenter = new VendingMachineMainPresenter(util, model, view);
-
-//     view.setPresenter(presenter);
-//     presenter.initProcess();
-// });
-
-
+import { VendingMachineModel } from './Model/VendingMachineModel.js';
+import { VendingMachineMainView } from './View/VendingMachineMainView.js';
+import { VendingMachineMainPresenter } from './Presenter/VendingMachineMainPresenter.js';
+import { Utility } from './util.js';
 
 function loadHandler() {
-    const util = new Utility();
+    const util = Utility;
+    const model = new VendingMachineModel();
+    const view = new VendingMachineMainView(util);
+    const presenter = new VendingMachineMainPresenter(util, model, view);
 
-    // const model = new VendingMachineModel();
-    // const view = new VendingMachineMainView(util);
-    // const presenter = new VendingMachineMainPresenter(util, model, view);
-
-    // view.setPresenter(presenter);
-    // presenter.initProcess();
+    view.setPresenter(presenter);
+    presenter.initProcess();
 }
 
 document.addEventListener('DOMContentLoaded', loadHandler);

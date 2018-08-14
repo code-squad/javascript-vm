@@ -1,7 +1,7 @@
-import { VendingMachineControlView } from './ControlView';
-import { VendingMachineItemView } from './ItemView';
-import { VendingMachineWalletView } from './WalletView';
-import { VendingMachineLogView } from './LogView';
+import { VendingMachineControlView } from './VendingMachineControlView.js';
+import { VendingMachineItemView } from './VendingMachineItemView.js';
+import { VendingMachineWalletView } from './VendingMachineWalletView.js';
+import { VendingMachineLogView } from './VendingMachineLogView.js';
 
 class VendingMachineMainView {
     constructor(util) {
@@ -12,14 +12,14 @@ class VendingMachineMainView {
         this.logView = new VendingMachineLogView(this, util);
     }
 
-    /** 
+    /**
      * @returns Control View 를 반환합니다
     */
     getControlView() {
         return this.controlView;
     }
 
-    /** 
+    /**
      * @returns Item View 를 반환합니다
      */
     getItemView() {

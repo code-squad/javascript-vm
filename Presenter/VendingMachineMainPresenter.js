@@ -1,19 +1,19 @@
-import { VendingMachineItemPrsenter } from './ItemPresenter';
-import { VendingMachineWalletPresenter } from './WalletPresenter';
-import { VendingMachineControlPresenter } from './ControlPresenter';
-import { VendingMachineLogPresenter } from './LogPresenter';
+import { VendingMachineItemPresenter } from './VendingMachineItemPresenter.js';
+import { VendingMachineWalletPresenter } from './VendingMachineWalletPresenter.js';
+import { VendingMachineControlPresenter } from './VendingMachineControlPresenter.js';
+import { VendingMachineLogPresenter } from './VendingMachineLogPresenter.js';
 
 class VendingMachineMainPresenter {
     constructor(util, model, view) {
         this.model = model;
         this.view = view;
-        
+
         this.itemView = view.getItemView();
         this.walletView = view.getWalletView();
         this.controlView = view.getControlView();
         this.logView = view.getLogView();
 
-        this.itemPresenter = new VendingMachineItemPrsenter(model, view);
+        this.itemPresenter = new VendingMachineItemPresenter(model, view);
         this.walletPresenter = new VendingMachineWalletPresenter(util, model, view);
         this.controlPresenter = new VendingMachineControlPresenter(util, model, view);
         this.logPresenter = new VendingMachineLogPresenter(model, view);
