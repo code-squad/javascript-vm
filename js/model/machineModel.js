@@ -3,7 +3,7 @@
 이벤트에 따라 item data의 변경을 담당한다
 */
 
-class MachineModel {
+export default class MachineModel {
   constructor(itemList) {
     this.itemList = itemList;
     this.totalInsertedMoney = 0;

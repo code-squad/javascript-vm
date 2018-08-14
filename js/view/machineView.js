@@ -2,7 +2,8 @@
   Machine 랜더링을 담당하는 파일
   초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
-class MachineView {
+import { Util } from '../Util/util.js'
+export default class MachineView {
   constructor(template) {
     this.clickItemNumberButton = null;
     this.TMP = template;

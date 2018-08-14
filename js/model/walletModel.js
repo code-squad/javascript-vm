@@ -2,8 +2,8 @@
 지갑 부분
 이벤트에 따라 wallet data의 변경을 담당한다
 */
-
-function WalletModel() {
+import { Util } from '../util/util.js'
+function WalletModel(money) {
   this.money = money;
   this.fullAmount = this.calculateFullAmount(money);
   this.notifyDecreasedMoney = null;
@@ -49,6 +49,8 @@ WalletModel.prototype = {
   },
 
   hasMoney(moneyUnit) {
-    return money[moneyUnit];
+    return this.money[moneyUnit];
   }
 }
+
+export { WalletModel }

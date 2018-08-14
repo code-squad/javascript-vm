@@ -4,8 +4,10 @@ VendingMachine의 Controller 역할
 2. 동작별로 data변경과 rendering의 역할을 여기에서 명시적으로 나타냄
 */
 
-class VendingMachine {
+export default class VendingMachine {
   constructor(machineModel, walletModel, machineView, walletView) {
+    console.log(machineModel);
+    console.log(walletView);
     this.machineModel = machineModel;
     this.walletModel = walletModel;
     this.machineView = machineView;
@@ -13,10 +15,10 @@ class VendingMachine {
   }
 
   initializeConnection() {
-    walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
-    walletModel.notifyChangedMoney = this.notifyChangedMoney.bind(this);
-    machineView.clickItemNumberButton = this.clickItemNumberButton.bind(this);
-    machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
+    this.walletView.clickMoneyButtonHandler = this.clickMoneyButtonHandler.bind(this);
+    this.walletModel.notifyChangedMoney = this.notifyChangedMoney.bind(this);
+    this.machineView.clickItemNumberButton = this.clickItemNumberButton.bind(this);
+    this.machineModel.notifyReceiveMoney = this.notifyReceiveMoney.bind(this);
   }
 
   clickMoneyButtonHandler(moneyUnit) {
