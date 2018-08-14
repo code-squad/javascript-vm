@@ -7,6 +7,7 @@
   "author": "Log91 <peter1636@naver.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "jest": "^23.5.0"
   },
   "scripts": {
