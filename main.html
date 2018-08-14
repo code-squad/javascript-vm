@@ -10,7 +10,6 @@
     <title>Document</title>
 </head>
 <body>
-    
     <section>
         <article id="item-panel" class="panel">
             <div class="column-base">
@@ -166,37 +165,36 @@
             </div>
         </article>
     </section>
-    <article id="function-panel" class="panel">
-        <div id="money-display">0원</div>
-        <div id="item-selector-panel">
-            <div class="function-column-base">
-                <button class="grid btn-num">1</button>
-                <button class="grid btn-num">2</button>
-                <button class="grid btn-num">3</button>
+        <article id="function-panel" class="panel">
+            <div id="money-display">0원</div>
+            <div id="item-selector-panel">
+                <div class="function-column-base">
+                    <button class="grid btn-num">1</button>
+                    <button class="grid btn-num">2</button>
+                    <button class="grid btn-num">3</button>
+                </div>
+
+                <div class="function-column-base">
+                    <button class="grid btn-num">4</button>
+                    <button class="grid btn-num">5</button>
+                    <button class="grid btn-num">6</button>
+                </div>
+
+                <div class="function-column-base">
+                    <button class="grid btn-num">7</button>
+                    <button class="grid btn-num">8</button>
+                    <button class="grid btn-num">9</button>
+                </div>
+
+                <div class="function-column-base">
+                    <button class="grid btn-zero-num">0</button>
+                </div>
+
             </div>
-
-            <div class="function-column-base">
-                <button class="grid btn-num">4</button>
-                <button class="grid btn-num">5</button>
-                <button class="grid btn-num">6</button>
+            <div id="status-panel">
+                
             </div>
-
-            <div class="function-column-base">
-                <button class="grid btn-num">7</button>
-                <button class="grid btn-num">8</button>
-                <button class="grid btn-num">9</button>
-            </div>
-
-            <div class="function-column-base">
-                <button class="grid btn-zero-num">0</button>
-            </div>
-
-        </div>
-        <div id="status-panel">
-            
-        </div>
-    </article>
-
+        </article>
     </section>
     <section id="money-panel">
         <div class="ui-column-base">
@@ -229,13 +227,24 @@
         </div>
         <div id="money-amount-window">0원</div>
     </section>
+    <footer class="footer">
+        <div class="alert hidden center-tag middle"></div>
+    </footer>
 
-    <script type="text/javascript" src="./MVC/app.js"></script>
-    <script type="text/javascript" src="./MVC/model.js"></script>
-    <script type="text/javascript" src="./MVC/view-update.js"></script>
-    <script type="text/javascript" src="./MVC/view-util.js"></script>
-    <script type="text/javascript" src="./MVC/view.js"></script>
-    <script type="text/javascript" src="./MVC/controller.js"></script>
+    <script type="text/javascript" src="./util.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+    <script type="text/javascript" src="./Model/Model.js"></script>
+    <script type="text/javascript" src="./View/MainView.js"></script>
+    <script type="text/javascript" src="./View/ItemView.js"></script>
+    <script type="text/javascript" src="./View/ControlView.js"></script>
+    <script type="text/javascript" src="./View/WalletView.js"></script>
+    <script type="text/javascript" src="./View/LogView.js"></script>
+    <script type="text/javascript" src="./Presenter/MainPresenter.js"></script>
+    <script type="text/javascript" src="./Presenter/ItemPresenter.js"></script>
+    <script type="text/javascript" src="./Presenter/ControlPresenter.js"></script>
+    <script type="text/javascript" src="./Presenter/WalletPresenter.js"></script>
+    <script type="text/javascript" src="./Presenter/LogPresenter.js"></script>
+    <script type="module" src="./test.js"></script>
 
 </body>
 </html>
