@@ -6,21 +6,22 @@ class VendingMachineWalletView {
         this.mainPresenter;
     }
 
-    /** 
+    /**
      * 동전을 투입하는 버튼에 이벤트를 등록합니다
      */
     registerClickEventToInsertMoneyBtn() {
-        const moneyInputBtnList = this.util.getNodeData('.ui-item-base', 'all');
 
-        for (let node of moneyInputBtnList) {
-            if (node.nodeName !== "BUTTON") continue;
-            node.addEventListener("click", this.insertMoneyBtnHandler.bind(this, node));
-        }
+        const walletSection = this.util.getNodeData('#money-panel');
+
+        walletSection.addEventListener("click", (e) => {
+            if (e.target.nodeName !== 'BUTTON') return;
+            this.insertMoneyBtnHandler(e.target);
+        });
     }
 
     /**
      * 동전을 투입하는 이벤트 핸들러입니다
-     * @param {DOM Node} node - 금액 버튼 노드 
+     * @param {DOM Node} node - 금액 버튼 노드
      */
     insertMoneyBtnHandler(node) {
         this.mainPresenter = this.mainView.getPresenter();
@@ -35,7 +36,7 @@ class VendingMachineWalletView {
         walletPresenter.calcelCurrentRunningTimer();
     }
 
-    /** 
+    /**
      * 내 지갑의 돈을 새로고침(지정) 합니다 (VIEW)
      */
     refreshWalletMoney(money) {

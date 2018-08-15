@@ -1,5 +1,5 @@
 const Utility = {
-    
+
     /**
     * 숫자 3자리마다 콤마를 찍습니다
     * @param {number} x - 숫자 데이터
@@ -11,7 +11,7 @@ const Utility = {
 
     /**
      * querySelector 함수를 대체합니다
-     * @param {Node Class or ID data} data 
+     * @param {Node Class or ID data} data
      * @param {string} mode - all or none
      */
     getNodeData(data, mode) {
@@ -29,8 +29,8 @@ const Utility = {
 
     /**
      * 로그의 문장을 만들어서 리턴합니다
-     * @param {string} data 
-     * @param {string} mode 
+     * @param {string} data
+     * @param {string} mode
      * @returns 문장이 포함된 로그텍스트를 리턴
      */
     addLogSentenceText(data, mode) {
@@ -72,7 +72,7 @@ const Utility = {
         node.classList.add(property);
     },
 
-    /** 
+    /**
      * nodeList 를 array 로 변환합니다
      * Array.prototype.slice.call(nodeList)
      * [].slice.call(nodeList)
@@ -84,7 +84,7 @@ const Utility = {
         // return [].slice.call(nodeList);
         return Array.from(nodeList);
     },
-    
+
     /**
      * 올바른 상품을 선택했는지 확인합니다
      * @param {number} data - 선택된 번호
@@ -111,7 +111,7 @@ const Utility = {
 
     /**
      * classList 를 사용해 node의 클래스 속성을 제거합니다
-     * @param {node} node 
+     * @param {node} node
      * @param {string} className
      */
     removeNodeClass(node, className) {
@@ -120,7 +120,7 @@ const Utility = {
 
     /**
      * 에러메세지를 반환합니다
-     * @param {string} type 
+     * @param {string} type
      */
     getErrorMsg(type) {
         if (type === 'walletMoneyShortage') {
@@ -134,7 +134,7 @@ const Utility = {
         }
     },
 
-    /** 
+    /**
      * 반환하는 과정에서 예외사항을 처리합니다.
      */
     isMoneyZero(money) {
@@ -142,7 +142,7 @@ const Utility = {
         return false;
     }
 
-    
+
 }
 
 export { Utility }
