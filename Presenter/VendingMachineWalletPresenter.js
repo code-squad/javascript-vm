@@ -1,4 +1,4 @@
-const VendingMachineWalletPresenter = (util, model, view) => {
+function VendingMachineWalletPresenter(util, model, view) {
     this.model = model;
     this.util = util;
     this.itemView = view.getItemView();
@@ -12,7 +12,7 @@ VendingMachineWalletPresenter.prototype = {
      * 자판기에 돈을 투입합니다
      * @param {number} money - 금액 데이터
      */
-    insertMoneyToVendingMachine: () => {
+    insertMoneyToVendingMachine(money) {
         this.model.decreaseWalletMoney(money);
         if (!this.isPossibleInvestMoney(money)) return false;
         this.model.increaseInvestedMoney(money);
@@ -26,7 +26,7 @@ VendingMachineWalletPresenter.prototype = {
      * @param {number} index
      * @returns true - 투입된 금액 > 아이템 가격
      */
-    isInvestedMoneyHigherThanItemPrice: (node, index) => {
+    isInvestedMoneyHigherThanItemPrice(node, index) {
         let itemPrice;
         const priceRegex = /.*\n+\d+.\s/;
         const investedMoney = this.model.getInvestedMoney();
@@ -46,7 +46,7 @@ VendingMachineWalletPresenter.prototype = {
      * 지갑의 돈이 마이너스 되는지 검사합니다
      * @return {boolean}
     */
-    isWalletMoneyMinus: () => {
+    isWalletMoneyMinus() {
         return this.model.getWalletMoney() < 0;
     },
 
@@ -54,7 +54,7 @@ VendingMachineWalletPresenter.prototype = {
      * 돈이 부족한지 확인합니다
      * @param {number} money
      */
-    isPossibleInvestMoney: (money) => {
+    isPossibleInvestMoney(money) {
         if (this.isWalletMoneyMinus()) {
             this.model.increaseWalletMoney(money);
             this.logView.showAlertMsg('walletMoneyShortage', 1500);
@@ -66,7 +66,7 @@ VendingMachineWalletPresenter.prototype = {
     /**
      * 현재 동작중인 타이머를 취소합니다
      */
-    calcelCurrentRunningTimer: () => {
+    calcelCurrentRunningTimer() {
         this.model.clearTimer(this.model.getRefundTimerID());
     }
 }
