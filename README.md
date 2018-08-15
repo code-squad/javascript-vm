@@ -16,6 +16,8 @@
 6. [[STEP 6] 로깅과 구입가능 상품표시](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step6.md)
 7. [[STEP 7] 상품 선택](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step7.md)
 8. [[STEP 8] 지연 처리](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step8.md)
+9. [[STEP 9] 코드 개선하기](https://github.com/antaehyeon/javascript-vm/tree/antaehyeon/README/step8.md)
+10. [STEP 10] 테스트코드 작성하기
 
 <br />
 
@@ -29,6 +31,8 @@
   - section요소를 사용할 수 있는 예로는 챕터나 탭으로 구분된  **대화상자에서 탭된 페이지**, 또는 논문의 번호가 매겨진 색션이 될 수 있습니다. 홈페이지에서는 소개, 뉴스 아이템, 연락처등이 섹션으로 분리될 수 있습니다.
   - 요소의 컨텐츠를 배포해도 이치에 맞다면 **section요소대신 article요소를 사용할것을 권장**합니다.
   - section요소는 일반적인 컨테이너 요소는 아닙니다. 요소가 단순히 스타일링을 위한 목적이나 스크립팅의 편의를 위해서 필요할때 section요소보다는 div요소를 사용할것을 권장합니다.
+
+<br/>
 
 - #### article : 문서내에서 독립적인 컨텐츠를 나타냅니다.
 
