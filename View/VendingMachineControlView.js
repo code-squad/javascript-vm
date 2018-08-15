@@ -9,17 +9,16 @@ class VendingMachineControlView {
      * 상품을 선택하는 버튼에 이벤트를 등록합니다
      */
     registerClickEventToProductClickNumBtn() {
-        this.createProductNumNodeArr().forEach(element => {
-            element.addEventListener("click", () => {
-                this.mainPresenter = this.mainView.getPresenter();
-                const controlPresenter = this.mainPresenter.getControlPresenter();
-                controlPresenter.doBeforeProductPurchase(element);
-                controlPresenter.startProductPurchaseTimer(1000);
-            });
-        });
+        const itemPanelDiv = this.util.getNodeData('#item-selector-panel');
+        itemPanelDiv.addEventListener('click', (e) => {
+            if (e.target.nodeName !== 'BUTTON') return;
+            const controlPresenter = this.mainView.getPresenter().getControlPresenter();
+            controlPresenter.doBeforeProductPurchase(e.target);
+            controlPresenter.startProductPurchaseTimer(1000);
+        })
     }
 
-    /** 
+    /**
      * 상품을 클릭하는 버튼의 배열을 생성합니다
      * @returns {array}
     */
@@ -31,7 +30,7 @@ class VendingMachineControlView {
         return productNumBtnArr;
     }
 
-    /** 
+    /**
      * 자판기에 투입된 돈을 새로고침합니다 (VIEW)
      * @param {number} money - 새로고침 할 돈
      */
