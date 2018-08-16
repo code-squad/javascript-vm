@@ -6,7 +6,7 @@ import { Util } from '../util/util.js'
 function WalletModel(money) {
   this.money = money;
   this.fullAmount = this.calculateFullAmount(money);
-  this.notifyDecreasedMoney = null;
+  this.notifyChangedMoney = null;
 }
 
 WalletModel.prototype = {
@@ -29,10 +29,6 @@ WalletModel.prototype = {
   },
 
   decreaseMoney(moneyUnit) {
-    if (this.money[moneyUnit] === 0) {
-      this.notifyNoUnit(moneyUnit);
-      return;
-    }
     this.money[moneyUnit] -= 1;
     this.fullAmount -= Number(moneyUnit);
     this.notifyChangedMoney([moneyUnit]);
