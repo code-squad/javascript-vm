@@ -154,8 +154,9 @@ view를 동작중심으로 나누는 건 어때요?
 - 아주 에러가 -_-;;;;
 - javaScript 의 함수는 지정을 하지 않으면 undefined 를 반환한다
   - return false 만 있는건 아닌지 확인할 것
-
-
+- export 할때는 HTML 에서 `<script type="modlue" src="경로"/>` 로 지정하면 됨
+- [call, apply, bind](http://anster.tistory.com/165) 에 대해서 다시 명확하게 짚고갈 것
+- .bind(this, 인자) => 해당 함수는 this가 해당 bind를 호출한 부분의 this로 바뀌며, 인자로 node를 받을 수 있음 (node 라는 변수가 있다면)
 
 <br/>
 
@@ -215,6 +216,63 @@ view를 동작중심으로 나누는 건 어때요?
 응집도(cohesion)는 모듈 내부에 존재하는 구성 요소들 사이의 밀접한 정도를 나타낸다. 즉 하나의 모듈 안에서 구성 요소들 간에 똘똘 뭉쳐 있는 정도로 평가한다. 응집도가 높을수록 구성 요소들이 꼭 필요한 것들로만 모여 있고, 응집도가 낮을수록 서로 관련성이 적은 요소들이 모여 있다. 응집도가 가장 높은 것은 모듈 하나가 단일 기능으로 구성된 경우이다. 반대로 응집도가 가장 낮은 것은 기능들이 필요에 의해 모듈 하나에 존재하는 것이 아니라 우연에 의해 함께 묶이게 되는 경우이다.
 
 ![](https://i.imgur.com/aG7E2kl.png)
+
+<br/>
+
+<br/>
+
+## 피드백
+
+- [ ] Utility 는 클래스를 통해서 어떠한 객체를 만드는 역할을 만들기보다, 서로 연관성 없는 개별 함수들의 묶음이라, 객체리터럴로 만들어도 됩니다. 
+
+  - 만들긴 만들었는데, 이것을 다른 JavaScript 의 Class 에서 어떻게 사용할지가 잘 안풀림
+  - HTML 과 연계되어 있는 JavaScript 에서의 import 는 어떻게 해야되는가 ?
+  - 자꾸 최상단에서 import 하려고 하면 `Uncaught SyntaxError: Unexpected token {` 에러만 출력됨 (import 지원이 안되는 것인가?)
+  - 전체 JavaScript (app.js) 에서 호출한 다음에 인자로 넘겨주어야 하는가?
+
+- [ ] 참고로 실제 서비스는 여러가지 js를 1-2개로 합쳐서 빌드하고 배포해요. http request 수를 줄이려고요. 
+
+  - LUMI 의 답변 : 요청을 줄이고 싶은 목적이라면, 빌드 툴 같은 것으로 압축을 해서 넣어야 할 것 같고 script태그를 줄이고 싶으신 거라면 es module 형식을 적용해서, entry point가 되는 JS만 HTML에 넣는 방식이 있을거 같습니다
+  - Crong 의 답변 : 이런 검색키워드는 어때요? `concatenate javascript file npm`
+
+- [x] 이벤트핸들러를 별도 함수로 선언해두면 여기코드가 더 가독성이 있을겁니다. 
+  node.addeventlistener("click", this.nodeClickHander.bind(this)); //bind는 필요하면 사용.
+
+- [x] Utility 는 사용하는 클래스 안에서 매번 객체를 만들지말고, 바깥쪽에서 객체를 생성해서 주입받아서 쓰면 불필요한 객체중복생성이 안될 듯. 
+
+  - 첫번 째 피드백과 연관있는 피드백인 듯 하다. 이 방식으로 적용해봐야 할 듯 함
+  - 아니다.. app.js 에서 Utility 를 새로 생성하고, 이것을 mainView 와 mainPresenter 로 넘겨줌
+
+- [x] 이 클래스(VendingMachineMainView)의 필요성이나 장점은 뭐에요? 
+
+  - 제가 생각했을때에는 두가지 목적이 존재합니다.
+
+    1. 다른 Presenter 에서 각 View로 접근할 때 사용합니다. 
+
+       각각의 View를 각자 new 키워드로 생성하는 것이 아닌 mainView 에서 한꺼번에 생성해서 get/set 메서드로 재사용을 하기 위해서 사용합니다.
+
+    2. 각 View에서 Presenter 로 접근할 때 사용
+
+       모든 JavaScript가 로드되고 나서, mainView는 MainPresenter를 받습니다. 이후 각 View들은 MainView를 this 인자로 받게되는데, 각 View에서 mainView로 접근해 MainPresenter를 받아오고, MainPresenter에서 각 Presenter 를 호출하게 되는 방식을 채택하였습니다.
+
+- [x] 이름이 controller 라는 걸 쓰다보니, 이게 MVC의 controller 와 헷갈리네요. 
+
+  - 뭔가 자판기를 조작(?) 하는 것을 나타내기 위해서 'Control' 이라는 단어를 사용했는데, Operate 가 더 괜찮은가요?
+
+- [x] this.mainView.getPresenter() 이걸 자주 부르지 말고, 한번 불러서 변수에 캐시하고 쓰면 될 듯. 
+
+  - 생성자에서 this.mainView 까지만 선언해놓고, 불러올 때 캐시하는 방식으로 바꿔봐야 겠다.
+
+- [x] 각각 코드에서 쓰이지 않는 변수가 여러개 선언되어 있었다.
+
+  - 코딩할 때 무슨생각한거지.. :(
+
+
+
+## 질문
+
+1. 객체 리터럴로 만들어서, 다른 Class 에서 어떻게 사용하는가?
+2. [require is not define](https://stackoverflow.com/questions/10166324/how-to-include-nodejs-modules-in-html-files)
 
 
 
