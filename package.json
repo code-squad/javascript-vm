@@ -1,0 +1,23 @@
+{
+  "name": "javascript-vm",
+  "version": "1.0.0",
+  "description": "`HTML` `CSS` `JAVASCRIPT` 의 기본기능을 이용한 **웹 개발을 시작**할 수 있으며, 웹에서 동작하는 자판기를 구현할 것입니다.",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "jest": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antaehyeon/javascript-vm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antaehyeon/javascript-vm/issues"
+  },
+  "homepage": "https://github.com/antaehyeon/javascript-vm#readme",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  }
+}
