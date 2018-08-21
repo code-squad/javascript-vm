@@ -10,65 +10,65 @@
     그래서 독립적인 기능들을 연결해줄 수 있는 역할이 필요한데
     그것이 컨트롤러에 역할이라고 생각합니다!
  */
-export default class VmController{
-    constructor(menuView, model, moneyView, logView, selectItemView){
-        this.menuView = menuView;
-        this.model = model;
-        this.moneyView = moneyView;
-        this.logView = logView;
-        this.selectItemView = selectItemView;
-    }
-    initializeView(){
-        this.moneyView.setMoneyData(this.model.getMoneyData());
-        this.moneyView.moneyView();
-    }
-    initializeConnection(){
-        this.moneyView.insertCoinHandler = this.insertCoinHandler.bind(this);
-        this.moneyView.inputMoneyHandler = this.inputMoneyHandler.bind(this);
-        this.moneyView.returnMoneyHandler = this.returnMoneyHandler.bind(this);
-        this.moneyView.showNoMoneyHandler = this.showNoMoneyHandler.bind(this);
+export default class VmController {
+  constructor(menuView, model, moneyView, logView, selectItemView) {
+    this.menuView = menuView;
+    this.model = model;
+    this.moneyView = moneyView;
+    this.logView = logView;
+    this.selectItemView = selectItemView;
+  }
+  initializeView() {
+    this.moneyView.setMoneyData(this.model.getMoneyData());
+    this.moneyView.moneyView();
+  }
+  initializeConnection() {
+    this.moneyView.insertCoinHandler = this.insertCoinHandler.bind(this);
+    this.moneyView.inputMoneyHandler = this.inputMoneyHandler.bind(this);
+    this.moneyView.returnMoneyHandler = this.returnMoneyHandler.bind(this);
+    this.moneyView.showNoMoneyHandler = this.showNoMoneyHandler.bind(this);
 
-        this.selectItemView.selectItemHandler = this.selectItemHandler.bind(this);
-        this.selectItemView.lackItemHandler = this.lackItemHandler.bind(this);
-        this.selectItemView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);
+    this.selectItemView.selectItemHandler = this.selectItemHandler.bind(this);
+    this.selectItemView.lackItemHandler = this.lackItemHandler.bind(this);
+    this.selectItemView.stopReturnMoneyHandler = this.stopReturnMoneyHandler.bind(this);
+  }
+  insertCoinHandler(coin) {
+    this.model.insertCoin(coin);
+    this.moneyView.setMoneyData(this.model.getMoneyData());
+    this.logView.showInsertMoney(coin);
+  }
+  inputMoneyHandler() {
+    this.menuView.highlightMenu(this.model.getInputMoney());
+  }
+  showNoMoneyHandler(coin) {
+    this.logView.showLackYourMoney(coin);
+  }
+  selectItemHandler(itemId, itemName, itemPrice) {
+    if (this.model.getInputMoney() < itemPrice) {
+      this.logView.showLackInputMoney();
+      this.moneyView.returnMoney();
+      return;
     }
-    insertCoinHandler(coin){
-        this.model.insertCoin(coin);
-        this.moneyView.setMoneyData(this.model.getMoneyData());
-        this.logView.showInsertMoney(coin);
-    }
-    inputMoneyHandler(){
-        this.menuView.highlightMenu(this.model.getInputMoney());
-    }
-    showNoMoneyHandler(coin){
-        this.logView.showLackYourMoney(coin);
-    }
-    selectItemHandler(itemId, itemName, itemPrice){
-        if(this.model.getInputMoney() < itemPrice){
-            this.logView.showLackInputMoney();
-            this.moneyView.returnMoney();
-            return ;
-        }
-        this.model.selectItem(itemPrice);
+    this.model.selectItem(itemPrice);
 
-        this.moneyView.setMoneyData(this.model.getMoneyData());
-        this.moneyView.inputMoneyView();
-        this.moneyView.returnMoney();
+    this.moneyView.setMoneyData(this.model.getMoneyData());
+    this.moneyView.inputMoneyView();
+    this.moneyView.returnMoney();
 
-        this.logView.showSelectItem(itemId,itemName);
-    }
-    lackItemHandler(){
-        this.logView.showNoItem();
-        this.moneyView.returnMoney();
-    }
-    returnMoneyHandler(){
-        const inputMoney = this.model.getInputMoney();
-        if(inputMoney <= 0 )return ;
-        this.logView.showReturnMoney(inputMoney);
-        this.model.returnMoney();
-        this.moneyView.setMoneyData(this.model.getMoneyData());
-    }
-    stopReturnMoneyHandler(){
-        this.moneyView.stopReturnMoney();
-    }
+    this.logView.showSelectItem(itemId, itemName);
+  }
+  lackItemHandler() {
+    this.logView.showNoItem();
+    this.moneyView.returnMoney();
+  }
+  returnMoneyHandler() {
+    const inputMoney = this.model.getInputMoney();
+    if (inputMoney <= 0) return;
+    this.logView.showReturnMoney(inputMoney);
+    this.model.returnMoney();
+    this.moneyView.setMoneyData(this.model.getMoneyData());
+  }
+  stopReturnMoneyHandler() {
+    this.moneyView.stopReturnMoney();
+  }
 }
