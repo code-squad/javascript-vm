@@ -32,10 +32,13 @@ export default class LogView {
   }
   printLogMessage(logMessage) {
     if (this.logCount > 10) {
-      this.logingBox.innerText = "";
       this.logCount = 0;
+      this.resetLogBox();
     }
     this.logingBox.insertAdjacentHTML("afterbegin", logMessage);
     this.logCount++;
+  }
+  resetLogBox() {
+    this.logingBox.innerText = "";
   }
 }

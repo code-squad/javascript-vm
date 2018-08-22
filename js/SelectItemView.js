@@ -13,42 +13,41 @@ export default class SelectItemView {
   clickItemIdBtn() {
     const itemIdBtn = document.querySelector('.select-button-part > ul');
     let setTimeoutId = 0;
+
     itemIdBtn.addEventListener('click', ({ target }) => {
-      this.stopReturnMoneyHandler();
       if (target.tagName !== "LI") return;
+
+      this.stopReturnMoneyHandler();
       clearTimeout(setTimeoutId);
       this.combineItemId(target);
-      setTimeoutId = this.delaySelectItemHandler();
+
+      setTimeoutId = setTimeout(this.delayRun.bind(this), '3000')
     })
   }
-  delaySelectItemHandler() {
+  delayRun() {
     const items = document.querySelectorAll('.items-box');
-    const setTimeoutId = setTimeout(() => {
-      if (this.lackItem(items)) return;
-      const itemName = this.searchItem(items).itemName;
-      const itemPrice = this.searchItem(items).itemPrice;
-      this.selectItemHandler(this.itemId, itemName, itemPrice);
-      this.resetItemId();
-    }, '3000');
-    return setTimeoutId;
+    if (this.lackItem(items)) return;
+
+    this.selectItemHandler(this.searchItem(items));
+    this.resetItemId();
   }
   lackItem(items) {
-    if (items.length < this.itemId) {
+    if (items.length < this.itemId || this.itemId[0] === '0') {
       this.lackItemHandler();
       this.resetItemId();
       return true;
     }
   }
   searchItem(items) {
-    const item = items[this.itemId - 1];
-    const itemName = item.getAttribute('data-name');
-    const itemPrice = item.getAttribute('data-price');
-    return { itemName: itemName, itemPrice: itemPrice }
+    const itemEl = items[this.itemId - 1];
+    const itemName = itemEl.getAttribute('data-name');
+    const itemPrice = itemEl.getAttribute('data-price');
+    return { itemId: this.itemId, itemName: itemName, itemPrice: itemPrice }
   }
   resetItemId() {
     this.itemId = "";
   }
   combineItemId(target) {
-    this.itemId += target.innerText;
+    this.itemId += target.innerHTML;
   }
 }

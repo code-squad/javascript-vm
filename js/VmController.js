@@ -43,7 +43,7 @@ export default class VmController {
   showNoMoneyHandler(coin) {
     this.logView.showLackYourMoney(coin);
   }
-  selectItemHandler(itemId, itemName, itemPrice) {
+  selectItemHandler({ itemId, itemName, itemPrice }) {
     if (this.model.getInputMoney() < itemPrice) {
       this.logView.showLackInputMoney();
       this.moneyView.returnMoney();
