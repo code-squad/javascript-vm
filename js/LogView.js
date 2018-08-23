@@ -6,36 +6,20 @@ export default class LogView {
     this.logingBox = logingBox;
     this.logCount = 0;
   }
-  showInsertMoney(coin) {
-    const logMessage = `<p>${coin}원이 투입됐음.</p>`;
-    this.printLogMessage(logMessage);
-  }
-  showLackYourMoney(coin) {
-    const logMessage = `<p>넣을 ${coin}원의 갯수가 부족합니다.</p>`;
-    this.printLogMessage(logMessage);
-  }
-  showNoItem() {
-    const logMessage = `<p>해당 번호의 물품이 존재하지 않습니다.</p>`
-    this.printLogMessage(logMessage);
-  }
-  showSelectItem(itemId, itemName) {
-    const logMessage = `<p>${itemId}번 ${itemName}가(이) 뽑혔습니다.</p>`
-    this.printLogMessage(logMessage);
-  }
-  showLackInputMoney() {
-    const logMessage = `<p>돈이 부족합니다. 자판기에 돈을 더 넣어주세요.</p>`
-    this.printLogMessage(logMessage);
-  }
-  showReturnMoney(inputMoney) {
-    const logMessage = `<p>${inputMoney}원이 반환되었습니다.</p>`
-    this.printLogMessage(logMessage);
-  }
-  printLogMessage(logMessage) {
+  showMessage(msgName, firstResource, secondResource) {
+    const MSG = {
+      INSERT_MONEY: `<p>${firstResource}원이 투입됐음.</p>`,
+      LACK_MONEY: `<p>넣을 ${firstResource}원의 갯수가 부족합니다.</p>`,
+      LACK_ITEM: `<p>해당 번호의 물품이 존재하지 않습니다.</p>`,
+      SELECT_ITEM: `<p>${firstResource}번 ${secondResource}가(이) 뽑혔습니다.</p>`,
+      LACK_INPUTMONEY: `<p>돈이 부족합니다. 자판기에 돈을 더 넣어주세요.</p>`,
+      RETURN_MONEY: `<p>${firstResource}원이 반환되었습니다.</p>`,
+    }
     if (this.logCount > 10) {
       this.logCount = 0;
       this.resetLogBox();
     }
-    this.logingBox.insertAdjacentHTML("afterbegin", logMessage);
+    this.logingBox.insertAdjacentHTML("afterbegin", MSG[msgName]);
     this.logCount++;
   }
   resetLogBox() {

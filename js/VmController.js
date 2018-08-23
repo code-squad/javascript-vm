@@ -35,17 +35,17 @@ export default class VmController {
   insertCoinHandler(coin) {
     this.model.insertCoin(coin);
     this.moneyView.setMoneyData(this.model.getMoneyData());
-    this.logView.showInsertMoney(coin);
+    this.logView.showMessage('INSERT_MONEY', coin);
   }
   inputMoneyHandler() {
     this.menuView.highlightMenu(this.model.getInputMoney());
   }
   showNoMoneyHandler(coin) {
-    this.logView.showLackYourMoney(coin);
+    this.logView.showMessage('LACK_MONEY', coin);
   }
   selectItemHandler({ itemId, itemName, itemPrice }) {
     if (this.model.getInputMoney() < itemPrice) {
-      this.logView.showLackInputMoney();
+      this.logView.showMessage('LACK_INPUTMONEY');
       this.moneyView.returnMoney();
       return;
     }
@@ -55,16 +55,16 @@ export default class VmController {
     this.moneyView.inputMoneyView();
     this.moneyView.returnMoney();
 
-    this.logView.showSelectItem(itemId, itemName);
+    this.logView.showMessage('SELECT_ITEM', itemId, itemName);
   }
   lackItemHandler() {
-    this.logView.showNoItem();
+    this.logView.showMessage('LACK_ITEM');
     this.moneyView.returnMoney();
   }
   returnMoneyHandler() {
     const inputMoney = this.model.getInputMoney();
     if (inputMoney <= 0) return;
-    this.logView.showReturnMoney(inputMoney);
+    this.logView.showMessage('RETURN_MONEY', inputMoney);
     this.model.returnMoney();
     this.moneyView.setMoneyData(this.model.getMoneyData());
   }
