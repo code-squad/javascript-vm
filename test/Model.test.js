@@ -1,13 +1,15 @@
 import VmModel from '../js/VmModel.js';
 const walletData = {
-  total: 30000,
   10000: 1,
   5000: 2,
   1000: 5,
   500: 8,
   100: 10
 }
-const vmModel = new VmModel(walletData);
+let vmModel = new VmModel(walletData);
+beforeEach(() => {
+  vmModel = new VmModel(walletData);
+})
 describe('모델 객체의 데이터를 가져오는 TEST', () => {
   test('지갑에 총 금액이 3만원이 있다.', () => {
     expect(30000).toBe(vmModel.getYourMoney())
@@ -18,21 +20,9 @@ describe('모델 객체의 데이터를 가져오는 TEST', () => {
   test('동전의 갯수가 100원 10개 500원 8개 1000원 5개 5000원 2개 만원 1개이다.', () => {
     expect({ '100': 10, '500': 8, '1000': 5, '5000': 2, '10000': 1 }).toEqual(vmModel.getCoinCount())
   })
-  test("TEST", () => {
-    vmModel.insertCoin(100);
-    expect(true).toBe(true);
-  })
-  test('TTTEST', () => {
-    expect(true).toBe(true);
-  })
 })
 
 describe('모델 객체의 데이터를 변경시키는 메소드 TEST', () => {
-  beforeEach(() => {
-    vmModel.yourMoney = 30000;
-    vmModel.inputMoney = 0;
-    vmModel.coinCount = { 10000: 1, 5000: 2, 1000: 5, 500: 8, 100: 10 }
-  })
   test('100원을 넣었을 때 데이터 변화를 확인한다.', () => {
     vmModel.insertCoin(100)
     expect({

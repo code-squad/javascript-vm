@@ -6,10 +6,16 @@
 */
 export default class VmModel {
   constructor(walletData) {
-    this.yourMoney = walletData.total;
-    this.coinCount = walletData;
-    delete walletData.total;
+    this.yourMoney = this.calculateMoney(walletData);
+    this.coinCount = JSON.parse(JSON.stringify(walletData));
     this.inputMoney = 0;
+  }
+  calculateMoney(walletData) {
+    let totalMoney = 0;
+    for (let key in walletData) {
+      totalMoney += (walletData[key] * Number(key));
+    }
+    return totalMoney;
   }
   getYourMoney() {
     return this.yourMoney;

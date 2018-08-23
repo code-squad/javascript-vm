@@ -8,7 +8,6 @@ import VmController from './VmController.js'
 import VmModel from './VmModel.js'
 
 const walletData = {
-  total: 30000,
   10000: 1,
   5000: 2,
   1000: 5,
