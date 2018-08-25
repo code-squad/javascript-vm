@@ -10,7 +10,7 @@ document.body.innerHTML = `
     </li>
 </ul></div>
 `
-const moneyView = new MoneyView();
+let moneyView = new MoneyView();
 const initMoneyData = {
   yourMoney: 30000,
   inputMoney: 0,
@@ -18,6 +18,11 @@ const initMoneyData = {
 }
 
 function initialize() {
+  moneyView = new MoneyView();
+  moneyView.inputMoneyHandler = jest.fn();
+  moneyView.returnMoneyHandler = jest.fn();
+  moneyView.insertCoinHandler = jest.fn();
+  moneyView.showNoMoneyHandler = jest.fn();
   moneyView.setMoneyData(initMoneyData);
 }
 
@@ -49,14 +54,6 @@ describe("MoneyView Unit TEST", () => {
     //then
     expect(firstCoinCount).toBe('10개');
   })
-  test('지갑이 동전이 없는 지 확인한다. 동전이 없을 때 true값을 반환하고 이벤트핸들러함수가 호출된다.', () => {
-    //when
-    moneyView.showNoMoneyHandler = jest.fn();
-    moneyView.setMoneyData({ inputMoney: 0, yourMoney: 0, coinCount: { 100: 0 } })
-    const result = moneyView.lackCoinCount(100);
-    expect(moneyView.showNoMoneyHandler).toBeCalled();
-    expect(true).toBe(result);
-  })
 })
 
 describe('금액 반환 시 TEST', () => {
@@ -86,10 +83,6 @@ describe('금액 반환 시 TEST', () => {
     expect(moneyViewSpy).toBeCalled();
     expect(moneyView.returnMoneyHandler).toBeCalled();
   })
-})
-
-describe('자판기에 돈을 넣었을 때 이벤트 TEST', () => {
-
   test('동전버튼이 아닌 것을 click하면 콜백함수안에 있는 함수가 호출되지 않는다.', () => {
     //given
     const spy = jest.spyOn(moneyView, 'stopReturnMoney');
@@ -98,21 +91,5 @@ describe('자판기에 돈을 넣었을 때 이벤트 TEST', () => {
     document.querySelector(".current-coin-count").dispatchEvent(evt);
     //then
     expect(spy).not.toBeCalled();
-  })
-
-  test('자판기에 동전을 넣을 시에 이벤트가 발생한다.', () => {
-    //given
-    jest.useFakeTimers();
-    moneyView.insertCoinHandler = jest.fn();
-    const stopReturnSpy = jest.spyOn(moneyView, 'stopReturnMoney');
-    const moneyViewSpy = jest.spyOn(moneyView, 'moneyView');
-    const evt = new Event('click', { bubbles: true });
-    //when
-    document.querySelector('.insert-coin-button').dispatchEvent(evt);
-    //then
-    expect(moneyViewSpy).toBeCalled();
-    expect(stopReturnSpy).toBeCalled();
-    expect(moneyView.insertCoinHandler).toBeCalled();
-    expect(moneyView.insertCoinHandler).toBeCalledWith(100);
   })
 })

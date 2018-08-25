@@ -11,7 +11,7 @@ document.body.innerHTML = `
 </ul></div>
 `
 
-let selectItemView = new SelectItemView();
+let selectItemView = new SelectItemView('3000');
 const target = document.querySelectorAll('.select-button');
 const items = document.querySelectorAll('.items-box');
 beforeEach(() => {
@@ -83,14 +83,9 @@ describe('SelectItemView unit test', () => {
       expect(resetHandlerSpy).toBeCalled();
     })
   })
-})
-describe('아이템번호 버튼을 클릭할 때 TEST', () => {
-  const evt = new Event('click', { bubbles: true });
-  selectItemView.stopReturnMoneyHandler = jest.fn();
-  selectItemView.selectItemHandler = jest.fn();
-
   test('tagName이 LI가 아니면 동작이 일어나지 않는다.', () => {
     //given
+    const evt = new Event('click', { bubbles: true });
     const itemBtn = document.querySelector('.select-button-part>ul');
     itemBtn.insertAdjacentHTML('beforeend', '<div></div>');
     //when
@@ -98,13 +93,4 @@ describe('아이템번호 버튼을 클릭할 때 TEST', () => {
     //then
     expect(selectItemView.stopReturnMoneyHandler).not.toBeCalled();
   })
-  test('setTimeout과 clearTimeout 돈을 반환하지 않게하는 함수가 호출된다.', () => {
-    jest.useFakeTimers();
-    //when
-    document.querySelector('.select-button').dispatchEvent(evt);
-    //then
-    expect(setTimeout).toBeCalled();
-    expect(clearTimeout).toBeCalled();
-  })
-
 })
