@@ -3,25 +3,26 @@
     - 버튼을 클릭해서 메뉴를 고르게 되면 3초후에 선택한 메뉴가 나오게 됩니다.
 */
 export default class SelectItemView {
-  constructor() {
+  constructor(delayTime) {
     this.itemId = "";
     this.lackItemHandler = null;
     this.selectItemHandler = null;
     this.stopReturnMoneyHandler = null;
+    this.delayTime = delayTime;
     this.clickItemIdBtn();
   }
   clickItemIdBtn() {
     const itemIdBtn = document.querySelector('.select-button-part > ul');
-    let setTimeoutId = 0;
+    let delaySelectItemId = 0;
 
     itemIdBtn.addEventListener('click', ({ target }) => {
       if (target.tagName !== "LI") return;
 
       this.stopReturnMoneyHandler();
-      clearTimeout(setTimeoutId);
+      clearTimeout(delaySelectItemId);
       this.combineItemId(target);
 
-      setTimeoutId = setTimeout(this.delayRun.bind(this), '3000')
+      delaySelectItemId = setTimeout(this.delayRun.bind(this), this.delayTime)
     })
   }
   delayRun() {

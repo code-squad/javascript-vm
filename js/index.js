@@ -20,9 +20,9 @@ function init() {
   const itemList = templateItemList(itemData);
   const menuView = new MenuView(itemList);
   const vmModel = new VmModel(walletData);
-  const moneyView = new MoneyView();
+  const moneyView = new MoneyView('3000');
   const logView = new LogView(logingBox);
-  const selectItemView = new SelectItemView();
+  const selectItemView = new SelectItemView('3000');
   const vmController = new VmController(menuView, vmModel, moneyView, logView, selectItemView);
   vmController.initializeConnection();
   vmController.initializeView();

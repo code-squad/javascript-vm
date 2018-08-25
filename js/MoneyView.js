@@ -6,12 +6,13 @@
 */
 export default class MoneyView {
 
-  constructor() {
+  constructor(delayTime) {
     this.inputMoneyHandler = null;
     this.returnMoneyHandler = null;
     this.insertCoinHandler = null;
     this.showNoMoneyHandler = null;
     this.delayReturnMoneyId = 0;
+    this.delayTime = delayTime;
     this.clickCoinBtns();
   }
 
@@ -32,7 +33,6 @@ export default class MoneyView {
 
   walletCoinView() {
     let insertCoinBtn = document.querySelectorAll(".insert-coin-button");
-    insertCoinBtn = Array.from(insertCoinBtn);
     insertCoinBtn.forEach(v => {
       v.nextElementSibling.innerHTML = this.coinCount[v.dataset.coin] + "개";
     })
@@ -52,24 +52,20 @@ export default class MoneyView {
       this.stopReturnMoney()
 
       const coin = +(target.getAttribute("data-coin"));
-      if (this.lackCoinCount(coin)) return;
+      if (!this.coinCount[coin]) {
+        this.showNoMoneyHandler(coin);
+        return;
+      }
       this.insertCoinHandler(coin);
       this.moneyView();
     })
-  }
-
-  lackCoinCount(coin) {
-    if (this.coinCount[coin] === 0) {
-      this.showNoMoneyHandler(coin);
-      return true;
-    }
   }
 
   returnMoney() {
     this.delayReturnMoneyId = setTimeout(() => {
       this.returnMoneyHandler();
       this.moneyView();
-    }, '3000');
+    }, this.delayTime);
   }
 
   stopReturnMoney() {
