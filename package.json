@@ -1,0 +1,28 @@
+{
+  "name": "javascript-vm",
+  "version": "1.0.0",
+  "description": "레벨3",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Imdonguk/javascript-vm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Imdonguk/javascript-vm/issues"
+  },
+  "homepage": "https://github.com/Imdonguk/javascript-vm#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^23.5.0"
+  },
+  "dependencies": {
+    "jsdom": "^9.12.0"
+  }
+}

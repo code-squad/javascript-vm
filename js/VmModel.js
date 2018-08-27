@@ -4,48 +4,54 @@
     - 데이터의 변화는 이 클래스에서 수행합니다.
     - 다른클래스에서 여기 클래스의 메소드를 통해 데이터를 넣어주거나, 데이터가 필요할 때 가져갈 수 있습니다.
 */
-export default class VmModel{
-    constructor(walletData){
-        this.yourMoney = walletData.total;
-        this.coinCount = walletData;
-        delete walletData.total;
-        this.inputMoney = 0;
+export default class VmModel {
+  constructor(walletData) {
+    this.yourMoney = this.calculateMoney(walletData);
+    this.coinCount = JSON.parse(JSON.stringify(walletData));
+    this.inputMoney = 0;
+  }
+  calculateMoney(walletData) {
+    let totalMoney = 0;
+    for (let key in walletData) {
+      totalMoney += (walletData[key] * Number(key));
     }
-    getYourMoney(){
-        return this.yourMoney;
+    return totalMoney;
+  }
+  getYourMoney() {
+    return this.yourMoney;
+  }
+  getInputMoney() {
+    return this.inputMoney;
+  }
+  getCoinCount() {
+    return this.coinCount;
+  }
+  getMoneyData() {
+    return {
+      inputMoney: this.getInputMoney(),
+      yourMoney: this.getYourMoney(),
+      coinCount: this.getCoinCount()
     }
-    getInputMoney(){
-        return this.inputMoney;
-    }
-    getCoinCount(){
-        return this.coinCount;
-    }
-    getMoneyData(){
-        return {
-            inputMoney : this.getInputMoney(),
-            yourMoney : this.getYourMoney(),
-            coinCount : this.getCoinCount()
-        }
-    }
-    insertCoin(coin){
-        this.yourMoney -= coin;
-        this.inputMoney += coin;
-        this.coinCount[coin]--;
-    }
-    selectItem(coin){
-        this.inputMoney -= coin;
-    }
-    returnMoney(){
-        this.yourMoney += this.inputMoney;
-        this.returnCoinCount();        
-        this.inputMoney = 0;
-    }
-    returnCoinCount(){
-        let temp = this.inputMoney;
-        const coinUnit = Object.keys(this.coinCount).sort((a,b) => b-a);
-        coinUnit.forEach(v=>{
-            this.coinCount[v] += Math.floor(temp/v);
-            temp %= v;
-        })
-    }
+  }
+  insertCoin(coin) {
+    this.yourMoney -= coin;
+    this.inputMoney += coin;
+    this.coinCount[coin]--;
+  }
+  selectItem(coin) {
+    this.inputMoney -= coin;
+  }
+  returnMoney() {
+    this.yourMoney += this.inputMoney;
+    this.returnCoinCount();
+    this.inputMoney = 0;
+  }
+  returnCoinCount() {
+    let temp = this.inputMoney;
+    const coinUnit = Object.keys(this.coinCount).sort((a, b) => b - a);
+    coinUnit.forEach(v => {
+      this.coinCount[v] += Math.floor(temp / v);
+      temp %= v;
+    })
+  }
 }
