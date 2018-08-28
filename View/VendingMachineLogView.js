@@ -11,27 +11,41 @@ class VendingMachineLogView {
      * @param {string} mode
      */
     displayLog(logData, mode) {
+        logData = this.createLogSenetence(logData, mode);
+        this.insertLogDivToLogWindow(logData);
+    }
+
+    /**
+     * 로그를 위한 문장을 완성합니다
+     * @param {string} logData - 비정형 데이터
+     * @param {string} mode - 로그 모드 (투입, 선택, 반환)
+     * @return {string} logData - 정형 데이터(문장)
+     */
+    createLogSenetence(logData, mode) {
         this.mainPresenter = this.mainView.getPresenter();
         const logPresenter = this.mainPresenter.getLogPresenter();
         logData = this.util.addLogSentenceText(logData, mode);
         logData = this.util.addLogModeText(logData, mode);
         logPresenter.sendLogDataToModel(logData);
-        this.insertLogDivToLogWindow(logData);
+
+        return logData;
     }
 
     /**
      * 로그창에 로그노드(DIV)를 삽입합니다
-     * @param {string} logData 
+     * @param {string} logData
      */
     insertLogDivToLogWindow(logData) {
         const logDivNode = this.createLogDivNode(logData);
         const logWindowNode = this.util.getNodeData('#status-panel');
+        console.log(logWindowNode);
+        console.log(document.body);
         logWindowNode.appendChild(logDivNode);
     }
 
     /**
      * 로그 데이터를 DIV node 로 반환합니다
-     * @param {string} logData 
+     * @param {string} logData
      */
     createLogDivNode(logData) {
         /*
@@ -40,7 +54,7 @@ class VendingMachineLogView {
 
             문자열에 class 를 넣어서 insertAdjacentHTML 을 이용해도 괜찮을 것 같습니다.
             ex. const logDivNodeText = <div class="text-left-align">LOG DATA</div>;
-        */ 
+        */
         const logDivElement = document.createElement("div");
         logDivElement.innerText = logData;
         logDivElement.classList.add('text-left-align');
@@ -63,8 +77,8 @@ class VendingMachineLogView {
 
     /**
      * 노드의 Visibility 속성을 설정합니다
-     * @param {DOM node} node 
-     * @param {string} mode 
+     * @param {DOM node} node
+     * @param {string} mode
      */
     setNodeVisibility(node, mode) {
         node.style.visibility = (mode === 'hidden') ? 'hidden' : 'visible'
@@ -72,8 +86,8 @@ class VendingMachineLogView {
 
     /**
      * 노드의 innerText 를 설정합니다
-     * @param {DOM node} node 
-     * @param {string} text 
+     * @param {DOM node} node
+     * @param {string} text
      */
     setNodeInnerText(node, text) {
         node.innerText = text;
@@ -81,7 +95,7 @@ class VendingMachineLogView {
 
     /**
      * 노드를 안보이게 하는 타이머를 시작합니다
-     * @param {number} time 
+     * @param {number} time
      */
     startHideNodeTimer(node, time) {
         setTimeout(() => {

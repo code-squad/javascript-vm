@@ -1,5 +1,10 @@
 import { Utility as util } from '../util.js';
 
+beforeAll(() => {
+    const htmlData = '<div class="a">TEST DATA</a>';
+    document.body.insertAdjacentHTML('beforeend', htmlData);
+});
+
 test('숫자 3자리 마다 콤마를 찍습니다', () => {
     // given
     let num = 440000;
@@ -11,15 +16,16 @@ test('숫자 3자리 마다 콤마를 찍습니다', () => {
     expect(result).toBe('440,000');
 });
 
-// test('querySelector 함수가 정상적으로 동작하는지 확인합니다', () => {
-//     const node = document.createElement('div');
-//     const content = document.createTextNode('TEST DIV');
-//     node.appendChild(content);
-//
-//     const htmlData = "<body><p>testdata</p></body>"
-//
-//     expect(util.getNodeData('#panel')).toBe(null);
-// });
+test('querySelector 함수가 정상적으로 동작하는지 확인합니다', () => {
+    // given
+
+    // when
+    const node = util.getNodeData('.a');
+
+    // then
+    expect(node.textContent).toBe("TEST DATA");
+
+});
 
 test('숫자만 출력하는 정규식을 테스트합니다', () => {
     // given
