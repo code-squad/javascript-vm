@@ -15,7 +15,7 @@ class VendingMachineControlView {
             const controlPresenter = this.mainView.getPresenter().getControlPresenter();
             controlPresenter.doBeforeProductPurchase(e.target);
             controlPresenter.startProductPurchaseTimer(1000);
-        })
+        });
     }
 
     /**
