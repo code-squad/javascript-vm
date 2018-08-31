@@ -10,8 +10,8 @@ class VendingMachineWalletView {
      * 동전을 투입하는 버튼에 이벤트를 등록합니다
      */
     registerClickEventToInsertMoneyBtn() {
-
         const walletSection = this.util.getNodeData('#money-panel');
+        if (!walletSection) return false;
 
         walletSection.addEventListener("click", (e) => {
             if (e.target.nodeName !== 'BUTTON') return;
