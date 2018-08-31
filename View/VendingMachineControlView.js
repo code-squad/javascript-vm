@@ -10,6 +10,8 @@ class VendingMachineControlView {
      */
     registerClickEventToProductClickNumBtn() {
         const itemPanelDiv = this.util.getNodeData('#item-selector-panel');
+        // if(!itemPanelDiv) throw new Error('NO EXIST NODE');
+        if(!itemPanelDiv) return true;
         itemPanelDiv.addEventListener('click', (e) => {
             if (e.target.nodeName !== 'BUTTON') return;
             const controlPresenter = this.mainView.getPresenter().getControlPresenter();
