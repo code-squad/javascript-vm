@@ -2,11 +2,11 @@ import { WalletModel } from '../js/model/walletModel.js';
 
 
 describe('WalletModel Test', () => {
-    let testMoneyData = { 10: 3, 50: 2, 100: 5, 500: 15, 1000: 10, 5000: 2, 10000: 5 };
-    let walletModel = new WalletModel(testMoneyData);
-
 
     describe('MoneyData를 넣어서 지갑을 초기화 한다', () => {
+        let testMoneyData = { 10: 3, 50: 2, 100: 5, 500: 15, 1000: 10, 5000: 2, 10000: 5 };
+        let walletModel = new WalletModel(testMoneyData);
+
         test('지갑의 금액을 올바르게 반환한다', () => {
             const expected = { 10: 3, 50: 2, 100: 5, 500: 15, 1000: 10, 5000: 2, 10000: 5 };
             expect(walletModel.getMoneyList()).toEqual(expected);
