@@ -158,3 +158,5 @@ const item = [{
   stock: 5,
   imageName: 'fanta_grape.png'
 }]
+
+export { item }

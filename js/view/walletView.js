@@ -2,7 +2,8 @@
 Wallet의 랜더링을 담당하는 파일
 초기 디스플레이, 이벤트 시에 화면 변화를 담당한다
 */
-class WalletView {
+import { Util } from '../util/util.js'
+export default class WalletView {
   constructor(template) {
     this.clickMoneyButtonHandler = null;
     this.TMP = template;

@@ -17,3 +17,5 @@ const Util = {
     return change;
   }
 }
+
+export { Util }

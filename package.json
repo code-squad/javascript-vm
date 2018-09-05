@@ -1,0 +1,18 @@
+{
+  "name": "vendingMachine",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "index.js",
+  "repository": "https://github.com/LOG91/javascript-vm.git",
+  "author": "Log91 <peter1636@naver.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^23.5.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
