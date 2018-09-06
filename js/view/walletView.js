@@ -17,10 +17,10 @@ export default class WalletView {
   addEventClickedMoney() {
     const moneyList = document.querySelector('.money_list');
     moneyList.addEventListener('click', ({ target }) => {
-      if (target.className === 'money') {
-        let moneyUnit = target.dataset["money"];
-        this.clickMoneyButtonHandler(moneyUnit);
-      }
+      if (target.className !== 'money') return;
+      let moneyUnit = target.dataset["money"];
+      this.clickMoneyButtonHandler(moneyUnit);
+
     })
   }
 

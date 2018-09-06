@@ -21,7 +21,7 @@ describe('MachineModel Test', () => {
       expect(machineModel.getItemList()).toEqual(expected);
     });
 
-    test('초기화된 상태이기에 투입금액은 0원을 반환한다', () => {
+    test('초기화된 상태에서는 투입금액이 0원을 반환한다', () => {
       const expected = 0;
       expect(machineModel.getTotalInsertedMoney()).toBe(expected);
     })
@@ -39,7 +39,7 @@ describe('MachineModel Test', () => {
     });
   });
 
-  describe('1000원을 투입하고 레몬에이드 번호 5번을 눌러 구입한다', () => {
+  describe('1000원을 투입하고 900원짜리 물건을 구입하면 물건이 나온다', () => {
     const machineModel = new MachineModel(itemList);
     const ITEM_NUMBER = 5;
     const insertedMoney = 1000;
@@ -89,7 +89,7 @@ describe('MachineModel Test', () => {
     const insertedMoney = 800;
     machineModel.receiveMoney(insertedMoney);
 
-    test('500원인 음료수 1번을 선택하면 투입금액으로 살 수 있기에 true를 리턴한다', () => {
+    test('500원인 음료수를 선택하면 투입금액으로 살 수 있기에 true를 리턴한다', () => {
       const ITEM_NUMBER = 1;
       const expected = true;
 
@@ -98,7 +98,7 @@ describe('MachineModel Test', () => {
       expect(returnValue).toBe(expected);
     });
 
-    test('1,000원인 음료수 2번을 선택하면 금액 부족으로 false를 리턴한다', () => {
+    test('1,000원인 음료수를 선택하면 금액 부족으로 false를 리턴한다', () => {
       const ITEM_NUMBER = 2;
       const expected = false;
 
