@@ -6,8 +6,6 @@ VendingMachine의 Controller 역할
 
 export default class VendingMachine {
   constructor(machineModel, walletModel, machineView, walletView) {
-    console.log(machineModel);
-    console.log(walletView);
     this.machineModel = machineModel;
     this.walletModel = walletModel;
     this.machineView = machineView;

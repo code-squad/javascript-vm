@@ -39,6 +39,7 @@ export default class WalletView {
   }
 
   updateRendering(moneyUnit, moneyList, fullAmount) {
+    console.log(moneyList);
     this.renderChangedMoney(moneyUnit, moneyList);
     this.renderFullAmount(fullAmount);
   }
