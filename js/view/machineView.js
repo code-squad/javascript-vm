@@ -19,8 +19,8 @@ export default class MachineView {
   }
 
   addEventClickedItemNumber() {
-    const itemNumberList = document.querySelector('.coin_button_list_container');
-    itemNumberList.addEventListener('click', ({ target }) => {
+    const itemNumberNode = document.querySelector('.coin_button_list_container');
+    itemNumberNode.addEventListener('click', ({ target }) => {
       if (target.className === 'coin_button') this.clickItemNumberButton(target);
     })
   }

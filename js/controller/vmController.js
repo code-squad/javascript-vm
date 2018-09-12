@@ -59,6 +59,7 @@ export default class VendingMachine {
       this.machineView.alertShortOfMoney();
       return;
     }
+
     this.machineModel.provideItemHandler(itemNumber);
     const itemList = this.machineModel.getItemList();
     const totalInsertedMoney = this.machineModel.getTotalInsertedMoney();
