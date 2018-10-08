@@ -61,10 +61,11 @@ test("상품을 클릭하는 버튼의 배열을 정상적으로 생성하는지
 
 test("노드의 textContent가 정상적으로 수정되는지 테스트합니다", () => {
     // given
+    const moneyData = 10000;
     const node = document.createElement('div');
 
     // when
-    const receivedResult = controlView.changeMoneyNodeTextContent(node, 10000);
+    const receivedResult = controlView.changeMoneyNodeTextContent(node, moneyData);
 
     // then
     expect(node.textContent).toBe('10,000원');
@@ -96,7 +97,8 @@ test("자판기에 투입된 돈을 정상적으로 설정하는지 테스트합
 */
 test("Model 에서 정상적으로 데이터를 가져와서 설정하는지 테스트합니다", () => {
     // given
-    model.increaseInvestedMoney(7700);
+    const moneyData = 7700;
+    model.increaseInvestedMoney(moneyData);
 
     // when
     controlPresenter.refreshInvestedMoney();
@@ -118,14 +120,15 @@ test("Model 에서 정상적으로 데이터를 가져와서 설정하는지 테
 */
 test("상품을 구매하는 타이머가 정상적으로 동작하는지 테스트합니다", () => {
     // given
+    let countMillisecond = 1000;
     jest.useFakeTimers();
 
     // when
-    controlPresenter.startProductPurchaseTimer(1000);
+    controlPresenter.startProductPurchaseTimer(countMillisecond);
 
     // then
     expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1000);
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), countMillisecond);
 
 
 });
@@ -176,12 +179,3 @@ test("투입된 금액을 반환하는 타이머가 정상적으로 동작하는
     expect(setTimeout).toHaveBeenCalledTimes(1);
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1000);
 });
-
-
-
-
-
-
-
-
-
