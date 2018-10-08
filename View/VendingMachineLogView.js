@@ -37,10 +37,13 @@ class VendingMachineLogView {
      */
     insertLogDivToLogWindow(logData) {
         const logDivNode = this.createLogDivNode(logData);
-        const logWindowNode = this.util.getNodeData('#status-panel');
-        console.log(logWindowNode);
-        console.log(document.body);
+        const logWindowNode = this.util.getNodeData('.status-panel');
+        console.log(logWindowNode.childNodes);
+        console.log(logDivNode);
         logWindowNode.appendChild(logDivNode);
+        console.log("AFTER");
+        console.log(logWindowNode.childNodes);
+        console.log(logDivNode);
     }
 
     /**
