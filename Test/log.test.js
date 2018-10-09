@@ -8,12 +8,15 @@ import { Utility as util} from '../util.js'
 const mainView = new MainView(util);
 const model = new Model();
 const presenter = new LogPresenter(model);
-const logView = new LogView(mainView, util);
+let logView;
 
 /**
  이 파일의 각 테스트가 실행되기 전에 한번만 함수를 실행합니다.
  */
-beforeAll(() => {
+beforeEach(() => {
+    logView = new LogView(mainView, util);
+
+    document.body.innerHTML = "";
     const element = document.createElement('div');
     element.classList.add('status-panel');
     document.body.appendChild(element);
@@ -39,31 +42,30 @@ it ('displayLog 함수가 정상적으로 동작하는지 테스트합니다', (
     logData = util.addLogModeText(logData, mode);
 
     // 대신 mock의 mockReturnValue 함수를 통해서 결과값을 고정시킨다
+    // mock 함수의 존재 이유인 것 같다.
     logView.createLogSenetence = jest.fn().mockReturnValue(logData);
 
     // when
     logView.displayLog(logData, mode);
-    // logView.displayLog.mockReturnValue(true);
 
     // then
     const element = document.querySelector('.status-panel');
     const receivedData = element.childNodes[0].innerText;
-    console.log("1");
-    console.log(receivedData);
     expect(receivedData).toBe(expectedResult);
 });
 
 it('로그 노드(DIV)를 정상적으로 삽입하는지 테스트합니다', () => {
     // given
     const logData = "[투입] 10000원이 투입됨";
+    const expectedResult = logData;
 
     // when
-    logView.insertLogDivToLogWindow = jest.fn();
-    logView.insertLogDivToLogWindow.mockReturnValue(true);
     logView.insertLogDivToLogWindow(logData);
 
     // then
-    expect(logView.insertLogDivToLogWindow).toHaveReturnedWith(true);
+    const element = document.querySelector('.status-panel');
+    const receivedData = element.childNodes[0].innerText;
+    expect(receivedData).toBe(expectedResult);
 });
 
 it('로그의 DIV 노드를 정상적으로 만드는지 테스트합니다', () => {
@@ -103,10 +105,11 @@ it('노드의 속성들을 정상적으로 설정하는지 테스트합니다', 
     logView.setNodeVisibility(node, 'hidden');
     logView.setNodeInnerText(node, 'test');
 
+    console.log(node.style.visibility);
+
     // then
-    // expect(node.style.visibility).toBe('hidden');
-    expect(logView.setNodeVisibility).toHaveBeenCalled();
-    expect(logView.setNodeInnerText).toHaveBeenCalled();
+    expect(node.style.visibility).toBe('hidden');
+    expect(node.innerText).toBe('test');
 });
 
 it('타이머 이벤트를 테스트합니다', () => {
