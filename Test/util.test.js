@@ -5,15 +5,16 @@ beforeAll(() => {
     document.body.insertAdjacentHTML('beforeend', htmlData);
 });
 
-test('숫자 3자리 마다 콤마를 찍습니다', () => {
+test('숫자 3자리 마다 콤마를 정상적으로 찍는지 테스트합니다', () => {
     // given
     let num = 440000;
+    const resultString = '440,000';
 
     // when
     const result = util.numberWithCommas(num);
 
     // then
-    expect(result).toBe('440,000');
+    expect(result).toBe(resultString);
 });
 
 test('querySelector 함수가 정상적으로 동작하는지 확인합니다', () => {
@@ -38,9 +39,12 @@ test('숫자만 출력하는 정규식을 테스트합니다', () => {
     expect(result).toBe(12345);
 });
 
-test('로그를 문장형식으로 만드는지 테스트합니다', () => {
+test('로그를 모드에 따라 문장형식(--원이 투입됨)으로 잘 만드는지 테스트합니다', () => {
     // given
     const testData = 100;
+    const investedMoney100Message = "100원이 투입됨";
+    const selectedMoney100Message = "100번이 선택됨";
+    const refundedMoney100Message = "100원이 반환됨";
 
     // when
     const inputModeResult = util.addLogSentenceText(testData, 'input');
@@ -48,25 +52,28 @@ test('로그를 문장형식으로 만드는지 테스트합니다', () => {
     const refundModeResult = util.addLogSentenceText(testData, 'refund');
 
     // then
-    expect(inputModeResult).toBe("100원이 투입됨");
-    expect(selectModeResult).toBe("100번이 선택됨");
-    expect(refundModeResult).toBe("100원이 반환됨");
+    expect(inputModeResult).toBe(investedMoney100Message);
+    expect(selectModeResult).toBe(selectedMoney100Message);
+    expect(refundModeResult).toBe(refundedMoney100Message);
 });
 
-test('모드 문자가 정상적으로 추가되는지 테스트합니다', () => {
+test('모드에 따른 문자([투입], [선택], [반환]])가 정상적으로 추가되는지 테스트합니다', () => {
     // given
     const testData = '테스트';
+    const investedTestMessage = "[투입] 테스트";
+    const selectedTestMessage = "[선택] 테스트";
+    const refundedTestMessage = "[반환] 테스트";
     const inputModeResult = util.addLogModeText(testData, 'input');
     const selectModeResult = util.addLogModeText(testData, 'select');
     const refundModeResult = util.addLogModeText(testData, 'refund');
 
     // when - then
-    expect(inputModeResult).toBe("[투입] 테스트");
-    expect(selectModeResult).toBe("[선택] 테스트");
-    expect(refundModeResult).toBe("[반환] 테스트");
+    expect(inputModeResult).toBe(investedTestMessage);
+    expect(selectModeResult).toBe(selectedTestMessage);
+    expect(refundModeResult).toBe(refundedTestMessage);
 });
 
-test("노드에 클래스 속성을 설정하는지 테스트합니다", () => {
+test("노드에 클래스 속성(classList)을 설정하는지 테스트합니다", () => {
     // given
     const node = document.createElement('div');
     const content = document.createTextNode('TEST DIV');
@@ -124,7 +131,7 @@ test("상품 선택이 올바른지 테스트합니다", () => {
     expect(receivedData).toBe(true);
 });
 
-test("상품을 구매할 수 있는 상품인지 테스트합니다", () => {
+test("상품을 정상적으로 구매하는지 (금액 조건 비교) 테스트합니다", () => {
     // given
     const price = 2000;
     const investedMoney = 10000;
@@ -136,7 +143,7 @@ test("상품을 구매할 수 있는 상품인지 테스트합니다", () => {
     expect(receivedData).toBe(true);
 });
 
-test("node의 클래스 속성을 정상적으로 제거하는지 테스트합니다", () => {
+test("node의 클래스 속성(ClassLIst)을 정상적으로 제거하는지 테스트합니다", () => {
     // given
     const node = document.createElement('div');
     const content = document.createTextNode('TEST DIV');
