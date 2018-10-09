@@ -31,6 +31,8 @@
 
    일단 Jest 를 사용하려면 install 을 해주어야 한다.
 
+   그리고 presets 에서 es2015 를 사용하기 위해서는 `npm install babel-cli babel-preset-es2015` 명령어를 이용해 node_module 에 명령어들을 추가해줘야 된다.
+
    `package.json`
 
    "scripts" 부분에 "test" 를 "jest" 로 설정한다.
@@ -145,7 +147,98 @@
    - jest 에서 테스트할 때, 정상적으로 진행되었다. 그래서 mock 함수로 대체된 함수들이 정상적으로 돌아왔고
    - model의 데이터를 통해 데이터를 지정하는 부분들이 정상적으로 진행되었다.
 
+8. **describe**
 
+   - `describe(name, fn)` creates a block that groups together several related tests in one "test suite".
+   - 비슷한 테스트들을 그룹화 할 수 있는 함수
+   - 맨 위에 `what is describe means?` 로 테스트 항목들에 대한 그룹을 지정할 수 있다
+
+   ![](https://i.imgur.com/ejq2tS7.png)
+
+9. **displayLog 함수를 제대로 테스트해보자**
+
+   - displayLog 함수는 `로그 창에 로그를 표시(출력)합니다` 기능을 제공
+
+   ```javascript
+   // then
+       expect(logView.createLogSenetence).toHaveBeenCalled();
+       expect(logView.insertLogDivToLogWindow).toHaveBeenCalled();
+       // expect(logView.displayLog).toHaveReturnedWith(true);
+       expect(logView.displayLog.name).toEqual("displayLog");
+   ```
+
+   - 해당 테스트코드에서 displayLog 함수를 통해서 추가할 타겟이 없음
+
+   - jest 의 beforeEach, beforeAll 메서드를 통해서 document 를 생성하는 것인가?
+
+   - `console.log(document.body)` 를 출력해보면 `undefined` 가 출력됨
+
+   - 이게 왜그러냐면, displayLog 함수는 아래와 같이 구성되어 있다.
+
+     ```javascript
+     displayLog(logData, mode) {
+         logData = this.createLogSenetence(logData, mode);
+         this.insertLogDivToLogWindow(logData);
+     }
+     ```
+
+   - 여기서 logData 를 createLogSentence 함수를 통해서 바꾸는데, mock 함수로 지정되기 때문에 리턴값이 따로 정해지지 않아서 undefined 가 출력된다.
+
+   - 해당 logData(undefined) 가 다음 insertLogDivToLogWindow 함수의 인자로 넘어가게 되는데, undefined 니까 함수가 제대로 동작할리 없음 + insertLogDivToWindow 함수도 mock 함수임
+
+   - 그러니 둘다 동작할리 없음, mock 함수로 정의된 부분들을 잘 살펴야 함
+
+   - 그러나, beforeAll 이든 beforeEach 던 document 에 노드들을 추가하는 과정은 정상적으로 됨
+
+10. **test Code 의 beforeEach 던, beforeAll 이던, 여기에서 body 객체들을 추가하는 과정**
+
+    - 기존 beforeEach
+
+      ```javascript
+      beforeAll(() => {
+          const htmlData = '<div class="status-panel"></div>';
+          document.body.insertAdjacentHTML('beforeend', htmlData);
+      });
+      ```
+
+      자 여기서 `insertAdjacentHTML` 메서드가 호출될 수 있는 객체는 `element` 이다
+
+      ![](https://i.imgur.com/HhbBHpt.png)
+
+      자, 그러면 `querySelector` 은 어떨까
+
+      ![](https://i.imgur.com/o0NomxI.png)
+
+      jest 문제인지, javascript의 문제인지 무튼 beforeAll 구문에서 에러가 발생해도 에러문을 출력해주질 않음
+
+      똑같은 구문을 크롬 개발자도구에서 실행했을 때, 에러가 출력됨
+
+      ```javascript
+      VM158:1 Uncaught TypeError: Failed to execute 'insertAdjacentElement' on 'Element': parameter 2 is not of type 'Element'.
+      ```
+
+      자, htmlData가 Element가 아니라는 뜻인데.. 일단 저 html data 구문은 틀렸다. (따옴표가 틀렸는지 뭐가 틀렸는지는 아직 모른다. 출처는 [여기](https://stackoverflow.com/questions/42628635/element-insertadjacenthtml-api-throws-error-in-chrome-55-0-2883-87))
+
+      그럼 안전하게 Document.createElement로 생성해보자
+
+      ```javascript
+      const tempElement = document.createElement('div');
+      // 그리고 class 를 추가할것이므로
+      tempElement.classList.add('status-panel');
+      // 그리고 tapElement 를 찍어보면 <div class="status-panel"></div> 출력되는것을 확인
+      ```
+
+      그리고 querySelector 에서의 구문자 중 `#` 은 **아이디**를 뜻하며, `.` 은 **클래스**를 뜻한다. (Comma-Class)
+
+      결정적으로 Jest 에서는 insertAdjacentElement 메서드가 동작하지 않는다 [Why?](https://stackoverflow.com/questions/45833331/jest-can-not-deal-with-insertadjacentelement)
+
+      그러므로 `document.querySelector('.status-panel')` 를 이용해서 Element 를 찾는 과정을 진행해야 한다.
+
+      `console.log(JSON.stringify(element, ["id", "className", "tagName"]));`
+
+      Element 들을 보기좋게 출력하는 방법. 여기서 classList 를 출력해보면, 아까 classList.add 를 통해서 추가한 'status-panel' 를 확인할 수 있을것이다.
+
+      `appendChild` 를 통해서, 노드를 추가한 후 `childNodes[idx]`를 통해 노드를 가져온 후 해당 classList 든, innerHTML 을 이용해서 데이터를 출력하면 된다.
 
 
 
@@ -157,12 +250,49 @@
 <br/>
 <br/>
 
-## 학습
+## 피드백
+
+1. bable은 무엇이고, 왜 필요한지?
+   1. `"presets": ["es2015"]` 해당 옵션은 무엇을 뜻하는지 알아둘 것
+2. 모델에 모든 getter/setter 이 필요하진 않음
+3. prototype 에 대한 특징과 메모리효율 측면에서 알아둘 것
+4. jest 는 Jest의 철학 중 하나는 통합 된 "zero-configuration"경험을 제공하는 것
+5. jest 에서 테스트할 때, model, view, controller 같은 것들을 전역으로 선언해도 되지만 beforeAll 이나 jest의 공식 doc에 존재하는 함수들을 이용하는 편이 좋을 수 있음
+6. describe 메서드 사용해보기 (모든 테스트 코드에서 공통적으로 사용되는 함수)
+7. magic number 의 사용을 자제하자
+   - 한자리나 두자리 정도의 상수들은 변수를 통해서 잘 처리하는 것 같은데, 천단위가 넘어가는 부분들은 그대로 magic number 의 사용을 하는 것
+8. mock 함수의 사용을 자제할 것
+   1. 진짜 테스트 할 수 있는 것은 진짜로 테스트 할 것
+      - node 의 classList 확인
+      - element 의 변경된 데이터 (innerText 등) 확인
 
 <br/>
 <br/>
 
 ## 질문
+
+1. displayLog 함수를 분리하기 위해서 2개의 메소드로 나눴습니다.
+
+   그러면 displayLog 함수대신 안에 존재하는 각각의 메소드를 테스트하면, displayLog 함수는 굳이 테스트를 할 필요가 없다고 생각되는데요. 옳은 방향인가요?
+
+2. clickEvent 같은 경우는 어려운 테스트인가요? 대부분 인터넷을 찾아보니까 Jest.mock 함수로 대체하고 몇번 불렸는지 테스트하는 식으로 하던데 이런 방법으로 하면 되는건가요?
+
+   ```javascript
+   import React from 'react';
+   import { shallow } from 'enzyme';
+   import Button from './Button';
+   
+   describe('Test Button component', () => {
+     it('Test click event', () => {
+       const mockCallBack = jest.fn();
+   
+       const button = shallow((<Button onClick={mockCallBack}>Ok!</Button>));
+       button.find('button').simulate('click');
+       expect(mockCallBack.mock.calls.length).toEqual(1);
+     });
+   });
+   ```
+
 
 <br/>
 <br/>

@@ -48,32 +48,12 @@ test("선택된 노드들을 정상적으로 해제하는지 테스트합니다"
 test("투입된 금액이 아이템 가격보다 높은지 판별하는 함수를 테스트합니다", () => {
     // given
     const investedMoney = 10000;
-    // const func = function(investedMoney, itemPrice) {
-    //     return (investedMoney >= itemPrice) ? true : false;
-    // };
     const mockFn = jest.fn().mockImplementation(itemPrice => itemPrice < investedMoney);
 
     // when
-    // const result = itemPresenter.isInvestedMoneyHigherThanItemPrice(node, index);
-    // const receivedResult = mockFn(investedMoney, itemPrice)
     const receivedResult = mockFn(1000);
 
     // then
-    // console.log(mockFn.mock.calls[0][0] === 0);
-    // console.log(receivedResult);
     expect(receivedResult).toBe(true);
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-

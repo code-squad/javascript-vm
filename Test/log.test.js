@@ -105,8 +105,6 @@ it('노드의 속성들을 정상적으로 설정하는지 테스트합니다', 
     logView.setNodeVisibility(node, 'hidden');
     logView.setNodeInnerText(node, 'test');
 
-    console.log(node.style.visibility);
-
     // then
     expect(node.style.visibility).toBe('hidden');
     expect(node.innerText).toBe('test');

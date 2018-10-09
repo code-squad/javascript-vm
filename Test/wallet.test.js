@@ -39,31 +39,25 @@ test("지갑의 돈을 정상적으로 새로고침하는지 테스트합니다"
 
 test("노드의 textContent를 정상적으로 수정하는지 테스트합니다", () => {
     // given
-    // const node = document.querySelector('#money-amount-window');
     const node = document.createElement('div');
+    const moneyString = '10,000원';
 
     // when
-    // walletView.changeMoneyNodeTextContent(node, 10000);
     walletView.changeMoneyNodeTextContent = jest.fn();
     walletView.changeMoneyNodeTextContent.mockReturnValue = '10,000원';
 
     // then
-    // console.log(node);
-    // console.log(JSON.stringify(node));
-    // console.log(node.textContent);
-    // console.log(node.innerText);
-    // console.log(walletView.changeMoneyNodeTextContent);
-    console.log(walletView.changeMoneyNodeTextContent.mockReturnValue);
-    expect(walletView.changeMoneyNodeTextContent.mockReturnValue).toBe('10,000원');
+    expect(walletView.changeMoneyNodeTextContent.mockReturnValue).toBe(moneyString);
 });
 
 test("자판기에 정상적으로 돈을 투입하는지 테스트합니다", () => {
     // given
+    const moneyData = 10000;
     walletPresenter.isPossibleInvestMoney = jest.fn();
     walletPresenter.isPossibleInvestMoney.mockReturnValue(true);
 
     // when
-    const result = walletPresenter.insertMoneyToVendingMachine(10000);
+    const result = walletPresenter.insertMoneyToVendingMachine(moneyData);
 
     // then
     expect(result).toBe(true);
@@ -71,7 +65,8 @@ test("자판기에 정상적으로 돈을 투입하는지 테스트합니다", (
 
 test("지갑의 돈이 마이너스인지 테스트합니다", () => {
     // given
-    model.increaseWalletMoney(-10000);
+    const moneyData = 10000;
+    model.increaseWalletMoney(-moneyData);
 
     // when
     const result = walletPresenter.isWalletMoneyMinus();
@@ -90,15 +85,3 @@ test("돈이 부족한지 테스트합니다", () => {
     // then
     expect(result).toBe(true);
 });
-
-
-
-
-
-
-
-
-
-
-
-
