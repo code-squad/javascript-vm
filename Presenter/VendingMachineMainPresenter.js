@@ -16,7 +16,7 @@ class VendingMachineMainPresenter {
         this.itemPresenter = new VendingMachineItemPresenter(model, view);
         this.walletPresenter = new VendingMachineWalletPresenter(util, model, view);
         this.controlPresenter = new VendingMachineControlPresenter(util, model, view);
-        this.logPresenter = new VendingMachineLogPresenter(model, view);
+        this.logPresenter = new VendingMachineLogPresenter(model);
     }
 
     /**

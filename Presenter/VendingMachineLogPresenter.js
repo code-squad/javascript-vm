@@ -1,5 +1,5 @@
 class VendingMachineLogPresenter {
-    constructor(model, view) {
+    constructor(model) {
         this.model = model;
     }
 

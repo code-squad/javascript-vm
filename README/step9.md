@@ -1,4 +1,4 @@
-## e목표
+## 목표
 
 1. localhost server / import-export 적용
 
@@ -393,6 +393,52 @@ const VendingMachineWalletPresenter = (util, model, view) => {
    <br/>
 
 4. **테스트코드 작성법**
+
+   프로젝트에서 함수를 천개 만들었다고 가정해보죠. 점점 규모가 커질수록 사람이 일일히 해당 함수를 하나씩 테스트하기엔 불가능한 일이 됩니다. 즉, **<u>어떤 수정이 일어났을 때</u>**(소프트웨어 업데이트, 새로운 버전 배포 등) 이전코드에 영향을 주지 않는지, 에러가 나진 않는지, **<u>최종적으로 정상적인 배포를 위하여</u>** 사람이 아닌 소프트웨어를 통해 테스트를 하기 위해서 테스트코드를 작성하는 것입니다.
+
+   ### Unit TEST
+
+   > 자바스크립트의 최소단위(함수)를 테스트 하는 것
+
+   ### JavaScript Unit Test Library
+
+   > Qunit, Mocha 같은 테스트 프레임워크를 사용해서 테스트코드를 구현
+   >
+   > 추가적으로 chai, shouldJS와 같은 assertion(단언문) 라이브러리를 추가로 필요로 함
+
+   ![](https://i.imgur.com/sxJ5oFE.png)
+
+   chai Assertion Library 부분에서 `.fail` 함수입니다. `actual` 은 실제값을 나타내며, `expected` 는 사용자가 정의한 기대값 입니다.
+
+   ```javascript
+   // assert
+   assert('foo' !== 'bar', 'foo is not bar');
+   assert(Array.isArray([]), 'empty arrays are arrays');
+   
+   // isOK
+   assert.isOk('everything', 'everything is ok');
+   assert.isOk(false, 'this will fail');
+   
+   // isNotOk
+   assert.isNotOk('everything', 'this will fail');
+   assert.isNotOk(false, 'this will pass');
+   
+   // equal
+   assert.equal(3, '3', '== coerces values to strings');
+   
+   // not Equal
+   assert.notEqual(3, 4, 'these numbers are not equal');
+   
+   // stric Equal
+   assert.strictEqual(true, true, 'these booleans are strictly equal');
+   ...
+   ```
+
+   assert 에는 다양한 함수가 있는데, [공식 문서](http://www.chaijs.com/api/assert/)를 통해서 확인하고 자주 사용하면 됩니다.
+
+   ### **Unit TEST 2편 - 모듈설치와 테스트코드 구현**
+
+   해당 디렉토리로 이동해서 `npm init` 을 수행해준다. 이후, `vi package.json` 을 통해서 설정을 하면 되고, 자기가 원하는 모듈을 설치한다. 여기서는 mocha, chai 를 설치할 예정이므로, `sudo npm install mocha, chai --save-dev` 형식으로 커맨드를 날려주면 된다.
 
 <br/>
 <br/>

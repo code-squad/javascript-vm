@@ -5,7 +5,7 @@ class VendingMachineItemView {
         this.mainPresenter;
     }
 
-    /** 
+    /**
      * 선택할 수 있는 노드들을 표시합니다
      * @param {number} money
      */
@@ -17,7 +17,7 @@ class VendingMachineItemView {
 
         for (let node of itemNodeList) {
             repeatCount++;
-            if (node.classList.contains('high-light')) { continue; }
+            if(node.classList.contains('high-light')) continue;
             if(itemPresenter.isInvestedMoneyHigherThanItemPrice(node, repeatCount, money)) {
                 this.util.setPropertyToItemNode(node, 'high-light');
             }
@@ -41,7 +41,7 @@ class VendingMachineItemView {
         this.hideSelectableNodes();
         this.showSelctableNodes();
     }
-    
+
 }
 
 export { VendingMachineItemView }
